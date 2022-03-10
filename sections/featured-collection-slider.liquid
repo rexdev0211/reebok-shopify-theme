@@ -1,0 +1,239 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-badge.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'template-collection.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-badge.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'template-collection.css' | asset_url | stylesheet_tag }}</noscript>
+
+<div class="collection featured-collection">
+  <div class="{% if section.settings.show_view_all %}title-wrapper-with-link{% endif %}{% if section.settings.title == blank %} title-wrapper-with-link--no-heading{% endif %}">
+    <h2 class="section-title h6 {% if section.settings.title == blank %} title--no-heading{% endif %}" style="font-family: {{ section.settings.font_family }}; font-weight: {{ section.settings.font_weight }}">{{ section.settings.title | escape }}</h2>
+
+    {%- if section.settings.show_view_all -%}
+      <a href="{{ section.settings.collection.url }}" class="link-with-icon link-with-icon--large animate-arrow section-title link-with-icon--right">
+        {%- if section.settings.view_all_text != blank -%}
+         {{ section.settings.view_all_text | escape }}
+        {%- else -%}
+          {{ 'sections.featured_collection.view_all' | t }}
+        {%- endif -%}
+        {%- render 'icon-arrow' -%}
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div id="slider-{{ section.id }}">
+      <ul class="">
+        {%- for product in section.settings.collection.products -%}
+            <li class="swiper-slide ">
+            {% render 'card-product',
+              card_product: product,
+              media_aspect_ratio: section.settings.image_ratio,
+              show_secondary_image: section.settings.show_secondary_image,
+              show_vendor: section.settings.show_vendor,
+              show_rating: section.settings.show_rating
+            %}
+            </li>
+        {%- else -%}
+            {%- for i in (1..4) -%}
+            <li class="swiper-slide">
+                {% render 'card-product-placeholder' %}
+            </li>
+            {%- endfor -%}
+        {%- endfor -%}
+        </ul>
+  </div>
+</div>
+<script>
+    $(document).ready(function() {
+        initCollectionSlider()
+    })
+  function initCollectionSlider() {
+    $('#slider-{{ section.id }} ul').slick({
+      loop: false,
+      dots: true,
+      arrows: true,
+      slidesToScroll: {{ section.settings.slides_desktop }},
+      slidesToShow: {{ section.settings.slides_desktop }},
+      responsive: [
+            {
+                breakpoint: 300,
+                settings: {
+                    slidesToShow: {{ section.settings.slides_mobile }},
+                    slidesToScroll: {{ section.settings.slides_mobile }},
+                }
+            },
+            {
+                breakpoint: 749,
+                settings: {
+                    slidesToShow: {{ section.settings.slides_tablet }},
+                    slidesToScroll: {{ section.settings.slides_tablet }},
+                }
+            },
+            {
+                breakpoint: 990,
+                settings: {
+                    slidesToShow: {{ section.settings.slides_desktop }},
+                    slidesToScroll: {{ section.settings.slides_desktop }},
+                }
+            }
+        ]
+    })
+  }
+</script>
+{% schema %}
+{
+  "name": "Collection slider",
+  "tag": "section",
+  "settings": [
+    {
+        "type": "range",
+        "id": "slides_desktop",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 4,
+        "label": "Slides per view (desktop)"
+    },
+    {
+        "type": "range",
+        "id": "slides_tablet",
+        "min": 1,
+        "max": 6,
+        "step": 0.5,
+        "default": 4.5,
+        "label": "Slides per view (tablet)"
+    },
+    {
+        "type": "range",
+        "id": "slides_mobile",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 2,
+        "label": "Slides per view (mobile)"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Featured collection",
+      "label": "t:sections.featured-collection.settings.title.label"
+    },
+    {
+        "type": "select",
+        "id": "font_family",
+        "label": "Font family",
+        "default": "Neue Plak Wide",
+        "options": [
+            {
+            "label": "Neue Plak",
+            "value": "Neue Plak"
+          },
+          {
+            "label": "Neue Plak Wide",
+            "value": "Neue Plak Wide"
+          }
+        ]
+    },
+    {
+        "type": "select",
+        "id": "font_weight",
+        "label": "Title font weight",
+        "default": "bold",
+        "info": "Not all font weight are available for all theme fonts",
+        "options": [
+          {
+            "label": "normal",
+            "value": "normal"
+          },
+          {
+            "label": "600",
+            "value": "600"
+          },
+          {
+            "label": "bold",
+            "value": "bold"
+          }
+        ]
+      },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.featured-collection.settings.collection.label"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 2,
+      "default": 4,
+      "label": "t:sections.featured-collection.settings.products_to_show.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_view_all.label"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View all button text",
+      "info": "If text is not included and View All button is enabled, it will default to 'View all'"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured-collection.settings.header.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.featured-collection.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.featured-collection.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.featured-collection.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.featured-collection.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_image_padding",
+      "default": false,
+      "label": "Add padding around image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_vendor.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection slider",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

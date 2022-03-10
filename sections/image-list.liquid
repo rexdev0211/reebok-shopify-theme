@@ -1,0 +1,524 @@
+{{ 'section-image-list.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
+
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+
+<div class="image-list-wrapper {% if section.settings.show_view_all == false or section.blocks.size > collections.size %} no-mobile-link{% endif %} {% if section.settings.content_boxed == true %}section-boxed{% endif %}">
+
+  {%- if section.settings.title != blank -%}
+  <div class="{% if section.settings.title == blank %} title-wrapper-with-link--no-heading{% endif %}">
+    <h2 
+    class="image-list-title section-title h6 f-heading"
+    style="--font-heading-family: {{ section.settings.font_family }};
+          --font-heading-weight: {{ section.settings.font_weight }};"
+    >
+    {%- if section.settings.heading_link != blank -%}<a href="{{ section.settings.heading_link }}" class="text-underline-hover">{%- endif -%}
+    {{ section.settings.title | escape }}
+    {%- if section.settings.heading_link != blank -%}</a>{%- endif -%}
+  </h2>
+  </div>
+  {%- endif -%}
+
+  <div>
+    <ul class="image-list grid grid--1-col grid--{{ section.settings.size }}-col-tablet{% if section.settings.swipe_on_mobile %} slider slider--tablet grid--peek{% endif %} image-list--{{ section.settings.size }}-items margin-0 {% if section.settings.layout_mobile != blank and section.settings.text_position != 'overlap' %} image-list__mobile--{{ section.settings.layout_mobile }}{% endif %} {% if section.settings.text_position != blank %} image-list--text-{{ section.settings.text_position }}{% endif %}"
+        style="--grid-desktop-horizontal-spacing: {{ section.settings.spacing_horizontal }}px;"
+    >
+      {%- for block in section.blocks -%} 
+      <li class="image-list__item grid__item{% if section.settings.swipe_on_mobile %} slider__slide{% endif %} {% if section.settings.zoom_hover == true %}image-list__item--zoom{% endif %} image-list__item--{{ block.id }}" {{ block.shopify_attributes }}>
+        {%- style -%} 
+          .image-list__item--{{ block.id }} .card__text-heading {
+            {%- if block.settings.title_color != blank -%}
+            --color-foreground: {{ block.settings.title_color | color_extract: 'red' }}, {{ block.settings.title_color | color_extract: 'green' }}, {{ block.settings.title_color | color_extract: 'blue' }};
+            {%- endif -%}
+          }
+
+          .image-list__item--{{ block.id }} .card__text-text {
+            {%- if block.settings.text_color != blank -%}
+            --color-base-text: {{ block.settings.text_color | color_extract: 'red' }}, {{ block.settings.text_color | color_extract: 'green' }}, {{ block.settings.text_color | color_extract: 'blue' }};
+            {%- endif -%}
+          }
+
+           
+
+            @media screen and (min-width: 750px) {
+              {%- if block.settings.title_sizing == 'scale' -%} 
+             .image-list__item--{{ block.id }} .card__text-heading {
+                font-size: {{ block.settings.title_scale }}vw;
+              }
+              {%- elsif block.settings.title_sizing == 'fixed' -%}
+             .image-list__item--{{ block.id }} .card__text-heading {
+                font-size: {{ block.settings.title_size }}px;
+              }
+              {%- endif -%}
+
+              {%- if block.settings.text_sizing == 'scale' -%} 
+             .image-list__item--{{ block.id }} .card__text-text {
+                font-size: {{ block.settings.text_scale }}vw;
+              }
+              {%- elsif block.settings.text_sizing == 'fixed' -%}
+             .image-list__item--{{ block.id }} .card__text-text {
+                font-size: {{ block.settings.text_size }}px;
+              }
+              {%- endif -%}
+            }
+        {%- endstyle -%}
+        <a{% if block.settings.link != blank %} href="{{ block.settings.link }}"{% endif %}
+          class="card link{% if section.settings.image_ratio != 'adapt' %} card--stretch{% endif %}"
+        >
+          <div class="card--stretch ">
+          {%- liquid 
+              if block.settings.image != blank 
+                assign collection_image = block.settings.image 
+              else 
+                assign collection_image = blank 
+              endif
+            -%}
+
+              <div class="position-relative image-list__content{% if section.settings.image_padding %} card__media-spacer{% endif %}">
+
+                {%- if section.settings.text_position != 'below' -%}
+                <div class="card__text card__text-spacing card-colored card__text-hover {% if section.settings.text_position != 'above' %} a-{{ block.settings.position_vertical }}-{{ block.settings.position_horizontal }} text-{{ block.settings.position_horizontal }} justify-content-{{ block.settings.position_horizontal }} w-full{% endif %} {{ section.settings.alignment }}">
+                    {% unless section.settings.image_padding %}<div class="overlay-card"></div>{% endunless %}
+                    <div>
+                      {%- if block.settings.text != blank -%}
+                      <p class="f-body card__text-text">{{ block.settings.text }}</p>
+                      {%- endif -%}
+                      <h3 class="h1 margin-0 f-heading card__text-heading">
+                        {%- if block.settings.title != blank -%}
+                          {{- block.settings.title | escape -}}
+                        {%- else -%}
+                          {{ 'onboarding.collection_title' | t }}
+                        {%- endif -%}
+                      </h3>
+                    </div>
+                  </div>
+                  {%- endif -%}
+
+
+                  {% if section.settings.image_padding %}<div class="overlay-card"></div>{% endif %}
+                  <div class="media{% if section.blocks.size > 1 %} media--{{ section.settings.image_ratio }}{% endif %} media--hover-effect overflow-hidden"
+                    {% if section.settings.image_ratio == 'adapt' %}style="padding-bottom: {{ 1 | divided_by: collection_image.aspect_ratio | times: 100 }}%;"{% endif %}>
+  
+  
+                    <img srcset="{%- if collection_image.width >= 165 -%}{{ collection_image | img_url: '165x' }} 165w,{%- endif -%}
+                      {%- if collection_image.width >= 330 -%}{{ collection_image | img_url: '330x' }} 330w,{%- endif -%}
+                      {%- if collection_image.width >= 535 -%}{{ collection_image | img_url: '535x' }} 535w,{%- endif -%}
+                      {%- if collection_image.width >= 720 -%}{{ collection_image | img_url: '720x' }} 720w,{%- endif -%}
+                      {%- if collection_image.width >= 940 -%}{{ collection_image | img_url: '940x' }} 940w,{%- endif -%}
+                      {%- if collection_image.width >= 1440 -%}{{ collection_image | img_url: '1440x' }} 1440w,{%- endif -%}
+                      {%- if collection_image.width >= 1880 -%}{{ collection_image | img_url: '1880x' }} 1880w{%- endif -%}"
+                      src="{{ collection_image | img_url: '533x' }}"
+                      sizes="(min-width: 1100px){% if section.blocks.size > 1 %}535px{% else %}940px{% endif %}, (min-width: 750px) {% if section.blocks.size > 1 %}calc((100vw - 10rem) / 2){% else %}calc(100vw - 10rem){% endif %}, calc(100vw - 3rem)"
+                      alt="{{ block.settings.image.alt | escape }}"
+                      height="{{ collection_image.height }}"
+                      width="{{ collection_image.width }}"
+                      loading="lazy"
+                      class="motion-reduce"
+                    >
+                  </div>
+
+                  {%- if section.settings.text_position == 'below' -%}
+                <div class="card__text card__text-spacing card-colored card__text-hover {{ section.settings.alignment }}">
+                    {% unless section.settings.image_padding %}<div class="overlay-card"></div>{% endunless %}
+                    <div>
+                      {%- if block.settings.text != blank -%}
+                      <p class="f-body card__text-text">{{ block.settings.text }}</p>
+                      {%- endif -%}
+                      <h3 class="h1 margin-0 f-heading card__text-heading">
+                        {%- if block.settings.title != blank -%}
+                          {{- block.settings.title | escape -}}
+                        {%- else -%}
+                          {{ 'onboarding.collection_title' | t }}
+                        {%- endif -%}
+                      </h3>
+                    </div>
+                  </div>
+                  {%- endif -%}
+                
+              </div>
+
+          </div>
+        </a>
+      </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{% schema %}
+{
+  "name": "Image list",
+  "tag": "section",
+  "settings": [
+    {
+        "type": "checkbox",
+        "id": "content_boxed",
+        "label": "Use boxed appearance for section",
+        "info": "Set the maximum width in Theme Settings > Layout",
+        "default": false
+    },
+    {
+      "type": "range",
+      "id": "size",
+      "label": "Items per row",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "info": "On desktop."
+    },
+    {
+        "type": "range",
+        "id": "spacing_horizontal",
+        "label": "Horizontal space between blocks",
+        "min": 0,
+        "max": 50,
+        "step": 5,
+        "default": 15,
+        "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
+      ],
+      "default": "adapt",
+      "label": "Image ratio"
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "default": false,
+      "label": "Enable swipe on mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_padding",
+      "default": false,
+      "label": "Add image padding"
+    },
+    {
+      "type": "checkbox",
+      "id": "zoom_hover",
+      "label": "Enable zoom in hover effect on image",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text content position",
+      "default": "overlap",
+      "info": "Adjust the 'Above image' mobile layout below.",
+      "options": [
+        {
+          "value": "above",
+          "label": "Above image"
+        },
+        {
+            "value": "below",
+            "label": "Below image"
+        },
+        {
+          "value": "overlap",
+          "label": "On top of image"
+        }
+      ]
+    },
+    {
+        "type": "select",
+        "id": "alignment",
+        "label": "Text alignment",
+        "default": "text-center",
+        "options": [
+            {
+                "value": "text-left",
+                "label": "Left"
+            },
+            {
+                "value": "text-center",
+                "label": "Centre"
+            },
+            {
+                "value": "text-right",
+                "label": "Right"
+            }
+        ]
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "url",
+      "id": "heading_link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Title font",
+      "default": "Neue Plak Wide",
+      "options": [
+        {
+            "label": "Neue Plak",
+            "value": "Neue Plak"
+        },
+        {
+            "label": "Neue Plak Wide",
+            "value": "Neue Plak Wide"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Title font weight",
+      "default": "normal",
+      "info": "Not all font weight are available for all theme fonts",
+      "options": [
+        {
+          "label": "normal",
+          "value": "normal"
+        },
+        {
+          "label": "600",
+          "value": "600"
+        },
+        {
+          "label": "bold",
+          "value": "bold"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Text Position - Above image"
+    },
+    {
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "Layout (mobile)",
+      "default": "",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "Image left, content right"
+        },
+        {
+          "value": "",
+          "label": "Content above, image below"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "featured_item",
+      "name": "Image item",
+      "settings": [
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "header",
+          "content": "Title"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title color",
+          "default": "#000000"
+        },
+        {
+          "type": "radio",
+          "id": "title_sizing",
+          "label": "Font sizing options",
+          "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+          "default": "",
+          "options": [
+            {
+              "value": "scale",
+              "label": "Scale with screen"
+            },
+            {
+              "value": "fixed",
+              "label": "Fixed size (in pixels)"
+            },
+            {
+              "value": "",
+              "label": "Default size"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "title_scale",
+          "label": "Font scaling",
+          "min": 0,
+          "max": 8,
+          "step": 0.2,
+          "default": 2.2
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Fixed font size",
+          "info": "A fixed font size.",
+          "min": 10,
+          "max": 50,
+          "step": 1,
+          "default": 30,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "Text"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#000000"
+        },
+        {
+          "type": "radio",
+          "id": "text_sizing",
+          "label": "Font sizing options",
+          "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+          "default": "",
+          "options": [
+            {
+              "value": "scale",
+              "label": "Scale with screen"
+            },
+            {
+              "value": "fixed",
+              "label": "Fixed size (in pixels)"
+            },
+            {
+              "value": "",
+              "label": "Default size"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "text_scale",
+          "label": "Font scaling",
+          "min": 0,
+          "max": 8,
+          "step": 0.2,
+          "default": 2.2
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Fixed font size",
+          "info": "A fixed font size.",
+          "min": 10,
+          "max": 50,
+          "step": 1,
+          "default": 30,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "Position - Overlap"
+        },
+        {
+          "type": "select",
+          "id": "position_vertical",
+          "label": "Vertical position",
+          "default": "center",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            } 
+          ]
+        },
+        {
+          "type": "select",
+          "id": "position_horizontal",
+          "label": "Horizontal position",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            } 
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image list",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "featured_item"
+        },
+        {
+          "type": "featured_item"
+        },
+        {
+          "type": "featured_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

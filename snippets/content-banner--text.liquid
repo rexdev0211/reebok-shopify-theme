@@ -1,0 +1,55 @@
+<div class="banner-block--{{ block.id }} banner-block--text">
+    {%- style -%}
+    #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__text-container {
+      width: {{ block.settings.width }}%;
+    }
+
+    #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__text {
+      {%- if block.settings.text_color != blank -%} 
+          color: {{ block.settings.text_color }};
+      {%- endif -%}
+      font-family: {{ block.settings.font_family }};
+      font-weight: {{ block.settings.font_weight }};
+      
+    }
+
+   
+    @media screen and (min-width: 750px) {
+      {%- if block.settings.text_sizing == 'scale' -%} 
+      #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__text {
+        font-size: {{ block.settings.text_scale }}vw;
+      }
+      {%- elsif block.settings.text_sizing == 'fixed' -%}
+      #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__text {
+        font-size: {{ block.settings.text_size }}px;
+      }
+      {%- endif -%}
+
+      #Banner-{{ section.id }} .banner__text--center-right {
+        padding-left: {{ block.settings.alignment_offset }}px;
+      }
+      #Banner-{{ section.id }} .banner__text--center-left {
+        padding-right: {{ block.settings.alignment_offset }}px;
+      }
+    }
+   
+
+    {%- if block.settings.text_color_mobile != blank -%} 
+    @media screen and (max-width: 749px) {
+      #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__text {
+        color: {{ block.settings.text_color_mobile }};
+      }
+
+      #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__text-container {
+        width: {{ block.settings.width_mobile }}%;
+      }
+    }
+    {%- endif -%}
+  {%- endstyle -%}
+
+    <div class="banner__text-container">
+      <div class="banner__text f-body banner__text--{{ block.settings.alignment }}" {{ block.shopify_attributes }}>
+        <span>{{ block.settings.text | escape }}</span>
+      </div>
+    </div>
+</div>

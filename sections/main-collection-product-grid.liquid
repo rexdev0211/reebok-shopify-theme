@@ -1,0 +1,1067 @@
+{% assign primary_sort_collection = collection %}
+{% if collection.metafields.sort_primary.collection_handle %}
+    {% assign primary_sort_collection = collections[collection.metafields.sort_primary.collection_handle] %}
+{% endif %}
+
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-color-swatches.css' | asset_url | stylesheet_tag }}
+{{ 'component-content-cta.css' | asset_url | stylesheet_tag }}
+
+
+<link rel="preload" href="{{ 'component-rte.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- liquid 
+  assign primary_sort_collection = collection
+  if collection.metafields.sort_primary.collection_handle
+      assign primary_sort_collection = collections[collection.metafields.sort_primary.collection_handle]
+  endif
+
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+  
+  assign has_content_blocks = false
+
+  assign current_page_position_start = section.settings.products_per_page | times: paginate.current_page
+  assign next_page_position = paginate.current_page | plus: 1 | times: section.settings.products_per_page
+
+  for block in section.blocks 
+    assign block_position = block.settings.position | plus: 0
+
+    if block.settings.collection and block.settings.collection.handle == primary_sort_collection.handle 
+      if block_position > current_page_position_start and block_position < next_page_position
+        assign has_content_blocks = true
+        break
+      endif 
+    elsif block_position > current_page_position_start and block_position < next_page_position
+      assign has_content_blocks = true
+      break
+    endif 
+  endfor 
+  
+  -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+    {{ 'component-facets.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+  
+    <div class="page-width" id="main-collection-filters" data-id="{{ section.id }}">
+      {% render 'facets', results: collection, enable_filtering: section.settings.enable_filtering, enable_sorting: section.settings.enable_sorting, collapse_on_larger_devices: section.settings.collapse_on_larger_devices %}
+    </div>
+  {%- endif -%}
+  
+  <div id="ProductGridContainer">
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      <div id="side-filter-container" class="clearfix page-width">   
+        <div class="side-filter-menu">    
+          {% render 'filter-menu' %}
+        </div>   
+        <div class="main-filter-content">
+
+        {%- if collection.products.size == 0 -%}
+          <div class="collection collection--empty" id="product-grid" data-id="{{ section.id }}">
+            <div class="loading-overlay gradient"></div>
+            <div class="title-wrapper center">
+              <h2 class="title title--primary">
+                {{ 'sections.collection_template.empty' | t }}<br>
+                {{ 'sections.collection_template.use_fewer_filters_html' | t: link: collection.url, class: "underlined-link link" }}
+              </h2>
+            </div>
+          </div>
+        {%- else -%}
+          <div class="collection">
+            <div class="loading-overlay gradient"></div>
+    
+            <ul id="product-grid" 
+                data-id="{{ section.id }}" 
+                class="grid  css-grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+              {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
+                grid--{{ section.settings.columns_desktop }}-col-desktop
+              {% endif %}"
+              data-infinite="{{ section.settings.enable_infinite_load }}"
+              data-hide-duplicates="{{ section.settings.hide_duplicate_products }}"
+            >
+              {%- assign productList = '' -%}
+
+              {%- assign current_total_count = paginate.current_page | minus: 1 | times: section.settings.products_per_page -%}
+              {%- assign sum_total_count = current_total_count -%} 
+              
+              {%- for product in collection.products -%}
+                {%- capture currentProductName -%}{%- render 'snippet--product-name', product: product -%}{%- endcapture -%}
+
+                {% assign lazy_load = false %}
+                {%- if forloop.index > 2 -%}
+                  {%- assign lazy_load = true -%}
+                {%- endif -%}
+
+                {%- unless section.settings.hide_duplicate_products == true and productList contains currentProductName -%}
+              {%- if section.settings.hide_sold_out == false or section.settings.hide_sold_out == true and product.available == true -%}
+
+                {%- if section.settings.hide_duplicate_products == true -%} 
+                  {%- assign formatList = currentProductName | strip | append: ', ' -%}
+                  {%- assign productList = productList | append: formatList -%}
+                {%- endif -%} 
+
+
+                <li class="grid__item product-item" data-prod-name="{{ currentProductName | strip }}">
+                  {% render 'card-product',
+                    card_product: product,
+                    media_aspect_ratio: section.settings.image_ratio,
+                    show_secondary_image: section.settings.show_secondary_image,
+                    show_vendor: section.settings.show_vendor,
+                    lazy_load: lazy_load,
+                    swatch_size: 'small',
+                    swatch_display: 'below'
+                  %}
+                </li>
+                {%- assign sum_total_count = sum_total_count | plus: 1 -%}
+
+                {%- if has_content_blocks == true -%}
+
+                  {%- for block in section.blocks -%}
+                  
+                    {%- assign content_position = block.settings.position | plus: 0 -%}
+
+                    {%- if block.settings.collection and block.settings.collection.handle == primary_sort_collection.handle and sum_total_count == content_position -%}
+                    <li class="grid__item product-item content-cta--{{ block.settings.size }} {{ block.settings.display }}" {{ block.shopify_attributes }}>
+                      {%- render 'collection--content-block', block: block -%}
+                    </li>
+                    {%- elsif has_content_blocks == true and sum_total_count == content_position -%}
+                    <li class="grid__item product-item content-cta--{{ block.settings.size }} {{ block.settings.display }}" {{ block.shopify_attributes }}>
+                      {%- render 'collection--content-block', block: block -%}
+                    </li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                  
+                {%- endif -%}
+
+                {%- endif -%}
+              {%- endunless -%}
+              {%- endfor -%}
+            </ul>
+    
+            {%- if paginate.pages > 1 -%}
+              {% render 'pagination', paginate: paginate, anchor: '' %}
+              {%- if section.settings.enable_infinite_load == true -%}
+                <div class="loading-spinner--wrapper js">
+                  <div class="loading-spinner loading-spinner--large"></div>
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{%- if collection.products.size > 0 -%}
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const enableInfiniteLoad = {{ section.settings.enable_infinite_load }};
+    const productCount = document.querySelectorAll(".product-item").length;
+
+    let collectionWaitForJQuery = setInterval(function () {
+      if(typeof $ != 'undefined') {
+        console.log('test')
+        clearInterval(collectionWaitForJQuery);
+
+        if(productCount > 0) {
+          let settings = {
+            hideDuplicates: {{ section.settings.hide_duplicate_products }},
+            showSwatches: {{ section.settings.show_color_swatches }},
+            {%- if settings.swatch_enable_limit == true %}
+            limitSwatches: {{ settings.swatch_limit_amount }}
+            {% endif %}
+          }
+          collectionGetVariations(settings, null);
+
+          if(enableInfiniteLoad) {
+            let ajaxSettings = {
+              isSearch: false,
+              hideDuplicates: {{ section.settings.hide_duplicate_products }},
+              showSwatches: {{ section.settings.show_color_swatches }},
+              {%- if settings.swatch_enable_limit == true %}
+              limitSwatches: {{ settings.swatch_limit_amount }}
+              {% endif %}
+            }
+            ajaxifyCollection(ajaxSettings);
+          }
+        }
+      }
+    }, 100);
+  });
+</script>
+{%- endif -%} 
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-product-grid.name",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 16,
+      "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.main-collection-product-grid.settings.columns_desktop.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_infinite_load",
+      "default": true,
+      "label": "Enable infinite load"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_color_swatches",
+      "default": true,
+      "label": "Show color swatches"
+    },
+    {
+      "type": "select",
+      "id": "swatch_size",
+      "label": "Color swatch size",
+      "default": "small",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_duplicate_products",
+      "default": false,
+      "label": "Hide duplicate products",
+      "info": "This will group variants as one product."
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_sold_out",
+      "label": "Hide sold out products",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__3.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.main-collection-product-grid.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_vendor.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__1.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_filtering.label",
+      "info": "t:sections.main-collection-product-grid.settings.enable_filtering.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "collapse_on_larger_devices",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.collapse_on_larger_devices.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header_mobile.content"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "default": "2",
+      "label": "t:sections.main-collection-product-grid.settings.columns_mobile.label",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.main-collection-product-grid.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.main-collection-product-grid.settings.columns_mobile.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content_spot",
+      "name": "Content spot",
+      "settings": [
+        {
+          "type": "select",
+          "id": "display",
+          "label": "Show on",
+          "options": [
+            {
+              "value": "",
+              "label": "Desktop & mobile"
+            },
+            {
+              "value": "medium-down--hide",
+              "label": "Desktop only"
+            },
+            {
+              "value": "large-up--hide",
+              "label": "Mobile only"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "options": [
+            {
+              "value": "single",
+              "label": "One column"
+            },
+            {
+              "value": "two-column",
+              "label": "Two columns (horizontal)"
+            },
+            {
+              "value": "large",
+              "label": "Two rows and columns"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "position",
+          "label": "Position among products",
+          "info": "A number greater than 0. Represents after how many products it should appear. Based on the number of products set per page (e.g. for position 20 with 16 products per page, it will appear on page 2 after 4 products). If duplicates are hidden, the position may not match as expected due to Shopify limitations."
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection to appear on",
+          "info": "For sorted collections, content spot will appear based on the parent collection. If left blank, it will appear on all collections."
+        },
+        {
+          "type": "header",
+          "content": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "image_position_vertical",
+          "label": "Image position (vertical)",
+          "info": "The image will fit to fill the entire width and height of the space which may result in resizing in some cases. This will help set the position of the image in the case it does resize.",
+          "default": "center",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "image_position_horizontal",
+          "label": "Image position (horizontal)",
+          "info": "The image will fit to fill the entire width and height of the space which may result in resizing in some cases. This will help set the position of the image in the case it does resize.",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background color",
+          "info": "If content layout is not set to overlap, this will apply to the text content's background."
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Content layout",
+          "info": "Partial overlap allows for a background to be added to the content. Set enabled items below.",
+          "options": [
+            {
+              "value": "overlap",
+              "label": "Overlap (full)"
+            },
+            {
+              "value": "overlap-partial",
+              "label": "Overlap (partial)"
+            },
+            {
+              "value": "image-right",
+              "label": "Content left, image right"
+            },
+            {
+              "value": "image-above",
+              "label": "Image above, content below"
+            },
+            {
+              "value": "no-image",
+              "label": "No image, fill column"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "content_alignment",
+          "label": "Content text alignment",
+          "default": "text-left",
+          "options": [
+            {
+              "value": "text-left",
+              "label": "Left"
+            },
+            {
+              "value": "text-center",
+              "label": "Center"
+            },
+            {
+              "value": "text-right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "borders",
+          "label": "Add borders to content area",
+          "default": "",
+          "options": [
+            {
+              "label": "No borders",
+              "value": ""
+            },
+            {
+              "label": "Top and bottom border",
+              "value": "border-top border-bottom"
+            },
+            {
+              "label": "Top border",
+              "value": "border-top"
+            },
+            {
+              "label": "Bottom border",
+              "value": "border-bottom"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "force_center",
+          "label": "Force center",
+          "default": false,
+          "info": "Centered content is based on the space available to it, minus the other text content. Enable this to force center position to be based on the block height. This may result in content overlap if content exceeds the center of the block's height."
+        },
+        {
+          "type": "header",
+          "content": "Link"
+        },
+        {
+          "type": "select",
+          "id": "link_position",
+          "label": "Position",
+          "default": "bottom",
+          "info": "For Overlap - Partial layout, this will default to bottom.",
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            }
+          ]
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text"
+        },
+        {
+          "type": "color",
+          "id": "link_color_background",
+          "label": "Background",
+          "info": "For outlined buttons, this will become the border and text. Will not be applied to the text link styled button."
+        },
+        {
+          "type": "color",
+          "id": "link_color_text",
+          "label": "Color",
+          "info": "Will not be applied to the outline button."
+        },
+        {
+          "type": "checkbox",
+          "id": "link_block_click",
+          "label": "Make entire content spot clickable",
+          "info": "This will make the entire content spot into a link whether there is a button or not. If unchecked, it will require a button to use the link.",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "link_style",
+          "label": "Link style",
+          "default": "button",
+          "options": [
+            {
+              "value": "button",
+              "label": "Solid button"
+            },
+            {
+              "value": "button-outline",
+              "label": "Outlined button"
+            },
+            {
+              "value": "link",
+              "label": "Text link with arrow"
+            },
+            {
+              "value": "none",
+              "label": "Don't show"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "link_width",
+          "label": "Minimum width",
+          "info": "Sets the minimum width of the button, based on the available width of the content area.",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "step": 5,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "Subtitle"
+        },
+        {
+          "type": "paragraph",
+          "content": "Appears above the title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "type": "select",
+          "id": "subtitle_position",
+          "label": "Position",
+          "default": "top",
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "subtitle_partial",
+          "label": "Show on partial section",
+          "info": "For Overlap - Partial layout. This will override the set position above.",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "subtitle_width",
+          "label": "Adjust subtitle width (desktop)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 100,
+          "unit": "%"
+        },
+        {
+          "type": "color",
+          "id": "subtitle_color",
+          "label": "Color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "subtitle_font",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+              "label": "Neue Plak",
+              "value": "Neue Plak"
+            },
+            {
+              "label": "Neue Plak Wide",
+              "value": "Neue Plak Wide"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "subtitle_weight",
+          "label": "Font weight",
+          "default": "normal",
+          "info": "Not all font weight are available for all theme fonts",
+          "options": [
+            {
+              "label": "normal",
+              "value": "normal"
+            },
+            {
+              "label": "600",
+              "value": "600"
+            },
+            {
+              "label": "bold",
+              "value": "bold"
+            }
+          ]
+        },
+        {
+          "type": "radio",
+          "id": "subtitle_sizing",
+          "label": "Font sizing options",
+          "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+          "default": "",
+          "options": [
+            {
+              "value": "scale",
+              "label": "Scale with screen"
+            },
+            {
+              "value": "fixed",
+              "label": "Fixed size (in pixels)"
+            },
+            {
+              "value": "",
+              "label": "Default size"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "subtitle_scale",
+          "label": "Font scaling",
+          "min": 0,
+          "max": 8,
+          "step": 0.2,
+          "default": 2.2
+        },
+        {
+          "type": "range",
+          "id": "subtitle_size",
+          "label": "Fixed font size",
+          "info": "A fixed font size.",
+          "min": 10,
+          "max": 50,
+          "step": 1,
+          "default": 30,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "Title"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "select",
+          "id": "title_position",
+          "label": "Position",
+          "default": "top",
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "title_partial",
+          "label": "Show on partial section",
+          "info": "For Overlap - Partial layout. This will override the set position above.",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "title_width",
+          "label": "Adjust title width (desktop)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 100,
+          "unit": "%"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "title_font",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+              "label": "Neue Plak",
+              "value": "Neue Plak"
+            },
+            {
+              "label": "Neue Plak Wide",
+              "value": "Neue Plak Wide"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "title_weight",
+          "label": "Font weight",
+          "default": "600",
+          "info": "Not all font weight are available for all Gant fonts",
+          "options": [
+            {
+              "label": "normal",
+              "value": "normal"
+            },
+            {
+              "label": "600",
+              "value": "600"
+            },
+            {
+              "label": "bold",
+              "value": "bold"
+            }
+          ]
+        },
+        {
+          "type": "radio",
+          "id": "title_sizing",
+          "label": "Font sizing options",
+          "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+          "default": "",
+          "options": [
+            {
+              "value": "scale",
+              "label": "Scale with screen"
+            },
+            {
+              "value": "fixed",
+              "label": "Fixed size (in pixels)"
+            },
+            {
+              "value": "",
+              "label": "Default size"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "title_scale",
+          "label": "Font scaling",
+          "min": 0,
+          "max": 8,
+          "step": 0.2,
+          "default": 2.2
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Fixed font size",
+          "info": "A fixed font size.",
+          "min": 10,
+          "max": 50,
+          "step": 1,
+          "default": 30,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Position",
+          "default": "top",
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "text_partial",
+          "label": "Show on partial section",
+          "info": "For Overlap - Partial layout. This will override the set position above.",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "text_width",
+          "label": "Adjust text width (desktop)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 100,
+          "unit": "%"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "text_font",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+              "label": "Neue Plak",
+              "value": "Neue Plak"
+            },
+            {
+              "label": "Neue Plak Wide",
+              "value": "Neue Plak Wide"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_weight",
+          "label": "Font weight",
+          "default": "normal",
+          "info": "Not all font weight are available for all Gant fonts",
+          "options": [
+            {
+              "label": "normal",
+              "value": "normal"
+            },
+            {
+              "label": "600",
+              "value": "600"
+            },
+            {
+              "label": "bold",
+              "value": "bold"
+            }
+          ]
+        },
+        {
+          "type": "radio",
+          "id": "text_sizing",
+          "label": "Font sizing options",
+          "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+          "default": "",
+          "options": [
+            {
+              "value": "scale",
+              "label": "Scale with screen"
+            },
+            {
+              "value": "fixed",
+              "label": "Fixed size (in pixels)"
+            },
+            {
+              "value": "",
+              "label": "Default size"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "text_scale",
+          "label": "Font scaling",
+          "min": 0,
+          "max": 8,
+          "step": 0.2,
+          "default": 2.2
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Fixed font size",
+          "info": "A fixed font size.",
+          "min": 10,
+          "max": 50,
+          "step": 1,
+          "default": 30,
+          "unit": "px"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

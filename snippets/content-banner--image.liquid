@@ -1,0 +1,63 @@
+<div class="banner-block--{{ block.id }} banner-block--image {{ block.settings.alignment_mobile }}">
+    {%- style -%}
+    #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__image .banner__media {
+        width: {{ block.settings.width }}%;
+    }
+
+    #Banner-{{ section.id }} .banner__image .banner__media::before {
+      padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;
+      content: '';
+      display: block;
+    }
+
+    @media screen and (max-width: 749px) {
+      #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__image .banner__media {
+        width: {{ block.settings.width_mobile }}%;
+      }
+    }
+  {%- endstyle -%}
+
+  {%- if block.settings.image != blank -%}
+    <div class="banner__image" {{ block.shopify_attributes }}>
+        <div class="banner__media media{% if block.settings.image_mobile != blank %} small--hide medium-up--show{% endif %}">
+            <img srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+              {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+              {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | img_url: '1100x' }} 1100w,{%- endif -%}
+              {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+              {%- if block.settings.image.width >= 1780 -%}{{ block.settings.image | img_url: '1780x' }} 1780w,{%- endif -%}
+              {%- if block.settings.image.width >= 2000 -%}{{ block.settings.image | img_url: '2000x' }} 2000w,{%- endif -%}
+              {%- if block.settings.image.width >= 2800 -%}{{ block.settings.image | img_url: '2800x' }} 2800w{%- endif -%}"
+              sizes="{% if block.settings.image != blank and block.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif block.settings.image != blank %}50vw{% else %}100vw{% endif %}"
+              src="{{ block.settings.image | img_url: '750x' }}"
+              loading="lazy"
+              alt="{{ block.settings.image.alt | escape }}"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.width | divided_by: block.settings.image.aspect_ratio }}"
+              {% if block.settings.image != blank %}class="banner__media-image-half"{% endif %}
+            >
+          </div>
+    </div>
+    {%- endif -%}
+
+    {%- if block.settings.image_mobile != blank -%}
+    <div class="banner__image" {{ block.shopify_attributes }}>
+        <div class="banner__media media medium-up--hide">
+            <img srcset="{%- if block.settings.image_mobile.width >= 375 -%}{{ block.settings.image_mobile | img_url: '375x' }} 375w,{%- endif -%}
+              {%- if block.settings.image_mobile.width >= 750 -%}{{ block.settings.image_mobile | img_url: '750x' }} 750w,{%- endif -%}
+              {%- if block.settings.image_mobile.width >= 1100 -%}{{ block.settings.image_mobile | img_url: '1100x' }} 1100w,{%- endif -%}
+              {%- if block.settings.image_mobile.width >= 1500 -%}{{ block.settings.image_mobile | img_url: '1500x' }} 1500w,{%- endif -%}
+              {%- if block.settings.image_mobile.width >= 1780 -%}{{ block.settings.image_mobile | img_url: '1780x' }} 1780w,{%- endif -%}
+              {%- if block.settings.image_mobile.width >= 2000 -%}{{ block.settings.image_mobile | img_url: '2000x' }} 2000w,{%- endif -%}
+              {%- if block.settings.image_mobile.width >= 2800 -%}{{ block.settings.image_mobile | img_url: '2800x' }} 2800w{%- endif -%}"
+              sizes="{% if block.settings.image != blank and block.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif block.settings.image != blank %}50vw{% else %}100vw{% endif %}"
+              src="{{ block.settings.image_mobile | img_url: '750x' }}"
+              loading="lazy"
+              alt="{{ block.settings.image_mobile.alt | escape }}"
+              width="{{ block.settings.image_mobile.width }}"
+              height="{{ block.settings.image_mobile.width | divided_by: block.settings.image_mobile.aspect_ratio }}"
+              {% if block.settings.image != blank %}class="banner__media-image-half"{% endif %}
+            >
+          </div>
+    </div>
+    {%- endif -%}
+</div>

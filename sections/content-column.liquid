@@ -1,0 +1,1288 @@
+{{ 'section-content-column.css' | asset_url | stylesheet_tag }}
+
+<style>
+    #shopify-section-{{ section.id }} .ib-wrapper {
+        margin-top: {{ section.settings.content_spacing_top }}px;
+        margin-bottom: {{ section.settings.content_spacing_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .ib-block-left {
+        {% if section.blocks.size == 1 %}
+        width: 100%;
+        {% else %}
+        width: {{ section.settings.column_left_width }}%;
+        {% endif %}
+    }
+
+    #shopify-section-{{ section.id }} .ib-block-right {
+        width: calc(100% - {{ section.settings.column_left_width }}%);
+    }
+</style>
+
+<div class="section-content-column ib-background {% if section.settings.content_boxed == true %}section-boxed{% endif %}">
+    <div class="ib-wrapper">
+    {% for block in section.blocks limit: section.blocks.size %}
+        {% assign bset = block.settings %}
+        {% assign sectionId = section.id | prepend: '#shopify-section-' | append: ' .ib-block-' %}
+        {% assign blockClass = block.id | prepend: sectionId %}
+        <style>
+            {% if bset.default_text_font == false %}
+            {{ bset.text_font_picker | font_face }}
+            {% endif %}
+
+            {% if bset.default_title_font == false %}
+            {{ bset.title_font_picker | font_face }}
+            {% endif %}
+
+           {{ blockClass }} .ib-item {
+                width: {{ bset.width }}%;
+
+                {% if bset.content_pos contains 'top' and bset.vertical_offset != blank %}
+                margin-top: {{ bset.vertical_offset }};
+                {% elsif bset.content_pos contains 'bottom' and bset.vertical_offset != blank %}
+                margin-bottom: {{ bset.vertical_offset }};
+                {% endif %}
+
+                {% case bset.content_pos %}
+
+                {% when 'top left' %}
+                top:0;
+                left: 0;
+                transform: unset;
+
+                {% when 'top center' %}
+                top: 0;
+                left: 50%;
+                transform: translate(-50%, 0);
+
+                {% when 'top right' %}
+                top:0;
+                left: unset;
+                right: 0;
+                transform: unset;
+
+                {% when 'center left' %}
+                left: 0;
+                transform: translate(0, -50%);
+                {% when 'center center' %}
+
+                {% when 'center right' %}
+                left: unset;
+                right: 0;
+                transform: translate(0, -50%);
+
+                {% when 'bottom left' %}
+                top: unset;
+                bottom: 0;
+                transform: unset;
+                left: 0;
+
+                {% when 'bottom center' %}
+                top: unset;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, 0);
+
+                {% when 'bottom right' %}
+                top: unset;
+                bottom: 0;
+                left: unset;
+                right: 0;
+                transform: unset;
+
+                {% endcase %}
+
+
+            }
+
+            {{ blockClass }} .ib-button {
+               display: inline-block;
+                font-size: {{ bset.button_size }}px;
+                {% if bset.button_scale > 0 %}
+                font-size: {{ bset.button_scale }}vw;
+                {% endif %}
+
+                margin-top: {{ bset.button_top_spacing }}px;
+                margin-bottom: {{ bset.button_bottom_spacing }}px;
+
+                margin-left: {{ bset.button_h_spacing }}px;
+                margin-right: {{ bset.button_h_spacing }}px;
+
+               padding-left: {{ bset.button_padding }}px;
+               padding-right: {{ bset.button_padding }}px;
+               padding-top: {{ bset.button_v_padding }}px;
+               padding-bottom: {{ bset.button_v_padding }}px;
+               border: 1px solid transparent;
+
+               {% if bset.button_style contains 'outline' %}
+                border-color: {{ bset.button_colour_bg }};
+                background: transparent;
+                color: {{ bset.button_colour_text }};
+               {% else %}
+                border-color: {{ bset.button_colour_bg }};
+                background: {{ bset.button_colour_bg }};
+                color: {{ bset.button_colour_text }};
+                {% endif %}
+
+                transition: all 0.15s ease-in-out;
+            }
+
+            {{ blockClass }} .ib-button:hover,
+            {{ blockClass }} .ib-button:focus  {
+                {% if bset.button_style == 'button-fill-all' or bset.button_style == 'button-outline-base'  %}
+
+                border-color: {{ bset.button_colour_bg_hover }};
+                background: {{ bset.button_colour_bg_hover }};
+                color: {{ bset.button_colour_text_hover }};
+
+                {% elsif bset.button_style == 'button-fill-base' or bset.button_style == 'button-outline-all' %}
+                border-color: {{ bset.button_colour_bg_hover }};
+                background: transparent;
+                color: {{ bset.button_colour_text_hover }};
+                {% endif %}
+            }
+
+           {{ blockClass }} .ib-block-inner {
+                background-color: {{ bset.bg_color}};
+
+                {% if bset.bg_image_style == 'background-all' or bset.bg_image_style == 'background-desktop' %}
+                background-image: url({{ bset.bg_image | img_url: '2048x' }});
+                background-size: cover;
+                background-position: {{ bset.image_bg_position }};
+                {% endif %}
+
+                height: 100%;
+                width: 100%;
+
+            }
+
+           {{ blockClass }} .ib-title {
+               margin-bottom: 0;
+                font-size: {{ bset.title_size }}px;
+
+                color: {{ bset.title_color }};
+
+                {%- if bset.title_sizing == 'scale' -%} 
+                font-size: {{ bset.title_scale }}vw;
+                {%- elsif bset.title_sizing == 'fixed' -%}
+                font-size: {{ bset.title_size }}px;
+                {%- endif -%}
+
+
+                {% if bset.default_title_font == false %}
+                font-family: {{ bset.title_font_picker.family }}, {{ bset.title_font_picker.fallback_families }};
+                font-weight: {{ bset.title_font_picker.weight }};
+                font-style: {{ bset.title_font_picker.style }};
+                {%- else -%} 
+                font-family: {{ bset.title_font }};
+                font-weight: {{ bset.title_weight }};
+                {% endif %}
+            }
+
+           {{ blockClass }} .ib-text {
+               margin-bottom: 0;
+            }
+
+            {{ blockClass }} .ib-text * {
+                color: {{ bset.text_color }};
+                font-size: {{ bset.text_size }}px;
+
+                {%- if bset.text_sizing == 'scale' -%} 
+                font-size: {{ bset.text_scale }}vw;
+                {%- elsif bset.text_sizing == 'fixed' -%}
+                font-size: {{ bset.text_size }}px;
+                {%- endif -%}
+
+                {% if bset.default_text_font == false %}
+                font-family: {{ bset.text_font_picker.family }}, {{ bset.text_font_picker.fallback_families }};
+                font-weight: {{ bset.text_font_picker.weight }};
+                font-style: {{ bset.text_font_picker.style }};
+                {%- else -%} 
+                font-family: {{ bset.text_font }};
+                font-weight: {{ bset.text_weight }};
+                {% endif %}
+            }
+
+            @media screen and (max-width:749px) {
+                {{ blockClass }} {
+                    
+                    width: {{ bset.block_width_mobile }}%;
+
+                    {%- if bset.block_offset_top_mobile -%}
+                    margin-top: {{ bset.block_offset_top_mobile }};
+                    {%- endif -%}
+                }   
+
+                {{ blockClass }} .ib-block-inner {
+                    padding-left: {{ bset.padding_h_mobile }}px;
+                    padding-right: {{ bset.padding_h_mobile }}px;
+
+                    padding-top: {{ bset.padding_v_mobile }}px;
+                    padding-bottom: {{ bset.padding_v_mobile }}px;
+                }
+
+                {% if bset.bg_image_mobile_hide %}
+                {{ blockClass }}.hide-bg-image-mobile .ib-block-inner {
+                    background: none;
+                }   
+                {% endif %}
+
+                {{ blockClass }}.ib-block-left {
+                    z-index: 2;
+                }
+
+                {{ blockClass }} .ib-item {
+                    width: 90%;
+                }
+
+                {{ blockClass }} .ib-title {
+                    font-size: {{ bset.title_size_mobile }}px;
+                    color: {{ bset.title_color_mobile }};
+                }
+
+                {{ blockClass }} .ib-text * {
+                    font-size: {{ bset.text_size_mobile }}px;
+                    color: {{ bset.text_color_mobile }};
+                }
+
+
+                {{ blockClass }} .ib-button {
+                    font-size: {{ bset.button_size_mobile }}px;
+
+                {% if bset.button_style_mobile contains 'outline' %}
+                    border-color: {{ bset.mobile_button_text_color }};
+                    background: transparent;
+                    color: {{ bset.mobile_button_text_color }};
+                {% else %}
+                    border-color: {{ bset.mobile_button_bg }};
+                    background: {{ bset.mobile_button_text_color }};
+                    color: {{ bset.mobile_button_text_color }};
+                    {% endif %}
+
+                    transition: all 0.15s ease-in-out;
+                }
+
+            {{ blockClass }} .ib-button:hover,
+            {{ blockClass }} .ib-button:focus  {
+                {% if bset.button_style_mobile == 'button-fill-all' or bset.button_style_mobile == 'button-outline-base'  %}
+
+                border-color: {{ bset.mobile_button_bg_hover }};
+                background: {{ bset.mobile_button_bg_hover }};
+                color: {{ bset.mobile_button_text_hover }};
+
+                {% elsif bset.button_style_mobile == 'button-fill-base' or bset.button_style_mobile == 'button-outline-all' %}
+                border-color: {{ bset.mobile_button_bg_hover }};
+                background: transparent;
+                color: {{ bset.mobile_button_text_hover }};
+                {% endif %}
+            }
+
+            }
+        </style>
+
+        {% unless bset.hide_block %}
+
+        <div class="ib-block ib-block-{{ block.id }} {% if forloop.first %}ib-block-left{% elsif forloop.last and section.blocks.size > 1 %}ib-block-right{% endif %} {% if bset.bg_image_mobile_hide == true %}hide-bg-image-mobile{% endif %}" {{ block.shopify_attributes }}>
+                <div class="ib-block-inner ib-block-inner-{{ block.id }}">
+                    {% if bset.full_click_link != blank and bset.full_click %}<a href="{{ bset.full_click_link }}">{% endif %}
+
+                        {% if bset.bg_image and bset.bg_image_style == 'full-all' %}
+                        <img src="{{ bset.bg_image | img_url: '2048x' }}" class="{% if bset.bg_image_mobile != blank %}small--hide medium-up--show{% endif %}" alt="{{ bset.bg_image.alt | escape }}" />
+                        {% endif %}
+        
+                        {% if bset.bg_image_mobile and bset.bg_image_style != 'background-all' %}
+                        <img src="{{ bset.bg_image_mobile | img_url: '700x' }}" alt="{{ bset.bg_image_mobile.alt | escape }}" class="medium-up--hide {% if bset.bg_image_mobile_hide == true %}small--hide{% endif %}" />
+                        {% endif %}
+                        
+                        <div class="text-{{- bset.alignment }} text-mobile-{{- bset.alignment_mobile }} ib-item flex-center flex-column">
+                            {%- if bset.content_image != blank  -%}
+                            <img style="{% if bset.content_image_bot_space > 0 %}margin-bottom: {{ bset.content_image_bot_space }}px{% endif %}" class="{{ bset.content_image_show_on }}" src="{{ bset.content_image | img_url: '500x' }}" alt="{{ bset.content_image.alt | escape }}" />
+                            {%- endif -%}
+        
+                            {%- if bset.title != blank  -%}
+                            <h2 class="ib-title {{ bset.title_show_on }}">{{ bset.title }}</h2>
+                            {%- endif -%}
+        
+                            {%- if bset.text != blank  -%}
+                            <div class="ib-text {{ bset.text_show_on }}" >
+                                {{ bset.text }}
+                            </div>
+                            {%- endif -%}
+        
+                            <div class="ib-buttons {% if bset.button_position_mobile == 'outside' %}small--hide medium-up--show{% endif %} ">
+                                {%- if bset.button_1_text != blank  -%}
+                                <a class="ib-button" href="{{ bset.button_1_link}}">{{ bset.button_1_text }}</a>
+                                {%- endif -%}
+        
+                                {%- if bset.button_2_text != blank  -%}
+                                <a class="ib-button" href="{{ bset.button_2_link}}">{{ bset.button_2_text }}</a>
+                                {%- endif -%}
+                            </div>
+                            
+                            
+                        </div>
+                        {% if bset.full_click_link != blank and bset.full_click %}</a>{% endif %}
+                </div>
+
+                {% if bset.button_position_mobile == 'outside' %}
+            <div class="ib-buttons medium-up--hide text-center">
+                {%- if bset.button_1_text != blank  -%}
+                <a class="ib-button" href="{{ bset.button_1_link}}">{{ bset.button_1_text }}</a>
+                {%- endif -%}
+
+                {%- if bset.button_2_text != blank  -%}
+                <a class="ib-button" href="{{ bset.button_2_link}}">{{ bset.button_2_text }}</a>
+                {%- endif -%}
+            </div>
+            {% endif %}
+            </div>
+
+            
+
+        {% endunless %}
+    {% endfor %}
+    </div>
+
+    {% if section.blocks.size == 0 %}
+        {% render 'no-blocks' %}
+    {% endif %}
+</div>
+
+
+
+{% schema %}
+{
+"name": "Content - Two column",
+"max_blocks": 2,
+"settings": [
+    {
+        "type": "header",
+        "content": "Content sizing"
+    },
+    {
+        "type": "checkbox",
+        "id": "content_boxed",
+        "label": "Use boxed appearance for section",
+        "info": "Set the maximum width in Theme Settings > Layout",
+        "default": false
+    },
+    {
+        "type": "range",
+        "id": "column_left_width",
+        "label": "Left column width",
+        "min": 20,
+        "max": 80,
+        "step": 5,
+        "default": 40,
+        "unit": "%",
+        "info": "The right side will fill the rest of the space. If there is only one block of content, it will fill the entire width."
+    },
+    {
+        "type": "header",
+        "content": "Content spacing"
+    },
+    {
+        "type": "range",
+        "id": "content_spacing_top",
+        "label": "Top spacing",
+        "min": 0,
+        "max": 60,
+        "step": 5,
+        "default": 0,
+        "unit": "px",
+        "info": "Adjusts the top space from other sections."
+    },
+    {
+        "type": "range",
+        "id": "content_spacing_bottom",
+        "label": "Bottom spacing",
+        "min": 0,
+        "max": 60,
+        "step": 5,
+        "default": 20,
+        "unit": "px",
+        "info": "Adjusts the bottom space from other sections."
+    }
+],
+"blocks": [
+    {
+    "type": "image_block",
+    "name": "Image Block",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "hide_block",
+            "label": "Hide this block",
+            "default": false
+        },
+        {
+           "type": "header",
+           "content": "Mobile block settings"
+        },
+        {
+            "type": "range",
+            "id": "block_width_mobile",
+            "label": "Mobile block width",
+            "min": 20,
+            "max": 100,
+            "step": 1,
+            "default": 100,
+            "unit": "%"
+        },
+        {
+            "type": "text",
+            "id": "block_offset_top_mobile",
+            "label": "Mobile offset from the top",
+            "info": "Add a number and unit (px) to move the content. It can overlap the right block by setting a negative number and unit.",
+            "default": "0px"
+        },
+        {
+            "type": "header",
+            "content": "Background"
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background Colour",
+            "info": "Will be shown when there is no background image."
+        },
+        {
+            "type": "image_picker",
+            "id": "bg_image",
+            "label": "Background Image",
+            "info": "The image will fill the entire column space and remain proportional."
+        },
+        {
+            "type": "image_picker",
+            "id": "bg_image_mobile",
+            "label": "Mobile background Image"
+        },
+        {
+            "type": "checkbox",
+            "id": "bg_image_mobile_hide",
+            "label": "Hide image on mobile"
+        },
+        {
+            "type": "select",
+            "id": "bg_image_style",
+            "label": "Background image style",
+            "info": "The background image style will fill the entire container, but it may cut off. Best used for patterned backgrounds with no text. The space will be either the next tallest full image or the minimum height set if both images are set to background.",
+            "default": "full-all",
+            "options": [
+                {
+                    "value": "full-all",
+                    "label": "Full image (desktop + mobile)"
+                },
+                {
+                    "value": "background-all",
+                    "label": "Set as background image (desktop + mobile)"
+                },
+                {
+                    "value": "background-desktop",
+                    "label": "Set as background image (desktop only)"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "image_bg_position",
+            "label": "Background image position",
+            "info": "For a Background style to position the image correctly",
+            "default": "top center",
+            "options": [
+                {
+                    "value": "top left",
+                    "label": "Top Left"
+                },
+                {
+                    "value": "top center",
+                    "label": "Top Centre"
+                },
+                {
+                    "value": "top right",
+                    "label": "Top Right"
+                },
+                {
+                    "value": "center left",
+                    "label": "Centre Left"
+                },
+                {
+                    "value": "center center",
+                    "label": "Centre Center"
+                },
+                {
+                    "value": "center right",
+                    "label": "Centre Right"
+                },
+                {
+                    "value": "bottom left",
+                    "label": "Bottom Left"
+                },
+                {
+                    "value": "bottom center",
+                    "label": "Bottom Center"
+                },
+                {
+                    "value": "bottom right",
+                    "label": "Bottom Right"
+                }
+            ]
+        },
+        {
+            "type": "header",
+            "content": "Content Positioning"
+        },
+        {
+            "type": "range",
+            "id": "content_top_space",
+            "label": "Space from top",
+            "info": "Used to create a gap between content",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "default": 0,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "content_bottom_space",
+            "label": "Space from bottom",
+            "info": "Used to create a gap between content",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "default": 15,
+            "unit": "px"
+        },
+        {
+            "type": "select",
+            "id": "content_pos",
+            "label": "Content position",
+            "options": [
+                {
+                    "value": "top left",
+                    "label": "Top left"
+                },
+                {
+                    "value": "top center",
+                    "label": "Top center"
+                },
+                {
+                    "value": "top right",
+                    "label": "Top right"
+                },
+                {
+                    "value": "center center",
+                    "label": "Centered"
+                },
+                {
+                    "value": "center left",
+                    "label": "Center left"
+                },
+                {
+                    "value": "center right",
+                    "label": "Center right"
+                },
+                {
+                    "value": "bottom left",
+                    "label": "Bottom left"
+                },
+                {
+                    "value": "bottom center",
+                    "label": "Bottom center"
+                },
+                {
+                    "value": "bottom right",
+                    "label": "Bottom right"
+                }
+            ],
+            "default": "center center"
+        }, 
+        {
+            "type": "text",
+            "id": "horizontal_offset",
+            "label": "Horizontal offset",
+            "info": "Offsets from the selected position. Include a number and unit. Leave blank if not used."
+        },
+        {
+            "type": "text",
+            "id": "vertical_offset",
+            "label": "Vertical offset",
+            "info": "Offsets from the selected position. Include a number and unit. Leave blank if not used."
+        },
+        {
+            "type": "header",
+            "content": "Content"
+        },
+        {
+            "type": "range",
+            "id": "width",
+            "label": "Desktop content width",
+            "min": 20,
+            "max": 80,
+            "step": 1,
+            "default": 50,
+            "unit": "%"
+        },
+        {
+            "type": "range",
+            "id": "width_mobile",
+            "label": "Mobile content width",
+            "min": 20,
+            "max": 100,
+            "step": 1,
+            "default": 100,
+            "unit": "%"
+        },
+        {
+            "type": "range",
+            "id": "padding_h_mobile",
+            "label": "Mobile content padding (horizontal)",
+            "min": 0,
+            "max": 50,
+            "step": 5,
+            "default": 0,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "padding_v_mobile",
+            "label": "Mobile content padding (vertical)",
+            "min": 0,
+            "max": 50,
+            "step": 5,
+            "default": 15,
+            "unit": "px"
+        },
+        {
+            "type": "select",
+            "id": "alignment",
+            "label": "Content alignment",
+            "default": "center",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Centre"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "alignment_mobile",
+            "label": "Content alignment (mobile)",
+            "default": "center",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Centre"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "checkbox",
+            "id": "full_click",
+            "label": "Make entire block clickable",
+            "default": false
+        },
+        {
+            "type": "url",
+            "id": "full_click_link",
+            "label": "Clickable block link",
+            "info": "Will be used when the above Full Block Click setting is checked."
+        },
+        {
+            "type": "image_picker",
+            "id": "content_image",
+            "label": "Content image",
+            "info": "This will appear above the content"
+        },
+        {
+            "type": "range",
+            "id": "content_image_bot_space",
+            "label": "Content image bottom spacing",
+            "default": 0,
+            "min": 0,
+            "max": 50,
+            "step": 5,
+            "unit": "px"
+        },
+        {
+            "type": "select",
+            "id": "content_image_show_on",
+            "label": "Show on",
+            "default": "all",
+            "options": [
+                {
+                    "value": "all",
+                    "label": "All screens"
+                },
+                {
+                    "value": "small--hide medium-up--show",
+                    "label": "Desktop only"
+                },
+                {
+                    "value": "medium-up--hide",
+                    "label": "Mobile only"
+                }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "content_image_width",
+            "label": "Content image width (desktop)",
+            "min": 20,
+            "max": 100,
+            "step": 5,
+            "default": 100,
+            "unit": "%"
+        },
+        {
+            "type": "header",
+            "content": "Title Settings"
+        },
+        {
+            "type": "text",
+            "label": "Title",
+            "id": "title"
+        },
+        {
+            "type": "select",
+            "id": "title_show_on",
+            "label": "Show on",
+            "default": "all",
+            "options": [
+                {
+                    "value": "all",
+                    "label": "All screens"
+                },
+                {
+                    "value": "small--hide medium-up--show",
+                    "label": "Desktop only"
+                },
+                {
+                    "value": "medium-up--hide",
+                    "label": "Mobile only"
+                }
+            ]
+        },
+        {
+            "type": "checkbox",
+            "id": "default_title_font",
+            "label": "Use theme font",
+            "info": "This will override the font picker for the title.",
+            "default": true
+        },
+        {
+            "type": "select",
+            "id": "title_font",
+            "label": "Font",
+            "default": "Neue Plak Wide",
+            "options": [
+                {
+                    "label": "Neue Plak",
+                    "value": "Neue Plak"
+                },
+                {
+                    "label": "Neue Plak Wide",
+                    "value": "Neue Plak Wide"
+                }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "title_weight",
+            "label": "Font weight",
+            "default": "bold",
+            "info": "Not all font weight are available for all theme fonts",
+            "options": [
+              {
+                "label": "normal",
+                "value": "normal"
+              },
+              {
+                "label": "600",
+                "value": "600"
+              },
+              {
+                "label": "bold",
+                "value": "bold"
+              }
+            ]
+        },
+        {
+            "type": "font_picker",
+            "id": "title_font_picker",
+            "label": "Title font (picker)",
+            "default": "work_sans_n4"
+        },
+        {
+            "type": "radio",
+            "id": "title_sizing",
+            "label": "Font sizing options",
+            "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+            "default": "",
+            "options": [
+              {
+                "value": "scale",
+                "label": "Scale with screen"
+              },
+              {
+                "value": "fixed",
+                "label": "Fixed size (in pixels)"
+              },
+              {
+                "value": "",
+                "label": "Default size"
+              }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "title_size",
+            "label": "Title font size",
+            "min": 15,
+            "max": 50,
+            "step": 1,
+            "default": 30,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "title_scale",
+            "label": "Title font scaling",
+            "info": "This will scale the text with the browser size.",
+            "min": 0,
+            "max": 7,
+            "step": 0.2,
+            "default": 2
+        },
+        {
+            "type": "range",
+            "id": "title_size_mobile",
+            "label": "Title size (mobile)",
+            "min": 8,
+            "max": 40,
+            "step": 1,
+            "default": 12,
+            "unit": "px"
+        },
+        {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title text colour",
+            "default": "#000"
+        },
+        {
+            "type": "color",
+            "id": "title_color_mobile",
+            "label": "Mobile title text colour",
+            "default": "#000"
+        },
+        {
+            "type": "header",
+            "content": "Text Settings"
+        },
+        {
+            "type": "richtext",
+            "label": "Text",
+            "id": "text"
+        },
+        {
+            "type": "select",
+            "id": "text_show_on",
+            "label": "Show on",
+            "default": "all",
+            "options": [
+                {
+                    "value": "all",
+                    "label": "All screens"
+                },
+                {
+                    "value": "small--hide medium-up--show",
+                    "label": "Desktop only"
+                },
+                {
+                    "value": "medium-up--hide",
+                    "label": "Mobile only"
+                }
+            ]
+        },
+        {
+            "type": "checkbox",
+            "id": "default_text_font",
+            "label": "Use theme font",
+            "info": "This will override the font picker for the text.",
+            "default": true
+        },
+        {
+            "type": "select",
+            "id": "text_font",
+            "label": "Font",
+            "default": "Neue Plak",
+            "options": [
+                {
+                    "label": "Neue Plak",
+                    "value": "Neue Plak"
+                },
+                {
+                    "label": "Neue Plak Wide",
+                    "value": "Neue Plak Wide"
+                }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "text_weight",
+            "label": "Font weight",
+            "default": "normal",
+            "info": "Not all font weight are available for all theme fonts",
+            "options": [
+              {
+                "label": "normal",
+                "value": "normal"
+              },
+              {
+                "label": "600",
+                "value": "600"
+              },
+              {
+                "label": "bold",
+                "value": "bold"
+              }
+            ]
+        },
+        {
+            "type": "font_picker",
+            "id": "text_font_picker",
+            "label": "Text font",
+            "default": "work_sans_n4"
+        },
+        {
+            "type": "radio",
+            "id": "text_sizing",
+            "label": "Font sizing options",
+            "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+            "default": "",
+            "options": [
+              {
+                "value": "scale",
+                "label": "Scale with screen"
+              },
+              {
+                "value": "fixed",
+                "label": "Fixed size (in pixels)"
+              },
+              {
+                "value": "",
+                "label": "Default size"
+              }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "text_size",
+            "label": "Text font size",
+            "min": 15,
+            "max": 50,
+            "step": 1,
+            "default": 16,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "text_scale",
+            "label": "Text font scaling",
+            "info": "This will scale the text with the browser size. Will override the size set above. Leave at 0 to use the size above instead.",
+            "min": 0,
+            "max": 7,
+            "step": 0.2,
+            "default": 1.4
+        },
+        {
+            "type": "range",
+            "id": "text_size_mobile",
+            "label": "Text size (mobile)",
+            "min": 8,
+            "max": 40,
+            "step": 1,
+            "default": 12,
+            "unit": "px"
+        },
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text colour",
+            "default": "#222"
+        },
+        {
+            "type": "color",
+            "id": "text_color_mobile",
+            "label": "Mobile text colour",
+            "default": "#222"
+        },
+        {
+            "type": "header",
+            "content": "Buttons"
+        },
+        {
+            "type": "select",
+            "id": "button_position_mobile",
+            "label": "Mobile button position",
+            "default": "inside",
+            "options": [
+                {
+                    "value": "inside",
+                    "label": "Inside (with content)"
+                },
+                {
+                    "value": "outside",
+                    "label": "Outside (below content)"
+                }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "button_padding",
+            "label": "Left and right padding",
+            "min": 0,
+            "max": 80,
+            "step": 5,
+            "default": 15,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "button_v_padding",
+            "label": "Top and bottom padding",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "default": 5,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "button_top_spacing",
+            "label": "Top spacing",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "button_bottom_spacing",
+            "label": "Bottom spacing",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "default": 20,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "button_h_spacing",
+            "label": "Horizontal spacing",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "default": 10,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "button_size",
+            "label": "Button font size",
+            "min": 10,
+            "max": 40,
+            "step": 1,
+            "default": 16,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "button_scale",
+            "label": "Button font scaling",
+            "info": "This will scale the text with the browser size. Will override the size set above. Leave at 0 to use the size above instead.",
+            "min": 0,
+            "max": 5,
+            "step": 0.2,
+            "default": 1.2
+        },
+        {
+            "type": "range",
+            "id": "button_size_mobile",
+            "label": "Button text size (mobile)",
+            "min": 8,
+            "max": 40,
+            "step": 1,
+            "default": 12,
+            "unit": "px"
+        },
+        {
+            "type": "select",
+            "id": "button_style",
+            "label": "Button style",
+            "default": "button-fill-all",
+            "options": [
+                {
+                    "value": "button-fill-all",
+                    "label": "Filled with filled hover"
+                },
+                {
+                    "value": "button-fill-base",
+                    "label": "Filled with outlined hover"
+                },
+                {
+                    "value": "button-outline-all",
+                    "label": "Outlined with outlined hover"
+                },
+                {
+                    "value": "button-outline-base",
+                    "label": "Outlined with filled hover"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "button_style_mobile",
+            "label": "Button mobile style",
+            "default": "button-outline-base",
+            "options": [
+                {
+                    "value": "button-fill-all",
+                    "label": "Filled with filled hover"
+                },
+                {
+                    "value": "button-fill-base",
+                    "label": "Filled with outlined hover"
+                },
+                {
+                    "value": "button-outline-all",
+                    "label": "Outlined with outlined hover"
+                },
+                {
+                    "value": "button-outline-base",
+                    "label": "Outlined with filled hover"
+                }
+            ]
+        },
+        {
+            "type": "color",
+            "id": "button_colour_bg",
+            "label": "Button background colour",
+            "info": "If an outlined style is chosen, this will be the border colour",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "color",
+            "id": "button_colour_text",
+            "label": "Button text colour",
+            "default": "#222222"
+        },
+        {
+            "type": "color",
+            "id": "button_colour_bg_hover",
+            "label": "Button hover background colour",
+            "info": "If an outlined style is chosen, this will be the border colour",
+            "default": "#222222"
+        },
+        {
+            "type": "color",
+            "id": "button_colour_text_hover",
+            "label": "Button hover text colour",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "color",
+            "id": "mobile_button_bg",
+            "label": "Mobile background colour",
+            "default": "#222"
+        },
+        {
+            "type": "color",
+            "id": "mobile_button_bg_hover",
+            "label": "Mobile background hover colour",
+            "default": "#222"
+        },
+        {
+            "type": "color",
+            "id": "mobile_button_text_color",
+            "label": "Mobile text colour",
+            "default": "#222"
+        },
+        {
+            "type": "color",
+            "id": "mobile_button_text_hover",
+            "label": "Mobile text hover colour",
+            "default": "#fff"
+        },
+        {
+            "type": "header",
+            "content": "Button 1"
+        },
+        {
+            "type": "text",
+            "label": "Text",
+            "id": "button_1_text",
+            "info": "Button will not appear unless this is is filled in."
+        },
+        {
+            "type": "url",
+            "label": "Link",
+            "id": "button_1_link"
+        },
+        {
+            "type": "header",
+            "content": "Button 2"
+        },
+        {
+            "type": "text",
+            "label": "Text",
+            "id": "button_2_text",
+            "info": "Button will not appear unless this is is filled in."
+        },
+        {
+            "type": "url",
+            "label": "Link",
+            "id": "button_2_link"
+        }
+    ]
+    }
+],
+"presets": [
+  {
+    "name": "Content - Two column",
+    "category": "Custom",
+    "settings": {
+      
+    },
+    "blocks": [
+      {
+        "type": "image_block"
+      },
+      {
+        "type": "image_block"
+      }
+    ]
+  }
+]
+}
+{% endschema %}

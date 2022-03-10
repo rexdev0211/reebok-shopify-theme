@@ -1,0 +1,6 @@
+.gitignore
+README.md
+package.json
+package-lock.json
+scss/
+config/settings_data.json

@@ -1,0 +1,38 @@
+{%- comment -%} 
+Returns the product name without vendor and colour name
+
+Accepts:
+- product: {Object} The product
+- show_vendor: {Boolean} show or hide the vendor in the product name
+
+Usage 
+{%- render 'snippet--product-name', product: product, show_vendor: true | false -%}
+
+{%- endcomment -%}
+
+{%- liquid
+    if product 
+        assign prodSanitizeName = product.title | downcase 
+        assign prodVendorDC = product.vendor | downcase | strip 
+
+        for tag in product.tags 
+            assign normalizeTag = tag | downcase 
+            if normalizeTag contains 'colour:' 
+                assign newTag = normalizeTag | downcase | replace: 'colour:', '' | strip 
+
+                assign prodName = product.title | downcase 
+
+                if prodName contains newTag 
+                    assign prodSanitizeName = product.title | downcase | replace: newTag, '' | strip 
+                endif 
+            endif 
+        endfor 
+        
+        if show_vendor == true or show_vendor == 'true' 
+            echo prodSanitizeName | escape | strip | capitalize 
+        else 
+            echo prodSanitizeName | replace: prodVendorDC, '' | escape | strip | capitalize
+        endif 
+    endif 
+-%}
+

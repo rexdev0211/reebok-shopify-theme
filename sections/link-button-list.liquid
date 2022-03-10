@@ -1,0 +1,482 @@
+{{ 'section-link-button-list.css' | asset_url | stylesheet_tag }}
+
+<div class="link-button-list link-button-list--{{ section.id }}" id="link-button-list--{{ section.id }}">
+  {%- if section.settings.title != blank -%} 
+  <div class="link-button-list__header {{ section.settings.title_alignment }}">
+    <h2 class="link-button-list--heading">{{ section.settings.title }}</h2>
+  </div>
+  {%- endif -%}
+    <div class="padding-left padding-right link-button-list__content">
+
+        <ul class="list-unstyled {{ section.settings.style }} justify-content-center">
+            {%- for link in section.settings.list.links -%}
+                <li>
+                    <a href="{{ link.url }}" {%- if section.settings.style == 'button-list-outline' -%}class="button button--secondary"{%- endif -%}>{{ link.title | escape }}{% if section.settings.style == 'text-list' and section.settings.show_commas == true and forloop.last != true or section.blocks.size > 0 %}, {% endif %}</a>
+                </li>
+            {%- endfor -%}
+            {%- for block in section.blocks -%}
+                <li>
+                    <a href="{{ block.settings.link }}" {%- if section.settings.style == 'button-list-outline' -%}class="button button--secondary"{%- endif -%}>{{ block.settings.title | escape }}{% if section.settings.style == 'text-list' and section.settings.show_commas == true and forloop.last != true %}, {% endif %}</a>
+                </li>
+            {%- endfor -%}
+        </ul>
+        
+    </div>
+</div>
+
+{%- style -%} 
+  {%- if section.settings.font_family == 'custom' -%}
+  {%- unless section.settings.font_custom.system? -%}
+    {{ section.settings.font_custom | font_face }}
+  {%- endunless -%}
+  {%- endif -%}
+
+  .link-button-list--{{ section.id }} .link-button-list__content {
+    width: {{ section.settings.width }}%;
+    padding-top: {{ section.settings.vertical_spacing }}px;
+    padding-bottom: {{ section.settings.vertical_spacing }}px;
+  }
+
+  {%- if section.settings.style == 'text-list' -%}
+  .link-button-list--{{ section.id }} a {
+    {%- if section.settings.text_color != blank -%}
+    color: {{ section.settings.text_color }};
+    {%- endif -%}
+
+    {%- if section.settings.font_family != 'custom' -%}
+    font-family: {{ section.settings.font_family }};
+    font-weight: {{ section.settings.font_weight }};
+    {%- else -%} 
+    font-family: {{ section.settings.font_custom.family }}, {{ section.settings.font_custom.fallback_families }};
+    font-weight: {{ section.settings.font_custom.weight }};
+    font-style: {{ section.settings.font_custom.style }};
+    {%- endif -%}
+  }
+  {%- endif -%}
+
+  {%- if section.settings.title != blank -%} 
+  .link-button-list--heading {
+    font-family: {{ section.settings.title_font_family }};
+    font-weight: {{ section.settings.title_font_weight }};
+    font-size: {{ section.settings.title_size_mobile }};
+  }
+  {%- endif -%}
+
+@media screen and (min-width: 750px) {
+    {%- if section.settings.style == 'text-list' -%}
+      {%- if section.settings.text_sizing == 'scale' -%} 
+      .link-button-list--{{ section.id }} a {
+        font-size: {{ section.settings.text_scale }}vw;
+      }
+      {%- elsif section.settings.text_sizing == 'fixed' -%}
+      .link-button-list--{{ section.id }} a {
+        font-size: {{ section.settings.text_size }}px;
+      }
+      {%- endif -%}
+    {%- endif -%}
+
+
+      {%- if section.settings.title_sizing == 'scale' -%} 
+      .link-button-list--{{ section.id }} .link-button-list--heading {
+        font-size: {{ section.settings.title_scale }}vw;
+      }
+      {%- elsif section.settings.title_sizing == 'fixed' -%}
+      .link-button-list--{{ section.id }} .link-button-list--heading {
+        font-size: {{ section.settings.title_size }}px;
+      }
+      {%- endif -%}
+
+    
+}
+
+{%- if section.settings.style == 'text-list' and section.settings.text_sizing_mobile != '' -%} 
+@media screen and (max-width: 750px) {
+    {%- if section.settings.text_sizing_mobile == 'scale' -%} 
+   .link-button-list--{{ section.id }} a {
+        font-size: {{ section.settings.text_scale_mobile }}vw;
+    }
+    {%- elsif section.settings.text_sizing_mobile == 'fixed' -%}
+   .link-button-list--{{ section.id }} a {
+        font-size: {{ section.settings.text_size_mobile }}px;
+    }
+    {%- endif -%}
+    }
+{%- endif -%}
+{%- endstyle -%}
+
+{%- if section.settings.style == 'text-list' -%}
+<script>
+  function initLinkEffect() {
+    const container = document.getElementById("link-button-list--{{ section.id }}");
+    const links = container.querySelectorAll("a");
+    links.forEach((link) => {
+      link.addEventListener("mouseenter", (elm) => {
+        elm.target.classList.add("link-button-list--hover");
+        container.classList.add("link-button-list--hover");
+      });
+
+      link.addEventListener("mouseout", (elm) => {
+        links.forEach((l) => l.classList.remove("link-button-list--hover"));
+        container.classList.remove("link-button-list--hover");
+      })
+    })
+  }
+  document.addEventListener("shopify:section:load", function(event) {
+    initLinkEffect();
+  });
+  window.addEventListener('DOMContentLoaded', () => {
+    initLinkEffect();
+  });
+</script>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Link button list",
+  "settings": [
+  {
+    "type": "paragraph",
+    "content": "Links will be centered by default. Links can be added by creating a navigation menu and linking it below and / or by adding individual blocks. In the case both are used, the menu links will appear before the block links."
+  },
+  {
+    "type": "link_list",
+    "id": "list",
+    "label": "Links",
+    "info": "Nested link will not appear."
+  },
+  {
+    "type": "select",
+    "id": "style",
+    "label": "Button style",
+    "default": "button-list-outline",
+    "options": [
+      {
+        "value": "button-list-outline",
+        "label": "Buttons (rectangle outline)"
+      },
+      {
+        "value": "text-list",
+        "label": "Text"
+      }
+    ]
+  },
+  {
+    "type": "range",
+    "id": "width",
+    "label": "Set width (desktop)",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "default": 80,
+    "unit": "%"
+  },
+  {
+    "type": "color",
+    "id": "background_color",
+    "label": "Background color"
+  },
+  {
+    "type": "range",
+    "id": "vertical_spacing",
+    "label": "Set vertical spacing",
+    "min": 0,
+    "max": 150,
+    "step": 5,
+    "default": 60,
+    "unit": "px"
+  },
+  {
+    "type": "header",
+    "content": "Title"
+  },
+  {
+    "type": "text",
+    "id": "title",
+    "label": "Title"
+  },
+  {
+    "type": "select",
+    "id": "title_alignment",
+    "label": "Content alignment",
+    "default": "text-center",
+    "options": [
+        {
+            "value": "text-left",
+            "label": "Left"
+        },
+        {
+            "value": "text-center",
+            "label": "Centre"
+        },
+        {
+            "value": "text-right",
+            "label": "Right"
+        }
+    ]
+},
+  {
+      "type": "select",
+      "id": "title_font_family",
+      "label": "Title font",
+      "default": "Neue Plak Wide",
+      "options": [
+        {
+            "label": "Neue Plak",
+            "value": "Neue Plak"
+        },
+        {
+            "label": "Neue Plak Wide",
+            "value": "Neue Plak Wide"
+        }
+      ]
+  },
+  {
+      "type": "select",
+      "id": "title_font_weight",
+      "label": "Title font weight",
+      "default": "bold",
+      "info": "Not all font weight are available for all theme fonts",
+      "options": [
+        {
+          "label": "normal",
+          "value": "normal"
+        },
+        {
+          "label": "600",
+          "value": "600"
+        },
+        {
+          "label": "bold",
+          "value": "bold"
+        }
+      ]
+  },
+  {
+    "type": "radio",
+    "id": "title_sizing",
+    "label": "Font sizing options",
+    "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+    "default": "",
+    "options": [
+      {
+        "value": "scale",
+        "label": "Scale with screen"
+      },
+      {
+        "value": "fixed",
+        "label": "Fixed size (in pixels)"
+      },
+      {
+        "value": "",
+        "label": "Default size"
+      }
+    ]
+  },
+  {
+    "type": "range",
+    "id": "title_scale",
+    "label": "Font scaling",
+    "min": 0,
+    "max": 8,
+    "step": 0.2,
+    "default": 2.2
+  },
+  {
+    "type": "range",
+    "id": "title_size",
+    "label": "Fixed font size",
+    "info": "A fixed font size.",
+    "min": 10,
+    "max": 50,
+    "step": 1,
+    "default": 30,
+    "unit": "px"
+  },
+  {
+    "type": "range",
+    "id": "title_size_mobile",
+    "label": "Mobile font size",
+    "info": "A fixed font size.",
+    "min": 10,
+    "max": 50,
+    "step": 1,
+    "default": 20,
+    "unit": "px"
+  },
+  {
+    "type": "header",
+    "content": "Style - Text"
+  },
+  {
+    "type": "paragraph",
+    "content": "Applies to the button style: Text"
+  },
+  {
+    "type": "checkbox",
+    "id": "show_commas",
+    "label": "Show comma separator",
+    "default": true
+  },
+  {
+    "type": "color",
+    "id": "text_color",
+    "label": "Text color"
+  },
+  {
+    "type": "select",
+    "id": "font_family",
+    "label": "Font",
+    "default": "Neue Plak",
+    "options": [
+        {
+        "label": "Neue Plak",
+        "value": "Neue Plak"
+      },
+      {
+        "label": "Neue Plak Wide",
+        "value": "Neue Plak Wide"
+      }
+    ]
+  },
+  {
+    "type": "font_picker",
+    "id": "font_custom",
+    "label": "Font (custom)",
+    "info": "Select the 'Custom' font family above to use this.",
+    "default": "helvetica_n4"
+  },
+  {
+    "type": "select",
+    "id": "font_weight",
+    "label": "Font weight",
+    "default": "normal",
+    "info": "Not all font weight are available for all theme fonts",
+    "options": [
+      {
+        "label": "normal",
+        "value": "normal"
+      },
+      {
+        "label": "600",
+        "value": "600"
+      },
+      {
+        "label": "bold",
+        "value": "bold"
+      }
+    ]
+  },
+  {
+    "type": "radio",
+    "id": "text_sizing",
+    "label": "Font sizing options",
+    "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+    "default": "",
+    "options": [
+      {
+        "value": "scale",
+        "label": "Scale with screen"
+      },
+      {
+        "value": "fixed",
+        "label": "Fixed size (in pixels)"
+      },
+      {
+        "value": "",
+        "label": "Default size"
+      }
+    ]
+  },
+  {
+    "type": "range",
+    "id": "text_scale",
+    "label": "Font scaling",
+    "min": 0,
+    "max": 8,
+    "step": 0.2,
+    "default": 2.2
+  },
+  {
+    "type": "range",
+    "id": "text_size",
+    "label": "Fixed font size",
+    "info": "A fixed font size.",
+    "min": 10,
+    "max": 50,
+    "step": 1,
+    "default": 30,
+    "unit": "px"
+  },
+  {
+    "type": "header",
+    "content": "Text Sizing - Mobile"
+},
+{
+    "type": "radio",
+    "id": "text_sizing_mobile",
+    "label": "Font sizing options",
+    "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+    "default": "",
+    "options": [
+      {
+        "value": "scale",
+        "label": "Scale with screen"
+      },
+      {
+        "value": "fixed",
+        "label": "Fixed size (in pixels)"
+      },
+      {
+        "value": "",
+        "label": "Default size"
+      }
+    ]
+  },
+  {
+    "type": "range",
+    "id": "text_scale_mobile",
+    "label": "Font scaling",
+    "min": 0,
+    "max": 8,
+    "step": 0.2,
+    "default": 2.2
+  },
+  {
+    "type": "range",
+    "id": "text_size_mobile",
+    "label": "Fixed font size",
+    "info": "A fixed font size.",
+    "min": 10,
+    "max": 50,
+    "step": 1,
+    "default": 30,
+    "unit": "px"
+  }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Link button list",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

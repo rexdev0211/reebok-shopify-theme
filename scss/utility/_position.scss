@@ -1,0 +1,68 @@
+.relative,
+.position-relative { 
+    position: relative;
+}
+
+.absolute,
+.position-absolute {
+    position: absolute;
+}
+
+
+//For absolute positioning
+.a-top-left {
+    top: 0;
+    left: 0;
+    transform: translate(0, 0);
+    text-align: left;
+}
+
+.a-top-center {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.a-top-right {
+    top: 0;
+    right: 0;
+    transform: translate(0, 0);
+}
+
+
+.a-center-left {
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+}
+
+.a-center-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.a-center-right {
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+}
+
+
+.a-bottom-left {
+    bottom: 0;
+    left: 0;
+    transform: translate(0, 0);
+}
+
+.a-bottom-center {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.a-bottom-right {
+    bottom: 0;
+    right: 0;
+    transform: translate(0, 0);
+}

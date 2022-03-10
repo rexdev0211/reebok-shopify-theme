@@ -1,0 +1,58 @@
+<div class="banner-block--{{ block.id }}  banner-block banner-block--buttons">
+    {%- style -%}
+    #Banner-{{ section.id }} .banner-block--{{ block.id }} .button {
+      {%- if block.settings.button_color_background and block.settings.button_color_background != blank and block.settings.button_color_background != 'rgba(0,0,0,0)' -%}
+        --color-button: {{ block.settings.button_color_background | color_extract: 'red' }}, {{ block.settings.button_color_background | color_extract: 'green' }}, {{ block.settings.button_color_background | color_extract: 'blue' }};
+      {%- endif -%}
+      {%- if block.settings.button_color_text and block.settings.button_color_text != blank and block.settings.button_color_text != 'rgba(0,0,0,0)' -%}
+        --color-button-text: {{ block.settings.button_color_text | color_extract: 'red' }}, {{ block.settings.button_color_text | color_extract: 'green' }}, {{ block.settings.button_color_text | color_extract: 'blue' }};
+      {%- endif -%}
+    }
+    #Banner-{{ section.id }} .banner-block--{{ block.id }} .button:after {
+      {%- if block.settings.button_color_background and block.settings.button_color_background != blank and block.settings.button_color_background != 'rgba(0,0,0,0)' -%}
+        --color-button: {{ block.settings.button_color_background | color_extract: 'red' }}, {{ block.settings.button_color_background | color_extract: 'green' }}, {{ block.settings.button_color_background | color_extract: 'blue' }};
+      {%- endif -%}
+    }
+
+    @media screen and (min-width: 750px) {
+      #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__buttons {
+        width: {{ block.settings.button_width }}%;
+      }
+      #Banner-{{ section.id }} .banner__box .banner__buttons--multiple {
+        grid-gap: {{ block.settings.button_gap }}px;
+      }
+    }
+
+    @media screen and (max-width: 749px) {
+      #Banner-{{ section.id }} .banner-block--{{ block.id }} .button {
+        {%- if block.settings.button_color_background_mobile and block.settings.button_color_background_mobile != blank and block.settings.button_color_background_mobile != 'rgba(0,0,0,0)' -%}
+          --color-button: {{ block.settings.button_color_background_mobile | color_extract: 'red' }}, {{ block.settings.button_color_background_mobile | color_extract: 'green' }}, {{ block.settings.button_color_background_mobile | color_extract: 'blue' }};
+        {%- endif -%}
+        {%- if block.settings.button_color_text_mobile and block.settings.button_color_text_mobile != blank and block.settings.button_color_text_mobile != 'rgba(0,0,0,0)' -%}
+          --color-button-text: {{ block.settings.button_color_text_mobile | color_extract: 'red' }}, {{ block.settings.button_color_text_mobile | color_extract: 'green' }}, {{ block.settings.button_color_text_mobile | color_extract: 'blue' }};
+        {%- endif -%}
+      }
+
+      #Banner-{{ section.id }} .banner-block--{{ block.id }} .button:after {
+        {%- if block.settings.button_color_background_mobile and block.settings.button_color_background_mobile != blank and block.settings.button_color_background_mobile != 'rgba(0,0,0,0)' -%}
+          --color-button: {{ block.settings.button_color_background_mobile | color_extract: 'red' }}, {{ block.settings.button_color_background_mobile | color_extract: 'green' }}, {{ block.settings.button_color_background_mobile | color_extract: 'blue' }};
+        {%- endif -%}
+      }
+    }
+    
+    {%- endstyle -%}
+    <div class="banner__buttons banner__buttons--multiple banner__buttons-grid--{{ block.settings.button_grid }} banner__buttons-grid--{{ block.settings.button_grid_mobile }}-mobile" {{ block.shopify_attributes }}>
+      {%- if block.settings.button_label_1 != blank -%}
+        <a{% if block.settings.button_link_1 != blank %} href="{{ block.settings.button_link_1 }}"{% endif %} class="button{% if block.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ block.settings.button_label_1 | escape }}</a>
+      {%- endif -%}
+      {%- if block.settings.button_label_2 != blank -%}
+        <a{% if block.settings.button_link_2 != blank %} href="{{ block.settings.button_link_2 }}"{% endif %} class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link_2 == blank %} aria-disabled="true"{% endif %}>{{ block.settings.button_label_2 | escape }}</a>
+      {%- endif -%}
+      {%- if block.settings.button_label_3 != blank -%}
+        <a{% if block.settings.button_link_3 != blank %} href="{{ block.settings.button_link_3 }}"{% endif %} class="button{% if block.settings.button_style_secondary_3 %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link_3 == blank %} aria-disabled="true"{% endif %}>{{ block.settings.button_label_3 | escape }}</a>
+      {%- endif -%}
+      {%- if block.settings.button_label_4 != blank -%}
+        <a{% if block.settings.button_link_4 != blank %} href="{{ block.settings.button_link_4 }}"{% endif %} class="button{% if block.settings.button_style_secondary_4 %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link_4 == blank %} aria-disabled="true"{% endif %}>{{ block.settings.button_label_4 | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>

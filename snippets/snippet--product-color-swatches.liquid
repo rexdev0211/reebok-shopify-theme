@@ -1,0 +1,128 @@
+{%- comment -%} 
+
+Returns a list of the product's colors other than the current one, comma separated
+
+Accepts:
+- product: {Object} The product
+- size: {Text} Size of the swatch
+
+Usage 
+{% render 'snippet--product-color-swatches', product: product, size: 'large' %}
+
+{%- endcomment -%}
+
+{%- liquid 
+    assign prodName = product.title | downcase
+    assign prodVendor = product.vendor | downcase
+    assign prodAllColors = ''
+    assign prodAllColorsHandles = ''
+    assign prodNameNoColor = ''
+    assign prodHandleNoColor = ''
+
+    for tag in product.tags
+        assign normalizeTag = tag | downcase
+        
+        if normalizeTag contains 'colour:' or normalizeTag contains 'color:'
+            assign productColorName = normalizeTag | downcase | replace: 'colour:', '' | replace: 'color:', '' | strip
+            assign prodAllColors = prodAllColors | append: productColorName | append: ','
+
+            assign productColorHandle = productColorName | handleize
+            assign prodAllColorsHandles = prodAllColorsHandles | append: productColorHandle | append: ','
+
+            if prodName contains productColorName
+                assign prodNameNoColor = prodName | replace: productColorName, ''
+            endif
+
+            if product.handle contains productColorHandle 
+                assign prodHandleNoColor = product.handle | replace: productColorHandle, ''
+            endif
+        endif
+    endfor
+
+    assign colorArr = prodAllColors | split: ','
+-%}
+
+
+<div class="color-swatches product__color-swatches">
+    <div class="color-swatches__swatch-wrapper">
+        {%- if colorArr and colorArr != empty -%} 
+            {%- for c in colorArr -%}
+                {%- if c != blank -%}
+                    {%- comment -%}
+                        {%- assign colorHandle = prodNameNoColor | append: " " | append: c | handleize | strip -%}
+                    {%- endcomment -%}
+
+                    {%- liquid  
+                         assign colorHandle = prodHandleNoColor | append: " " | append: c | handleize | strip 
+
+                        if colorHandle == product.handle 
+                            assign colorProd = product 
+                        else 
+                            assign colorProd = all_products[colorHandle] 
+                        endif 
+
+                        assign colorProdHex = '' 
+
+                        for ct in colorProd.tags 
+                            if ct contains "#" 
+                                assign colorProdHex = ct 
+                            endif 
+                        endfor 
+                    -%}
+
+                    {%- if colorProd.available == true -%}
+
+                        {%- liquid  
+                            assign url = request.path | split: '/products/'
+
+                            assign contrast_checker = colorProdHex | color_contrast: settings.colors_background_1
+                            if contrast_checker < 1.3 
+                            assign contrast_class = 'color-swatch--light'
+                            else 
+                            assign contrast_class = ''
+                            endif 
+                            -%}
+
+                            <div class="color-swatch__wrapper {% if prodName contains c %}color-swatch--selected color-swatch--main{% endif %} color-swatch--{{- size }} {{ contrast_class }}">
+                                <a class=" color-swatch color-swatch-{{- colorHandle -}} {% if prodName contains c %} color-swatch--selected color-swatch--main{% endif %}" data-swatch-color-name="{{- c -}}" href="{{ url | first | append: '/products/' | append: colorProd.handle }}">
+                                    <span class="sr-only">{{ colorProd.title }}</span>
+                                    <img src="{{ colorProd.featured_media | img_url: 'x80' }}" loading="lazy" />
+                                </a>
+                            </div>
+                    
+                    {%- endif -%}
+                {%- endif -%}
+            {%- endfor -%}
+
+        {%- else -%}
+
+            {%- liquid  
+                assign url = request.path | split: '/products/'
+
+                assign contrast_checker = colorProdHex | color_contrast: settings.colors_background_1
+                if contrast_checker < 1.3 
+                assign contrast_class = 'color-swatch--light'
+                else 
+                assign contrast_class = ''
+                endif 
+
+                assign colorProdHex = ''
+
+                for ct in product.tags
+                    if ct contains "#"
+                        assign colorProdHex = ct
+                    endif
+                endfor
+            -%}
+
+            <div class="color-swatch__wrapper color-swatch--selected color-swatch--main color-swatch--{{- size }} {{ contrast_class }}">
+                <a class=" color-swatch color-swatch-{{- product.handle }} color-swatch--selected color-swatch--main" data-swatch-color-name="{{- c -}}" style="background-color: {{- colorProdHex -}};" href="{{ url | first | append: '/products/' | append: product.handle }}">
+                    <span class="sr-only">{{ product.title }}</span>
+                </a>
+            </div>
+        {%- endif -%}
+     
+    </div>
+
+</div>
+

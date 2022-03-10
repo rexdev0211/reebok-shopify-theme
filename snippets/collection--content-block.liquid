@@ -1,0 +1,195 @@
+{%- liquid 
+    assign subtitle_partial = false
+    assign title_partial = false
+    assign text_partial  = false
+    assign link_partial = false
+  
+  
+    if block.settings.layout == 'overlap-partial'
+      assign link_partial = true
+  
+      assign subtitle_partial = block.settings.subtitle_partial
+      assign title_partial = block.settings.title_partial
+      assign text_partial  = block.settings.text_partial
+    endif
+  -%}
+  
+  <div class="content-cta content-cta--{{ block.settings.layout }} content-cta--{{ block.id }} {{ block.settings.content_alignment }}">
+      {%- style -%}
+          .content-cta--{{ block.id }} {
+              {%- if block.settings.title_color != blank -%}
+              background: {{ block.settings.background_color }};
+              {%- endif -%}
+              
+          }
+  
+          .content-cta--{{ block.id }} .content-cta--op-content {
+            {%- if block.settings.title_color != blank -%}
+              background: {{ block.settings.background_color }};
+              {%- endif -%}
+          }
+  
+          .content-cta--{{ block.id }} .content-cta--subtitle {
+            --font-body-family: {{ block.settings.subtitle_font }};
+            --font-body-weight: {{ block.settings.subtitle_weight }};
+              {%- if block.settings.subtitle_color != blank -%}
+              --color-base-text: {{ block.settings.subtitle_color | color_extract: 'red' }}, {{ block.settings.subtitle_color | color_extract: 'green' }}, {{ block.settings.subtitle_color | color_extract: 'blue' }};
+              {%- endif -%}
+          }
+  
+  
+          .content-cta--{{ block.id }} .content-cta--title {
+            --font-body-family: {{ block.settings.title_font }};
+            --font-body-weight: {{ block.settings.title_weight }};
+              {%- if block.settings.title_color != blank -%}
+              --color-base-text: {{ block.settings.title_color | color_extract: 'red' }}, {{ block.settings.title_color | color_extract: 'green' }}, {{ block.settings.title_color | color_extract: 'blue' }};
+              {%- endif -%}
+          }
+  
+          .content-cta--{{ block.id }} .content-cta--text {
+            --font-body-family: {{ block.settings.text_font }};
+            --font-body-weight: {{ block.settings.text_weight }};
+              {%- if block.settings.text_color != blank -%}
+              --color-base-text: {{ block.settings.text_color | color_extract: 'red' }}, {{ block.settings.text_color | color_extract: 'green' }}, {{ block.settings.text_color | color_extract: 'blue' }};
+              {%- endif -%}
+          }
+  
+          .content-cta--{{ block.id }} .content-cta--image {
+            object-position: {{ block.settings.image_position_horizontal }} {{ block.settings.image_position_vertical }};
+          }
+  
+          .content-cta--{{ block.id }} .content-cta--link {
+              {%- if block.settings.link_color_background != blank and block.settings.link_color_background != 'rgba(0,0,0,0,)' -%}
+              --color-button: {{ block.settings.link_color_background | color_extract: 'red' }}, {{ block.settings.link_color_background | color_extract: 'green' }}, {{ block.settings.link_color_background | color_extract: 'blue' }};
+              {%- endif -%}
+  
+              {%- if block.settings.link_color_text != blank and block.settings.link_color_text != 'rgba(0,0,0,0,)' -%}
+              --color-button-text: {{ block.settings.link_color_text | color_extract: 'red' }}, {{ block.settings.link_color_text | color_extract: 'green' }}, {{ block.settings.link_color_text | color_extract: 'blue' }};
+              --color-foreground: {{ block.settings.link_color_text | color_extract: 'red' }}, {{ block.settings.link_color_text | color_extract: 'green' }}, {{ block.settings.link_color_text | color_extract: 'blue' }};
+              {%- endif -%}
+  
+              {%- if block.settings.link_width != blank and block.settings.link_width > 0 -%} 
+                min-width: {{ block.settings.link_width }}%;
+                width: auto;
+              {%- endif -%}
+          }
+  
+          @media screen and (min-width: 750px) {
+              .content-cta--{{ block.id }} .content-cta--subtitle {
+                --content-width: {{ block.settings.subtitle_width }}%;
+                {%- if block.settings.subtitle_sizing == 'scale' -%} 
+                  font-size: {{ block.settings.subtitle_scale }}vw;
+                {%- elsif block.settings.subtitle_sizing == 'fixed' -%}
+                  font-size: {{ block.settings.subtitle_size }}px;
+                {%- endif -%}
+              }
+  
+              .content-cta--{{ block.id }} .content-cta--title {
+                --content-width: {{ block.settings.title_width }}%;
+                {%- if block.settings.title_sizing == 'scale' -%} 
+                  font-size: {{ block.settings.title_scale }}vw;
+                {%- elsif block.settings.title_sizing == 'fixed' -%}
+                  font-size: {{ block.settings.title_size }}px;
+                {%- endif -%}
+              }
+  
+              .content-cta--{{ block.id }} .content-cta--text {
+                --content-width: {{ block.settings.text_width }}%;
+                {%- if block.settings.text_sizing == 'scale' -%} 
+                  font-size: {{ block.settings.text_scale }}vw;
+                {%- elsif block.settings.text_sizing == 'fixed' -%}
+                  font-size: {{ block.settings.text_size }}px;
+                {%- endif -%}
+              }
+  
+            }
+      {%- endstyle -%}
+  
+  
+      {%- if block.settings.link_block_click == true -%}
+      <a href="{{ block.settings.link }}" class="content-cta__link-stretch text-decoration-none">
+      {%- endif -%}
+     
+      <div class="content-cta__content">
+        {%- if block.settings.image != blank -%}
+        <div class="media overflow-hidden content-cta__image"
+            style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;">
+  
+            <img srcset="{%- if block.settings.image.width >= 165 -%}{{ block.settings.image | img_url: '165x' }} 165w,{%- endif -%}
+              {%- if block.settings.image.width >= 330 -%}{{ block.settings.image | img_url: '330x' }} 330w,{%- endif -%}
+              {%- if block.settings.image.width >= 535 -%}{{ block.settings.image | img_url: '535x' }} 535w,{%- endif -%}
+              {%- if block.settings.image.width >= 720 -%}{{ block.settings.image | img_url: '720x' }} 720w,{%- endif -%}
+              {%- if block.settings.image.width >= 940 -%}{{ block.settings.image | img_url: '940x' }} 940w,{%- endif -%}
+              {%- if block.settings.image.width >= 1440 -%}{{ block.settings.image | img_url: '1440x' }} 1440w,{%- endif -%}
+              {%- if block.settings.image.width >= 1880 -%}{{ block.settings.image | img_url: '1880x' }} 1880w{%- endif -%}"
+              src="{{ block.settings.image | img_url: '533x' }}"
+              sizes="(min-width: 1100px){% if section.blocks.size > 1 %}535px{% else %}940px{% endif %}, (min-width: 750px) {% if section.blocks.size > 1 %}calc((100vw - 10rem) / 2){% else %}calc(100vw - 10rem){% endif %}, calc(100vw - 3rem)"
+              alt="{{ block.settings.image.alt | escape }}"
+              height="{{ block.settings.image.height }}"
+              width="{{ block.settings.image.width }}"
+              loading="lazy"
+              class="motion-reduce content-cta--image"
+            >
+          </div>
+        {%- endif -%}
+  
+  
+          <div class="content-cta__text-wrapper {{ block.settings.borders }}">
+            <div class="content-cta__text">
+  
+              {%- if 
+                block.settings.subtitle_position == 'center' or 
+                block.settings.title_position == 'center' or 
+                block.settings.text_position == 'center' or 
+                block.settings.link_position == 'center' 
+                -%}
+              <div class="content-cta__text--center{% if block.settings.force_center == true %} content-cta__text--center--a{% endif %}">
+                {%- liquid 
+                  if block.settings.subtitle != blank and block.settings.subtitle_position == 'center' and subtitle_partial == false
+                    render 'block--content-block--subtitle', block: block
+                  endif
+  
+                  if block.settings.title != blank and block.settings.title_position == 'center' and title_partial == false
+                    render 'block--content-block--title', block: block
+                  endif
+  
+                  if block.settings.text != blank and block.settings.text_position == 'center' and subtitle_partial == false
+                    render 'block--content-block--text', block: block 
+                  endif 
+  
+                  if block.settings.link_style != 'none' and block.settings.link_text != blank and block.settings.link_position == 'center' and link_partial == false
+                    render 'block--content-block--link', block: block 
+                  endif 
+                -%}
+                
+              </div>
+              {%- endif -%}
+  
+  
+              {%- liquid 
+  
+                if subtitle_partial == true or block.settings.subtitle != blank and block.settings.subtitle_position != 'center'
+                  render 'block--content-block--subtitle', block: block, is_partial: subtitle_partial
+                endif
+  
+                if title_partial == true or block.settings.title != blank and block.settings.title_position != 'center'
+                  render 'block--content-block--title', block: block, is_partial: title_partial
+                endif
+  
+                if text_partial == true or block.settings.text != blank and block.settings.text_position != 'center'
+                  render 'block--content-block--text', block: block, is_partial: text_partial
+                endif
+                
+                if  block.settings.link_style != 'none' and block.settings.link_text != blank and block.settings.link_position != 'center'
+                  render 'block--content-block--link', block: block, is_partial: link_partial
+                endif
+              -%}
+          </div>
+          
+        </div>
+      </div>
+  
+      {%- if block.settings.link_block_click == true -%}
+      </a>
+      {%- endif -%}
+  </div>

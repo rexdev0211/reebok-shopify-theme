@@ -1,0 +1,40 @@
+<div class="banner-block--{{ block.id }} banner-block--heading">
+    {%- style -%}
+    #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__heading {
+      {%- if block.settings.heading_color != blank -%} 
+          color: {{ block.settings.heading_color }};
+      {%- endif -%}
+      font-family: {{ block.settings.font_family }};
+      font-weight: {{ block.settings.font_weight }};
+      margin-top: 0;
+      width: {{ block.settings.width }}%;
+    }
+
+    {%- if block.settings.text_sizing != '' -%} 
+    @media screen and (min-width: 750px) {
+      {%- if block.settings.text_sizing == 'scale' -%} 
+      #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__heading {
+        font-size: {{ block.settings.text_scale }}vw;
+      }
+      {%- elsif block.settings.text_sizing == 'fixed' -%}
+      #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__heading {
+        font-size: {{ block.settings.text_size }}px;
+      }
+      {%- endif -%}
+    }
+    {%- endif -%}
+
+    {%- if block.settings.heading_color_mobile != blank -%} 
+    @media screen and (max-width: 749px) {
+      #Banner-{{ section.id }} .banner-block--{{ block.id }} .banner__heading {
+        color: {{ block.settings.heading_color_mobile }};
+        width: {{ block.settings.width_mobile }}%;
+      }
+    }
+    {%- endif -%}
+  {%- endstyle -%}
+
+    <h2 class="banner__heading h1 f-heading" {{ block.shopify_attributes }}>
+      <span>{{ block.settings.heading | escape }}</span>
+    </h2>
+  </div>

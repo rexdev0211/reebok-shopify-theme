@@ -1,0 +1,121 @@
+.text-decoration-none-hover {
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.text-decoration-none {
+    text-decoration: none;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+@media screen and (max-width: 749px) {
+    .text-mobile-left {
+        text-align: left;
+    }
+    
+    .text-mobile-center {
+        text-align: center;
+    }
+    
+    .text-mobile-right {
+        text-align: right;
+    }
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.font-weight-300 {
+    font-weight: 300;
+}
+
+.font-weight-regular {
+    font-weight: regular;
+}
+
+.font-weight-500 {
+    font-weight: 500;
+}
+
+.font-weight-600 {
+    font-weight: 600;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
+.section-title {
+    margin: 0;
+    padding: 1rem 1.25rem;
+}
+
+.font-neue-plak {
+    font-family: 'Neue Plak', Helvetica, Arial, sans-serif;
+}
+
+.font-neue-plak-wide {
+    font-family: 'Neue Plak Wide', Helvetica, Arial, sans-serif;
+}
+
+
+.text-color-base {
+    color: rgb(var(--color-base-text));
+}
+
+.text-color-light {
+    color: rgb(var(--color-base-text-light))
+}
+
+.text-color-inherit {
+    color: inherit;
+}
+
+.text-small {
+    font-size: 0.8rem;
+}
+
+.text-large {
+    font-size: 1.3rem;
+}
+
+
+
+
+.f-heading {
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-weight: var(--font-heading-weight);
+}
+
+.f-body {
+    font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-weight: var(--font-body-weight);
+    color: rgb(var(--color-base-text));
+}
+
+.text-underline-hover {
+    text-decoration: none;
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+    }
+}

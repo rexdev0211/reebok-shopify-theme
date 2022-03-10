@@ -1,0 +1,31 @@
+.content-slider {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.content-slide {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.content-slider .slick-dots {
+    width: 100%;
+}
+
+.content-section-title {
+    letter-spacing: 0;
+
+    @include media-query($small) {
+        text-align: center;
+    }
+}
+
+.content-slider-title {
+}
+
+.content-slide-link {
+    display: inline-block;
+    width: 100%;
+}

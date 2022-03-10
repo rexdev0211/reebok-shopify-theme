@@ -1,0 +1,28 @@
+{%- comment -%} 
+
+Returns a list of the product's colors other than the current one, comma separated
+
+Accepts:
+- product: {Object} The product
+
+Usage 
+{% render 'snippet--product-color-variants', product: item.product %}
+
+{%- endcomment -%}
+
+{%- assign prodName = product.title | downcase -%}
+{%- assign prodVendor = product.vendor | downcase -%}
+{%- assign prodOtherColors = '' -%}
+
+{%- for tag in product.tags -%}
+  {%- assign normalizeTag = tag | downcase -%}
+  
+  {%- if normalizeTag contains 'colour:' or normalizeTag contains 'color:' -%}
+    {%- assign productColorName = normalizeTag | downcase | replace: 'colour:', '' | replace: 'color:', '' | strip -%}
+    {%- unless prodName contains productColorName -%}
+        {%- assign prodOtherColors = prodOtherColors | append: productColorName | append: ',' -%}
+    {%- endunless -%}
+
+  {%- endif -%}
+{%- endfor -%}
+{{- prodOtherColors -}}

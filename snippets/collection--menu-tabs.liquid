@@ -1,0 +1,7 @@
+<div class="collection-hero__menu-tabs">
+    <ul class="button-list">
+        {%- for link in settings.menu_tabs.links -%} 
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- endfor -%}
+    </ul>
+</div>

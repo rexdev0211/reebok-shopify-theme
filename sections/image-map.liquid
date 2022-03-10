@@ -1,0 +1,124 @@
+{%- assign id = section.id -%}
+{%- assign sset = section.settings -%}
+
+<div>
+  <div class="image-map {{ sset.width }} {{ sset.display }}">
+    <div class="image-map-inner">
+      {{ sset.promo_html }}
+    </div>
+  </div>
+</div>
+
+{%- style -%}
+#shopify-section-{{ id }} .image-map-inner {
+    margin-top: {{ sset.promo_top_spacing }}px;
+    margin-bottom: {{ sset.promo_bottom_spacing }}px;
+}
+
+@media screen and (max-width: 749px) {
+  #shopify-section-{{ id }} .image-map-inner {
+    margin-top: {{ sset.promo_top_spacing_mobile }}px;
+    margin-bottom: {{ sset.promo_bottom_spacing_mobile }}px;
+  }
+}
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Image Map",
+  "settings": [
+  {
+    "type": "select",
+    "id": "width",
+    "label": "Set width",
+    "default": "",
+    "options": [
+      {
+        "value": "page-width",
+        "label": "Boxed"
+      },
+      {
+        "value": "",
+        "label": "Full width"
+      }
+    ]
+  },
+  {
+    "type": "select",
+    "id": "display",
+    "label": "Set display",
+    "default": "",
+    "options": [
+      {
+        "value": "",
+        "label": "Show on desktop and mobile"
+      },
+      {
+        "value": "small--hide",
+        "label": "Desktop only"
+      },
+      {
+        "value": "medium-up--hide",
+        "label": "Mobile only"
+      }
+    ]
+  },
+  {
+    "id": "promo_html",
+    "type": "html",
+    "label": "Image Map Code",
+    "info": "Copy and paste your html code into here. Used for image maps, but can also be used for other information that uses html code."
+  },
+  {
+    "id": "promo_top_spacing",
+    "type": "range",
+    "label": "Top Space Size",
+    "info": "Space between sections, not blocks",
+    "min": 0,
+    "max": 50,
+    "step": 5,
+    "unit": "px",
+    "default": 0
+  },
+  {
+    "id": "promo_bottom_spacing",
+    "type": "range",
+    "label": "Bottom Space Size",
+    "info": "Space between sections, not blocks",
+    "min": 0,
+    "max": 50,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "id": "promo_top_spacing_mobile",
+    "type": "range",
+    "label": "Top Space Size (mobile)",
+    "info": "Space between sections, not blocks",
+    "min": 0,
+    "max": 50,
+    "step": 5,
+    "unit": "px",
+    "default": 0
+  },
+  {
+    "id": "promo_bottom_spacing_mobile",
+    "type": "range",
+    "label": "Bottom Space Size (mobile)",
+    "info": "Space between sections, not blocks",
+    "min": 0,
+    "max": 50,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  }
+],
+  "presets": [
+    {
+      "name": "Image Map",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

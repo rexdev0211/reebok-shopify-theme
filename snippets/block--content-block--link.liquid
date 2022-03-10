@@ -1,0 +1,41 @@
+<div class="
+    {%- if  is_partial == true -%}
+    content-cta--position-bottom
+    {%- else -%}
+    content-cta--position-{{ block.settings.link_position }}
+    {%- endif -%}
+    ">
+    <div class="content-cta__container-link {% if is_partial == true  %}content-cta--op-content{% endif %}">
+    
+        {%- liquid 
+            case block.settings.link_style
+            when 'button' 
+                assign link_classes = 'button'
+            when 'button-outline'
+                assign link_classes = 'button button--secondary'
+            when 'link'
+                assign link_classes = 'link-with-icon link-with-icon--large animate-arrow'
+            else 
+                assign link_classes = ''
+            endcase
+            -%}
+
+        
+        {%- if block.settings.link_block_click == true -%}
+            <div class="{{ link_classes }} content-cta--link">
+            {{ block.settings.link_text }}
+            {%- if block.settings.link_style == 'link' -%}
+            {%- render 'icon-arrow-long-right' -%}
+            {%- endif -%}
+            </div>
+        {%- else -%}
+            <a href="{{ block.settings.link }}" class="{{ link_classes }} content-cta--link">
+            {{ block.settings.link_text }}
+            {%- if block.settings.link_style == 'link' -%}
+            {%- render 'icon-arrow-long-right' -%}
+            {%- endif -%}
+            </a>
+        {%- endif -%}
+        
+    </div>
+</div>

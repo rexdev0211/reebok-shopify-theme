@@ -1,0 +1,91 @@
+// Additional grid classes
+
+.css-grid {
+    display: grid;
+
+    .grid__item {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    &.grid--1-col {
+        grid-template-columns: 1fr;
+    }
+
+    &.grid--2-col {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.grid--3-col {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media screen and (min-width: 750px) {
+        &.grid--2-col {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        &.grid--2-col-tablet {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        &.grid--3-col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &.grid--4-col-tablet {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        &.grid--3-col-tablet {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media screen and (min-width: 750px) and (max-width: 989px) {
+        &.grid--3-col-tablet {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media screen and (min-width: 990px) {
+        &.grid--4-col-desktop {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        &.grid--3-col-desktop {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &.grid--2-col-desktop {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+}
+
+@include media-query($large-up) {
+    .large-up--30 {
+        width: 30%;
+
+        &.grid__item {
+            max-width: 30%;
+        }
+    }
+
+    .large-up--70 {
+        width: 70%;
+
+        &.grid__item {
+            max-width: 70%;
+        }
+    }
+
+    .large-up--full-width {
+        width: 100%;
+
+        &.grid__item {
+            max-width: 100%;
+        }
+    }
+}

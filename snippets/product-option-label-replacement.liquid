@@ -1,0 +1,33 @@
+{% comment %}
+    Renders the product option label
+
+    Accepts:
+    - product: {Object} Product Liquid object (required)
+    - label: {String} The option / label being replaced
+
+    Usage:
+    {% render 'product-option-label-replacement', label: 'Width' %}
+{% endcomment %}
+
+{%- liquid 
+    if product and label
+        assign replacement_label = blank
+
+        for i in (1..3)
+            assign polr_pre = i | prepend: 'pol_'
+            assign polr_type = polr_pre | append: '_type'
+            assign polr_label = polr_pre | append: '_label'
+            assign polr_new = polr_pre | append: '_new'
+            if settings[polr_type] != blank and settings[polr_label] != blank and settings[polr_new] != blank and settings[polr_type] == product.type and settings[polr_label] == label 
+                assign replacement_label = settings[polr_new]
+                break
+            endif
+        endfor
+
+        if replacement_label != blank 
+            echo replacement_label
+        elsif label 
+            echo label
+        endif 
+    endif
+-%}

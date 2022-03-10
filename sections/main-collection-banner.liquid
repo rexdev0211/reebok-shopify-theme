@@ -1,0 +1,291 @@
+{{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  @media screen and (max-width: 749px) {
+    .collection-hero--with-image .collection-hero__inner {
+      padding-bottom: calc({{ settings.media_shadow_vertical_offset | at_least: 0 }}px + 2rem);
+    }
+  }
+{%- endstyle -%}
+
+<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
+  <div class="collection-hero__inner page-width">
+    <div class="collection-hero__text-wrapper">
+      <h1 class="collection-hero__title">
+        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
+        {%- liquid 
+          assign collection_title = collection.title
+          assign collection_handle = collection.handle
+
+          unless section.settings.show_sort_selected == true
+            assign primary_sort_collection = collection
+            if collection.metafields.sort_primary.collection_handle
+              assign primary_sort_collection = collections[collection.metafields.sort_primary.collection_handle]
+            endif
+
+            assign collection_title = primary_sort_collection.title
+            assign collection_handle = primary_sort_collection.handle
+          endunless 
+          
+          -%}
+        {{- collection_title | escape -}}
+      </h1>
+
+      {%- liquid 
+        if section.blocks.size > 0
+          for block in section.blocks 
+            if block.settings.collection_handles != blank and block.settings.menu_tabs != blank and block.settings.position == 'before'
+              assign collection_handles = block.settings.collection_handles | split: "," 
+              for handle in collection_handles 
+                assign h = handle | strip 
+                if h != blank 
+                    if h == collection_handle 
+                      render 'collection--menu-tabs', settings: block.settings
+                      break
+                    endif
+                endif
+              endfor
+            endif
+          endfor
+        endif
+      -%}
+
+      {%- if section.settings.show_collection_description -%}
+        <div class="collection-hero__description rte">{{ collection.description }}</div>
+      {%- endif -%}
+
+      {%- liquid 
+        if section.blocks.size > 0
+          for block in section.blocks 
+            if block.settings.collection_handles != blank and block.settings.menu_tabs != blank and block.settings.position == 'after'
+              assign collection_handles = block.settings.collection_handles | split: "," 
+              for handle in collection_handles 
+                assign h = handle | strip 
+                if h != blank 
+                    if h == collection_handle 
+                      render 'collection--menu-tabs', settings: block.settings
+                      break
+                    endif
+                endif
+              endfor
+            endif
+          endfor
+        endif
+      -%}
+    </div>
+
+    {%- if section.settings.show_collection_image and collection.image -%}
+      <div class="collection-hero__image-container media gradient">
+        <img
+          srcset="{%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if collection.image.width >= 360 -%}{{ collection.image | image_url: width: 360 }} 360w,{%- endif -%}
+            {%- if collection.image.width >= 535 -%}{{ collection.image | image_url: width: 535 }} 535w,{%- endif -%}
+            {%- if collection.image.width >= 750 -%}{{ collection.image | image_url: width: 750 }} 750w,{%- endif -%}
+            {%- if collection.image.width >= 1070 -%}{{ collection.image | image_url: width: 1070 }} 1070w,{%- endif -%}
+            {%- if collection.image.width >= 1500 -%}{{ collection.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+            {{ collection.image | image_url }} {{ collection.image.width }}w"
+          src="{{ collection.image | image_url: width: 750 }}"
+          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
+          alt="{{ collection.title | escape }}"
+          width="{{ collection.image.width }}"
+          height="{{ collection.image.height }}"
+        >
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+{%- capture button_select -%} 
+{%- if section.settings.button_list_selector != blank -%} 
+.{{- section.settings.button_list_selector -}}
+{%- endif -%}
+{%- endcapture -%}
+
+{%- if section.settings.highlight_current_collection_button == true -%}
+{%- style -%}
+.collection-hero__description ul{{ button_select }} a[href$="/collections/{{ collection_handle }}"],
+.collection-hero__menu-tabs .button-list a[href$="/collections/{{ collection_handle }}"] {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+{%- endstyle -%}
+{%- endif -%}
+
+{%- style -%}
+.collection-hero ul{{ button_select }} {
+  display: flex;
+  overflow-x: auto;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.5rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0;
+  padding-left: 0!important;
+}
+
+.collection-hero ul{{ button_select }}.center {
+  justify-content: center;
+} 
+
+.collection-hero ul{{ button_select }} li {
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+
+.collection-hero ul{{ button_select }} a {
+  display: inline-block;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  letter-spacing: .02em;
+  padding: 8px 25px;
+  border-radius: 9999px;
+  border: 1px solid rgb(var(--color-foreground));
+  text-decoration: none;
+  font-size: 0.8rem;
+
+  transition: all var(--duration-default) ease-in-out;
+}
+
+.collection-hero ul{{ button_select }} a:hover, 
+.collection-hero ul{{ button_select }} a:focus {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.collection-hero ul{{ button_select }} li:first-child {
+  margin-left: 0;
+}
+
+.collection-hero__description ul{{ button_select }} {
+  display: flex;
+  overflow-x: auto;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.5rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0;
+}
+
+.collection-hero__description ul{{ button_select }} li {
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+
+.collection-hero__description ul{{ button_select }} a {
+  display: inline-block;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  letter-spacing: .02em;
+  padding: 8px 25px;
+  border-radius: 9999px;
+  border: 1px solid rgb(var(--color-foreground));
+  text-decoration: none;
+  font-size: 0.8rem;
+
+  transition: all var(--duration-default) ease-in-out;
+}
+
+.collection-hero__description ul{{ button_select }} a:hover, 
+.collection-hero__description ul{{ button_select }} a:focus {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.collection-hero__description ul{{ button_select }} li:first-child {
+  margin-left: 0;
+}
+{%- endstyle -%}
+<script>
+  const buttonList = document.querySelectorAll('.collection-hero__description .button-list');
+  if(buttonList && buttonList.length > 0) {
+
+  }
+</script>
+{% schema %}
+{
+  "name": "t:sections.main-collection-banner.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-collection-banner.settings.paragraph.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "To add navigation buttons, go to the collection description and add a new bullet / unordered list with links to the collections, then switch to the code view and add [class='button-list'] to the <ul> so it looks like <ul class='button-list'>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_description",
+      "default": true,
+      "label": "t:sections.main-collection-banner.settings.show_collection_description.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "default": false,
+      "label": "t:sections.main-collection-banner.settings.show_collection_image.label",
+      "info": "t:sections.main-collection-banner.settings.show_collection_image.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sort_selected",
+      "label": "Show sort option in title",
+      "info": "If a sort selection other that the default is selected, enabling this will show the sort option in the title as shown in the collection title",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "highlight_current_collection_button",
+      "label": "Highlight current collection button",
+      "info": "If navigation buttons are added to the collection's description, this will highlight the current collection if it exists.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_list_selector",
+      "label": "Class selector for button list (no dot)",
+      "info": "By default, any <ul> elements (bullet lists) in the description will be made into a button list. If you need to be specific, adding a class name will only target those to be made into buttons. Must add the class in the collection description on the <ul> element. Default class is \"button-list\" on the <ul> element"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tabs",
+      "name": "Menu tabs",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "menu_tabs",
+          "label": "Links",
+          "info": "First-level links only."
+        },
+        {
+          "type": "textarea",
+          "id": "collection_handles",
+          "label": "Collection handles for linking tabs to",
+          "info": "Separated by comma. Add the collection handle to apply the links to. Must match exactly (without sorting)"
+        },
+        {
+          "type": "radio",
+          "id": "position",
+          "label": "Position",
+          "info": "Position of the menu links when there is a description on the collection",
+          "default": "before",
+          "options": [
+            {
+              "value": "before",
+              "label": "Before description"
+            },
+            {
+              "value": "after",
+              "label": "After description"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

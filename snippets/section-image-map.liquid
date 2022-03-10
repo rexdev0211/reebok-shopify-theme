@@ -1,0 +1,24 @@
+{%- assign id = id -%}
+{%- assign sset = section.settings -%}
+
+<div class="{{ sset.borders }}">
+  <div class="image-map {{ sset.width }} {{ sset.display }}">
+    <div class="image-map-inner">
+      {{ sset.promo_html }}
+    </div>
+  </div>
+</div>
+
+{%- style -%}
+#shopify-section-{{ id }} .image-map-inner {
+    margin-top: {{ sset.promo_top_spacing }}px;
+    margin-bottom: {{ sset.promo_bottom_spacing }}px;
+}
+
+@media screen and (max-width: 749px) {
+  #shopify-section-{{ id }} .image-map-inner {
+    margin-top: {{ sset.promo_top_spacing_mobile }}px;
+    margin-bottom: {{ sset.promo_bottom_spacing_mobile }}px;
+  }
+}
+{%- endstyle -%}

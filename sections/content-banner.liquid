@@ -1,0 +1,1365 @@
+{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+{{ 'section-content-banner.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.adapt_height == 'first_image' and section.settings.image != blank -%}
+  {%- style -%}
+    #Banner-{{ section.id }}::before, #Banner-{{ section.id }} .banner__media::before {
+      padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
+      content: '';
+      display: block;
+    }
+  {%- endstyle -%}
+{%- elsif section.settings.adapt_height == 'second_image' and section.settings.image_2 != blank -%}
+  {%- style -%}
+  #Banner-{{ section.id }}::before, #Banner-{{ section.id }} .banner__media::before {
+    padding-bottom: {{ 1 | divided_by: section.settings.image_2.aspect_ratio | times: 100 }}%;
+    content: '';
+    display: block;
+  }
+  {%- endstyle -%}
+{%- endif -%}
+
+{%- if section.settings.video_file != blank or section.settings.video_link != blank and section.settings.video_height != blank -%} 
+  {%- style -%} 
+  #Banner-{{ section.id }}.banner--video .banner__media--video {
+    padding: {{ section.settings.video_height }} 0 0 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    #Banner-{{ section.id }}.banner--video {
+      height: {{ section.settings.video_height }};
+    }
+  }
+  {%- endstyle -%}
+{%- endif -%}
+
+<div id="Banner-{{ section.id }}" 
+class="banner
+  {% if section.settings.stack_images_on_mobile and section.settings.image != blank and section.settings.image_2 != blank%} banner--stacked{% endif %}
+  {% if section.settings.adapt_height != 'none' and section.settings.image != blank or section.settings.image_2 != blank %} banner--adapt{% endif %} 
+  {% if section.settings.video_file != blank or section.settings.video_link.id != blank %} banner--video{% endif %} 
+  banner-mobile--{{ section.settings.layout_mobile }} 
+  {% if section.settings.layout_mobile != 'overlap' %} banner-mobile--stack{% endif %} 
+  {{ section.settings.borders }}"
+  >
+  {%- if section.settings.image != blank -%}
+    <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}">
+      <img srcset="{%- if section.settings.image.width >= 375 -%}{{ section.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+        {%- if section.settings.image.width >= 750 -%}{{ section.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+        {%- if section.settings.image.width >= 1100 -%}{{ section.settings.image | img_url: '1100x' }} 1100w,{%- endif -%}
+        {%- if section.settings.image.width >= 1500 -%}{{ section.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+        {%- if section.settings.image.width >= 1780 -%}{{ section.settings.image | img_url: '1780x' }} 1780w,{%- endif -%}
+        {%- if section.settings.image.width >= 2000 -%}{{ section.settings.image | img_url: '2000x' }} 2000w,{%- endif -%}
+        {%- if section.settings.image.width >= 2800 -%}{{ section.settings.image | img_url: '2800x' }} 2800w{%- endif -%}"
+        sizes="{% if section.settings.image_2 != blank and section.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif section.settings.image_2 != blank %}50vw{% else %}100vw{% endif %}"
+        src="{{ section.settings.image | img_url: '750x' }}"
+        loading="lazy"
+        alt="{{ section.settings.image.alt | escape }}"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.width | divided_by: section.settings.image.aspect_ratio }}"
+        {% if section.settings.image_2 != blank %}class="banner__media-image-half"{% endif %}
+      >
+    </div>
+    {%- elsif section.settings.image == blank and section.settings.left_bg != blank -%}
+      <div class="banner__col-left banner__col-empty"></div>
+    {%- comment -%}
+    {%- elsif section.settings.image_2 == blank -%}
+      <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}">
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+      {%- endcomment -%}
+  {%- endif -%}
+  {%- if section.settings.image_2 != blank -%}
+    <div class="banner__media media{% if section.settings.image != blank %} banner__media-half{% endif %}">
+      <img srcset="{%- if section.settings.image_2.width >= 375 -%}{{ section.settings.image_2 | img_url: '375x' }} 375w,{%- endif -%}
+        {%- if section.settings.image_2.width >= 750 -%}{{ section.settings.image_2 | img_url: '750x' }} 750w,{%- endif -%}
+        {%- if section.settings.image_2.width >= 1100 -%}{{ section.settings.image_2 | img_url: '1100x' }} 1100w,{%- endif -%}
+        {%- if section.settings.image_2.width >= 1500 -%}{{ section.settings.image_2 | img_url: '1500x' }} 1500w,{%- endif -%}
+        {%- if section.settings.image_2.width >= 1780 -%}{{ section.settings.image_2 | img_url: '1780x' }} 1780w,{%- endif -%}
+        {%- if section.settings.image_2.width >= 2000 -%}{{ section.settings.image_2 | img_url: '2000x' }} 2000w,{%- endif -%}
+        {%- if section.settings.image_2.width >= 2800 -%}{{ section.settings.image_2 | img_url: '2800x' }} 2800w{%- endif -%}"
+        sizes="{% if section.settings.image != blank and section.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif section.settings.image != blank %}50vw{% else %}100vw{% endif %}"
+        src="{{ section.settings.image_2 | img_url: '750x' }}"
+        loading="lazy"
+        alt="{{ section.settings.image_2.alt | escape }}"
+        width="{{ section.settings.image_2.width }}"
+        height="{{ section.settings.image_2.width | divided_by: section.settings.image_2.aspect_ratio }}"
+        {% if section.settings.image != blank %}class="banner__media-image-half"{% endif %}
+      >
+    </div>
+    {%- elsif section.settings.image_2 == blank and section.settings.right_bg != blank -%}
+    <div class="banner__col-right banner__col-empty"></div>
+  {%- endif -%}
+
+  {%- if section.settings.video_file != blank -%}
+    <div class="banner__media media banner__media--video{% if section.settings.video_cover == true %} banner__media--video-cover{% endif %}">
+      <video {% if section.settings.video_autoplay == true %}muted autoplay playsinline{% endif %} loop class="banner__media--video-video">
+        <source src="{{ section.settings.video_file | strip }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  {%- elsif section.settings.video_link != blank -%}
+    {%- capture enableAutoplay -%}
+      {%- if section.settings.video_autoplay == true -%}
+      1
+      {%- else -%}
+      0
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- if section.settings.video_link.type == 'vimeo' -%}
+      <div class="video-embed-height banner__media media banner__media--video {% if section.settings.video_cover == true %} banner__media--video-cover{% endif %} banner__media--video-embed">
+        <iframe  class="banner__media--video-video" src="https://player.vimeo.com/video/{{section.settings.video_link.id}}?autoplay={{enableAutoplay}}&autopause=0&muted={{enableAutoplay}}&loop=1&color=ffffff&title=0&byline=0&portrait=0"  frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    
+    {%- else -%}
+      <div class="video-embed-height banner__media media banner__media--video {% if section.settings.video_cover == true %} banner__media--video-cover{% endif %} banner__media--video-embed">
+        <iframe class="banner__media--video-video" src="https://www.youtube.com/embed/{{section.settings.video_link.id}}?autoplay={{enableAutoplay}}&controls=0&fs=0&loop=1&modestbranding=1&mute={{enableAutoplay}}&showinfo=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
+      </div>
+  {%- endif -%}
+  {%- endif -%}
+  <div class="banner__content page-width {{ section.settings.content_alignment_mobile }}">
+    <div class="banner__box banner__blocks--{{ section.blocks.size }} {{ section.settings.content_mobile }}">
+      {%- assign block_count = section.blocks.size -%}
+
+      <div class="banner__box--top {%- if section.settings.content_mobile != blank %} small--hide{%- endif -%}">
+        {%- liquid 
+          if block_count > 0 
+            for block in section.blocks 
+              if block.settings.position == 'top'
+                case block.type 
+                when 'tagline'
+                  assign block_count = block_count | minus: 1
+                  render 'content-banner--text', section: section, block: block
+                when 'heading'
+                  assign block_count = block_count | minus: 1
+                  render 'content-banner--heading', section: section, block: block
+                when 'text'
+                  assign block_count = block_count | minus: 1
+                  render 'content-banner--text', section: section, block: block
+                when 'buttons'
+                  assign block_count = block_count | minus: 1
+                  render 'content-banner--buttons', section: section, block: block
+                when 'image'
+                  assign block_count = block_count | minus: 1
+                  render 'content-banner--image', section: section, block: block
+                endcase
+              endif 
+            endfor
+          endif 
+        -%}
+      </div>
+
+      <div class="banner__box--center {%- if section.settings.content_mobile != blank %} small--hide{%- endif -%} {%- if section.settings.force_center == true %} banner__box--center--f{% endif -%}">
+        {%- liquid 
+          if block_count > 0 
+            for block in section.blocks 
+              if block.settings.position == 'center'
+                case block.type 
+                when 'tagline'
+                  assign block_count = block_count | minus: 1
+                  render 'content-banner--text', section: section, block: block
+                when 'heading'
+                  assign block_count = block_count | minus: 1
+                  render 'content-banner--heading', section: section, block: block
+                when 'text'
+                  assign block_count = block_count | minus: 1
+                  render 'content-banner--text', section: section, block: block
+                when 'buttons'
+                  assign block_count = block_count | minus: 1
+                  render 'content-banner--buttons', section: section, block: block
+                when 'image'
+                  assign block_count = block_count | minus: 1
+                  render 'content-banner--image', section: section, block: block
+                endcase
+              endif 
+            endfor
+          endif 
+        -%}
+      </div>
+
+      <div class="banner__box--bottom {%- if section.settings.sticky_bottom %} banner__box--sticky-bottom{% endif -%} {%- if section.settings.content_mobile != blank %} small--hide{%- endif -%}">
+        {%- liquid 
+          if block_count > 0
+            for block in section.blocks 
+              if block.settings.position == 'bottom'
+                case block.type 
+                when 'tagline'
+                  render 'content-banner--text', section: section, block: block
+                when 'heading'
+                  render 'content-banner--heading', section: section, block: block
+                when 'text'
+                  render 'content-banner--text', section: section, block: block
+                when 'buttons'
+                  render 'content-banner--buttons', section: section, block: block
+                when 'image'
+                  render 'content-banner--image', section: section, block: block
+                endcase
+              endif 
+            endfor
+          endif 
+        -%}
+      </div>
+
+      {%- if section.settings.content_mobile != blank -%} 
+        <div class="banner__box--mobile medium-up--hide">
+          {%- liquid 
+            for block in section.blocks 
+              case block.type 
+              when 'tagline'
+                render 'content-banner--text', section: section, block: block
+              when 'heading'
+                render 'content-banner--heading', section: section, block: block
+              when 'text'
+                render 'content-banner--text', section: section, block: block
+              when 'buttons'
+                render 'content-banner--buttons', section: section, block: block
+              when 'image'
+                render 'content-banner--image', section: section, block: block
+              endcase
+            endfor
+        -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+{%- style -%} 
+  {%- if section.settings.sticky_bottom == true -%}
+    .banner__box--sticky-bottom {
+      bottom: {{ section.settings.sticky_bottom_spacing }}px;
+    }
+  {%- endif -%}
+  {%- if section.settings.min_height -%} 
+    #Banner-{{ section.id }} {
+      min-height: {{ section.settings.min_height }}vh;
+    }
+  {%- endif -%}
+
+  {%- if section.settings.left_bg != blank -%} 
+  #Banner-{{ section.id }} .banner__col-left {
+      --banner-background: {{ section.settings.left_bg }};
+  }
+  {%- endif -%}
+
+  {%- if section.settings.right_bg != blank -%} 
+  #Banner-{{ section.id }} .banner__col-right {
+    --banner-background: {{ section.settings.right_bg }};
+  }
+  {%- endif -%}
+
+  {%- if section.settings.content_bg != blank -%} 
+  #Banner-{{ section.id }} .banner__box {
+    background-color: {{ section.settings.content_bg }};
+  }
+  {%- endif -%}
+
+  @media screen and (min-width: 750px) {
+    #Banner-{{ section.id }} .banner__box {
+      width: {{ section.settings.content_width }}%;
+      padding-top: {{ section.settings.content_spacing_vertical }}px;
+      padding-bottom: {{ section.settings.content_spacing_vertical }}px;
+      padding-left: {{ section.settings.content_spacing_horizontal }}px;
+      padding-right: {{ section.settings.content_spacing_horizontal }}px;
+      
+    }
+  }
+  {%- if section.settings.content_bg_mobile != blank -%} 
+  @media screen and (max-width: 749px) {
+    #Banner-{{ section.id }} .banner__box {
+      background-color: {{ section.settings.content_bg_mobile }};
+    }
+  }
+  {%- endif -%}
+{%- endstyle -%}
+{% schema %}
+{
+  "name": "Content banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum height",
+      "info": "According to the browser's height. Does not apply to videos",
+      "default": 60,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "force_center",
+      "label": "Force center content",
+      "info": "In some cases, the content positioned in the center is not aligned in the presumed center correctly due to the top positioned content pushing it down. Enabling this will readjust the center to the correct position, but could result in potential content overlap.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_bottom",
+      "label": "Keep bottom content visible",
+      "info": "This will sticky any content set in the 'bottom' overlap position to the bottom of the screen until it reaches its original position. Useful for keeping button CTAs visible if they otherwise will be positioned below the fold.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "sticky_bottom_spacing",
+      "label": "Sticky bottom spacing",
+      "info": "Adjust how far from the bottom of the screen the sticky content should be.",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "borders",
+      "label": "Add section borders",
+      "default": "",
+      "options": [
+        {
+          "label": "No borders",
+          "value": ""
+        },
+        {
+          "label": "Top and bottom border",
+          "value": "border-top border-bottom"
+        },
+        {
+          "label": "Top border",
+          "value": "border-top"
+        },
+        {
+          "label": "Bottom border",
+          "value": "border-bottom"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "adapt_height",
+      "label": "Adapt section height to:",
+      "default": "first_image",
+      "options": [
+        {
+          "label": "First image size",
+          "value": "first_image"
+        },
+        {
+          "label": "Second image size",
+          "value": "second_image"
+        },
+        {
+          "label": "Don't adapt",
+          "value": "none"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "stack_images_on_mobile",
+      "default": false,
+      "label": "t:sections.image-banner.settings.stack_images_on_mobile.label"
+    },
+    {
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "Layout on mobile",
+      "info": "Overlap will not apply to videos due to sizing. Please use one of the stacked options for videos.",
+      "default": "stack--image-first",
+      "options": [
+        {
+          "value": "overlap",
+          "label": "Overlap image"
+        },
+        {
+          "value": "stack--image-first",
+          "label": "Stacked, image / video first"
+        },
+        {
+          "value": "stack--image-second",
+          "label": "Stacked, image / video second"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_mobile",
+      "label": "Content order on mobile",
+      "default": "",
+      "options": [
+        {
+          "value": "",
+          "label": "Default (same as desktop)"
+        },
+        {
+          "value": "content__box--order-1",
+          "label": "Image, Tagline, Title, Text, Buttons"
+        },
+        {
+          "value": "content__box--order-2",
+          "label": "Tagline, Title, Image, Text, Buttons"
+        },
+        {
+          "value": "content__box--order-3",
+          "label": "Tagline, Title, Text, Image, Buttons"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Left content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.image-banner.settings.image.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "First image (mobile)"
+    },
+    {
+      "type": "color",
+      "id": "left_bg",
+      "label": "Background color",
+      "info": "Background colour will appear when there is no image."
+    },
+    {
+      "type": "header",
+      "content": "Right content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "t:sections.image-banner.settings.image_2.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2_mobile",
+      "label": "Second image (mobile)"
+    },
+    {
+      "type": "color",
+      "id": "right_bg",
+      "label": "Background color",
+      "info": "Background colour will appear when there is no image."
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "paragraph",
+      "content": "Adding a video will replace the background colour or image if either is set."
+    },
+    {
+      "type": "text",
+      "id": "video_file",
+      "label": "Uploaded video file link",
+      "info": "Only add either this or an embed link. Will not show both. Upload a .MP4 file in Shopify through Admin > Settings > Files. Copy the link for the file and paste it here."
+    },
+    {
+      "type": "video_url",
+      "id": "video_link",
+      "label": "Embed Video link",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ],
+      "info": "Links should be copied and pasted from the browser url e.g. https://www.youtube.com/watch?v=_9VUPq3SxOc or https://vimeo.com/119871306"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_cover",
+      "label": "Force video to fill entire space",
+      "info": "In the case the video height leaves extra white space, this will enable the video to fill the white space by sizing up. As a result, this may cut off a small portion of the video.",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "video_height",
+      "label": "Video height adjustment",
+      "info": "A value with a unit, for adjusting the height spacing of the video if needed.",
+      "default": "53.7vw"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_autoplay",
+      "label": "Enable video autoplay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content box"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content box width",
+      "info": "Based on browser width. Applies to desktop only.",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "default": 70,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment_mobile",
+      "label": "Content alignment (mobile)",
+      "default": "banner__content--mobile-left",
+      "options": [
+        {
+          "value": "banner__content--mobile-left",
+          "label": "Left"
+        },
+        {
+          "value": "",
+          "label": "Center"
+        },
+        {
+          "value": "banner__content--mobile-right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "content_bg",
+      "label": "Content box background color"
+    },
+    {
+      "type": "color",
+      "id": "content_bg_mobile",
+      "label": "Content box background (mobile)"
+    },
+    {
+      "type": "range",
+      "id": "content_spacing_vertical",
+      "label": "Content box vertical spacing",
+      "info": "Applies to desktop only",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "content_spacing_horizontal",
+      "label": "Content box horizontal spacing",
+      "info": "Applies to desktop only",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "t:sections.image-banner.blocks.heading.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Content banner",
+          "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Heading position",
+          "default": "center",
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "width",
+          "label": "Adjust text content width",
+          "info": "Relative to the content box's width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "default": 100,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "width_mobile",
+          "label": "Adjust text content width (mobile)",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "default": 100,
+          "unit": "%"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Color"
+        },
+        {
+          "type": "color",
+          "id": "heading_color_mobile",
+          "label": "Color (mobile)"
+        },
+        {
+          "type": "select",
+          "id": "font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+ 
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font weight",
+          "default": "normal",
+          "info": "Not all font weight are available for all theme fonts",
+          "options": [
+            {
+              "label": "normal",
+              "value": "normal"
+            },
+            {
+              "label": "600",
+              "value": "600"
+            },
+            {
+              "label": "bold",
+              "value": "bold"
+            }
+          ]
+        },
+        {
+          "type": "radio",
+          "id": "text_sizing",
+          "label": "Font sizing options",
+          "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+          "default": "",
+          "options": [
+            {
+              "value": "scale",
+              "label": "Scale with screen"
+            },
+            {
+              "value": "fixed",
+              "label": "Fixed size (in pixels)"
+            },
+            {
+              "value": "",
+              "label": "Default size"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "text_scale",
+          "label": "Font scaling",
+          "min": 0,
+          "max": 8,
+          "step": 0.2,
+          "default": 2.2
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Fixed font size",
+          "info": "A fixed font size.",
+          "min": 10,
+          "max": 50,
+          "step": 1,
+          "default": 30,
+          "unit": "px"
+        }
+      ]
+    },
+    {
+      "type": "tagline",
+      "name": "Tagline",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Tagline"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "default": "center",
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "default": "",
+          "options": [
+            {
+              "value": "",
+              "label": "Center"
+            },
+            {
+              "value": "center-left",
+              "label": "Left column, center of page"
+            },
+            {
+              "value": "center-right",
+              "label": "Right column, center of page"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "alignment_offset",
+          "label": "Alignment offset",
+          "info": "Used with the left or right column alignment. Sets spacing from the centre.",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 10,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "width",
+          "label": "Adjust text content width",
+          "info": "Relative to the content box's width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "default": 100,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "width_mobile",
+          "label": "Adjust text content width (mobile)",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "default": 100,
+          "unit": "%"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Color"
+        },
+        {
+          "type": "color",
+          "id": "text_color_mobile",
+          "label": "Color (mobile)"
+        },
+        {
+          "type": "select",
+          "id": "font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+ 
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font weight",
+          "default": "normal",
+          "info": "Not all font weight are available for all theme fonts",
+          "options": [
+            {
+              "label": "normal",
+              "value": "normal"
+            },
+            {
+              "label": "600",
+              "value": "600"
+            },
+            {
+              "label": "bold",
+              "value": "bold"
+            }
+          ]
+        },
+        {
+          "type": "radio",
+          "id": "text_sizing",
+          "label": "Font sizing options",
+          "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+          "default": "",
+          "options": [
+            {
+              "value": "scale",
+              "label": "Scale with screen"
+            },
+            {
+              "value": "fixed",
+              "label": "Fixed size (in pixels)"
+            },
+            {
+              "value": "",
+              "label": "Default size"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "text_scale",
+          "label": "Font scaling",
+          "min": 0,
+          "max": 8,
+          "step": 0.2,
+          "default": 2.2
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Fixed font size",
+          "info": "A fixed font size.",
+          "min": 10,
+          "max": 50,
+          "step": 1,
+          "default": 30,
+          "unit": "px"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.image-banner.blocks.text.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Give customers details about the banner image(s) or content on the template.",
+          "label": "t:sections.image-banner.blocks.text.settings.text.label"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "default": "center",
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "default": "",
+          "options": [
+            {
+              "value": "",
+              "label": "Center"
+            },
+            {
+              "value": "center-left",
+              "label": "Left column, center of page"
+            },
+            {
+              "value": "center-right",
+              "label": "Right column, center of page"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "alignment_offset",
+          "label": "Alignment offset",
+          "info": "Used with the left or right column alignment. Sets spacing from the centre.",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 10,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "width",
+          "label": "Adjust text content width",
+          "info": "Relative to the content box's width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "default": 100,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "width_mobile",
+          "label": "Adjust text content width (mobile)",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "default": 100,
+          "unit": "%"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Color"
+        },
+        {
+          "type": "color",
+          "id": "text_color_mobile",
+          "label": "Color (mobile)"
+        },
+        {
+          "type": "select",
+          "id": "font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font weight",
+          "default": "normal",
+          "info": "Not all font weight are available for all theme fonts",
+          "options": [
+            {
+              "label": "normal",
+              "value": "normal"
+            },
+            {
+              "label": "600",
+              "value": "600"
+            },
+            {
+              "label": "bold",
+              "value": "bold"
+            }
+          ]
+        },
+        {
+          "type": "radio",
+          "id": "text_sizing",
+          "label": "Font sizing options",
+          "info": "Select the type of font sizing to use. Set the \"scale\" and \"fixed\" options below. Applies to desktop browser sizes.",
+          "default": "",
+          "options": [
+            {
+              "value": "scale",
+              "label": "Scale with screen"
+            },
+            {
+              "value": "fixed",
+              "label": "Fixed size (in pixels)"
+            },
+            {
+              "value": "",
+              "label": "Default size"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "text_scale",
+          "label": "Font scaling",
+          "min": 0,
+          "max": 8,
+          "step": 0.2,
+          "default": 2.2
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Fixed font size",
+          "info": "A fixed font size.",
+          "min": 10,
+          "max": 50,
+          "step": 1,
+          "default": 30,
+          "unit": "px"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "t:sections.image-banner.blocks.buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Button settings"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "default": "bottom",
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_grid",
+          "label": "Button layout (desktop)",
+          "default": "four",
+          "options": [
+            {
+              "value": "one",
+              "label": "One per row"
+            },
+            {
+              "value": "two",
+              "label": "Two per row"
+            },
+            {
+              "value": "three",
+              "label": "Three per row"
+            },
+            {
+              "value": "four",
+              "label": "Four per row"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_grid_mobile",
+          "label": "Button layout (mobile)",
+          "default": "two",
+          "options": [
+            {
+              "value": "one",
+              "label": "One per row"
+            },
+            {
+              "value": "two",
+              "label": "Two per row"
+            },
+            {
+              "value": "three",
+              "label": "Three per row"
+            },
+            {
+              "value": "four",
+              "label": "Four per row"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "button_gap",
+          "label": "Button spacing",
+          "min": 0,
+          "max": 50,
+          "step": 5,
+          "default": 15,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "button_width",
+          "label": "Button width (desktop)",
+          "min": 10,
+          "max": 100,
+          "step": 5,
+          "default": 100,
+          "unit": "%"
+        },
+        {
+          "type": "color",
+          "id": "button_color_background",
+          "label": "Button background color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_color_text",
+          "label": "Button text color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "button_color_background_mobile",
+          "label": "Button background color (mobile)",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_color_text_mobile",
+          "label": "Button text color (mobile)",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "header",
+          "content": "Button 1"
+        },
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "default": "Button label",
+          "label": "t:sections.image-banner.blocks.buttons.settings.button_label_1.label",
+          "info": "t:sections.image-banner.blocks.buttons.settings.button_label_1.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "t:sections.image-banner.blocks.buttons.settings.button_link_1.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_1",
+          "default": false,
+          "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_1.label"
+        },
+        {
+          "type": "header",
+          "content": "Button 2"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "default": "Button label",
+          "label": "t:sections.image-banner.blocks.buttons.settings.button_label_2.label",
+          "info": "t:sections.image-banner.blocks.buttons.settings.button_label_2.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "t:sections.image-banner.blocks.buttons.settings.button_link_2.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_2",
+          "default": false,
+          "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
+        },
+        {
+          "type": "header",
+          "content": "Button 3"
+        },
+        {
+          "type": "text",
+          "id": "button_label_3",
+          "default": "Button label",
+          "label": "Third button",
+          "info": "Leave the label blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "button_link_3",
+          "label": "Third button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_3",
+          "default": false,
+          "label": "Use outline button style"
+        },
+        {
+          "type": "header",
+          "content": "Button 4"
+        },
+        {
+          "type": "text",
+          "id": "button_label_4",
+          "default": "Button label",
+          "label": "Fourth button label",
+          "info": "Leave the label blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "button_link_4",
+          "label": "Fourth button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_4",
+          "default": false,
+          "label": "Use outline button style"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Image will be used on mobile unless if no mobile version is added."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image (mobile)"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "default": "center",
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "width",
+          "label": "Adjust image width",
+          "info": "Relative to the content box's width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "default": 70,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "width_mobile",
+          "label": "Adjust image width (mobile)",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "default": 70,
+          "unit": "%"
+        },
+        {
+          "type": "select",
+          "id": "alignment_mobile",
+          "label": "Alignment (mobile)",
+          "options": [
+            {
+              "value": "",
+              "label": "Default"
+            },
+            {
+              "value": "banner-block--image-mobile-left",
+              "label": "Left"
+            },
+            {
+              "value": "banner-block--image-mobile-center",
+              "label": "Center"
+            },
+            {
+              "value": "banner-block--image-mobile-right",
+              "label": "Right"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content banner",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "buttons"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

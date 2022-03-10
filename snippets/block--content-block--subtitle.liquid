@@ -1,0 +1,10 @@
+<div class="
+{%- if is_partial == true -%}
+content-cta--position-bottom 
+{%- else -%}
+content-cta--position-{{ block.settings.subtitle_position }}
+{%- endif -%}"">
+    <div class="{%- if is_partial == true -%}content-cta--op-content{%- endif -%}">
+      <p class="f-body content-cta--subtitle">{{ block.settings.subtitle }}</p>
+    </div>
+</div>

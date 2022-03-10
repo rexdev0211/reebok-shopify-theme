@@ -1,0 +1,118 @@
+.color-swatches {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.color-swatches.color-swatches--left {
+    justify-content: flex-start;
+}
+
+.color-swatches__swatch-wrapper {
+    width: 100%;
+}
+
+.color-swatch__wrapper {
+    display: inline-block;
+    position: relative;
+    margin: 5px;
+}
+
+.color-swatch__wrapper:after {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #000;
+    left: 0;
+    bottom: -2px;
+    opacity: 0;
+    content: '';
+}
+
+.color-swatch__wrapper.color-swatch--selected:after,
+.color-swatch__wrapper.color-swatch--selected .color-swatch:after,
+.color-swatch__wrapper:hover:after {
+    opacity: 1;
+}
+
+.color-swatch {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    /* border: 3px solid #fff; */
+    display: inline-block;
+}
+
+.color-swatch--small.color-swatch--light .color-swatch {
+    /* box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5); */
+}
+
+
+.color-swatch__wrapper.color-swatch--small {
+    /* width: 10px;
+    height: 10px; */
+    border: none;
+}
+
+.color-swatch__wrapper.color-swatch--small:after {
+    height: 0;
+}
+
+.color-swatch__wrapper.color-swatch--small .color-swatch {
+    width: 50px;
+    height: 50px;
+    border: none;
+}
+
+.color-swatch__wrapper.color-swatch--small .color-swatch:after {
+    width: 50px;
+    height: 50px;
+    box-shadow: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.color-swatch__wrapper img {
+    width: auto;
+    height: 100%;
+}
+
+.color-swatch__display--below {
+
+}
+
+.card-wrapper .color-swatches .card-information__wrapper {
+    position: relative;
+}
+
+.card-wrapper .color-swatches .color-swatches {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* background: rgb(var(--color-background)); */
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+    transition: opacity var(--duration-default) ease-in-out;
+}
+
+.card-wrapper .color-swatches .color-swatch__wrapper.color-swatch--selected:after,
+.card-wrapper .color-swatches .color-swatch__wrapper:hover:after {
+    content: unset;
+}
+
+.card-wrapper .color-swatches:hover .color-swatches {
+    z-index: 0;
+    visibility: visible;
+    opacity: 1;
+}
+
+.additional-swatch-count {
+    height: 100%;
+    vertical-align: middle;
+    margin-left: 5px;
+}

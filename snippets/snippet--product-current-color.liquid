@@ -1,0 +1,37 @@
+{%- comment -%} 
+Returns the product's current color
+
+Accepts:
+- product: {Object} The product
+- label: {Text} Add a label before the color name
+
+Usage 
+{% render 'snippet--product-current-color', product: item.product, label: 'cart' %}
+
+{%- endcomment -%}
+
+{%- liquid 
+  assign prodSanitizeName = ''
+  assign prodName = product.title | downcase
+  assign prodVendor = product.vendor | downcase
+
+  for tag in product.tags 
+    assign normalizeTag = tag | downcase 
+    
+    if normalizeTag contains 'colour:' or normalizeTag contains 'color:' 
+      assign productColorName = normalizeTag | downcase | replace: 'colour:', '' | replace: 'color:', '' | strip 
+
+      if prodName contains productColorName 
+        assign prodSanitizeName = productColorName | downcase | replace: prodVendor, '' | strip 
+      endif 
+
+    endif 
+  endfor 
+-%}
+
+{%- if prodSanitizeName != blank -%}
+  {%- if label == 'cart' -%}
+    {{ 'sections.cart.product_color_label' | t }}: 
+  {%- endif -%}
+  {{- prodSanitizeName -}}
+{%- endif -%}
