@@ -1,0 +1,54 @@
+<section class="conten_links">
+  <ul class="workout_links">
+  	{% for block in section.blocks %}
+      <li class="workout_tab"><a href="#workout-container-{{forloop.index}}">{{block.settings.workout_links}}</a></li>
+    {% endfor %}
+  </ul>
+
+</section>
+
+<script>
+	$(document).ready(function() {
+    $(".workout_tab").click(function () {
+    $(".workout_tab").removeClass("active");
+    $(".workout_tab").addClass("active");        
+ });
+});
+</script>
+{% schema %}
+{
+"name": "workout_links",
+  "settings": [
+    
+
+  ],
+  
+"blocks": [
+     
+    {
+      "type": "text",
+      "name": "links",
+      "settings": [
+        {
+          "type": "text",
+          "id": "workout_links",
+          "label": "text"
+        },
+        {
+           "id": "workout_tabs",
+           "type": "url",
+            "label": "tab-url"
+         }
+      ]
+    }
+
+  ],
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "workout-links"
+    }
+  ]
+}
+{% endschema %}

@@ -4,10 +4,10 @@
   }
 }
 
-.article {
+/* .article {
   display: flex;
   align-items: center;
-}
+} */
 
 .article.grid__item {
   padding: 0;

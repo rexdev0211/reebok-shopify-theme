@@ -1,0 +1,48 @@
+<div class="video-component-wrapper___2BSG0">
+  <div class="oragnice_video_one">
+    <video width="100%" height="100%" autoplay muted loop playsinline class="video-main-class" src="{{ section.settings.video_oragenice_url }}" type="video/mp4">
+    </video>
+  </div>
+  <div class="oragnice_video_mobile">
+    <video width="100%" height="100%" autoplay muted loop playsinline class="video-main-class" src="{{ section.settings.mobile_oragenice_url }}" type="video/mp4">
+    </video>
+  </div>
+  <div class="video-text-conten">
+    <h2 class="video-title">{{ section.settings.video_oragenice_title }}</h2>
+  </div>
+
+</div>
+
+
+{% schema %}
+{
+"name": "video-banner",
+  "settings": [
+    {
+      "type": "url",
+      "id": "video_oragenice_url",
+      "label": "video-url"
+    },
+    {
+      "type": "url",
+      "id": "mobile_oragenice_url",
+      "label": "mobile-video"
+    },
+    {
+      "type": "text",
+      "id": "video_oragenice_title",
+      "label": "video-text"
+    }
+
+  ],
+  
+
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "review-section"
+    }
+  ]
+}
+{% endschema %}

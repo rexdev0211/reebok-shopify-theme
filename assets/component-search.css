@@ -10,6 +10,7 @@
 .search__button:focus-visible {
   background-color: rgb(var(--color-background));
   z-index: 2;
+  padding-left:12px;
 }
 
 .search__button:focus {
@@ -26,8 +27,107 @@
   height: 1.8rem;
   width: 1.8rem;
 }
+input#Search-In-Modal::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #767677;
+  opacity: 1; /* Firefox */
+  padding-left:8px;
+}
 
+input#Search-In-Modal:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #767677;
+  padding-left:8px;
+}
+
+input#Search-In-Modal::-ms-input-placeholder { /* Microsoft Edge */
+  color: ##767677;
+  padding-left:8px;
+}
 /* Remove extra spacing for search inputs in Safari */
 input::-webkit-search-decoration {
   -webkit-appearance: none;
+}
+label.field__label {
+    font-size: 14px;
+  left: 9px;
+}
+input#Search-In-Modal {
+    padding: 0px !important;
+    margin: 0px;
+    border-bottom: 1px solid black;
+    height: 37px;
+    width: 140px;
+      font-size: 13px;
+}
+/* button.search__button.field__button {
+    left: 33%;
+} */
+.field:after, .select:after, .customer .field:after, .customer select:after, .localization-form__select:after {
+    content: none;
+}
+button.search__button.field__button img {
+    width: 20px;
+}
+a.header__icon.header__icon--account.link.focus-inset svg#Layer_1 {
+    width: 21px;
+   margin-left:23px
+}
+a#cart-icon-bubble svg#Layer_1 {
+    width: 21px;
+   margin-left:23px
+}
+.header__icon, .header__icon--cart .icon {
+    float: left;
+}
+details-modal.header__search {
+    display: none !important;
+}
+
+input#Search-In-Modal:focus {
+    box-shadow: none;
+}
+a#cart-icon-bubble {
+    margin-right: 0px;
+  margin-left: 8px;
+    padding-bottom: 5px;
+}
+a.header__icon.header__icon--account.link.focus-inset {
+    margin-left: 8px;
+    padding-bottom: 5px;
+}
+
+@media only screen and (max-width: 767px) {
+
+ 
+  a.header__icon.header__icon--account.link.focus-inset img {
+    width: 20px;
+     margin-left: 0px;
+}
+  a.header__icon.header__icon--account.link.focus-inset.small-hide img, a#cart-icon-bubble img {
+    margin-left: 0px;
+}
+  .header__icon:not(.header__icon--summary), .header__icon span {
+    justify-content: flex-end;
+    margin-left: 7px;
+}
+  a#cart-icon-bubble {
+    margin-right: 0px;
+}
+.header__heading, .header__heading-link {
+justify-self: right;
+}
+  
+  
+  
+}
+
+@media only screen and (max-width: 769px) {
+	details-modal.header__search {
+     display: block !important;
+   }
+  form.search.search-modal__form {
+    display: none;
+   }
+   summary.header__icon.header__icon--search.header__icon--summary.link.focus-inset.modal__toggle svg#Layer_1 {
+    width: 20px;
+  }
 }

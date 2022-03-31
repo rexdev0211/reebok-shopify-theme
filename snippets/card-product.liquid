@@ -193,6 +193,9 @@
       </div>
 
     </a>
+      <div class="card__price">
+           {% render 'price', product: card_product, price_class: '' %}
+       </div>
       <div class="card__content">
         
         <div class="card__information">
@@ -221,7 +224,7 @@
                   data-swatch-color-name="{{ product_current_color }}" 
                   href="{{ card_product.url | within: collection | default: '#' }}">
                     <span class="sr-only">{{ card_product.title }}</span>
-                    <img src="{{ card_product.featured_media | img_url: 'x40' }}" loading="lazy" />
+                    <img src="{{ card_product.featured_media | img_url: 'x40' }}" loading="lazy" /> 
                 </a>
             </div>
             </div>
@@ -263,9 +266,9 @@
                   </p>
                 {%- endif -%}
 
-                <div class="card__price">
+               {%comment%} <div class="card__price">
                   {% render 'price', product: card_product, price_class: '' %}
-                </div>
+                </div>{%endcomment%}
                 <div class="card__price--variant hide">
                   {% render 'price', product: card_product, price_class: '' %}
                 </div>
@@ -275,19 +278,20 @@
               </div>
               </div>
             </div>
-            <div class="card__badge {{ settings.badge_position }}">
+           {%comment%} <div class="card__badge {{ settings.badge_position }}">
               {%- if card_product.available == false -%}
                 <span class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}">{{ 'products.product.sold_out' | t }}</span>
               {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
                 <span class="badge badge--bottom-left badge--sale">{{ 'products.product.on_sale' | t }}</span>
               {%- endif -%}
-            </div>
+            </div>{%endcomment%}
 
           </a>
       </div>
     </div>
   </div>
 {%- else -%}
+  {% comment %}
   <div class="card-wrapper underline-links-hover"
   data-prod-name="{{- product_name -}}" 
   data-current-color="{{- product_current_color | strip -}}" 
@@ -332,4 +336,5 @@
       </div>
     </div>
   </div>
+    {% endcomment %}
 {%- endif -%}

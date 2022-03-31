@@ -1,10 +1,10 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
-{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
+{%comment%}{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}{%endcomment%}
 
-<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-badge.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'template-collection.css' | asset_url }}" media="print" onload="this.media='all'">
+<link type="text/css" rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<link type="text/css"  href="{{ 'component-badge.css' | asset_url }}" media="print" onload="this.media='all'">
+<link type="text/css" rel="stylesheet" href="{{ 'template-collection.css' | asset_url }}" media="print" onload="this.media='all'">
 
 <noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-badge.css' | asset_url | stylesheet_tag }}</noscript>
@@ -21,13 +21,13 @@
         {%- else -%}
           {{ 'sections.featured_collection.view_all' | t }}
         {%- endif -%}
-        {%- render 'icon-arrow' -%}
+     {%comment%}   {%- render 'icon-arrow' -%}{%endcomment%}
       </a>
     {%- endif -%}
   </div>
 
   <div id="slider-{{ section.id }}">
-      <ul class="">
+      <ul class="new-slider">
         {%- for product in section.settings.collection.products -%}
             <li class="swiper-slide ">
             {% render 'card-product',
@@ -53,34 +53,41 @@
         initCollectionSlider()
     })
   function initCollectionSlider() {
-    $('#slider-{{ section.id }} ul').slick({
+    $(".new-slider").not('.slick-initialized').slick({
       loop: false,
+      infinite: false,
       dots: true,
       arrows: true,
       slidesToScroll: {{ section.settings.slides_desktop }},
       slidesToShow: {{ section.settings.slides_desktop }},
       responsive: [
             {
-                breakpoint: 300,
+                breakpoint: 1024,
                 settings: {
-                    slidesToShow: {{ section.settings.slides_mobile }},
-                    slidesToScroll: {{ section.settings.slides_mobile }},
+                  slidesToShow: {{ section.settings.slides_desktop }},
+                  slidesToScroll: 1,
+                  infinite: false,
+                  dots: true
                 }
-            },
-            {
-                breakpoint: 749,
+              },
+              {
+                breakpoint: 600,
                 settings: {
-                    slidesToShow: {{ section.settings.slides_tablet }},
-                    slidesToScroll: {{ section.settings.slides_tablet }},
+                  slidesToShow: {{ section.settings.slides_tablet }},
+                  slidesToScroll: 2,
+                  arrows: false,
+      			 infinite: false
                 }
-            },
-            {
-                breakpoint: 990,
+              },
+              {
+                breakpoint: 480,
                 settings: {
-                    slidesToShow: {{ section.settings.slides_desktop }},
-                    slidesToScroll: {{ section.settings.slides_desktop }},
+                  slidesToShow: {{ section.settings.slides_mobile }},
+                  slidesToScroll: 2,
+                  infinite: false,
+                  arrows: false
                 }
-            }
+              }
         ]
     })
   }

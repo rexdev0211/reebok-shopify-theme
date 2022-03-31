@@ -92,7 +92,17 @@
   </symbol>
 </svg>
 <div class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+  <div class="new-side-manu-outer-class">
+  <ul class="page-width new-side-menu-outer">
+{% for link in linklists[section.settings.main_linklist].links %}
+      <li class="new-side-menu-link"><a href= "{{ link.url }}">{{ link.title }}</a></li>
+{% endfor %}
+</ul>
+  </div>
+  
   <header class="header header--{{ section.settings.logo_position }} page-width{% if section.settings.menu != blank %} header--has-menu{% endif %}">
+  
+    
     {%- if section.settings.menu != blank -%}
       <header-drawer data-breakpoint="tablet">
         <details id="Details-menu-drawer-container" class="menu-drawer-container">
@@ -107,6 +117,67 @@
               <div class="menu-drawer__navigation-container">
                 <nav class="menu-drawer__navigation">
                   <ul class="menu-drawer__menu list-menu" role="list">
+                    {%- for link in section.settings.menu.links -%}
+                      <li>
+                        {%- if link.links != blank -%}
+                          <details>
+                            <summary class="icone_wrapper_new menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+                              {{ link.title | escape }}
+                              {% render 'icon-arrow' %}
+                              {% render 'icon-caret' %}
+                            </summary>
+                            <div>
+                              <div class="menu-drawer__inner-submenu">
+                                <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                  {% render 'icon-arrow' %}
+                                  {{ link.title | escape }}
+                                </button>
+                                <ul class="child_menu_drive">
+                                  {%- for childlink in link.links -%}
+                                    <li>
+                                      {%- if childlink.links == blank -%}
+                                        <a href="{{ childlink.url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                                          {{ childlink.title | escape }}
+                                        </a>
+                                      {%- else -%}
+                                        <details id="Details-menu-drawer-submenu-{{ forloop.index }}">
+                                          <summary id="small_child_menu" class="icone_wrapper_new menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                            {{ childlink.title | escape }}
+                                            {% render 'icon-arrow' %}
+                                            {% render 'icon-caret' %}
+                                          </summary>
+                                          <div id="childlink-{{ childlink.title | escape }}" class="menu-drawer__submenu motion-reduce">
+                                            <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                              {% render 'icon-arrow' %}
+                                              {{ childlink.title | escape }}
+                                            </button>
+                                            <ul id="grand_child_menus">
+                                              {%- for grandchildlink in childlink.links -%}
+                                                <li>
+                                                  <a href="{{ grandchildlink.url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                                    {{ grandchildlink.title | escape }}
+                                                  </a>
+                                                </li>
+                                              {%- endfor -%}
+                                            </ul>
+                                          </div>
+                                        </details>
+                                      {%- endif -%}
+                                    </li>
+                                  {%- endfor -%}
+                                </ul>
+                              </div>
+                            </div>
+                          </details>
+                        {%- else -%}
+                          <a href="{{ link.url }}" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"{% if link.current %} aria-current="page"{% endif %}>
+                            {{ link.title | escape }}
+                          </a>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                 {%comment%} <ul class="menu-drawer__menu list-menu" role="list">
                     {%- for link in section.settings.menu.links -%}
                       <li>
                         {%- if link.links != blank -%}
@@ -166,11 +237,16 @@
                         {%- endif -%}
                       </li>
                     {%- endfor -%}
+                  </ul>{%endcomment%}
+                     <ul class="page-width new-side-menu-outer">
+                  {% for link in linklists[section.settings.main_linklist].links %}
+                        <li class="new-side-menu-link"><a href= "{{ link.url }}">{{ link.title }}</a></li>
+                  {% endfor %}
                   </ul>
                 </nav>
                 <div class="menu-drawer__utility-links">
                   {%- if shop.customer_accounts_enabled -%}
-                    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__account link focus-inset h5">
+                   {% comment %} <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__account link focus-inset h5">
                       {% render 'icon-account' %}
                       {%- liquid
                         if customer
@@ -179,7 +255,7 @@
                           echo 'customer.log_in' | t
                         endif
                       -%}
-                    </a>
+                    </a>{% endcomment %}
                   {%- endif -%}
                   <ul class="list list-social list-unstyled" role="list">
                     {%- if settings.social_twitter_link != blank -%}
@@ -268,9 +344,11 @@
         <details>
           <summary class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
             <span>
-              <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
-                <use href="#icon-search">
-              </svg>
+              {% comment %}<svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                        <use href="#icon-search">
+                           </svg> {% endcomment %}
+                         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 974.21 127.78"><defs><style>.cls-1{fill:#fff;}</style></defs><circle class="cls-1" cx="941.1" cy="33.96" r="33.11"/><path d="M100.2,121.34l-22-34.62A45.5,45.5,0,1,0,68,93l22.13,34.79Zm-84.58-70A33.86,33.86,0,1,1,49.47,85.24,33.86,33.86,0,0,1,15.62,51.38Z" transform="translate(292.81)"/><path d="M-247.29,0a45.52,45.52,0,0,0-45.52,45.53,45.53,45.53,0,0,0,45.52,45.53,45.53,45.53,0,0,0,45.53-45.53A45.52,45.52,0,0,0-247.29,0Zm0,79.39a33.86,33.86,0,0,1-33.85-33.86,33.86,33.86,0,0,1,33.85-33.86,33.86,33.86,0,0,1,33.86,33.86A33.86,33.86,0,0,1-247.29,79.39Z" transform="translate(292.81)"/><rect x="-219.42" y="78.15" width="11.99" height="44" transform="matrix(0.84, -0.54, 0.54, 0.84, 205.7, -98.92)"/></svg>
+                     
               <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
                 <use href="#icon-close">
               </svg>
@@ -308,9 +386,10 @@
                     <input type="hidden" name="options[unavailable_products]" value="hide" />
                     <input type="hidden" name="options[prefix]" value="last">
                     <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
-                      <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                      {% comment %}<svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
                         <use href="#icon-search">
-                      </svg>
+                           </svg> {% endcomment %}
+					<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 974.21 127.78"><defs><style>.cls-1{fill:#fff;}</style></defs><circle class="cls-1" cx="941.1" cy="33.96" r="33.11"/><path d="M100.2,121.34l-22-34.62A45.5,45.5,0,1,0,68,93l22.13,34.79Zm-84.58-70A33.86,33.86,0,1,1,49.47,85.24,33.86,33.86,0,0,1,15.62,51.38Z" transform="translate(292.81)"/><path d="M-247.29,0a45.52,45.52,0,0,0-45.52,45.53,45.53,45.53,0,0,0,45.52,45.53,45.53,45.53,0,0,0,45.53-45.53A45.52,45.52,0,0,0-247.29,0Zm0,79.39a33.86,33.86,0,0,1-33.85-33.86,33.86,33.86,0,0,1,33.85-33.86,33.86,33.86,0,0,1,33.86,33.86A33.86,33.86,0,0,1-247.29,79.39Z" transform="translate(292.81)"/><rect x="-219.42" y="78.15" width="11.99" height="44" transform="matrix(0.84, -0.54, 0.54, 0.84, 205.7, -98.92)"/></svg>                     
                     </button>
                   </div>
 
@@ -330,9 +409,10 @@
                 </predictive-search>
               {%- endif -%}
               <button type="button" class="modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
-                <svg class="icon icon-close" aria-hidden="true" focusable="false" role="presentation">
-                  <use href="#icon-close">
-                </svg>
+                {% comment %}<svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                        <use href="#icon-search">
+                           </svg> {% endcomment %}
+                     <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 974.21 127.78"><defs><style>.cls-1{fill:#fff;}</style></defs><circle class="cls-1" cx="941.1" cy="33.96" r="33.11"/><path d="M100.2,121.34l-22-34.62A45.5,45.5,0,1,0,68,93l22.13,34.79Zm-84.58-70A33.86,33.86,0,1,1,49.47,85.24,33.86,33.86,0,0,1,15.62,51.38Z" transform="translate(292.81)"/><path d="M-247.29,0a45.52,45.52,0,0,0-45.52,45.53,45.53,45.53,0,0,0,45.52,45.53,45.53,45.53,0,0,0,45.53-45.53A45.52,45.52,0,0,0-247.29,0Zm0,79.39a33.86,33.86,0,0,1-33.85-33.86,33.86,33.86,0,0,1,33.85-33.86,33.86,33.86,0,0,1,33.86,33.86A33.86,33.86,0,0,1-247.29,79.39Z" transform="translate(292.81)"/><rect x="-219.42" y="78.15" width="11.99" height="44" transform="matrix(0.84, -0.54, 0.54, 0.84, 205.7, -98.92)"/></svg>
               </button>
             </div>
           </div>
@@ -371,8 +451,8 @@
                 <details-disclosure>
                   <details id="Details-HeaderMenu-{{ forloop.index }}">
                     <summary class="header__menu-item list-menu__item link focus-inset">
-                      <span {%- if link.child_active %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
-                      {% render 'icon-caret' %}
+                      <a href="{{ link.url }}"><span {%- if link.child_active %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span></a>
+                      {% comment %}{% render 'icon-caret' %}{% endcomment %}
                     </summary>
                     <ul id="HeaderMenu-MenuList-{{ forloop.index }}" class="header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="list" tabindex="-1">
                       {%- for childlink in link.links -%}
@@ -382,7 +462,7 @@
                               {{ childlink.title | escape }}
                             </a>
                           {%- else -%}
-                            <a href="{{ childlink.url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                            <a href="{{ childlink.url }}" class="submenu_dark header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
                               {{ childlink.title | escape }}
                             </a>
                             
@@ -417,9 +497,11 @@
         <details>
           <summary class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
             <span>
-              <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
-                <use href="#icon-search">
-              </svg>
+             {% comment %}<svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                        <use href="#icon-search">
+                           </svg> {% endcomment %}
+                         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104.14 133.63"><path d="M100.2,121.34l-22-34.62A45.5,45.5,0,1,0,68,93l22.13,34.79Zm-84.58-70A33.86,33.86,0,1,1,49.47,85.24,33.86,33.86,0,0,1,15.62,51.38Z"></path></svg>
+                     
               <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
                 <use href="#icon-close">
               </svg>
@@ -457,9 +539,11 @@
                     <input type="hidden" name="options[unavailable_products]" value="hide" />
                     <input type="hidden" name="options[prefix]" value="last">
                     <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
-                      <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                      {% comment %}<svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
                         <use href="#icon-search">
-                      </svg>
+                           </svg> {% endcomment %}
+                         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104.14 133.63"><path d="M100.2,121.34l-22-34.62A45.5,45.5,0,1,0,68,93l22.13,34.79Zm-84.58-70A33.86,33.86,0,1,1,49.47,85.24,33.86,33.86,0,0,1,15.62,51.38Z"></path></svg>
+                     
                     </button>
                   </div>
 
@@ -487,9 +571,45 @@
           </div>
         </details>
       </details-modal>
+               <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+                  <div class="field">
+                    <input class="search__input field__input"
+                      id="Search-In-Modal"
+                      type="search"
+                      name="q"
+                      value=""
+                      placeholder="{{ 'general.search.search' | t }}"
+                      {%- if settings.predictive_search_enabled -%}
+                        role="combobox"
+                        aria-expanded="false"
+                        aria-owns="predictive-search-results-list"
+                        aria-controls="predictive-search-results-list"
+                        aria-haspopup="listbox"
+                        aria-autocomplete="list"
+                        autocorrect="off"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                      {%- endif -%}
+                    >
+                   {% comment %}
+                    <label class="field__label" for="Search-In-Modal">{{ 'general.search.search' | t }}</label>
+                   {% endcomment %}
+                    <input type="hidden" name="type" value="product" />
+                    <input type="hidden" name="options[unavailable_products]" value="hide" />
+                    <input type="hidden" name="options[prefix]" value="last">
+                    <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                      {% comment %}<svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                        <use href="#icon-search">
+                           </svg> {% endcomment %}
+                         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104.14 133.63"><path d="M100.2,121.34l-22-34.62A45.5,45.5,0,1,0,68,93l22.13,34.79Zm-84.58-70A33.86,33.86,0,1,1,49.47,85.24,33.86,33.86,0,0,1,15.62,51.38Z"></path></svg>
+                     
+                    </button>
+                  </div>
+                 </form>
 
       {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} {% endif %}">
           {% render 'icon-account' %}
           <span class="visually-hidden">
             {%- liquid
@@ -526,6 +646,20 @@
 </div>
 
 {%- render 'cart-notification', color_scheme: section.settings.color_scheme -%}
+          
+          
+          
+<script>
+$(document).ready(function(){
+  $("summary.icone_wrapper_new").click(function(){
+    $(this).toggleClass("summary_daigonal");
+  });
+});
+</script>
+ 
+
+          
+          
 
 <script type="application/ld+json">
   {
@@ -549,8 +683,10 @@
     ],
     "url": {{ request.origin | append: page.url | json }}
   }
+  
+  
 </script>
-
+         
 {%- if request.page_type == 'index' -%}
   {% assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" %}
   <script type="application/ld+json">
@@ -567,7 +703,11 @@
     }
   </script>
 {%- endif -%}
-
+    <style>
+      input#Search-In-Modal:focus::placeholder {
+        color: transparent;
+      }
+    </style>
 {% schema %}
 {
   "name": "t:sections.header.name",
@@ -643,6 +783,14 @@
       "default": "main-menu",
       "label": "t:sections.header.settings.menu.label"
     },
+          {
+      "type": "link_list",
+      "id": "main_linklist",
+      "label": {
+        "en": "Side-Menu"
+      },
+      "default": "main-menu"
+    },
     {
       "type": "checkbox",
       "id": "show_line_separator",
@@ -663,6 +811,7 @@
       "label": "t:sections.header.settings.margin_bottom.label",
       "default": 0
     }
+            
   ]
 }
 {% endschema %}

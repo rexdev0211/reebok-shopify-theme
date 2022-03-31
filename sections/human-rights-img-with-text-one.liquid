@@ -1,0 +1,75 @@
+<div class="component-wrapper___2BSG0">
+  <div class="page-width articals-wrapper">
+    <div class="heading-olders">
+      <h2>{{section.settings.older_title}}</h2>
+    </div>
+    <div class="gl-carousel__content">
+      {% for block in section.blocks %}
+      <div class="teaser-media___22wQp">
+        <div class="older-imge-conten">
+        	<img src="{{block.settings.older_img | img_url: 'master'}}">
+        </div>
+        <div class="teaser-content___2qVy3">
+          <div class="title___3i4il gl-body">
+            <h6 class="withhtml">{{block.settings.older_text}}</h6>
+          </div>
+          <p class="summary___3soIS gl-body">{{block.settings.older_subtext}}</p>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  
+  </div>
+
+</div>
+
+
+{% schema %}
+{
+"name": "img-text-one",
+  "settings": [
+    {
+      "type": "text",
+      "id": "older_title",
+      "label": "Heading",
+      "default": "Your title"
+    }
+
+  ],
+  
+"blocks": [
+     
+    {
+      "type": "text",
+      "name": "box",
+      "settings": [
+       
+        {
+           "id": "older_img",
+           "type": "image_picker",
+            "label": "Image"
+         },
+         {
+          "type": "text",
+          "id": "older_text",
+          "label": "text"
+        },
+        {
+          "type": "text",
+          "id": "older_subtext",
+          "label": "text"
+        }
+		
+      ]
+    }
+
+  ],
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "img-text"
+    }
+  ]
+}
+{% endschema %}

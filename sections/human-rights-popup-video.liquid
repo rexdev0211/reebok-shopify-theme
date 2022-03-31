@@ -1,0 +1,48 @@
+<div class="component-wrapper___2BkSO">
+  <div class="summary___1Xtln_row">
+    <div class="shine-wrapper">
+      <h2 class="video-popup-heading">{{section.settings.popup_heading}}</h2>
+      <p class="video-popup-text">{{section.settings.popup_text}}</p>
+      <div class="pupop-clear">
+        <p class="popup-btn">{{section.settings.popup_btn}}</p>
+      </div>
+    </div>
+    
+  
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+"name": "popup-video",
+  "settings": [
+    {
+      "type": "text",
+      "id": "popup_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "popup_text",
+      "label": "text"
+    },
+    {
+      "type": "text",
+      "id": "popup_btn",
+      "label": "btn"
+    }
+
+  ],
+  
+
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "review-section"
+    }
+  ]
+}
+{% endschema %}

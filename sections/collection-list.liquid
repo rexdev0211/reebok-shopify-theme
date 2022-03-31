@@ -50,7 +50,7 @@
           endif
         -%}
         {%- for block in section.blocks -%}
-          <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="collection-list__item grid__item{% if show_mobile_slider %} slider__slide{% endif %}{% if block.settings.collection.featured_image == nil %} collection-list__item--no-media{% endif %}" {{ block.shopify_attributes }}>
+          <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="buttan_coll collection-list__item grid__item{% if show_mobile_slider %} slider__slide{% endif %}{% if block.settings.collection.featured_image == nil %} collection-list__item--no-media{% endif %}" {{ block.shopify_attributes }}>
             {% render 'card-collection', card_collection: block.settings.collection , media_aspect_ratio: section.settings.image_ratio, columns: columns %}
           </li>
         {%- endfor -%}
@@ -76,6 +76,56 @@
     {%- endif -%}
   </div>
 </div>
+
+
+
+<style>
+section#shopify-section-template--15773388701926__164794404458bdbb5c h3.card__heading {
+    color: black;
+}
+section#shopify-section-template--15773388701926__164794404458bdbb5c .card__content {
+    background: white;
+    border: 1px solid #e9ecef;;
+      padding: 0px;
+}
+  section#shopify-section-template--15773388701926__164794404458bdbb5c .card__content:hover {
+  	border-color:  black;
+  }
+section#shopify-section-template--15773388701926__164794404458bdbb5c a.full-unstyled-link {
+    font-size: 13px;
+    font-family: 'Neue Plak';
+    font-weight: 300;
+    letter-spacing: 1px;
+  	text-align: center;
+}
+section#shopify-section-template--15773388701926__164794404458bdbb5c span.icon-wrap {
+    display: none;
+}
+section#shopify-section-template--15773388701926__164794404458bdbb5c {
+    width: 800px;
+    margin: auto;
+}
+section#shopify-section-template--15773388701926__164794404458bdbb5c .card__information {
+    padding: 14px 0px;
+}
+section#shopify-section-template--15773388701926__164794404458bdbb5c .title-wrapper-with-link.title-wrapper--self-padded-mobile.title-wrapper--no-top-margin {
+    justify-content: center;
+}
+section#shopify-section-template--15773388701926__164794404458bdbb5c.card.card--standard.card--text {
+    padding: 0px 10px;
+}
+section#shopify-section-template--15773388701926__164794404458bdbb5c h2.collection-list-title.h2 {
+    font-size: 30px;
+}
+  @media only screen and (max-width: 767px) {
+section#shopify-section-template--15773388701926__164794404458bdbb5c {
+    width: auto;
+    margin: auto;
+}
+}
+
+</style>
+
 
 {% schema %}
 {

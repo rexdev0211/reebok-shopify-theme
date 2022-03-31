@@ -9,7 +9,8 @@
 {%- endstyle -%}
 
 <div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
-  <div class="collection-hero__inner page-width">
+  <div class="collection-hero__inner">
+     {%- if section.settings.show_collection_image and collection.image -%}
     <div class="collection-hero__text-wrapper">
       <h1 class="collection-hero__title">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
@@ -30,7 +31,27 @@
           -%}
         {{- collection_title | escape -}}
       </h1>
+      {%else%}
+        <h1 class="second_collection-hero__title">
+        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
+        {%- liquid 
+          assign collection_title = collection.title
+          assign collection_handle = collection.handle
 
+          unless section.settings.show_sort_selected == true
+            assign primary_sort_collection = collection
+            if collection.metafields.sort_primary.collection_handle
+              assign primary_sort_collection = collections[collection.metafields.sort_primary.collection_handle]
+            endif
+
+            assign collection_title = primary_sort_collection.title
+            assign collection_handle = primary_sort_collection.handle
+          endunless 
+          
+          -%}
+        {{- collection_title | escape -}}
+       </h1>
+	{%endif%}
       {%- liquid 
         if section.blocks.size > 0
           for block in section.blocks 
@@ -51,7 +72,7 @@
       -%}
 
       {%- if section.settings.show_collection_description -%}
-        <div class="collection-hero__description rte">{{ collection.description }}</div>
+        
       {%- endif -%}
 
       {%- liquid 
@@ -75,7 +96,7 @@
     </div>
 
     {%- if section.settings.show_collection_image and collection.image -%}
-      <div class="collection-hero__image-container media gradient">
+      <div class="collection-hero__image-container media gradient" id="coll_banner{{ section.id }}">
         <img
           srcset="{%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
             {%- if collection.image.width >= 360 -%}{{ collection.image | image_url: width: 360 }} 360w,{%- endif -%}
@@ -94,6 +115,7 @@
     {%- endif -%}
   </div>
 </div>
+
 {%- capture button_select -%} 
 {%- if section.settings.button_list_selector != blank -%} 
 .{{- section.settings.button_list_selector -}}

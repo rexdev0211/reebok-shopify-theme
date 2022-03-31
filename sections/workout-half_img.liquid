@@ -1,0 +1,111 @@
+<div id="workout-container-1" class="workout-colums">
+  <div class="page-width">
+    <div class="half_img_container">
+      {% for block in section.blocks %}
+      <div class="one_half_conten">
+        <div class="tile-wrapper___3r-F1">
+          <div class="workout_img_overlay">
+            <div class="wallpaperWrapper___-q6gq tile-wallpaper___2GU1z">
+              <div class="container___246kH">
+              	<img src="{{block.settings.img_colum | img_url: 'master'}}">
+              </div>
+            </div>
+          </div>
+          <div class="workout_text_overlay">
+              <h2 class="title___1RkKz withhtml___2qjxa gl-heading--s">{{block.settings.head_text}}</h2>
+            <p class="summary___15lGL withhtml___2qjxa">{{block.settings.sub_text}}</p>
+
+              <div class="content_item">
+                <div class="cta___1ls_5 fadeIn___U34LS">
+                  <a href="{{block.settings.video_one}}" class="gl-cta gl-cta--tertiary gl-cta--tertiary-light" title="Yoga For Back Pain" manual_cm_sp="SLOT-4.1-_-MICROSITE_BRAND_HOME WORKOUTS_HOME_CLP_TEASER-CAROUSEL_BRAND_HOME-FITNESS-HUB-LIFT-UP-MY-TRAINERS_STATIC-ON-MODEL_04272020-_-CTA_READ-MORE_BLOG-_-528364">
+                    <span class="gl-cta__content">{{block.settings.video_link_one}}</span>
+                  </a>
+                </div>
+                <div id="workout-container-2" class="cta___1ls_5 fadeIn___U34LS">
+                  <a href="{{block.settings.video_two}}" class="gl-cta gl-cta--tertiary gl-cta--tertiary-light" title="The Backpack Bootcamp" manual_cm_sp="SLOT-4.1-_-MICROSITE_BRAND_HOME WORKOUTS_HOME_CLP_TEASER-CAROUSEL_BRAND_HOME-FITNESS-HUB-LIFT-UP-MY-TRAINERS_STATIC-ON-MODEL_04272020-_-CTA_READ-MORE_BLOG-_-528364">
+                    <span class="gl-cta__content">{{block.settings.video_link_one}}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% schema %}
+{
+"name": "img_colums",
+  "settings": [
+    
+
+  ],
+  
+"blocks": [
+     
+    {
+      "type": "text",
+      "name": "column",
+      "settings": [
+       
+        {
+           "id": "img_colum",
+           "type": "image_picker",
+            "label": "Image"
+         },
+         {
+          "type": "text",
+          "id": "head_text",
+          "label": "title"
+        },
+        {
+          "type": "text",
+          "id": "sub_text",
+          "label": "sub-title"
+        },
+        {
+          "type": "text",
+          "id": "video_link_one",
+          "label": "link"
+        },
+        {
+          "type": "url",
+          "id": "video_one",
+          "label": "link-url"
+        },
+        {
+          "type": "text",
+          "id": "video_link_two",
+          "label": "link"
+        },
+        {
+          "type": "url",
+          "id": "video_two",
+          "label": "link-url"
+        }
+      ]
+    }
+
+  ],
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "img_colums"
+    }
+  ]
+}
+{% endschema %}

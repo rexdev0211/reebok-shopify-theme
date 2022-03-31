@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="human-rights-video-banner">
+  <div id="unice" class="clorin bg-video___4-QWO layer_video___5PYSY ">
+    <div class="wallpaperWrapper___-q9sq bg-video___4-QWO">
+    	<img src="{{section.settings.wallpaper_one | img_url: 'master'}}">
+    </div>
+    <div class="wallpaperWrapper___mobile">
+    	<img src="{{section.settings.wallpaper_two | img_url: 'master'}}">
+    </div>
+    <div class="content___2FKWs body-position-left___2OJR0 container page-width">
+      <div class="poster-content___7-yN" data-testid="masthead-group-summary ">
+        <h2 class="title___2dh_z withhtml___3UP6V gl-heading--l">{{section.settings.wallpaper_text_one}}</h2>
+        <div class="summary___3Or3O gl-body--l withhtml___3UP6V">{{section.settings.wallpaper_text_two}}</div>
+      </div>
+    </div>
+    <div class="play-wrapper-icone">
+      <p id="hide" class="trigger_popup_fridd play_video_icone"><i class="fa fa-play"></i></p>
+    </div>
+  </div>
+  <div class="embedded-video">
+  	<iframe scrolling="none" id="sample_video" src="https://www.youtube.com/embed/{{section.settings.youtube_video_one}}?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div id="show" class="close_wrapper"><i class="fa fa-close"></i></div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#hide").click(function(){
+    $(".clorin").hide();
+  });
+  $("#hide").click(function(){
+    $(".embedded-video").show();
+  });
+  $("#show").click(function(){
+    $(".clorin").show();
+    $(".embedded-video").hide();
+  });
+});
+</script>
+
+<script> 
+jQuery(document).ready(function() {
+		jQuery('#show').on('click', function(ev) {
+			jQuery("#sample_video")[0].src += "&autoplay=0";
+			ev.preventDefault();
+		});
+	});
+</script> 
+
+
+
+
+
+{% schema %}
+{
+"name": "review-title",
+  "settings": [
+        {
+           "id": "wallpaper_one",
+           "type": "image_picker",
+            "label": "Image"
+         },
+         {
+           "id": "wallpaper_two",
+           "type": "image_picker",
+            "label": "mobile-Image"
+         },
+         {
+           "id": "youtube_video_one",
+           "type": "text",
+            "label": "video-id"
+         },
+         {
+          "type": "text",
+          "id": "wallpaper_text_one",
+          "label": "text"
+        },
+        {
+          "type": "text",
+          "id": "wallpaper_text_two",
+          "label": "text"
+        }
+
+  ],
+  
+
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "review-section"
+    }
+  ]
+}
+{% endschema %}

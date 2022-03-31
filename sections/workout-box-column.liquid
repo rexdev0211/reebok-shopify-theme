@@ -1,0 +1,79 @@
+<div id="" class="box-colums">
+  <div class="page-width">
+    <div class="half_img_container">
+      {% for block in section.blocks %}
+      <div class="second_half_conten">
+        <div class="tile-wrapper___3r-F1">
+          <div class="workout_img_overlay">
+            <div class="wallpaperWrapper___-q6gq tile-wallpaper___2GU1z">
+              <div class="container___246kH">
+              	<img src="{{block.settings.img_colum | img_url: 'master'}}">
+              </div>
+            </div>
+          </div>
+          <div class="workout_text_overlay">
+            <a href="{{block.settings.box_btn_links}}">{{block.settings.box_btn_text}}</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% schema %}
+{
+"name": "box_columns",
+  "settings": [
+    
+
+  ],
+  
+"blocks": [
+     
+    {
+      "type": "text",
+      "name": "column",
+      "settings": [
+       
+        {
+           "id": "img_colum",
+           "type": "image_picker",
+            "label": "Image"
+         },
+         
+        {
+          "type": "text",
+          "id": "box_btn_text",
+          "label": "link"
+        },
+        {
+          "type": "url",
+          "id": "box_btn_links",
+          "label": "link-url"
+        }
+        
+      ]
+    }
+
+  ],
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "img_colums"
+    }
+  ]
+}
+{% endschema %}

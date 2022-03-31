@@ -1,0 +1,80 @@
+<div class="image_container">
+  <div class="fadeIn fadeInActive">
+  	{% for block in section.blocks %}
+    <div class="text_with_image_container">
+      <div class="img_stream">
+        <div class="five_terms">
+          <picture class="container___246kH"> <img src="{{block.settings.about_image | img_url: 'master'}}"></picture>
+        </div>
+      </div>
+      <div class="text_stream">
+        <h2 class="title___1RkKz withhtml___2qjxa gl-heading--s">{{block.settings.about_head}}</h2>
+        <p class="summary___15lGL withhtml___2qjxa">{{block.settings.about_text}}</p>
+        <a href="{{block.settings.about_url_btn}}"><span>{{block.settings.about_btn}}<span></a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+{% schema %}
+{
+"name": "build-our-kids",
+  "settings": [
+    
+
+  ],
+  
+"blocks": [
+     
+    {
+      "type": "text",
+      "name": "content",
+      "settings": [
+       
+        {
+           "id": "about_image",
+           "type": "image_picker",
+            "label": "Image"
+         },
+         {
+          "type": "text",
+          "id": "about_head",
+          "label": "title"
+        },
+        {
+          "type": "text",
+          "id": "about_text",
+          "label": "text"
+        },
+        {
+          "type": "text",
+          "id": "about_btn",
+          "label": "button"
+        },
+        {
+          "type": "url",
+          "id": "about_url_btn",
+          "label": "btn-url"
+        }
+      ]
+    }
+
+  ],
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "build-our-kids"
+    }
+  ]
+}
+{% endschema %}

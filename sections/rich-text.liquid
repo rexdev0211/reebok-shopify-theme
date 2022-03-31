@@ -20,23 +20,78 @@
 
 <div class="isolate{% unless section.settings.full_width %} page-width{% endunless %}">
   <div class="rich-text content-container color-{{ section.settings.color_scheme }} gradient{% if section.settings.full_width %} rich-text--full-width content-container--full-width{% endif %} section-{{ section.id }}-padding">
+    <div class="rich-text_bg">
+    	<img src="{{section.settings.rich_text_bg | img_url: 'master'}}">
+    </div>
+    <div class="rich-text_bg_mobile">
+    	<img src="{{section.settings.rich_text_bg_mobile | img_url: 'master'}}">
+    </div>
     <div class="rich-text__blocks">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
+          {%- when 'image_picker' -%}
+          <div class="logo___J1onM"><img class="" src="{{block.settings.brand_img | img_url: 'master'}}"></div>
           {%- when 'heading' -%}
             <h2 class="{{ block.settings.heading_size }}" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
           {%- when 'text' -%}
             <div class="rich-text__text rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
           {%- when 'button' -%}
-            <a{% if block.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link }}"{% endif %} class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}" {{ block.shopify_attributes }}>
+            <a{% if block.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link }}"{% endif %} id="myBtn" class="popup_button">
               {{ block.settings.button_label | escape }}
             </a>
         {%- endcase -%}
       {%- endfor -%}
     </div>
-  </div>
-</div>
+   <div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="pupop_close">
+            <span class="close">&times;</span>
+        </div>
+        <p>login form.....</p>
+    </div>
+   </div>
 
+<script>
+
+var modal = document.getElementById("myModal");
+
+
+var btn = document.getElementById("myBtn");
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+    
+<script>
+$(document).ready(function(){
+  $(".popup_button").click(function(){
+    $("body").addClass("intro");
+  });
+  $(".close").click(function(){
+    $("body").removeClass("intro");
+  });
+});
+</script>
+    
+
+    
 {% schema %}
 {
   "name": "t:sections.rich-text.name",
@@ -78,6 +133,16 @@
       "label": "t:sections.rich-text.settings.full_width.label"
     },
     {
+           "id": "rich_text_bg",
+           "type": "image_picker",
+            "label": "bg-Image"
+     },
+    {
+           "id": "rich_text_bg_mobile",
+           "type": "image_picker",
+            "label": "mobile_bg"
+     },
+    {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
     },
@@ -104,9 +169,22 @@
   ],
   "blocks": [
     {
+      "type": "image_picker",
+      "name": "logo",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_img",
+          "label": "img"
+        }
+      ]
+    },
+	
+    {
       "type": "heading",
       "name": "t:sections.rich-text.blocks.heading.name",
-      "limit": 1,
+      "limit": 5,
       "settings": [
         {
           "type": "text",
@@ -139,7 +217,7 @@
     {
       "type": "text",
       "name": "t:sections.rich-text.blocks.text.name",
-      "limit": 1,
+      "limit": 5,
       "settings": [
         {
           "type": "richtext",
@@ -152,7 +230,7 @@
     {
       "type": "button",
       "name": "t:sections.rich-text.blocks.button.name",
-      "limit": 1,
+      "limit": 5,
       "settings": [
         {
           "type": "text",

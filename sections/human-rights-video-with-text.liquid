@@ -1,0 +1,121 @@
+<div class="component-wrapper___2BSG0">
+  <div class="page-width articals-wrapper">
+    <div class="heading-olders">
+      <h2>{{section.settings.newest_title}}</h2>
+      <p>{{section.settings.newest_subtitle}}</p>
+    </div>
+    <div class="gl-carousel__content">
+      {% for block in section.blocks %}
+      <div class="teaser-media___22wQp">
+        <div class="box-a-{{forloop.index}} newest-imge-conten">
+        	<img src="{{block.settings.newest_img | img_url: 'master'}}">
+            <div class="play-wrapper-icone">
+              <p id="much-{{forloop.index}}" class="trigger_popup_fridd play_video_icone"><i class="fa fa-play"></i></p>
+            </div>
+        </div>
+        <div class="box-b-{{forloop.index}} newest_video_container">
+           <iframe scrolling="none" id="box_video-{{forloop.index}}" width="310" height="360" src="https://www.youtube.com/embed/{{block.settings.youtube_video_second}}?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+           <div id="many-{{forloop.index}}" class="close_wrapper_second"><i class="fa fa-close"></i></div>
+        </div>
+        <div class="teaser-content___2qVy3">
+          <div class="title___3i4il gl-body">
+            <h6 class="withhtml">{{block.settings.newest_text}}</h6>
+          </div>
+          <p class="summary___3soIS gl-body">{{block.settings.newest_subtext}}</p>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  
+  </div>
+
+</div>
+
+
+<script>
+   {% for block in section.blocks %}
+$(document).ready(function(){
+  $("#much-{{forloop.index}}").click(function(){
+    $(".box-a-{{forloop.index}}").hide();
+  });
+  $("#much-{{forloop.index}}").click(function(){
+    $(".box-b-{{forloop.index}}").show();
+  });
+  $("#many-{{forloop.index}}").click(function(){
+    $(".box-a-{{forloop.index}}").show();
+    $(".box-b-{{forloop.index}}").hide();
+  });
+});
+  {% endfor %}
+</script>
+
+<script> 
+jQuery(document).ready(function() {
+		jQuery('#many-{{forloop.index}}').on('click', function(ev) {
+			jQuery("#box_video-{{forloop.index}}")[0].src += "&autoplay=0";
+			ev.preventDefault();
+		});
+	});
+</script> 
+
+
+
+{% schema %}
+{
+"name": "video-text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "newest_title",
+      "label": "Heading",
+      "default": "Your title"
+    },
+    {
+      "type": "text",
+      "id": "newest_subtitle",
+      "label": "Sub-Heading"
+    }
+
+  ],
+  
+"blocks": [
+     
+    {
+      "type": "text",
+      "name": "text-video",
+      "settings": [
+       
+        {
+           "id": "newest_img",
+           "type": "image_picker",
+            "label": "Image"
+         },
+         {
+          "type": "text",
+          "id": "youtube_video_second",
+          "label": "video-id"
+        },
+         {
+          "type": "text",
+          "id": "newest_text",
+          "label": "text"
+        },
+        {
+          "type": "text",
+          "id": "newest_subtext",
+          "label": "text"
+        }
+		
+      ]
+    }
+
+  ],
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "img-text"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,98 @@
+{{ 'video-section.css' | asset_url | stylesheet_tag }}
+
+<div class="home-video-outer">
+
+	<video width="100%" id="mp4" loop="" autoplay="" playsinline="" src="{{section.settings.home_full_video}}"></video>
+
+
+<div class="page-width home-full-width-video-text" style="text-align:{{section.settings.box_align}};">
+  <h1 style="color:{{section.settings.color_text}}">{{ section.settings.home_full_video_heading}}</h1>
+  <p style="color:{{section.settings.color_text}}">{{ section.settings.home_full_video_text }}</p>
+</div>
+</div>
+
+{% schema %}
+{ 
+    "name": "Home Full Width Video",
+    "settings": [
+      {
+        "type": "url",
+        "id": "home_full_video",
+        "label": "Video URL"
+      },
+      {
+        "type": "text",
+        "id": "home_full_video_heading",
+        "label": "Video Title"
+      },
+      {
+        "type": "text",
+        "id": "home_full_video_text",
+        "label": "Video Text"
+      },
+		{
+          "type": "color",
+          "id": "color_text",
+          "label": "Text color",
+          "default": "#ffffff"
+        },
+{
+          "type": "select",
+          "id": "box_align",
+          "options": [
+            {
+              "value": "top-left",
+              "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__1.label"
+            },
+            {
+              "value": "top-center",
+              "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__2.label"
+            },
+            {
+              "value": "top-right",
+              "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__3.label"
+            },
+            {
+              "value": "middle-left",
+              "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__4.label"
+            },
+            {
+              "value": "middle-center",
+              "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__5.label"
+            },
+            {
+              "value": "middle-right",
+              "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__6.label"
+            },
+            {
+              "value": "bottom-left",
+              "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__7.label"
+            },
+            {
+              "value": "bottom-center",
+              "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__8.label"
+            },
+            {
+              "value": "bottom-right",
+              "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__9.label"
+            }
+          ],
+          "default": "middle-center",
+          "label": "t:sections.slideshow.blocks.slide.settings.box_align.label",
+          "info": "t:sections.slideshow.blocks.slide.settings.box_align.info"
+        }
+    ],
+	"presets": [
+	{
+      "name": "Home Full Width Video",
+      "category": "Video"
+    }
+	]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

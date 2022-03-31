@@ -36,20 +36,41 @@
   }
 {%- endstyle -%}
 
+
+
+
+
+
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="footer-interactive">
+    <div class="footer_newsletter___33hsw">
+      <div class="container wrapper___hyNX4 row_base">
+        <div class="col-l-12 col-s-12">
+          <h4 class="intractive_title">{{ section.settings.intractive_title }}</h4>
+        </div>
+        <div class="col-l-12 col-s-12">
+          <div>
+            <button type="button" class="trigger_popup_fricc gl-cta gl-cta--secondary gl-cta--secondary-light" aria-label="Primary">
+              <span class="gl-cta__content">{{ section.settings.intractive_btn }}</span>
+			</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   {%- if section.blocks.size > 0 or section.settings.newsletter_enable or section.settings.show_social -%}
     <div class="footer__content-top page-width">
       {%- if section.blocks.size > 0 -%}
         {%- liquid
           if section.blocks.size == 9
             assign footer_grid_class = 'grid--3-col-tablet'
-          elsif section.blocks.size > 6
-            assign footer_grid_class = 'grid--4-col-desktop'
+          elsif section.blocks.size > 5
+            assign footer_grid_class = 'grid--5-col-desktop'
           elsif section.blocks.size > 4
-            assign footer_grid_class = 'grid--3-col-tablet'
+            assign footer_grid_class = 'grid--4-col-tablet'
           endif
         -%}
-        <div class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}">
+        <div class="desktop_conten footer__blocks-wrapper grid grid--3-col grid--4-col grid--5-col-tablet {{ footer_grid_class }}">
           {%- for block in section.blocks -%}
             <div class="footer-block grid__item{% if block.type == 'link_list' and block.settings.heading != blank %} footer-block--menu{% endif %}" {{ block.shopify_attributes }}>
               {%- if block.settings.heading != blank -%}
@@ -71,7 +92,16 @@
                           </a>
                         </li>
                       {%- endfor -%}
-                    </ul>
+                      
+                   
+               
+              <ul class="second-footer-menu-outer">
+                <h5 class="second-footer-menu-heading">{{ block.settings.new_second_footer_hadding}}</h5>
+			{% for link in linklists[block.settings.new_second_footer_menu].links %}
+ 					 <li class="second-footer-menu-inner"><a href= "{{ link.url }}">{{ link.title }}</a></li>
+					{% endfor %}
+					</ul> </ul>
+              
                   {%- endif -%}
                 {%- when 'image' -%}
                   <div class="footer-block__details-content footer-block-image {{ block.settings.alignment }}">
@@ -95,8 +125,15 @@
           {%- endfor -%}
         </div>
       {%- endif -%}
-
-      <div class="footer-block--newsletter">
+		
+      <div class="mobile_nevigation">
+      	<ul class=" mobile-conten page-width new-side-menu-outer">
+        {% for link in linklists[section.settings.footer_new_linklist].links %}
+              <li class="mobile_footer_links new-side-menu-link"><a href= "{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+        </ul>
+      </div>
+     {%comment%} <div class="footer-block--newsletter">
         {%- if section.settings.newsletter_enable -%}
           <div class="footer-block__newsletter">
             {%- if section.settings.newsletter_heading != blank -%}
@@ -220,10 +257,46 @@
             {%- endif -%}
           </ul>
         {%- endif -%}
-      </div>
+      </div>{%endcomment%}
     </div>
   {%- endif -%}
 </footer>
+
+<div class="hover_bkgr_fricc">
+    <span class="helper"></span>
+    <div>
+        <div class="popupCloseButton">&times;</div>
+        <p>Add any HTML content<br />inside the popup box!</p>
+    </div>
+</div>
+
+
+<script>
+
+$(window).load(function () {
+    $(".trigger_popup_fricc").click(function(){
+       $('.hover_bkgr_fricc').show();
+    });
+    $('.hover_bkgr_fricc').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });
+    $('.popupCloseButton').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });
+});
+</script>
+
+<script>
+$(document).ready(function(){
+  $(".trigger_popup_fricc").click(function(){
+    $("body").addClass("remaning");
+  });
+  $(".popupCloseButton").click(function(){
+    $("body").removeClass("remaning");
+  });
+});
+</script>
+    
 
 {% schema %}
 {
@@ -246,7 +319,20 @@
           "default": "footer",
           "label": "t:sections.footer.blocks.link_list.settings.menu.label",
           "info": "t:sections.footer.blocks.link_list.settings.menu.info"
-        }
+        },
+		{
+          "type": "text",
+          "id": "new_second_footer_hadding",
+          "label": "Heading"
+        },
+		  {
+      "type": "link_list",
+      "id": "new_second_footer_menu",
+      "label": {
+        "en": "second-footer-Menu"
+      },
+      "default": "footer"
+    }
       ]
     },
     {
@@ -310,6 +396,22 @@
     }
   ],
   "settings": [
+    {
+          "type": "text",
+          "id": "intractive_title",
+          "label": "login_form_title"
+    },
+    {
+          "type": "text",
+          "id": "intractive_btn",
+          "label": "button"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_new_linklist",
+     
+      "label": "mobile-menu"
+    },
     {
       "type": "select",
       "id": "color_scheme",

@@ -1,0 +1,40 @@
+<div class="text-section-conten">
+  <div class="inline_text_wrapper">
+    <h2 class="gl-heading--m">{{ section.settings.gl_text_one}}</h2>
+    <p class="gl-heading--s">{{ section.settings.gl_text_two }}</p>
+    <p class="gl-heading--l">{{ section.settings.gl_text_three }}</p>
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "text-container",
+  "settings": [
+    {
+      "type": "text",
+      "id": "gl_text_one",
+      "label": "heading"
+    },
+    {
+      "type": "html",
+      "id": "gl_text_two",
+      "label": "text-one"
+    },
+    {
+      "type": "html",
+      "id": "gl_text_three",
+      "label": "text-two"
+    }
+
+  ],
+  
+
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "review-section"
+    }
+  ]
+}
+{% endschema %}

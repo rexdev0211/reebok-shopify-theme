@@ -1,0 +1,73 @@
+<div class="video-component-wrapper___2BSGde">
+  <div class="enargy_video_one">
+    <video width="100%" height="100%" autoplay muted loop playsinline class="video-main-class" src="{{ section.settings.video_cycled_url }}" type="video/mp4">
+    </video>
+  </div>
+  <div class="enargy_video_mobile">
+    <video width="100%" height="100%" autoplay muted loop playsinline class="video-main-class" src="{{ section.settings.cycled_video_mobile }}" type="video/mp4">
+    </video>
+  </div>
+  <div class="cycled-video-text-conten">
+    <div class="poster_conten_new">
+        <img src="{{section.settings.cycled_img | img_url: 'master'}}">
+        <h2 class="video-title new_g5_terminal">{{ section.settings.video_cycled_title }}</h2>
+        <p class="enargy_sometext">{{ section.settings.video_cycled_text }}</p>
+        <a class="enargy-btn" href="{{ section.settings.video_cycled_btn_url }}">{{ section.settings.video_cycled_btn_text }}</a>
+    </div>
+  </div>
+
+</div>
+
+
+{% schema %}
+{
+"name": "video-banner",
+  "settings": [
+    {
+      "type": "url",
+      "id": "video_cycled_url",
+      "label": "video-url"
+    },
+    {
+      "type": "url",
+      "id": "cycled_video_mobile",
+      "label": "mobile-video-url"
+    },
+    {
+       "id": "cycled_img",
+       "type": "image_picker",
+       "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "video_cycled_title",
+      "label": "video-title"
+    },
+    {
+      "type": "html",
+      "id": "video_cycled_text",
+      "label": "video-text"
+    },
+   {
+      "type": "text",
+      "id": "video_cycled_btn_text",
+      "label": "btn_title"
+    },
+    {
+      "type": "url",
+      "id": "video_cycled_btn_url",
+      "label": "btn-url"
+    }
+
+  ],
+  
+
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "review-section"
+    }
+  ]
+}
+{% endschema %}

@@ -26,7 +26,7 @@
   {%- endstyle -%}
 {%- endif -%}
 
-<slideshow-component class="slider-mobile-gutter{% if section.settings.layout == 'grid' %} page-width{% endif %}{% if section.settings.show_text_below %} mobile-text-below{% endif %}" role="region" aria-roledescription="{{ 'sections.slideshow.carousel' | t }}" aria-label="{{ section.settings.accessibility_info | escape }}">
+<slideshow-component class="slider-mobile-gutter{% if section.settings.layout == 'grid' %} {% endif %}{% if section.settings.show_text_below %} mobile-text-below{% endif %}" role="region" aria-roledescription="{{ 'sections.slideshow.carousel' | t }}" aria-label="{{ section.settings.accessibility_info | escape }}">
   <div class="slideshow banner banner--{{ section.settings.slide_height }} grid grid--1-col slider slider--everywhere{% if section.settings.show_text_below %} banner--mobile-bottom{% endif %}{% if section.blocks.first.settings.image == blank %} slideshow--placeholder{% endif %}"
     id="Slider-{{ section.id }}"
     aria-live="polite"
@@ -69,30 +69,36 @@
               height="{{ block.settings.image.width | divided_by: block.settings.image.aspect_ratio | round }}"
             >
           {%- else -%}
-            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% comment %}{{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}{% endcomment %}
+             <video width="100%" height="100%" autoplay muted loop playsinline class="video-main-class" src="{{ block.settings.video_home_url }}" type="video/mp4">
+</video>
+          
+          <video width="100%" height="100%" autoplay muted loop playsinline class="video-second-class" src="{{ block.settings.video_mobile_url }}" type="video/mp4"></video>
           {%- endif -%}
         </div>
         <div class="slideshow__text-wrapper banner__content banner__content--{{ block.settings.box_align }} page-width{% if block.settings.show_text_box == false %} banner--desktop-transparent{% endif %}">
-          <div class="slideshow__text banner__box content-container content-container--full-width-mobile color-{{ block.settings.color_scheme }} slideshow__text--{{ block.settings.text_alignment }} slideshow__text-mobile--{{ block.settings.text_alignment_mobile }}">
+          <div class="slideshow__text banner__box content-container content-container--full-width-mobile slideshow__text--{{ block.settings.text_alignment }} slideshow__text-mobile--{{ block.settings.text_alignment_mobile }}" style="background-color:{{ block.settings.color_backgrounde }};">
             {%- if block.settings.heading != blank -%}
-              <h2 class="banner__heading {{ block.settings.heading_size }}">{{ block.settings.heading | escape }}</h2>
+              <h2 class="banner__heading {{ block.settings.heading_size }}" style="color:{{ block.settings.color_text }};">{{ block.settings.heading | escape }}</h2>
             {%- endif -%}
             {%- if block.settings.subheading != blank -%}
-              <div class="banner__text" {{ block.shopify_attributes }}>
+              <div class="banner__text" {{ block.shopify_attributes }} style="color:{{ block.settings.color_text }};">
                 <span>{{ block.settings.subheading | escape }}</span>
               </div>
             {%- endif -%}
             {%- if block.settings.button_label != blank -%}
               <div class="banner__buttons">
-                <a{% if block.settings.link %} href="{{ block.settings.link }}"{% else %} role="link" aria-disabled="true"{% endif %} class="button {% if block.settings.button_style_secondary %}button--secondary{% else %}button--primary{% endif %}">{{ block.settings.button_label | escape }}</a>
+                <a style="color:{{ block.settings.color_text }}; background-color:{{ block.settings.color_backgrounde_button }};" {% if block.settings.link %} href="{{ block.settings.link }}"{% else %} role="link" aria-disabled="true"{% endif %} class="button {% if block.settings.button_style_secondary %}button--secondary{% else %}button--primary{% endif %}">{{ block.settings.button_label | escape }}</a>
               </div>
             {%- endif -%}
           </div>
         </div>
       </div>
+    
     {%- endfor -%}
   </div>
-
+  
+  
   {%- if section.blocks.size > 1 -%}
     <div class="slideshow__controls slider-buttons no-js-hidden">
       <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'sections.slideshow.previous_slideshow' | t }}" aria-controls="Slider-{{ section.id }}">{% render 'icon-caret' %}</button>
@@ -300,6 +306,16 @@
           "id": "link",
           "label": "t:sections.slideshow.blocks.slide.settings.link.label"
         },
+	{
+		"type": "url",
+		"id": "video_home_url",
+		"label": "video url"
+ 	},
+    {
+		"type": "url",
+		"id": "video_mobile_url",
+		"label": "mobile_video url"
+ 	},
         {
           "type": "checkbox",
           "id": "button_style_secondary",
@@ -388,34 +404,25 @@
           "default": 0
         },
         {
-          "type": "select",
-          "id": "color_scheme",
-          "options": [
-            {
-              "value": "accent-1",
-              "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__1.label"
-            },
-            {
-              "value": "accent-2",
-              "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__2.label"
-            },
-            {
-              "value": "background-1",
-              "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__3.label"
-            },
-            {
-              "value": "background-2",
-              "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__4.label"
-            },
-            {
-              "value": "inverse",
-              "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__5.label"
-            }
-          ],
-          "default": "background-1",
-          "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.label",
-          "info": "t:sections.slideshow.blocks.slide.settings.color_scheme.info"
+          "type": "color",
+          "id": "color_backgrounde",
+		  "label": "background color",
+          "default": "#ffffff"
+},
+   {
+          "type": "color",
+          "id": "color_text",
+          "label": "Text color",
+          "default": "#ffffff"
         },
+      {
+          "type": "color",
+          "id": "color_backgrounde_button",
+		  "label": "background color button",
+          "default": "#ffffff"
+},
+   
+          
         {
           "type": "header",
           "content": "t:sections.slideshow.settings.mobile.content"

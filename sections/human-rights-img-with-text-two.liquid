@@ -1,0 +1,113 @@
+<div class="component-wrapper___2BSG0">
+  <div class="page-width articals-wrapper">
+     {%- if section.settings.older_title_one != blank -%}
+    <div class="heading-olders">
+      <h2>{{section.settings.older_title_one}}</h2>
+    </div>
+     {%- endif -%}
+    <div class="gl-carousel__content">
+      {% for block in section.blocks %}
+      <div class="teaser-media___22wQp">
+        <div class="older-imge-conten">
+        	<img src="{{block.settings.older_img_one | img_url: 'master'}}">
+        </div>
+        <div class="teaser-content___2qVy3">
+          <div class="title___3i4il gl-body">
+            <h6 class="withhtml">{{block.settings.older_text_one}}</h6>
+          </div>
+          <p class="summary___3soIS gl-body">{{block.settings.older_subtext_one}}</p>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  
+  </div>
+
+</div>
+<script>
+	$('.gl-carousel__content').slick({
+  dots: false,
+  arrow: false,
+  infinite: false,
+  speed: 300,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 3,
+        infinite: false,
+        dots: false
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+ 
+  ]
+});
+	
+</script>
+
+{% schema %}
+{
+"name": "img-text-two",
+  "settings": [
+    {
+      "type": "text",
+      "id": "older_title_one",
+      "label": "Heading",
+      "default": "Your title"
+    }
+
+  ],
+  
+"blocks": [
+     
+    {
+      "type": "text",
+      "name": "box",
+      "settings": [
+       
+        {
+           "id": "older_img_one",
+           "type": "image_picker",
+            "label": "Image"
+         },
+         {
+          "type": "text",
+          "id": "older_text_one",
+          "label": "text"
+        },
+        {
+          "type": "text",
+          "id": "older_subtext_one",
+          "label": "text"
+        }
+		
+      ]
+    }
+
+  ],
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "img-text"
+    }
+  ]
+}
+{% endschema %}

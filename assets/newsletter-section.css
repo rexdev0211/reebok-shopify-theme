@@ -2,7 +2,93 @@
   padding-right: calc(4rem / var(--font-body-scale));
   padding-left: calc(4rem / var(--font-body-scale));
 }
+.newsletter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.newsletter__wrapper.color-background-1.gradient.content-container.isolate.content-container--full-width.section-template--15773388701926__1647524178479fcc19-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+.newsletter__subheading.rte {
+    margin-top: 4px;
+}
+.newsletter {
+    border: 1px solid #f3f3f3;
+    margin-top: 20px;
+  padding: 30px 45px;
+  margin-bottom: 40px
+}
+input#phone {
+    background: transparent;
+    padding: 17px 0px 17px 14px;
+    border: 1px solid #767677;
+}
+input#phone:focus-visible {
+    outline: none;
+    outline-offset: 0px;
+    box-shadow: none;
+}
+input#NewsletterForm--template--15773388701926__1647524178479fcc19 {
+    border: 1px solid #000000;
+  padding: 24px 0px;
+}
+}
+input#NewsletterForm--template--15773388701926__1647524178479fcc19:focus-visible {
+    border: none;
+}
+form#contact_form {
+    width: 500px;
+  max-width: initial;
+}
+.newsletter-form__field-wrapper {
+    max-width: initial !important;
+}
+form#contact_form .field {
+    flex-direction: column;
+}
+button#Subscribe {
+    background: black;
+    color: white;
+    padding: 14px 0px;
+    width: 80px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+  margin-top: 40px;
+}
+.newslatter-checkbox-outer {
+    margin-top: 10px;
+  display: flex;
 
+}
+input[type="checkbox"]:checked:before {
+  background: #000;
+  color: #fff;
+  content: "\2713";
+  text-align: center;
+}
+input[type="checkbox"]:before {
+  content: "\00a0";
+  display: inline-block;
+  font: 16px/1em sans-serif;
+  height: 24px;
+  margin: 0 1em 0 0;
+  padding: 4px;
+  vertical-align: middle;
+  width: 24px;
+}
+input#myCheck {
+    width: 24px;
+    height: 24px;
+}
+.newslatter-checkbox-outer label {
+    font-size: 14px;
+}
+form#contact_form {
+    display: none;
+}
 @media screen and (min-width: 750px) {
   .newsletter__wrapper {
     padding-right: 9rem;

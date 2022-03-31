@@ -78,7 +78,7 @@
           font-size: 1rem;
         }
       }
-    {% endstyle %}
+    {% endstyle %} 
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
 
@@ -88,8 +88,9 @@
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 
-    <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
-
+    
+    <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+    
     {%- unless settings.type_body_font.system? and settings.type_use_custom == true -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
@@ -233,7 +234,7 @@
     </script>
     {%- endif -%}
 
-    <script>
+<!--     <script>
       window.addEventListener('DOMContentLoaded', () => {
         imageMapResize();
       });
@@ -241,7 +242,7 @@
       document.addEventListener("shopify:section:load", function(event) {
         imageMapResize();
       });
-    </script>
+    </script>  -->
 
     <script>
       window.shopUrl = '{{ request.origin }}';
@@ -269,7 +270,7 @@
         pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
         playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
       }
-    </script>
+    </script> 
 
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>

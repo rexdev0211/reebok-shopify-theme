@@ -4,7 +4,9 @@
         {{ section.settings.slider_title }}
     </h2>
     {%- endif -%}
-
+    <p class="content-section-peregraph">
+      {{ section.settings.new_peregrapfh }}
+    </p>
     <div>
         <div class="content-slider">
             {% for block in section.blocks %}
@@ -29,20 +31,20 @@
                         {{ bset.image | img_url: image_size, scale: 2, crop: 'top' | img_tag: bset.image.alt, 'custom__image' }}
                         </noscript>
                     </div>
-    
-                    {%- if bset.title != blank -%}
-                    <p class="content-slider-title">{{ bset.title }}</p>
-                    {%- endif -%}
+    				<div class="conten_slider_information">
+                        {%- if bset.title != blank -%}
+                        <p class="content-slider-title">{{ bset.title }}</p>
+                        {%- endif -%}
 
-                    {%- if bset.text != blank -%} 
-                    {{ bset.text }}
-                    {%- endif -%}
 
-                    {%- if bset.link_text != blank -%} 
-                    <p class="button">{{ bset.link_text }}</p>
-                    {%- endif -%}
+                        <p class="content_slider_text">{{ bset.text }}</p>
 
-                    
+
+                        {%- if bset.link_text != blank -%} 
+                        <p class="New_button">{{ bset.link_text }}</p>
+                        {%- endif -%}
+
+                   </div>
                 </a>
             </div>
             {% endfor %}
@@ -80,13 +82,15 @@
         $("#shopify-section-{{section.id}} .content-slider").slick({
             dots: false,
             arrows: true,
+            infinite: false,
             slidesToShow: {{ section.settings.slides_per_view }},
+            slidesToScroll: 4,
             responsive: [
                 {
                     breakpoint: 749,
                     settings: {
                         slidesToShow: 1,
-                        centerMode: true
+                        arrows: false
                     }
                 }
             ]
@@ -109,6 +113,11 @@
             "type": "text",
             "id": "slider_title",
             "label": "Title"
+        },
+        {
+            "type": "text",
+            "id": "new_peregrapfh",
+            "label": "Sub-Title"
         },
         {
             "type": "color",
@@ -174,7 +183,7 @@
                     "label": "Title"
                 },
                 {
-                    "type": "richtext",
+                    "type": "html",
                     "id": "text",
                     "label": "Text"
                 },

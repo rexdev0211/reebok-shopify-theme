@@ -16,13 +16,31 @@
   }
 {%- endstyle -%}
 
+<div class="blog_categories">
+  <ul class="blog_wrapper">
+       
+
+       {%- for tag in blog.all_tags -%}
+        
+           <li>
+              <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+           </li>
+          
+       {%- endfor -%}
+        {% comment %}
+        {% for block in section.blocks %}
+          <li><a href="{{block.settings.blog_link_url}}">{{block.settings.blog_link_text}}</a></li>
+        {% endfor %}
+       {% endcomment %}
+  </ul>
+</div>
 {%- paginate blog.articles by 6 -%}
   <div class="main-blog page-width section-{{ section.id }}-padding">
     <h1 class="title--primary">{{ blog.title | escape }}</h1>
 
     <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
       {%- for article in blog.articles -%}
-        <div class="blog-articles__article article">
+        <div class="blog-articles__article article custom-blog-{{forloop.index}}">
           {%- render 'article-card',
             article: article,
             media_height: section.settings.image_height,
@@ -140,6 +158,26 @@
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
     }
+  ],
+  "blocks": [
+     
+    {
+      "type": "text",
+      "name": "categories",
+      "settings": [
+       {
+          "type": "text",
+          "id": "blog_link_text",
+          "label": "text"
+        },
+        {
+           "id": "blog_link_url",
+           "type": "url",
+            "label": "blog-link"
+         }
+      ]
+    }
+
   ]
 }
 {% endschema %}

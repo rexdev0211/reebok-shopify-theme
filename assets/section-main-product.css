@@ -183,14 +183,14 @@ fieldset.product-form__input .form__label {
 }
 
 .product-form__input input[type='radio'] + label {
-  border: var(--variant-pills-border-width) solid rgba(var(--color-foreground), var(--variant-pills-border-opacity));
+  border: 1px solid #e9ecef;
   background-color: rgb(var(--color-background));
   color: rgba(var(--color-foreground));
-  border-radius: var(--variant-pills-radius);
+  border-radius: 0;
   color: rgb(var(--color-foreground));
   display: inline-block;
   margin: 0.7rem 0.5rem 0.2rem 0;
-  padding: 1rem 2rem;
+  padding: 1rem 23px;
   font-size: 1.4rem;
   /* letter-spacing: 0.1rem; */
   line-height: 1;
@@ -217,8 +217,9 @@ fieldset.product-form__input .form__label {
 }
 
 .product-form__input input[type='radio']:checked + label {
-  background-color: rgb(var(--color-foreground));
-  color: rgb(var(--color-background));
+  background-color: white;
+  color: black;
+  border: 1px solid;
 }
 
 @media screen and (forced-colors: active) {
@@ -259,7 +260,19 @@ fieldset.product-form__input .form__label {
 
 .product-form__submit {
   margin-bottom: 1rem;
+  background: black;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none !important;
+  font-weight: bold;
+  
 }
+.product-form__submit:hover {
+	background: #244496;
+  border: none;
+  outline: none;
+} 
 
 .no-js .product-form__submit.button--secondary {
   --color-button: var(--color-base-accent-1);
@@ -323,7 +336,7 @@ a.product__text {
 }
 
 .product__text.caption-with-letter-spacing + .product__title {
-  margin-top: 0;
+  margin-top: 15px;
 }
 
 .product__accordion .accordion__content {
@@ -359,7 +372,7 @@ a.product__text {
   }
   
   .product__info-container .price--on-sale .price-item--regular {
-    font-size: 1.6rem;
+    font-size: 13px;
   }
 
   .product__info-container > *:first-child {
@@ -1154,4 +1167,50 @@ a.product__text {
   content: "";
   display: block;
   padding-bottom: 100%;
+}
+
+/*   ---------------------------------------------------- */
+  p.product__text.caption-with-letter-spacing {
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: none;
+    margin-bottom: 15px;
+}
+  h1.product__title {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    text-transform: capitalize;
+    margin-bottom: 0;
+    font-family: "Neue Plak",Helvetica, Arial, sans-serif;
+}
+  span.badge.price__badge-sale.color-accent-2 {
+    display: none;
+}
+  span.price-item.price-item--sale.price-item--last {
+    font-size: 16px;
+    font-weight: 900;
+}
+  p.product__text {
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: black;
+    line-height: 15px;
+    font-weight: 900;
+    margin: 20px 0;
+}
+ fieldset.js.product-form__input legend.form__label {
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 0;
+    color: black;
+    font-weight: 700;
+}
+  variant-radios.no-js-hidden {
+    padding-top: 10px;
+}
+  button.shopify-payment-button__button.shopify-payment-button__button--unbranded._2ogcW-Q9I-rgsSkNbRiJzA._2EiMjnumZ6FVtlC7RViKtj._2-dUletcCZ2ZL1aaH0GXxT {
+    display: none;
 }

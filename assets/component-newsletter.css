@@ -42,14 +42,29 @@
   }
 }
 
-.newsletter-form__button {
+@media only screen and (max-width: 767px) {
+.newsletter {
+    display: block;
+  padding-bottom: 30px;
+}
+  form#contact_form {
+    width: 245px;
+    max-width: initial;
+}
+  
+  
+}
+
+
+
+/* .newsletter-form__button {
   width: 4.4rem;
   margin: 0;
   right: var(--inputs-border-width);
   top: 0;
   height: 100%;
   z-index: 2;
-}
+} */
 
 .newsletter-form__button:focus-visible {
   box-shadow: 0 0 0 .3rem rgb(var(--color-background)),0 0 0 .4rem rgba(var(--color-foreground));

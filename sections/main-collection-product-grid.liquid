@@ -71,9 +71,9 @@
   <div id="ProductGridContainer">
     {%- paginate collection.products by section.settings.products_per_page -%}
       <div id="side-filter-container" class="clearfix page-width">   
-        <div class="side-filter-menu">    
+        {% comment %}<div class="side-filter-menu">    
           {% render 'filter-menu' %}
-        </div>   
+        </div> {% endcomment %}  
         <div class="main-filter-content">
 
         {%- if collection.products.size == 0 -%}
@@ -173,7 +173,7 @@
     {%- endpaginate -%}
   </div>
 </div>
-
+<div class="collection-hero__description rte">{{ collection.description }}</div>
 {%- if collection.products.size > 0 -%}
 <script>
   window.addEventListener("DOMContentLoaded", () => {
@@ -212,6 +212,13 @@
   });
 </script>
 {%- endif -%} 
+<!-- <script>
+$('.color-swatches').hover(function() {
+    $(this).fadeTo(1,1);
+},function() {
+    $(this).fadeTo(1,0);
+});  
+</script>  -->
 
 {% schema %}
 {
