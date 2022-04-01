@@ -1275,7 +1275,7 @@ section#shopify-section-template--15773388669158__16487227664b757d9c {
 }
 
 /*   ---------------------------------------------------- */
-  p.product__text.caption-with-letter-spacing {
+p.product__text.caption-with-letter-spacing {
     font-size: 14px;
     letter-spacing: 0;
     text-transform: none;
@@ -1284,7 +1284,7 @@ section#shopify-section-template--15773388669158__16487227664b757d9c {
     margin-top: 6px;
     font-weight: 100;
 }
-  h1.product__title {
+h1.product__title {
     font-weight: 600;
     font-size: 28px;
     line-height: 34px;
@@ -1292,14 +1292,14 @@ section#shopify-section-template--15773388669158__16487227664b757d9c {
     margin-bottom: 0;
     font-family: "Neue Plak",Helvetica, Arial, sans-serif;
 }
-  span.badge.price__badge-sale.color-accent-2 {
+span.badge.price__badge-sale.color-accent-2 {
     display: none;
 }
-  span.price-item.price-item--sale.price-item--last {
+span.price-item.price-item--sale.price-item--last {
     font-size: 16px;
     font-weight: 900;
 }
-  p.product__text {
+p.product__text {
     font-size: 14px;
     text-transform: none;
     letter-spacing: 0;
@@ -1308,7 +1308,7 @@ section#shopify-section-template--15773388669158__16487227664b757d9c {
     font-weight: 900;
     margin: 20px 0;
 }
- fieldset.js.product-form__input legend.form__label {
+fieldset.js.product-form__input legend.form__label {
     font-size: 14px;
     text-transform: none;
     letter-spacing: 0;
@@ -1316,10 +1316,10 @@ section#shopify-section-template--15773388669158__16487227664b757d9c {
     color: black;
     font-weight: 700;
 }
-  variant-radios.no-js-hidden {
+variant-radios.no-js-hidden {
     padding-top: 10px;
 }
-  button.shopify-payment-button__button.shopify-payment-button__button--unbranded._2ogcW-Q9I-rgsSkNbRiJzA._2EiMjnumZ6FVtlC7RViKtj._2-dUletcCZ2ZL1aaH0GXxT {
+button.shopify-payment-button__button.shopify-payment-button__button--unbranded._2ogcW-Q9I-rgsSkNbRiJzA._2EiMjnumZ6FVtlC7RViKtj._2-dUletcCZ2ZL1aaH0GXxT {
     display: none;
 }
 span.classify_icones img {
@@ -1332,15 +1332,12 @@ span.classify_icones {
 	position: relative;  
 }
 #sidebar {
-	
 	float:right;
 	margin:10px;
-	padding:10px;
 	position:absolute; /*initial value will override by jquery based on event*/
 	top:0;
     right: 0;
 }
-
 .sidebarfixed {
     position: fixed!important;/*sometime browser overrides the class. so we put important */
     top: 0;
@@ -1353,15 +1350,14 @@ h1.mobile_product_title.product__title {
 }  
 .mobile_description.product__description.rte {
     display: none;
-}  
-  
-  
-  
-  
-  
-  
-  
-
+} 
+.product_term-description {
+    margin-top: 20px;
+    padding-top: 30px;
+}
+.card-product__color-counter p {
+	margin: 0;  
+}
 @media screen and (max-width: 769px) {
   #sidebar {
   	position:relative;

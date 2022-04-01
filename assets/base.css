@@ -1347,8 +1347,6 @@ button.shopify-payment-button__button--unbranded {
 .customer button:hover::after,
 .shopify-payment-button__button--unbranded:hover::after {
   --border-offset: 1.3px;
-  box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)),
-    0 0 0 calc(var(--buttons-border-width) + 1px) rgba(var(--color-button), var(--alpha-button-background));
 }
 
 .button--secondary:after {
@@ -2583,9 +2581,10 @@ details[open] > .header__icon--menu .icon-hamburger {
 }
 
 .header__menu-item {
-  padding: 1.2rem;
+  padding: 1.2rem 10px;
   text-decoration: none;
   color: rgba(var(--color-foreground), 0.75);
+  letter-spacing: 2px;
 }
 
 .header__menu-item:hover {
@@ -2983,8 +2982,10 @@ ul.workout_links li a {
     font-size: 14px;
 }
 ul.workout_links li:hover {
-	border-bottom: 2px solid black;  
+	border-bottom: 2px solid black; 
+    
 }
+
 .half_img_container {
     display: flex;
     flex-wrap: wrap;
@@ -2993,15 +2994,21 @@ ul.workout_links li:hover {
 }
 .one_half_conten {
     width: 50%;
-    padding-right: 25px;
+    padding: 0 12px;
     height: 504px;
     position: relative;
     overflow: hidden;
     float: left;
 }
+div#workout-container-1 .page-width {
+    padding: 0 1rem;
+}
+div#shopify-section-workout-box-column .page-width {
+    padding: 0 1rem;
+}
 .second_half_conten {
     width: 33.33%;
-    padding-right: 25px;
+    padding: 0 12px;
     height: 504px;
     position: relative;
     overflow: hidden;
@@ -3103,6 +3110,9 @@ section#shopify-section-bottom-banner a.button.button--primary {
     text-decoration: none !important;
     font-weight: 600;
 }
+section#shopify-section-bottom-banner a.button.button--primary:hover {
+   background: #244496;
+}
 section#shopify-section-bottom-banner {
     padding-top: 25px;
 }
@@ -3188,6 +3198,9 @@ a.enargy-btn {
     font-size: 14px;
     font-weight: 700;
 }
+a.enargy-btn:hover {
+	background: #f6f4e4;  
+}
 .grow_text {
 	padding: 0 15px;  
 } 
@@ -3270,14 +3283,9 @@ h2.title___2dh_z.withhtml___3UP6V.gl-heading--l {
 }  
 p.play_video_icone {
     margin: 0;
-    background: white;
-    padding: 11px 13px 10px 20px;
-    border-radius: 53%;
+    
     cursor: pointer;
 } 
-p.play_video_icone i {
-	font-size: 30px;  
-}  
 .embedded-video {
     display: none;
     position: relative;
@@ -3299,7 +3307,6 @@ p.play_video_icone i {
     right: 25px;
     color: white;
     font-size: 25px;
-   
 }
 .teaser-media___22wQp {
     width: 25%;
@@ -3364,8 +3371,7 @@ p.summary___3soIS.gl-body {
     position: relative;
     display: none;
 }  
- 
-.component-wrapper___2BSG0 .slick-track {
+ .component-wrapper___2BSG0 .slick-track {
     margin: 0;
 }  
 .wallpaperWrapper___mobile {
@@ -3441,13 +3447,33 @@ iframe#sample-popup_video {
 p.summary___3soIS.gl-body-one {
     display: none;
 }  
-  
-  
-  
-  
-  
-  
-  
+.content-slider {
+	padding: 0 8px;  
+}  
+div#shopify-section-human-rights-video-banner svg#Layer_1 {
+    width: 73px;
+}  
+div#shopify-section-human-rights-video-with-text svg#Layer_1 {
+    width: 73px;
+}  
+li.workout_tab.active {
+    border-bottom: 2px solid;
+}
+li.workout_tab.active a {
+	color: black;
+    font-weight: bold;
+}
+button.tablinks.active {
+    border-bottom: 2px solid;
+}
+.card-product__color-counter p {
+ 	margin: 0;
+    color: #767677;
+    font-size: 14px;
+} 
+.caption-with-letter-spacing.light {
+    text-transform: capitalize;
+} 
   
   
   
@@ -3460,7 +3486,7 @@ p.summary___3soIS.gl-body-one {
   }
   .one_half_conten {
   	width: 100%;
-    padding-right: 0;
+    
   }
    .second_half_conten {
   	width: 100%;
@@ -3515,7 +3541,7 @@ p.summary___3soIS.gl-body-one {
     padding: 0 13px;
   }
   .poster_conten img {
-  	width: 50%;
+  	width: 60%;
   }
    h2.video-title.new_g5_terminal {
     font-size: 36px;

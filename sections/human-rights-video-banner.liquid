@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="play-wrapper-icone">
-      <p id="hide" class="trigger_popup_fridd play_video_icone"><i class="fa fa-play"></i></p>
+      <p id="hide" class="trigger_popup_fridd play_video_icone"><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 204 204"><defs><style>.cls-1,.cls-2{fill:none;stroke-miterlimit:10;}.cls-1{stroke:#000;stroke-width:22px;}.cls-2{stroke:#fff;stroke-width:19px;}</style></defs><polygon class="cls-1" points="164 105.34 47.44 38.05 47.44 172.64 164 105.34"/><polygon class="cls-2" points="156.56 98.66 40 31.36 40 165.95 156.56 98.66"/></svg></p>
     </div>
   </div>
   <div class="embedded-video">
@@ -24,6 +24,7 @@
 </div>
 
 <script>
+//  video script
 $(document).ready(function(){
   $("#hide").click(function(){
     $(".clorin").hide();
@@ -39,6 +40,7 @@ $(document).ready(function(){
 </script>
 
 <script> 
+//   autoplay video
 jQuery(document).ready(function() {
 		jQuery('#show').on('click', function(ev) {
 			jQuery("#sample_video")[0].src += "&autoplay=0";
@@ -46,9 +48,6 @@ jQuery(document).ready(function() {
 		});
 	});
 </script> 
-
-
-
 
 
 {% schema %}

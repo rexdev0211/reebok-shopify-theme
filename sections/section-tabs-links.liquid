@@ -1,18 +1,15 @@
 <section class="conten_links">
-  <ul class="workout_links">
+  <ul id="navMenus" class="workout_links">
   	{% for block in section.blocks %}
-      <li class="workout_tab"><a href="#workout-container-{{forloop.index}}">{{block.settings.workout_links}}</a></li>
+      <li class="workout_tab {% if forloop.first == true %}active{%endif%}"><a href="#workout-container-{{forloop.index}}">{{block.settings.workout_links}}</a></li>
     {% endfor %}
   </ul>
-
 </section>
 
 <script>
-	$(document).ready(function() {
-    $(".workout_tab").click(function () {
-    $(".workout_tab").removeClass("active");
-    $(".workout_tab").addClass("active");        
- });
+	$("#navMenus").on('click', 'li', function () {
+    $("#navMenus li.active").removeClass("active");
+    $(this).addClass("active");
 });
 </script>
 {% schema %}

@@ -263,7 +263,7 @@
 }
 
 .card-information > * + * {
-  margin-top: 0.5rem;
+
 }
 
 .card-information {
@@ -286,7 +286,7 @@
 .card-information
   > *:not(.visually-hidden:first-child)
   + *:not(.rating) {
-  margin-top: 0.7rem;
+ 
 }
 
 .card-information .caption {
@@ -517,13 +517,15 @@ button.slick-prev.slick-arrow.slick-disabled {
 div#shopify-section-template--15773388701926__1647854956d75c4f51 h2.text-uppercase.content-section-title {
     font-size: 30px;
     margin-bottom: 0;
+    padding: 0 12px;
 }
 p.content-section-peregraph {
     margin-top: 5px;
     font-size: 16px;
     font-family: 'Neue Plak';
     font-weight: 400;
-    color: black;
+    color: black; 
+    padding: 0 12px;
 }
 div#shopify-section-template--15773388701926__1647854956d75c4f51 {
     padding-top: 55px;
@@ -630,4 +632,5 @@ div#shopify-section-template--15773388701926__1647854956d75c4f51 .col-prod-slide
         width: 100%;
 
     }
+   
 }

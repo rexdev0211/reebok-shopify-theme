@@ -169,12 +169,7 @@ a#myBtn {
     border: 1px solid;
 }
 @media only screen and (max-width: 769px) {
-	.rich-text_bg {
-    display: none;
-   }
-  .rich-text_bg_mobile {
-    display: block;
-   }
+	
   .rich-text_bg_mobile img {
   	width: 100%;
   }
@@ -197,4 +192,12 @@ a#myBtn {
   .modal-content {
   	width: 100%;
   }
+}
+@media only screen and (max-width: 767px)  {
+	.rich-text_bg {
+    display: none;
+   }
+  .rich-text_bg_mobile {
+    display: block;
+   }
 }

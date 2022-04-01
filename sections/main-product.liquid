@@ -206,7 +206,7 @@
       {%- unless is_gift_card == true -%}
         <div>
           <div>
-            <p>{%- render 'snippet--product-current-color', product: product -%}</p>
+          {%comment%}  <p>{%- render 'snippet--product-current-color', product: product -%}</p>{%endcomment%}
           </div>
           <div class="product__colors"> 
             <div class="product__colors--swatches">
@@ -221,6 +221,7 @@
                 {{ product.description }}
               </div>
             {%- endif -%}
+      {%- render 'product-recommendations-new' -%}
     </div>
     <div id="sidebar" class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
       <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
