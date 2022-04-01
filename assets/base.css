@@ -2135,6 +2135,7 @@ input[type='checkbox'] {
 /* section-announcement-bar */
 #shopify-section-announcement-bar {
   z-index: 4;
+  background: #244495;
 }
 
 .announcement-bar {
@@ -3401,6 +3402,7 @@ p.popup-btn {
     text-decoration: underline;
     font-size: 14px;
     font-weight: 700;
+    cursor: pointer;
 }  
 p.popup-btn:hover {
 	background: black;
@@ -3420,9 +3422,25 @@ iframe#sample_video {
     width: 100%;
     height: 100%;
 }
-  
-  
-  
+iframe#sample-popup_video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+}
+.embedded-popup-video {
+	display: none;  
+}  
+.gl-carousel__content-new {
+    display: flex;
+}
+p.summary___3soIS.gl-body-one {
+    display: none;
+}  
   
   
   
@@ -3544,5 +3562,22 @@ iframe#sample_video {
   h2.video-popup-heading {
   	font-size: 26px;
     line-height: 24px;
+  }
+   .teaser-media___22wQp.media_video {
+    width: 100%;
+  }
+  .gl-carousel__content-new {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+  p.summary___3soIS.gl-body-one {
+    color: black;
+    font-size: 12px;
+    display: block;
+  }
+  p.summary___3soIS.gl-body {
+    display: none;
   }
 }

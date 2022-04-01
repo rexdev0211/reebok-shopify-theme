@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 472 314.29" style="enable-background:new 0 0 472 314.29;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:15;stroke-miterlimit:10;}
+</style>
+<g>
+	<polygon class="st0" points="122.69,44.47 122.69,20.06 356.17,20.06 452.98,173.01 452.98,235.65 122.69,235.65 	"/>
+	<circle cx="205.67" cy="245.41" r="48.81"/>
+	<circle cx="370.81" cy="245.41" r="48.81"/>
+	<line class="st0" x1="19.02" y1="69.69" x2="205.67" y2="69.69"/>
+	<line class="st0" x1="42.51" y1="116.47" x2="229.16" y2="116.47"/>
+	<line class="st0" x1="65.8" y1="163.24" x2="252.44" y2="163.24"/>
+</g>
+</svg>

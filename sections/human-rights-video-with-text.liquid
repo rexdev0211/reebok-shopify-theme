@@ -4,9 +4,9 @@
       <h2>{{section.settings.newest_title}}</h2>
       <p>{{section.settings.newest_subtitle}}</p>
     </div>
-    <div class="gl-carousel__content">
+    <div class="gl-carousel__content-new">
       {% for block in section.blocks %}
-      <div class="teaser-media___22wQp">
+      <div class="teaser-media___22wQp media_video">
         <div class="box-a-{{forloop.index}} newest-imge-conten">
         	<img src="{{block.settings.newest_img | img_url: 'master'}}">
             <div class="play-wrapper-icone">
@@ -22,6 +22,7 @@
             <h6 class="withhtml">{{block.settings.newest_text}}</h6>
           </div>
           <p class="summary___3soIS gl-body">{{block.settings.newest_subtext}}</p>
+          <p class="summary___3soIS gl-body-one">{{block.settings.newest_one_subtitle}}</p>
         </div>
       </div>
     {% endfor %}
@@ -75,6 +76,7 @@ jQuery(document).ready(function() {
       "id": "newest_subtitle",
       "label": "Sub-Heading"
     }
+    
 
   ],
   
@@ -104,6 +106,11 @@ jQuery(document).ready(function() {
           "type": "text",
           "id": "newest_subtext",
           "label": "text"
+        },
+        {
+          "type": "html",
+          "id": "newest_one_subtitle",
+          "label": "mobile-Sub-Heading"
         }
 		
       ]

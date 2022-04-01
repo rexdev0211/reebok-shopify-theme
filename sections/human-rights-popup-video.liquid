@@ -7,10 +7,38 @@
         <p class="popup-btn">{{section.settings.popup_btn}}</p>
       </div>
     </div>
-    
+    <div class="embedded-popup-video">
+  	   <iframe scrolling="none" id="sample-popup_video" src="https://www.youtube.com/embed/{{section.settings.youtube_video_three}}?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       <div id="versions" class="close_wrapper"><i class="fa fa-close"></i></div>
+    </div>
   
   </div>
 </div>
+
+
+<script>
+$(document).ready(function(){
+  $(".popup-btn").click(function(){
+    $(".shine-wrapper").hide();
+  });
+  $(".popup-btn").click(function(){
+    $(".embedded-popup-video").show();
+  });
+  $("#versions").click(function(){
+    $(".shine-wrapper").show();
+    $(".embedded-popup-video").hide();
+  });
+});
+</script>
+
+<script> 
+jQuery(document).ready(function() {
+		jQuery('#versions').on('click', function(ev) {
+			jQuery("#sample-popup_video")[0].src += "&autoplay=0";
+			ev.preventDefault();
+		});
+	});
+</script> 
 
 
 
@@ -32,6 +60,11 @@
       "type": "text",
       "id": "popup_btn",
       "label": "btn"
+    },
+    {
+      "type": "text",
+      "id": "youtube_video_three",
+      "label": "video-id"
     }
 
   ],

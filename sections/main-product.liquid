@@ -46,6 +46,12 @@
 <section class="section-{{ section.id }}-padding">
   <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
+      <h1 class="mobile_product_title product__title" {{ block.shopify_attributes }}>
+          {%- render 'snippet--product-name', product: product -%}
+       </h1>
+      <div class="mobile_product_price no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+           {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+       </div>
       <div>
         <media-gallery id="MediaGallery-{{ section.id }}" role="region" {% if section.settings.enable_sticky_info %}class="product__media-gallery"{% endif %} aria-label="{{ 'products.product.media.gallery_viewer' | t }}" data-desktop-layout="{{ section.settings.gallery_layout }}">
           <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
@@ -209,8 +215,14 @@
           </div>
         </div>
       {%- endunless -%}
+    
+            {%- if product.description != blank -%}
+              <div class="desktop_description product__description rte">
+                {{ product.description }}
+              </div>
+            {%- endif -%}
     </div>
-    <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
+    <div id="sidebar" class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
       <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
@@ -223,11 +235,11 @@
               {{- block.settings.text -}}
             </p>
           {%- when 'title' -%}
-            <h1 class="product__title" {{ block.shopify_attributes }}>
+            <h1 class="desktop_product_title product__title" {{ block.shopify_attributes }}>
               {%- render 'snippet--product-name', product: product -%}
             </h1>
           {%- when 'price' -%}
-            <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+            <div class="desktop_product_price no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
               {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
             </div>
             {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
@@ -246,12 +258,12 @@
                 {{ form | payment_terms }}
               {%- endform -%}
             </div>
-          {%- when 'description' -%}
+          	{%comment%}{%- when 'description' -%}
             {%- if product.description != blank -%}
               <div class="product__description rte">
                 {{ product.description }}
               </div>
-            {%- endif -%}
+            {%- endif -%}{%endcomment%}
           {%- when 'custom_liquid' -%}
             {{ block.settings.custom_liquid }}
           {%- when 'collapsible_tab' -%}
@@ -299,7 +311,7 @@
             </div>
           {%- when 'popup' -%}
               <modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#PopupModal-{{ block.id }}" {{ block.shopify_attributes }}>
-                <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog">{{ block.settings.text | default: block.settings.page.title }}</button>
+                <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog"><span class="classify_icones">{{ block.settings.claasi_icon }}</span><span class="classify_text">{{ block.settings.text | default: block.settings.page.title }}</span></button>
               </modal-opener>
               <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.text }}</a>
           {%- when 'share' -%}
@@ -661,6 +673,12 @@
           {%- endcase -%}
         {%- endfor -%}
       </div>
+        
+        {%- if product.description != blank -%}
+              <div class="mobile_description product__description rte">
+                {{ product.description }}
+              </div>
+       {%- endif -%}
     </div>
   </div>
 
@@ -1009,6 +1027,50 @@
     ]
   }
 </script>
+  
+  <script>
+  	// JavaScript Document
+
+/*
+Jquery Sticky for long sidebars
+by www.web3canvas.com
+The below script is copyrighted to its respective owner
+*/
+
+	$(function () {
+  
+  var msie6 = $.browser == 'msie' && $.browser.version < 7;
+  
+  if (!msie6 && $('#sidebar').offset()!=null) {
+    var top = $('#sidebar').offset().top - parseFloat($('#sidebar').css('margin-top').replace(/auto/, 0));
+	var height = $('#sidebar').height();
+	var winHeight = $(window).height();	
+	var footerTop = $('#footer').offset().top - parseFloat($('#footer').css('margin-top').replace(/auto/, 0));
+	
+	var gap = 30;
+    $(window).scroll(function (event) {
+      // what the y position of the scroll is
+      var y = $(this).scrollTop();
+      
+      // whether that's below the form
+      if (y+winHeight >= top+ height+gap && y+winHeight<=footerTop) {
+        // if so, ad the fixed class
+        $('#sidebar').addClass('sidebarfixed').css('top',winHeight-height-gap +'px');
+      } 
+	  else if (y+winHeight>footerTop) {
+        // if so, ad the fixed class
+       $('#sidebar').addClass('sidebarfixed').css('top',footerTop-height-y-gap+'px');
+      } 
+	  else 	  
+	  {
+        // otherwise remove it
+        $('#sidebar').removeClass('sidebarfixed').css('top','0px');
+      }
+    });
+  }  
+});
+
+  </script>
 
 {% schema %}
 {
@@ -1357,6 +1419,11 @@
           "id": "text",
           "default": "Pop-up link text",
           "label": "t:sections.main-product.blocks.popup.settings.link_label.label"
+        },
+        {
+          "type": "html",
+          "id": "claasi_icon",
+          "label": "text-icone"
         },
         {
           "id": "page",
