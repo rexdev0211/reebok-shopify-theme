@@ -2333,6 +2333,7 @@ input[type='checkbox'] {
 
 .header__icon span {
   height: 100%;
+  color: white;
 }
 
 .header__icon::after {
@@ -2893,13 +2894,9 @@ details-disclosure > details {
   position: absolute;
   top: 0;
 }
-div#shopify-section-build-our-kids {
-    padding-top: 55px;
-    padding-bottom: 15px;
-    position: relative;
-    width: 100%;
-}
 .image_container {
+    padding-top: 55px;
+    padding-bottom: 35px;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -2962,7 +2959,7 @@ p.summary___15lGL.withhtml___2qjxa {
     color: white;
     text-decoration: none;
 }
-#Banner-workout-content-banner .banner-block--e34954e5-eb2b-4fda-b8e2-28f5e0df9649 .banner__text {
+.banner-block--e34954e5-eb2b-4fda-b8e2-28f5e0df9649 .banner__text {
   text-align: start;
   line-height: 24px;  
 } 
@@ -3000,10 +2997,10 @@ ul.workout_links li:hover {
     overflow: hidden;
     float: left;
 }
-div#workout-container-1 .page-width {
+.box-colums .page-width {
     padding: 0 1rem;
 }
-div#shopify-section-workout-box-column .page-width {
+.box-colums .page-width {
     padding: 0 1rem;
 }
 .second_half_conten {
@@ -3084,7 +3081,7 @@ section.conten_links {
 .second_half_conten .workout_text_overlay {
 	bottom: 10px;  
 }
-div#shopify-section-workout-box-column .workout_text_overlay a {
+.box-colums.workout_text_overlay a {
   color: white;
   background: black;
   padding: 9px 17px;
@@ -3092,17 +3089,17 @@ div#shopify-section-workout-box-column .workout_text_overlay a {
   font-size: 14px;
   font-weight: 600;
 }
-div#shopify-section-workout-box-column .workout_text_overlay a:hover {
+.box-colums .workout_text_overlay a:hover {
   	background: #244496;
 }
-section#shopify-section-bottom-banner .banner__text.f-body.banner__text-- {
+div#Banner-bottom-banner .banner__text.f-body.banner__text-- {
     text-align: left;
     margin-top: 15px;
 }
-section#shopify-section-bottom-banner .banner__buttons {
+div#Banner-bottom-banner .banner__buttons {
     margin: 0;
 }
-section#shopify-section-bottom-banner a.button.button--primary {
+div#Banner-bottom-banner a.button.button--primary {
     opacity: 1;
     text-align: center;
     align-items: center;
@@ -3110,11 +3107,11 @@ section#shopify-section-bottom-banner a.button.button--primary {
     text-decoration: none !important;
     font-weight: 600;
 }
-section#shopify-section-bottom-banner a.button.button--primary:hover {
+div#Banner-bottom-banner a.button.button--primary:hover {
    background: #244496;
 }
-section#shopify-section-bottom-banner {
-    padding-top: 25px;
+div#Banner-bottom-banner {
+    margin-top: 25px;
 }
 html {
       scroll-behavior: smooth;
@@ -3221,9 +3218,7 @@ a.enargy-btn:hover {
     padding-left: 35px;
 }  
 
-div#shopify-section-Sustainability-third-video {
-    margin-bottom: -9px;
-}
+
 .oragnice_video_mobile {
 	display: none;  
 } 
@@ -3450,10 +3445,10 @@ p.summary___3soIS.gl-body-one {
 .content-slider {
 	padding: 0 8px;  
 }  
-div#shopify-section-human-rights-video-banner svg#Layer_1 {
+.human-rights-video-banner svg#Layer_1 {
     width: 73px;
 }  
-div#shopify-section-human-rights-video-with-text svg#Layer_1 {
+.gl-carousel__content-new svg#Layer_1 {
     width: 73px;
 }  
 li.workout_tab.active {
@@ -3474,6 +3469,249 @@ button.tablinks.active {
 .caption-with-letter-spacing.light {
     text-transform: capitalize;
 } 
+.shopify-challenge__container .shopify-challenge__button {
+    display: block;
+    margin: 0 auto;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 30px;
+}  
+/*   term & conditions */
+.page-width.page-width--narrow.section-template--15773388800230__main-padding h1.main-page-title.page-title.h0 {
+	display: none;  
+}  
+.page-width.page-width--narrow.section-template--15773388800230__main-padding {
+    width: 100%;
+    max-width: 100%;
+}
+.term-policy.page-width {
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    width: 80%;
+}
+.conditions_value {
+    width: 100%;
+    display: flex;
+}
+.term_details_page {
+    width: 80%;
+}
+a.back-page {
+    font-size: 16px;
+}
+a.back-page:hover {
+	color: white !important;
+    background: black;
+}
+h2.gl-heading.gl-heading--l {
+    margin: 10px 0;
+    font-family: "Neue Plak Wide",Helvetica,Arial,sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 38px;
+}
+.sub_text_center h6 {
+    font-size: 14px;
+    font-family: arial;
+    color: #40403a;
+    line-height: 20px;
+    margin: 0;
+    font-weight: 600;
+}
+.sub_text_center p {
+	margin: 0 0 20px 0;
+    color: #40403A;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: arial;
+    font-weight: 400;
+}
+.sub_text_center {
+    margin-top: 30px;
+    padding-top: 20px;
+    width: 87%;
+}
+
+a.link_editer {
+    color: red !important;
+    text-decoration-color: black !important;
+     padding-bottom: 5px;
+}
+a.link_editer:hover {
+    color: red;
+    text-decoration-color: white !important;
+    background: black !important;
+} 
+h4.gl-heading--m.withhtml___2qjxa {
+    font-size: 30px;
+    line-height: 28px;
+    margin: 30px 0 15px 0;
+    font-family: "Neue Plak Wide",Helvetica,Arial,sans-serif;
+    font-style: normal;
+    font-weight: 700;
+}
+.feedback___2io0v .positive___HZP1F {
+    background: url(https://cdn.shopify.com/s/files/1/0631/9810/1734/files/sd1.jpg?v=1648894298);
+    background-size: contain;
+    margin-right: 14px;
+}
+.feedback___2io0v>* {
+    cursor: pointer;
+    display: inline-block;
+    height: 55px;
+    width: 55px;
+}
+.feedback___2io0v .negative___BmuNz {
+    background: url(https://cdn.shopify.com/s/files/1/0631/9810/1734/files/sd2.jpg?v=1648894298);
+    background-size: contain;
+}
+
+section.row.main___3NLlF.color-theme-black___ZnrwM.text-justify-left___3h-30 {
+    padding-top: 30px;
+    margin-top: 20px;
+}
+h2.gl-heading.title___2eQQb.withhtml___3ITcI {
+    font-size: 30px;
+    line-height: 28px;
+    margin: 0 0 15px 0;
+}
+.content___1jDXz.col-m-8.col-l-14 {
+    width: 60%;
+}
+a.gl-cta.gl-cta--tertiary {
+    color: white;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+}
+.cta___2bw7D {
+    margin-bottom: 12px;
+}
+.bottom_conten_text {
+    padding-top: 30px;
+    margin-top: 30px;
+}
+.adress_with_btn {
+    display: flex;
+    padding: 0 10px;
+}
+.btn_container_text {
+    width: 50%;
+    padding: 10px;
+}
+.defolt_adress_conten {
+    width: 50%;
+    padding: 15px;
+}
+.dynamice_btn_one {
+	padding-bottom: 30px  
+}
+.dynamice_btn_one a {
+    color: #fff!important;
+    background: black;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    font-weight: 700 !important;
+    padding: 12px 18px !important;
+    text-decoration: none;
+}
+.dynamice_btn_one a:hover {
+  background: #244496;
+}
+.last-cloumn-btn a {
+	font-size: 14px;
+   color: black !important;
+   font-weight: 600 !important;
+}
+.last-cloumn-btn a:hover {
+	background: black;
+    color: white !important;
+}
+/*   privacy policy */
+.privacy-policy.page-width {
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    width: 80%;
+}
+.privacy-policy.page-width .conditions_value {
+	display: block  
+} 
+.privacy-policy.page-width .term_details_page {
+    width: 100%;
+}  
+.privacy-policy.page-width .sub_text_center {
+ 	width: 70%; 
+}  
+.privacy-policy.page-width .sub_text_center h6 {
+	color: black;  
+    font-family: 'Neue Plak';
+} 
+.privacy-policy.page-width .sub_text_center p {
+	color: black; 
+    font-family: 'Neue Plak';
+}
+a.other_page_links {
+    color: black !important;
+    font-size: 16px !important;
+    text-decoration: underline;
+
+} 
+a.other_page_links:hover {
+    color: white !important;
+    background: black;
+}
+.assign_links li {
+	color: black; 
+    font-size: 14px;
+     margin-bottom: 15px;
+}
+p.jkl1 {
+    text-align: start;
+}
+div#technology a.button.button--primary {
+    justify-content: center;
+    align-items: center;
+    text-decoration: none !important;
+    font-weight: bold;
+}  
+div#technology a.button.button--primary:hover {
+	background: #244496;  
+}  
+div#technology .banner__buttons.banner__buttons--multiple.banner__buttons-grid--one.banner__buttons-grid--one-mobile {
+    margin: 0;
+}
+div#workout-container-3 {
+    margin-top: 25px;
+}
+.box-colums .workout_text_overlay a {
+    color: white;
+    background: black;
+    padding: 7px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+#tagline h2.banner__heading.h1.f-heading {
+    text-align: left;
+    font-size: 26px;
+} 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3606,4 +3844,43 @@ button.tablinks.active {
   p.summary___3soIS.gl-body {
     display: none;
   }
+  .term-policy.page-width {
+  	padding: 0;
+    width: 100%;
+  }
+  .conditions_value {
+  	display: block;
+  }
+   .term_details_page {
+    width: 100%;
+   }
+  h2.gl-heading.gl-heading--l {
+  	font-size: 36px;
+    font-weight: 32px;
+  }
+  .sub_text_center {
+  	width: 100%;
+  }
+   .content___1jDXz.col-m-8.col-l-14 {
+    width: 100%;
+   }
+  .adress_with_btn {
+  	display: block;
+  }
+   .btn_container_text {
+    width: 100%;
+   }
+   .defolt_adress_conten {
+    width: 100%;
+   }
+  .dynamice_btn_one a {
+  	font-size: 12px !important;
+   }
+  .privacy-policy.page-width {
+  	width: 100%;
+    padding: 0;
+  }
+   .privacy-policy.page-width .sub_text_center {
+    width: 100%;
+   }
 }

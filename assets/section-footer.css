@@ -580,24 +580,19 @@ li.li\.footer-legal-item___1t4Gx {
     padding: 0 15px;
 }
 h4.intractive_title {
-    font-size: 30px;
     line-height: 35px;
-    color: white;
     text-transform: uppercase;
     font-weight: 700;
-    font-family: 'Neue Plak Wide';
     margin: 0 0 15px 0;
 }
 button.gl-cta.gl-cta--secondary.gl-cta--secondary-light {
-	background-color: black;
-    color: white;
+
     border-color: #e9ecef;
     height: 44px;
     border-style: solid;
     border-width: 1px;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 14px;
     line-height: 20px;
     align-items: center;
     cursor: pointer;

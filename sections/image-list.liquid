@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {{ 'section-image-list.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
 
@@ -26,7 +28,7 @@
         style="--grid-desktop-horizontal-spacing: {{ section.settings.spacing_horizontal }}px;"
     >
       {%- for block in section.blocks -%} 
-      <li class="image-list__item grid__item{% if section.settings.swipe_on_mobile %} slider__slide{% endif %} {% if section.settings.zoom_hover == true %}image-list__item--zoom{% endif %} image-list__item--{{ block.id }}" {{ block.shopify_attributes }}>
+      <li id="world" class="image-list__item grid__item{% if section.settings.swipe_on_mobile %} slider__slide{% endif %} {% if section.settings.zoom_hover == true %}image-list__item--zoom{% endif %} image-list__item--{{ block.id }}" {{ block.shopify_attributes }}>
         {%- style -%} 
           .image-list__item--{{ block.id }} .card__text-heading {
             {%- if block.settings.title_color != blank -%}
@@ -178,6 +180,8 @@
 }
 #slid-file {
   padding: 0;
+  list-style: none;
+  position: relative;
 }
 #featured_tabs {
 	display: none;  
@@ -185,6 +189,78 @@
 section#shopify-section-template--15773388701926__1648028630effa185f {
     padding-top: 30px;
     margin-top: 20px;
+}
+.owl-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 40%;
+}
+.owl-carousel .owl-nav button.owl-prev {
+    background: white;
+    color: black;
+    border: 1px solid #e9ecef;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 40px;
+}
+.owl-carousel .owl-nav button.owl-prev:hover {
+	border-color: black;  
+}
+.owl-carousel .owl-nav button.owl-prev::before {
+    content: "\2190";
+    position: relative;
+    font-size: 35px;
+    bottom: 7px;
+}
+.owl-carousel .owl-nav button.owl-next::before {
+    content: "\2192";
+    position: relative;
+    font-size: 35px;
+    bottom: 7px;
+}
+.owl-carousel .owl-nav button.owl-next {
+    background: white;
+    color: black;
+    border: 1px solid #e9ecef;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 40px;
+}
+.owl-carousel .owl-nav button.owl-next:hover {
+	border-color: black;  
+}
+button.owl-prev.disabled {
+    visibility: hidden;
+}
+button.owl-next.disabled {
+    visibility: hidden;
+}
+.owl-dots {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    align-items: center;
+
+}
+.owl-carousel button.owl-dot {
+     background: #767677;
+    color: inherit;
+    height: 2px;
+    padding: 0!important;
+    width: 15px;
+    margin: 0 6px;
+}
+.owl-carousel button.owl-dot.active {
+   background: black;
+   height: 4px;
 }
 </style>
 
@@ -199,7 +275,7 @@ section#shopify-section-template--15773388701926__1648028630effa185f {
   	{% for block in section.blocks %}
     <div id="home-{{ forloop.index }}" class="tabcontent">
 	   <div id="tab_expert">
-        <ul id="slid-file" class="slide-conten-{{ forloop.index }}">
+        <ul id="slid-file" class="owl-carousel">
             {% for product in collections[block.settings.collection_slide].products %}
                 <li class="swiper-slide ">
                 {% render 'card-product',
@@ -222,6 +298,7 @@ section#shopify-section-template--15773388701926__1648028630effa185f {
     </div>
      {% endfor %}
 </div>  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  
 <script>
 function openCity(evt, cityName) {
@@ -243,41 +320,28 @@ document.getElementById("defaultOpen").click();
   
   
   //---------------------slider-script------------------
-   {% for block in section.blocks %}
-     $('.slide-conten-{{ forloop.index }}').slick({
-        dots: false,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 4,
-        slidesToScroll: 2,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-              infinite: true,
-              dots: false
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
 
-        ]
-      });
-  {%endfor%}
+	$('.owl-carousel').owlCarousel({
+    loop:false,
+    margin:10,
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:2,
+            nav:true
+        },
+        600:{
+            items:3,
+            nav:false
+        },
+        1000:{
+            items:5,
+            nav:true,
+            loop:false
+        }
+    }
+})
+
 </script>
 
   <script>

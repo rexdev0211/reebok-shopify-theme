@@ -1,0 +1,71 @@
+{{ 'main-faq.css' | asset_url | stylesheet_tag }}
+<div class="main-frequently-asked-questions ">
+  <div class="page-width">
+    <div class="faq_row">
+      <div class="section_by-deatils">
+        <div class="component-wrapper___2BSGCS">
+          <section class="necessary_conten">
+            <div class="content___1jDXzw">
+            	<h2 class="Faq_head_title">{{section.settings.Que_headding}}</h2>
+                <ul class="ctas___1HCiK">
+                  {% for block in section.blocks %}
+                  <li class="cta___2bw7D">
+                    <a href="{{block.settings.Que_url}}">{{block.settings.Que_title}}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+            </div>
+          </section>
+        </div>
+      </div>
+    
+    </div>
+  
+  </div>
+
+</div>
+
+
+
+{% schema %}
+{
+"name": "faq_section",
+  "settings": [
+       {
+          "type": "text",
+          "id": "Que_headding",
+          "label": "text"
+        }
+
+  ],
+  
+"blocks": [
+     
+    {
+      "type": "text",
+      "name": "FAQ",
+      "settings": [
+       {
+          "type": "text",
+          "id": "Que_title",
+          "label": "text"
+        },
+        {
+          "type": "url",
+          "id": "Que_url",
+          "label": "quetion_url"
+        }
+        
+      ]
+    }
+
+  ],
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "faq_section"
+    }
+  ]
+}
+{% endschema %}

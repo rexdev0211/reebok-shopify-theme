@@ -9,8 +9,8 @@
     </div>
     <div class="content___2FKWs body-position-left___2OJR0 container page-width">
       <div class="poster-content___7-yN" data-testid="masthead-group-summary ">
-        <h2 class="title___2dh_z withhtml___3UP6V gl-heading--l">{{section.settings.wallpaper_text_one}}</h2>
-        <div class="summary___3Or3O gl-body--l withhtml___3UP6V">{{section.settings.wallpaper_text_two}}</div>
+        <h2 style="color:{{ block.settings.v2_color }}; font-family:{{ block.settings.v2_font_family }};" class="title___2dh_z withhtml___3UP6V gl-heading--l">{{section.settings.wallpaper_text_one}}</h2>
+        <div style="color:{{ block.settings.v3_color }}; font-family:{{ block.settings.v3_font_family }};" class="summary___3Or3O gl-body--l withhtml___3UP6V">{{section.settings.wallpaper_text_two}}</div>
       </div>
     </div>
     <div class="play-wrapper-icone">
@@ -52,7 +52,7 @@ jQuery(document).ready(function() {
 
 {% schema %}
 {
-"name": "review-title",
+"name": "human-rights-video-banner",
   "settings": [
         {
            "id": "wallpaper_one",
@@ -75,9 +75,53 @@ jQuery(document).ready(function() {
           "label": "text"
         },
         {
+          "type": "color",
+          "id": "v2_color",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "v2_font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
           "type": "text",
           "id": "wallpaper_text_two",
           "label": "text"
+        },
+        {
+          "type": "color",
+          "id": "v3_color",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "v3_font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
         }
 
   ],
@@ -87,7 +131,7 @@ jQuery(document).ready(function() {
   "presets": [
     {
       "category": "text",
-      "name": "review-section"
+      "name": "human-rights-video-banner"
     }
   ]
 }

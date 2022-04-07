@@ -1,0 +1,120 @@
+{{ 'main-faq.css' | asset_url | stylesheet_tag }}
+<div class="main-frequently-asked-questions ">
+  <div class="page-width">
+    <div class="faq_row">
+      <div class="section_by-deatils">
+        <div class="component-wrapper___2BSGCS">
+          <section class="tab_faq_container">
+          	<h2 class="faq_tabs_title">{{section.settings.faq_tabs_title}}</h2>
+            {% for block in section.blocks %}
+            <div class="vertical_faq_tabs">
+              <div class="tab">
+                <button class="tablinks" onclick="openfaq(event, 'quetion-one')" id="getelemenet">
+                	<div class="helpCategory___fews">
+                      <div class="faq-icone-img">
+                      	<img src="{{block.settings.faq_icone_img_one | img_url: 'master'}}">
+                      </div>
+                      <div class="faq-title_label">{{block.settings.title_label_one}}</div>
+                      <div class="faq_arrow_now">
+                      	<img src="https://cdn.shopify.com/s/files/1/0631/9810/1734/files/faq-arrow.jpg?v=1649057478">
+                      </div>
+                    </div>
+                </button>
+                
+              </div>
+
+              <div id="quetion-one" class="tabcontent">
+                <ul class="ctas___1Htmc">
+                    <li class="cta___2bx8t">
+                      <a href="/">{{block.settings.label_a1}}</a>
+                   </li>
+                    
+                  </ul>
+              </div>
+            </div>
+            {% endfor %}
+          </section>
+        </div>
+      </div>
+    
+    </div>
+  
+  </div>
+
+</div>
+
+
+
+
+
+<script>
+function openfaq(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("getelemenet").click();
+</script>
+
+
+{% schema %}
+{
+"name": "tab-faq",
+  "settings": [
+    {
+      "type": "text",
+      "id": "faq_tabs_title",
+      "label": "Heading",
+      "default": "Your title"
+    }
+
+  ],
+  
+"blocks": [
+     
+    {
+      "type": "text",
+      "name": "tabs",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title_label_one",
+          "label": "text"
+        },
+        {
+           "id": "faq_icone_img_one",
+           "type": "image_picker",
+            "label": "Image"
+         },
+         {
+          "type": "html",
+          "id": "label_a1",
+          "label": "text"
+        }
+         
+         
+         
+         
+      ]
+    }
+
+  ],
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "tab-faq"
+    }
+  ]
+}
+{% endschema %}

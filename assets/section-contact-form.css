@@ -22,6 +22,7 @@
 
 .contact__button {
   margin-top: 3rem;
+  text-align: center;
 }
 
 @media screen and (min-width: 750px) {
@@ -40,4 +41,23 @@
 
 .grecaptcha-badge {
   visibility: hidden;
+}
+h1.main-page-title.page-title.h0 {
+    text-align: center;
+    font-size: 40px;
+    line-height: 52px;
+    margin: 0;
+}
+.contact .field {
+	border: 1px solid #e9ecef;
+}
+.contact__fields label.field__label {
+	left: 15px;
+}
+.contact__button button.button {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
 }

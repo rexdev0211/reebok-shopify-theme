@@ -81,43 +81,35 @@ a.menu-drawer__menu-item.list-menu__item.link.link--text.focus-inset.menu-drawer
     background-color: white;
 } */
 
-div#shopify-section-footer h2.footer-block__heading {
-    font-size: 14px;
+ h2.footer-block__heading {
     font-weight: 600;
-    font-family: 'Neue Plak';
     letter-spacing: 2px;
 }
-div#shopify-section-footer li.second-footer-menu-inner {
+ li.second-footer-menu-inner {
     list-style: none;
 }
-div#shopify-section-footer h5.second-footer-menu-heading {
-    font-size: 14px;
-    font-weight: 600;
-    font-family: 'Neue Plak';
+ h5.second-footer-menu-heading {
+	font-weight: 600;
     letter-spacing: 2px;
  	margin-bottom: 17px;
   	margin-top: 17px;
 }
-div#shopify-section-footer li.second-footer-menu-inner a {
-    color: #000;
+ li.second-footer-menu-inner a {
     text-decoration: none;
-    font-size: 14px;
-    font-family: 'Neue Plak';
 }
-div#shopify-section-footer ul.second-footer-menu-outer {
+ ul.second-footer-menu-outer {
     padding-left: 0px;
 }
-div#shopify-section-footer .footer__blocks-wrapper {
+.footer__blocks-wrapper {
     width: 1010px;
     margin: auto;
 }
-div#shopify-section-footer a.link.link--text.list-menu__item.list-menu__item--link {
-    color: black;
+ul.footer-block__details-content.list-unstyled a.link.link--text.list-menu__item.list-menu__item--link {
   padding: 0px;
 }
 
 @media only screen and (max-width: 767px) {
-div#shopify-section-footer .footer__blocks-wrapper {
+ .footer__blocks-wrapper {
     width: auto;
     margin: auto;
 }

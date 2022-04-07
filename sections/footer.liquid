@@ -46,11 +46,11 @@
     <div class="footer_newsletter___33hsw">
       <div class="container wrapper___hyNX4 row_base">
         <div class="col-l-12 col-s-12">
-          <h4 class="intractive_title">{{ section.settings.intractive_title }}</h4>
+          <h4 style="color:{{ section.settings.news_color }}; font-family:{{ section.settings.news_font_family }}; font-size:{{ section.settings.news_font_size }}px;" class="intractive_title">{{ section.settings.intractive_title }}</h4>
         </div>
         <div class="col-l-12 col-s-12">
           <div>
-            <button type="button" class="trigger_popup_fricc gl-cta gl-cta--secondary gl-cta--secondary-light" aria-label="Primary">
+            <button style="color:{{ section.settings.btn_color }}; font-family:{{ section.settings.btn_font_family }}; font-size:{{ section.settings.btn_font_size }}px; background:{{ section.settings.btn_bgcolor }};" type="button" class="trigger_popup_fricc gl-cta gl-cta--secondary gl-cta--secondary-light" aria-label="Primary">
               <span class="gl-cta__content">{{ section.settings.intractive_btn }}</span>
 			</button>
           </div>
@@ -74,7 +74,7 @@
           {%- for block in section.blocks -%}
             <div class="footer-block grid__item{% if block.type == 'link_list' and block.settings.heading != blank %} footer-block--menu{% endif %}" {{ block.shopify_attributes }}>
               {%- if block.settings.heading != blank -%}
-                <h2 class="footer-block__heading">{{- block.settings.heading | escape -}}</h2>
+                <h2 style="color:{{ block.settings.footer_title_color }}; font-family:{{ block.settings.footer_title_font_family }}; font-size:{{ block.settings.footer_title_font_size }}px;" class="footer-block__heading">{{- block.settings.heading | escape -}}</h2>
               {%- endif -%}
 
               {%- case block.type -%}
@@ -87,7 +87,7 @@
                     <ul class="footer-block__details-content list-unstyled">
                       {%- for link in block.settings.menu.links -%}
                         <li>
-                          <a href="{{ link.url }}" class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                          <a style="color:{{ block.settings.footer_link_color }}; font-family:{{ block.settings.footer_link_font_family }}; font-size:{{ block.settings.footer_link_font_size  }}px;" href="{{ link.url }}" class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
                             {{ link.title }}
                           </a>
                         </li>
@@ -96,9 +96,9 @@
                    
                
               <ul class="second-footer-menu-outer">
-                <h5 class="second-footer-menu-heading">{{ block.settings.new_second_footer_hadding}}</h5>
+                <h5 style="color:{{ block.settings.second_title_color }}; font-family:{{ block.settings.second_title_font_family }}; font-size:{{ block.settings.second_title_font_size }}px;" class="second-footer-menu-heading">{{ block.settings.new_second_footer_hadding}}</h5>
 			{% for link in linklists[block.settings.new_second_footer_menu].links %}
- 					 <li class="second-footer-menu-inner"><a href= "{{ link.url }}">{{ link.title }}</a></li>
+ 					 <li class="second-footer-menu-inner"><a style="color:{{ block.settings.second_link_color }}; font-family:{{ block.settings.second_link_font_family }}; font-size:{{ block.settings.second_link_font_size }}px;" href= "{{ link.url }}">{{ link.title }}</a></li>
 					{% endfor %}
 					</ul> </ul>
               
@@ -314,16 +314,97 @@ $(document).ready(function(){
           "info": "t:sections.footer.blocks.link_list.settings.heading.info"
         },
         {
+          "type": "color",
+          "id": "footer_title_color",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "footer_title_font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "footer_title_font_size",
+          "label": "size"
+        },
+        {
           "type": "link_list",
           "id": "menu",
           "default": "footer",
           "label": "t:sections.footer.blocks.link_list.settings.menu.label",
           "info": "t:sections.footer.blocks.link_list.settings.menu.info"
         },
+        {
+          "type": "color",
+          "id": "footer_link_color",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "footer_link_font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "footer_link_font_size",
+          "label": "size"
+        },
 		{
           "type": "text",
           "id": "new_second_footer_hadding",
           "label": "Heading"
+        },
+        {
+          "type": "color",
+          "id": "second_title_color",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "second_title_font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "second_title_font_size",
+          "label": "size"
         },
 		  {
       "type": "link_list",
@@ -332,7 +413,34 @@ $(document).ready(function(){
         "en": "second-footer-Menu"
       },
       "default": "footer"
-    }
+    },
+      {
+          "type": "color",
+          "id": "second_link_color",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "second_link_font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "second_link_font_size",
+          "label": "size"
+        }
       ]
     },
     {
@@ -400,12 +508,71 @@ $(document).ready(function(){
           "type": "text",
           "id": "intractive_title",
           "label": "login_form_title"
-    },
+       },
+       {
+          "type": "color",
+          "id": "news_color",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "news_font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "news_font_size",
+          "label": "size"
+        },
     {
           "type": "text",
           "id": "intractive_btn",
           "label": "button"
     },
+    {
+          "type": "color",
+          "id": "btn_color",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "btn_font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "btn_font_size",
+          "label": "size"
+        },
+        {
+          "type": "color",
+          "id": "btn_bgcolor",
+          "label": "bg-Color"
+        },
     {
       "type": "link_list",
       "id": "footer_new_linklist",

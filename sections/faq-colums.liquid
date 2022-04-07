@@ -1,0 +1,271 @@
+
+{{ 'main-faq.css' | asset_url | stylesheet_tag }}
+<div class="main-frequently-asked-questions ">
+  <div class="page-width">
+    <div class="faq_row">
+      <div class="section_by-deatils">
+        <div class="component-wrapper___2BSGCS">
+          <div class="faq-colums_container">
+             <div class="colums-wrapper-term">
+                <div class="frequently_text-colums">
+                    {% for block in section.blocks %}
+                    <div class="main-divice-text">
+                      <div class="head_title_text">
+                        <h2 style="color:{{ block.settings.news_t1 }}; font-family:{{ block.settings.news_t2 }}; font-size:{{ block.settings.news_t3 }}px;">{{block.settings.divice_x1}}</h2>
+                      </div>
+                      <div class="detox_text">
+                        <a style="color:{{ block.settings.news_l1 }}; font-family:{{ block.settings.news_l2 }}; font-size:{{ block.settings.news_l3 }}px;" href="{{block.settings.divice_x3}}">{{block.settings.divice_x2}}</a>
+                        <p style="color:{{ block.settings.news_m1 }}; font-family:{{ block.settings.news_m2 }}; font-size:{{ block.settings.news_m3 }}px;">{{block.settings.divice_x4}}</p>
+                      </div>
+                    </div>
+                    {% endfor %}
+                </div>
+               <div class="bottom_conten_text">
+                  <div class="adress_with_btn">
+                  <div class="btn_container_text">
+                  <h2 class="title___1RkKz withhtml___2qjxa gl-heading--s">{{ section.settings.news_z1 }}</h2>
+                  <p class="summary___15lGL withhtml___2qjxa">{{ section.settings.news_z2 }}</p>
+                  <div class="content_item">
+                  <div class="dynamice_btn_one"><a href="{{ section.settings.news_z4 }}"><span>{{ section.settings.news_z3 }}</span></a></div>
+                  <div class="dynamice_btn_one"><a href="{{ section.settings.news_z6 }}"><span>{{ section.settings.news_z5 }}</span></a></div>
+                  </div>
+                  </div>
+                  <div class="defolt_adress_conten">
+                  <h2 class="title___1RkKz withhtml___2qjxa gl-heading--s">{{ section.settings.news_z7 }}</h2>
+                  <p style="color: black; margin: 0 0 20px 0; line-height: 20px;"><strong>{{ section.settings.news_z8 }}</strong></p>
+                  <p style="color: black; margin: 0; line-height: 20px;">{{ section.settings.news_z9 }}</p>
+                  <p style="color: black; margin: 0 0 20px 0; line-height: 20px;">{{ section.settings.news_z10 }}</p>
+                  <p style="color: black; margin: 0; line-height: 20px;"><strong>{{ section.settings.news_z11 }}</strong></p>
+                  <p style="color: black; margin: 0 0 20px 0; line-height: 20px;">{{ section.settings.news_z12 }}</p>
+                  <p style="color: black; margin: 0; line-height: 20px;"><strong>{{ section.settings.news_z13 }}</strong></p>
+                  <p style="color: black; margin: 0 0 20px 0; line-height: 20px;">{{ section.settings.news_z14 }}</p>
+                  <div class="last-cloumn-btn"><a href="{{ section.settings.news_z16 }}"><span class="gl-cta__content">{{ section.settings.news_z15 }}</span></a></div>
+                  </div>
+                  </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% schema %}
+{
+"name": "faq_box",
+  "settings": [
+       {
+          "type": "text",
+          "id": "news_z1",
+          "label": "title"
+        },
+        {
+          "type": "text",
+          "id": "news_z2",
+          "label": "text"
+        },
+        {
+          "type": "text",
+          "id": "news_z3",
+          "label": "login-btn"
+        },
+        {
+          "type": "url",
+          "id": "news_z4",
+          "label": "btn_url"
+        },
+        {
+          "type": "text",
+          "id": "news_z5",
+          "label": "order-btn"
+        },
+        {
+          "type": "url",
+          "id": "news_z6",
+          "label": "btn_url"
+        },
+        {
+          "type": "text",
+          "id": "news_z7",
+          "label": "title"
+        },
+        {
+          "type": "html",
+          "id": "news_z8",
+          "label": "sub-title"
+        },
+        {
+          "type": "html",
+          "id": "news_z9",
+          "label": "phone"
+        },
+        {
+          "type": "html",
+          "id": "news_z10",
+          "label": "chat"
+        },
+        {
+          "type": "html",
+          "id": "news_z11",
+          "label": "sub-text"
+        },
+        {
+          "type": "text",
+          "id": "news_z12",
+          "label": "live-text"
+        },
+        {
+          "type": "text",
+          "id": "news_z13",
+          "label": "mob-no"
+        },
+        {
+          "type": "text",
+          "id": "news_z14",
+          "label": "text"
+        },
+        {
+          "type": "text",
+          "id": "news_z15",
+          "label": "contact-text"
+        },
+        {
+          "type": "url",
+          "id": "news_z16",
+          "label": "contact-url"
+        }
+
+
+
+
+  ],
+  
+"blocks": [
+     
+    {
+      "type": "text",
+      "name": "colums",
+      "settings": [
+        {
+          "type": "text",
+          "id": "divice_x1",
+          "label": "title"
+        },
+        {
+          "type": "color",
+          "id": "news_t1",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "news_t2",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "news_t3",
+          "label": "size"
+        },
+        {
+          "type": "text",
+          "id": "divice_x2",
+          "label": "link"
+        },
+        {
+          "type": "color",
+          "id": "news_l1",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "news_l2",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "news_l3",
+          "label": "size"
+        },
+        {
+          "type": "url",
+          "id": "divice_x3",
+          "label": "link_url"
+        },
+        {
+          "type": "html",
+          "id": "divice_x4",
+          "label": "text"
+        },
+        {
+          "type": "color",
+          "id": "news_m1",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "news_m2",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "news_m3",
+          "label": "size"
+        }
+      ]
+    }
+
+  ],
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "faq_box"
+    }
+  ]
+}
+{% endschema %}

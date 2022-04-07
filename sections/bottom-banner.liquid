@@ -155,7 +155,7 @@ class="banner
         -%}
       </div>
 
-      <div class="banner__box--center {%- if section.settings.content_mobile != blank %} small--hide{%- endif -%} {%- if section.settings.force_center == true %} banner__box--center--f{% endif -%}">
+      <div id="technology" class="banner__box--center {%- if section.settings.content_mobile != blank %} small--hide{%- endif -%} {%- if section.settings.force_center == true %} banner__box--center--f{% endif -%}">
         {%- liquid 
           if block_count > 0 
             for block in section.blocks 
@@ -183,7 +183,7 @@ class="banner
         -%}
       </div>
 
-      <div class="banner__box--bottom {%- if section.settings.sticky_bottom %} banner__box--sticky-bottom{% endif -%} {%- if section.settings.content_mobile != blank %} small--hide{%- endif -%}">
+      <div  class="banner__box--bottom {%- if section.settings.sticky_bottom %} banner__box--sticky-bottom{% endif -%} {%- if section.settings.content_mobile != blank %} small--hide{%- endif -%}">
         {%- liquid 
           if block_count > 0
             for block in section.blocks 
@@ -207,7 +207,7 @@ class="banner
       </div>
 
       {%- if section.settings.content_mobile != blank -%} 
-        <div class="banner__box--mobile medium-up--hide">
+        <div id="technology" class="banner__box--mobile medium-up--hide">
           {%- liquid 
             for block in section.blocks 
               case block.type 
@@ -1356,7 +1356,7 @@ class="banner
   ],
   "presets": [
     {
-      "name": "Content banner",
+      "name": "bottom banner",
       "category": "Custom",
       "blocks": [
         {

@@ -485,7 +485,7 @@ font-weight: 600;
   
   
 /* ----------------------24.03.22----------- */
-section#shopify-section-template--15773388701926__164743634355034733 video.video-second-class {
+div#Slider-template--15773388701926__164743634355034733 video.video-second-class {
   	display: none;
 }
 
@@ -493,10 +493,10 @@ section#shopify-section-template--15773388701926__164743634355034733 video.video
 
 
 @media only screen and (max-width: 769px) {
-  section#shopify-section-template--15773388701926__164743634355034733 video.video-main-class {
+  div#Slider-template--15773388701926__164743634355034733 video.video-main-class {
   	display: none;
   }
-  section#shopify-section-template--15773388701926__164743634355034733 video.video-second-class {
+ div#Slider-template--15773388701926__164743634355034733 video.video-second-class {
   	display: block;
     position: inherit;
   }
@@ -505,12 +505,12 @@ section#shopify-section-template--15773388701926__164743634355034733 video.video
     top: 76%;
     justify-content: start;
   }
-  section#shopify-section-template--15773388701926__164743634355034733 .slideshow__text.banner__box.content-container.content-container--full-width-mobile.slideshow__text--left.slideshow__text-mobile--center {
+  div#Slider-template--15773388701926__164743634355034733 .slideshow__text.banner__box.content-container.content-container--full-width-mobile.slideshow__text--left.slideshow__text-mobile--center {
   	width: 0;
     min-width: 38rem;
     
   }
-   div#Slider-template--15773388701926__164743634355034733 h2.banner__heading.h1 {
+  div#Slider-template--15773388701926__164743634355034733 h2.banner__heading.h1 {
     line-height: 28px;
     font-size: 30px;
     text-align: start;

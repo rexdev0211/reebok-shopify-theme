@@ -80,12 +80,12 @@
                   </div>
                 </div>
               {%- endif -%}
-              <div class="multicolumn-card__info">
+              <div class="multicolumn-card__info multi_dynamic-{{ block.id }}">
                 {%- if block.settings.title != blank -%}
-                  <h3>{{ block.settings.title | escape }}</h3>
+                  <h3 style="color:{{ block.settings.info_color }}; font-family:{{ block.settings.info_font_family }}; font-size:{{ block.settings.info_font_size }}px; " class="info_text">{{ block.settings.title | escape }}</h3>
                 {%- endif -%}
                 {%- if block.settings.text != blank -%}
-                  <div class="rte">{{ block.settings.text }}</div>
+                  <div style="color:{{ block.settings.rte_color }}; font-family:{{ block.settings.rte_font_family }};" class="rte">{{ block.settings.text }}</div>
                 {%- endif -%}
                 {%- if block.settings.link_label != blank -%}
                   <a class="link animate-arrow" {% if block.settings.link == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.link }}"{% endif %}>{{ block.settings.link_label | escape }}<span class="icon-wrap">&nbsp;{% render 'icon-arrow' %}</span></a>
@@ -118,6 +118,7 @@
     </div>
   </div>
 </div>
+
 
 {% schema %}
 {
@@ -343,10 +344,59 @@
           "label": "t:sections.multicolumn.blocks.column.settings.title.label"
         },
         {
+          "type": "color",
+          "id": "info_color",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "info_font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "info_font_size",
+          "label": "size"
+        },
+        {
           "type": "richtext",
           "id": "text",
           "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
           "label": "t:sections.multicolumn.blocks.column.settings.text.label"
+        },
+        {
+          "type": "color",
+          "id": "rte_color",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "rte_font_family",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
         },
         {
           "type": "text",
