@@ -3,9 +3,11 @@
     flex: 0 0 100%;
     max-width: 100%;
   }
+  
   .css-grid {
   	display: flex;
   }
+  
   .css-grid .grid__item {
   	max-width: auto;
   }
@@ -17,9 +19,11 @@
     margin-bottom: 1.5rem;
   }
 }
+
 .css-grid .grid__item {
-	max-width: 100%;
+  max-width: 100%;
 }
+
 .collection .loading-overlay {
   top: 0;
   right: 0;
@@ -51,8 +55,6 @@
   margin-top: 2rem;
 }
 
-
-
 .featured-collection .section-title {
   letter-spacing: 0;
 }
@@ -75,10 +77,10 @@
   padding-right: 0.75rem;
 }
 
-
 .main-filter-content {
-    width: 100%;
+  width: 100%;
 }
+
 li.grid__item.product-item:hover {
-    border: 1px solid black;
+  border: 1px solid black;
 }

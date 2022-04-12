@@ -1,8 +1,8 @@
 <div class="text-section-conten">
   <div class="inline_text_wrapper">
-    <h2 class="gl-heading--m">{{ section.settings.gl_text_one}}</h2>
-    <p class="gl-heading--s">{{ section.settings.gl_text_two }}</p>
-    <p class="gl-heading--l">{{ section.settings.gl_text_three }}</p>
+    <h2 style="color:{{section.settings.head_fs1}}; font-family:{{section.settings.head_fs2}}; font-size:{{section.settings.head_fs3}}px;" class="gl-heading--m">{{ section.settings.gl_text_one}}</h2>
+    <p style="color:{{section.settings.head_fh1}}; font-family:{{section.settings.head_fh2}}; font-size:{{section.settings.head_fh3}}px;" class="gl-heading--s">{{ section.settings.gl_text_two }}</p>
+    <p style="color:{{section.settings.head_fi1}}; font-family:{{section.settings.head_fi2}}; font-size:{{section.settings.head_fi3}}px;" class="gl-heading--l">{{ section.settings.gl_text_three }}</p>
   </div>
 </div>
 
@@ -16,15 +16,96 @@
       "label": "heading"
     },
     {
+          "type": "color",
+          "id": "head_fs1",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_fs2",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_fs3",
+          "label": "size"
+        },
+    {
       "type": "html",
       "id": "gl_text_two",
       "label": "text-one"
     },
     {
+          "type": "color",
+          "id": "head_fh1",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_fh2",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_fh3",
+          "label": "size"
+        },
+    {
       "type": "html",
       "id": "gl_text_three",
       "label": "text-two"
-    }
+    },
+    {
+          "type": "color",
+          "id": "head_fi1",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_fi2",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_fi3",
+          "label": "size"
+        }
 
   ],
   

@@ -32,11 +32,11 @@
           {%- when 'image_picker' -%}
           <div class="logo___J1onM"><img class="" src="{{block.settings.brand_img | img_url: 'master'}}"></div>
           {%- when 'heading' -%}
-            <h2 class="{{ block.settings.heading_size }}" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
+            <h2 style="color: {{ block.settings.rich_r1 }}; font-size: {{ block.settings.rich_r2 }}px;" class="{{ block.settings.heading_size }}" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
           {%- when 'text' -%}
-            <div class="rich-text__text rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+            <div style="color: {{ block.settings.rich_r3 }}; font-size: {{ block.settings.rich_r4 }}px;" class="rich-text__text rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
           {%- when 'button' -%}
-            <a{% if block.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link }}"{% endif %} id="myBtn" class="popup_button">
+            <a style="background-color: {{ block.settings.rich_r5 }}; font-size: {{ block.settings.rich_r6 }}px; color: {{ block.settings.rich_r7 }};" {% if block.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link }}"{% endif %} id="myBtn" class="popup_button">
               {{ block.settings.button_label | escape }}
             </a>
         {%- endcase -%}
@@ -193,6 +193,17 @@ $(document).ready(function(){
           "label": "t:sections.rich-text.blocks.heading.settings.heading.label"
         },
         {
+          "type": "color",
+          "id": "rich_r1",
+          "label": "Color"
+        },
+        
+        {
+          "type": "text",
+          "id": "rich_r2",
+          "label": "size"
+        },
+        {
           "type": "select",
           "id": "heading_size",
           "options": [
@@ -224,9 +235,21 @@ $(document).ready(function(){
           "id": "text",
           "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
           "label": "t:sections.rich-text.blocks.text.settings.text.label"
-        }
+        },
+        {
+        "type": "color",
+        "id": "rich_r3",
+        "label": "Color"
+     },
+        
+     {
+        "type": "text",
+        "id": "rich_r4",
+        "label": "size"
+     }
       ]
     },
+    
     {
       "type": "button",
       "name": "t:sections.rich-text.blocks.button.name",
@@ -248,6 +271,22 @@ $(document).ready(function(){
           "id": "button_style_secondary",
           "default": false,
           "label": "t:sections.rich-text.blocks.button.settings.button_style_secondary.label"
+        },
+        {
+          "type": "color",
+          "id": "rich_r7",
+          "label": "Color"
+        },
+        
+        {
+          "type": "text",
+          "id": "rich_r6",
+          "label": "size"
+        },
+        {
+          "type": "color",
+          "id": "rich_r5",
+          "label": "background-Color"
         }
       ]
     }

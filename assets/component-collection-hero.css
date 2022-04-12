@@ -3,36 +3,45 @@
   flex-direction: column;
   position: relative;
 }
+
 .collection-hero__text-wrapper {
-    position: absolute;
-    top: 71px;
-    z-index: 1;
-    width: 100%;
-    text-align: center;
+  position: absolute;
+  top: 71px;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
 }
+
 h1.second_collection-hero__title {
-    text-align: center;
+  text-align: center;
 }
+
 h1.collection-hero__title {
-    color: white;
+  color: white;
 }
+
 .pt-sort-selector {
-    display: none;
+  display: none;
 }
+
 .product-count.light {
-    display: none;
+  display: none;
 }
+
 .facets-container {
-    justify-content: end;
+  justify-content: end;
 }
+
 menu-drawer.mobile-facets__wrapper {
-    border: 2px solid black;
-    padding: 4px 10px;
+  border: 2px solid black;
+  padding: 4px 10px;
 }
+
 span.mobile-facets__open {
-	color: black;
-    font-weight: 700;
+  color: black;
+  font-weight: 700;
 }
+
 .collection-hero--with-image .collection-hero__inner {
   margin-bottom: 0;
   padding-bottom: 2rem;
@@ -95,8 +104,6 @@ span.mobile-facets__open {
   margin: 0;
 }
 
-
-
 .collection-hero__image-container {
   border: var(--media-border-width) solid rgba(var(--color-foreground), var(--media-border-opacity));
   border-radius: var(--media-radius);
@@ -123,7 +130,7 @@ span.mobile-facets__open {
   .diss_subtitle_new_one {
     font-size: 14px;
   }
-  div#diss_remaning ul.colam_two {
+  .collection_conten_discription ul.colam_two {
   	width: 100% !important;
     padding: 0 !important;
   }
@@ -131,13 +138,10 @@ span.mobile-facets__open {
 }
 
 @media screen and (min-width: 750px) {
-   
-
-  .collection-hero__image-container {
+   .collection-hero__image-container {
     align-self: stretch;
     flex: 1 0 50%;
- 
-    min-height: 20rem;
+ 	min-height: 20rem;
   }
 }
 
@@ -149,6 +153,7 @@ span.mobile-facets__open {
     font-weight: 400;
     text-transform: uppercase;
 }
+
 .diss_subtitle_new {
 	font-size: 20px;
     line-height: 20px;
@@ -157,12 +162,14 @@ span.mobile-facets__open {
     font-weight: 400;
     text-transform: uppercase;
 }
+
 .diss_text_new {
 	font-size: 16px;
     line-height: 22px;
     margin: 0 0 16px 0;
     padding: 0;
 }
+
 .diss_subtitle_new_one {
 	font-size: 20px;
     line-height: 18px;
@@ -171,12 +178,14 @@ span.mobile-facets__open {
     text-transform: uppercase;
     margin: 0 0 10px 0;
 }
+
 .row_diss {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
 }
-div#diss_remaning ul.colam_two {
+
+.collection_conten_discription ul.colam_two {
 	width: 33.3333333333%;
     columns: 2;
     column-fill: balance;
@@ -184,12 +193,14 @@ div#diss_remaning ul.colam_two {
     padding: 0 15px 0 0;
     display: block;
 }
-div#diss_remaning li.strap_conten {
+
+.collection_conten_discription li.strap_conten {
 	margin-bottom: 0;
     text-transform: capitalize;
     margin: 0;
 }
-div#diss_remaning a.strap_links {
+
+.collection_conten_discription a.strap_links {
 	font-size: 14px;
     line-height: 0;
     margin-bottom:0;
@@ -201,13 +212,16 @@ div#diss_remaning a.strap_links {
     padding: 0;
     border: none
 }
-div#diss_remaning a.strap_links:hover {
+
+.collection_conten_discription a.strap_links:hover {
 	background: white;
 }
-div#diss_remaning a.strap_links:focus {
+
+.collection_conten_discription a.strap_links:focus {
 	background: white;
 }
-div#diss_remaning a.strap_links p {
+
+.collection_conten_discription a.strap_links p {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -216,6 +230,7 @@ div#diss_remaning a.strap_links p {
     line-height: 22px;
     color: black;
 }
+
 .diss_links_conten {
     margin-top: 40px;
     padding-top: 20px;

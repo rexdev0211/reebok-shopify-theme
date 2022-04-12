@@ -2,9 +2,6 @@
   position: initial;
 }
 
-
-
-
 .js menu-drawer > details > summary::before,
 .js menu-drawer > details[open]:not(.menu-opening) > summary::before {
   content: '';
@@ -28,29 +25,39 @@ menu-drawer > details[open] > summary::before {
   visibility: visible;
   opacity: 1;
   transition: opacity var(--duration-default) ease,
-    visibility var(--duration-default) ease;
+  visibility var(--duration-default) ease;
 }
+
 button.menu-drawer__close-button.link.link--text.focus-inset {
-    display: none;
+  display: none;
 }
+
+.header__icon--menu svg {
+  color: black;
+}
+
 ul.child_menu_drive {
-    list-style-type: none;
-    padding: 0;
-    background: #f3f3f3;
+  list-style-type: none;
+  padding: 0;
+  background: #f3f3f3;
 }
-ul#grand_child_menus {
-    padding: 0;
-    list-style-type: none;
-    background: #f3f3f3;
+
+.grand_links_with_child {
+  padding: 0;
+  list-style-type: none;
+  background: #f3f3f3;
 }
-summary#small_child_menu {
-    font-weight: 100;
+
+.small_links_with_child {
+  font-weight: 100 !important;
 }
-svg#Layer_1 {
-    width: 15px;
+
+.nav_arrow{
+  width: 15px;
 }
+
 summary.menu-drawer__menu-item.list-menu__item.link.link--text.focus-inset {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .menu-drawer {
@@ -60,7 +67,6 @@ summary.menu-drawer__menu-item.list-menu__item.link.link--text.focus-inset {
   z-index: 3;
   left: 0;
   top: 100%;
-  
   padding: 0;
   border-width: 0 var(--drawer-border-width) 0 0;
   background-color: rgb(var(--color-background));
@@ -172,7 +178,7 @@ details[open].menu-opening > .menu-drawer__submenu {
 ul.menu-drawer__menu.list-menu li:first-child {
 	border-top: 1px solid #f3f3f3;
 }
-.summary_daigonal svg#Layer_1 {
+.summary_daigonal .nav_arrow {
 	transform: rotate(180deg);
 }
 .menu-drawer__menu-item--active,
@@ -278,24 +284,12 @@ ul.menu-drawer__menu.list-menu li:first-child {
 .menu-drawer .list-social__link {
   padding: 1.3rem 1.25rem;
 }
+
 .submenu_dark {
-    font-weight: bold;
-    color: black;
+  font-weight: bold;
+  color: black;
 }
 
-
-
-
-
-
-
-
-
-@media only screen and (max-width: 767px) {
-
- 
-
-}
 
 @media only screen and (max-width: 769px) {
 	.new-side-manu-outer-class {

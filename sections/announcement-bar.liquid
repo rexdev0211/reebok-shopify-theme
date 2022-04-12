@@ -16,7 +16,7 @@
 {%- if section.blocks.size > 0 -%}
 {{ 'component-announcement-bar.css' | asset_url | stylesheet_tag }}
 
- <div class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement' | t }}" {{ block.shopify_attributes }}>
+ <div style="background: {{section.settings.annumcment_bg}};" class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement' | t }}" {{ block.shopify_attributes }}>
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when 'announcement' -%}
@@ -75,6 +75,12 @@
   "name": "t:sections.announcement-bar.name",
   "max_blocks": 12,
   "settings": [
+		{
+          "type": "color",
+          "id": "annumcment_bg",
+          "label": "Background color",
+          "default": "#000000"
+        }	
     
   ],
   "blocks": [
@@ -82,6 +88,7 @@
       "type": "announcement",
       "name": "t:sections.announcement-bar.blocks.announcement.name",
       "settings": [
+        
         {
           "type": "color",
           "id": "color_background",

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {{ 'main-faq.css' | asset_url | stylesheet_tag }}
 <div class="main-frequently-asked-questions ">
   <div class="page-width">
@@ -5,34 +6,52 @@
       <div class="section_by-deatils">
         <div class="component-wrapper___2BSGCS">
           <section class="tab_faq_container">
-          	<h2 class="faq_tabs_title">{{section.settings.faq_tabs_title}}</h2>
-            {% for block in section.blocks %}
-            <div class="vertical_faq_tabs">
+          	<h2 style="font-size: {{section.settings.faq_a1}}px; color: {{section.settings.faq_a2}}; font-family: {{section.settings.faq_a3}};" class="faq_tabs_title">{{section.settings.faq_tabs_title}}</h2>
+            <div class="component-wrapper_links">
+            <div class="tabs-container">
+              {% for block in section.blocks %}
               <div class="tab">
-                <button class="tablinks" onclick="openfaq(event, 'quetion-one')" id="getelemenet">
+                <button class="tablinks" onclick="openfaq(event, 'faq-tab-{{forloop.index}}')" {% if forloop.first == true %}id="defaultOpen"{%endif%}>
                 	<div class="helpCategory___fews">
                       <div class="faq-icone-img">
                       	<img src="{{block.settings.faq_icone_img_one | img_url: 'master'}}">
                       </div>
-                      <div class="faq-title_label">{{block.settings.title_label_one}}</div>
+                      <div style="font-size: {{block.settings.faq_b1}}px; color: {{block.settings.faq_b2}}; font-family: {{block.settings.faq_b3}};" class="faq-title_label">{{block.settings.title_label_one}}</div>
                       <div class="faq_arrow_now">
                       	<img src="https://cdn.shopify.com/s/files/1/0631/9810/1734/files/faq-arrow.jpg?v=1649057478">
                       </div>
                     </div>
                 </button>
-                
               </div>
-
-              <div id="quetion-one" class="tabcontent">
-                <ul class="ctas___1Htmc">
-                    <li class="cta___2bx8t">
-                      <a href="/">{{block.settings.label_a1}}</a>
-                   </li>
-                    
-                  </ul>
-              </div>
-            </div>
             {% endfor %}
+            </div>
+            <div class="tabs_text_conten">
+              {% for block in section.blocks %}
+              <div id="faq-tab-{{forloop.index}}" class="tabcontent">
+                {{block.settings.label_a1}}
+              </div>
+			  {% endfor %}
+            </div>
+            </div>
+          </section>
+          <section class="mibile_tab_faq_container">
+            <div class="mobile_tab_accordian">
+            {% for block in section.blocks %}
+              <div class="accordian_difolt">
+              	<button class="accordion">
+                	<div class="helpCategory___fews">
+                      <div class="faq-icone-img">
+                      	<img src="{{block.settings.faq_mob_img_one | img_url: 'master'}}">
+                      </div>
+                      <div style="font-size: {{block.settings.faq_b11}}px; color: {{block.settings.faq_b12}}; font-family: {{block.settings.faq_b13}};" class="mobile_faq-title_label">{{block.settings.mob_label_one}}</div>
+                    </div>
+                </button>
+                <div class="panel">
+                  {{block.settings.label_a2}}
+                </div>
+              </div> 
+             {% endfor %}
+            </div>
           </section>
         </div>
       </div>
@@ -63,9 +82,26 @@ function openfaq(evt, cityName) {
 }
 
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("getelemenet").click();
+document.getElementById("defaultOpen").click();
 </script>
 
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
 
 {% schema %}
 {
@@ -76,7 +112,34 @@ document.getElementById("getelemenet").click();
       "id": "faq_tabs_title",
       "label": "Heading",
       "default": "Your title"
-    }
+    },
+       {
+          "type": "color",
+          "id": "faq_a2",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "faq_a3",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "faq_a1",
+          "label": "size"
+        }
 
   ],
   
@@ -92,6 +155,33 @@ document.getElementById("getelemenet").click();
           "label": "text"
         },
         {
+          "type": "color",
+          "id": "faq_b2",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "faq_b3",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "faq_b1",
+          "label": "size"
+        },
+        {
            "id": "faq_icone_img_one",
            "type": "image_picker",
             "label": "Image"
@@ -100,6 +190,49 @@ document.getElementById("getelemenet").click();
           "type": "html",
           "id": "label_a1",
           "label": "text"
+        },
+
+        {
+          "type": "text",
+          "id": "mob_label_one",
+          "label": "mobile-text"
+        },
+        {
+          "type": "color",
+          "id": "faq_b12",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "faq_b13",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "faq_b11",
+          "label": "size"
+        },
+        {
+           "id": "faq_mob_img_one",
+           "type": "image_picker",
+            "label": "mobile-Image"
+         },
+         {
+          "type": "html",
+          "id": "label_a2",
+          "label": "mobile-text"
         }
          
          

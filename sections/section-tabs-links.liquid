@@ -1,7 +1,7 @@
 <section class="conten_links">
   <ul id="navMenus" class="workout_links">
   	{% for block in section.blocks %}
-      <li class="workout_tab {% if forloop.first == true %}active{%endif%}"><a href="#workout-container-{{forloop.index}}">{{block.settings.workout_links}}</a></li>
+      <li class="workout_tab {% if forloop.first == true %}active{%endif%}"><a style="font-size:{{block.settings.links_o1}}px " href="#workout-container-{{forloop.index}}">{{block.settings.workout_links}}</a></li>
     {% endfor %}
   </ul>
 </section>
@@ -30,6 +30,11 @@
           "type": "text",
           "id": "workout_links",
           "label": "text"
+        },
+        {
+          "type": "text",
+          "id": "links_o1",
+          "label": "size"
         },
         {
            "id": "workout_tabs",

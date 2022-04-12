@@ -4,11 +4,6 @@
   }
 }
 
-/* .article {
-  display: flex;
-  align-items: center;
-} */
-
 .article.grid__item {
   padding: 0;
 }
@@ -61,7 +56,6 @@
 }
 
 .article-card__footer {
-  /* letter-spacing: 0.1rem; */
   font-size: 1.4rem;
 }
 

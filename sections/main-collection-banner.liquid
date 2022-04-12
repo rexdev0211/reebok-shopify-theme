@@ -12,7 +12,7 @@
   <div class="collection-hero__inner">
      {%- if section.settings.show_collection_image and collection.image -%}
     <div class="collection-hero__text-wrapper">
-      <h1 class="collection-hero__title">
+      <h1 style="font-size:{{section.settings.collection_l1}}px; color:{{section.settings.collection_l2}}; " class="collection-hero__title">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {%- liquid 
           assign collection_title = collection.title
@@ -230,6 +230,16 @@
 {
   "name": "t:sections.main-collection-banner.name",
   "settings": [
+    {
+          "type": "color",
+          "id": "collection_l2",
+          "label": "title-Color"
+    },
+    {
+          "type": "text",
+          "id": "collection_l1",
+          "label": "title-size"
+     },
     {
       "type": "paragraph",
       "content": "t:sections.main-collection-banner.settings.paragraph.content"

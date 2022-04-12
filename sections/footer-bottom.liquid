@@ -76,7 +76,7 @@
                     <ul class="footer-block__details-content list-unstyled">
                       {%- for link in block.settings.menu.links -%}
                         <li class="li.footer-legal-item___1t4Gx">
-                          <a href="{{ link.url }}" class="bottom_links_conten bottom_new_links link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                          <a style="font-family:{{block.settings.footer_bottom_a3}} ; color:{{block.settings.footer_bottom_a1}}; font-size: {{block.settings.footer_bottom_a2}};" href="{{ link.url }}" class="bottom_links_conten bottom_new_links link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
                             {{ link.title }}
                           </a>
                         </li>
@@ -272,6 +272,33 @@
           "default": "footer",
           "label": "t:sections.footer.blocks.link_list.settings.menu.label",
           "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+        },
+        {
+          "type": "color",
+          "id": "footer_bottom_a1",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "footer_bottom_a3",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "footer_bottom_a2",
+          "label": "size"
         }
       ]
     },

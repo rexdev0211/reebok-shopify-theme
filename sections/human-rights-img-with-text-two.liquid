@@ -13,9 +13,9 @@
         </div>
         <div class="teaser-content___2qVy3">
           <div class="title___3i4il gl-body">
-            <h6 class="withhtml">{{block.settings.older_text_one}}</h6>
+            <h6 style="color:{{block.settings.head_d10}}; font-family:{{block.settings.head_d11}}; font-size:{{block.settings.head_d12}}px;" class="withhtml">{{block.settings.older_text_one}}</h6>
           </div>
-          <p class="summary___3soIS gl-body">{{block.settings.older_subtext_one}}</p>
+          <p style="color:{{block.settings.head_d13}}; font-family:{{block.settings.head_d14}}; font-size:{{block.settings.head_d15}}px;" class="summary___3soIS gl-body">{{block.settings.older_subtext_one}}</p>
         </div>
       </div>
     {% endfor %}
@@ -92,10 +92,66 @@
           "label": "text"
         },
         {
+          "type": "color",
+          "id": "head_d10",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_d11",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_d12",
+          "label": "size"
+        },
+
+        {
           "type": "text",
           "id": "older_subtext_one",
           "label": "text"
+        },
+         {
+          "type": "color",
+          "id": "head_d13",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_d14",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_d15",
+          "label": "size"
         }
+
 		
       ]
     }

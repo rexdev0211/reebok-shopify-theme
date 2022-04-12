@@ -84,9 +84,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  /* justify-content: center; */
-  /* align-self: center; */
-  /* padding: 4rem calc(4rem / var(--font-body-scale)) 5rem; */
   padding: 1rem;
   position: relative;
   z-index: 1;
@@ -215,17 +212,6 @@
     padding: 3rem 0;
   }
 
-  /* .image-with-text--overlap .image-with-text__content {
-    height: auto;
-    width: calc(100% + 4rem);
-    min-width: calc(100% + 4rem);
-    transform: translate(-4rem, 0);
-  }
-
-  .image-with-text--overlap .image-with-text__grid--reverse .image-with-text__content {
-    transform: translate(4rem, 0);
-  } */
-
   .image-with-text--overlap .image-with-text__grid--reverse .image-with-text__text-item {
     justify-content: flex-end;
   }
@@ -288,43 +274,9 @@
     rgba(var(--color-shadow), var(--text-boxes-shadow-opacity));
 }
 
-@media screen and (min-width: 990px) {
-  .image-with-text__content {
-    /* padding: 6rem 7rem 7rem; */
-  }
-}
-
-.image-with-text__content > * + * {
-  /* margin-top: 2rem; */
-}
-
-.image-with-text__content > .image-with-text__text:empty ~ a {
-  /* margin-top: 2rem; */
-}
-
-.image-with-text__content > :first-child:is(.image-with-text__heading),
-.image-with-text__text--caption + .image-with-text__heading,
-.image-with-text__text--caption:first-child {
-  /* margin-top: 0; */
-}
-
-.image-with-text__content :last-child:is(.image-with-text__heading),
-.image-with-text__text--caption {
-  /* margin-bottom: 0; */
-}
-
-.image-with-text__content .button + .image-with-text__text {
-  /* margin-top: 2rem; */
-}
-
-.image-with-text__content .image-with-text__text + .button {
-  /* margin-top: 3rem; */
-}
-
 .image-with-text__heading {
   word-break: break-word;
   width: var(--text-with-image__content-width);
-  /* margin-bottom: 0; */
 }
 
 .image-with-text__text,
@@ -379,8 +331,6 @@
 }
 
 .image-with-text__content-align--center .image-with-text__buttons.image-with-text__buttons--size-1 .button {
-  /* display: flex;
-  justify-content: center; */
   grid-column-start: 1;
   grid-column-end: 3;
   width: 50%;

@@ -34,7 +34,7 @@
     {%- endif -%}
   {%- endstyle -%}
 
-    <h2 class="banner__heading h1 f-heading" {{ block.shopify_attributes }}>
+    <h2 style="text-align:{{ block.settings.text_align | escape }}" class="banner__heading h1 f-heading" {{ block.shopify_attributes }}>
       <span>{{ block.settings.heading | escape }}</span>
     </h2>
   </div>

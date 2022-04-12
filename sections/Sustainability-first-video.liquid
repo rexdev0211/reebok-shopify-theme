@@ -8,7 +8,7 @@
     </video>
   </div>
   <div class="video-text-conten">
-    <h2 class="video-title">{{ section.settings.video_oragenice_title }}</h2>
+    <h2 style="color:{{section.settings.head_f1}}; font-family:{{section.settings.head_f2}}; font-size:{{section.settings.head_f3}}px;" class="video-title">{{ section.settings.video_oragenice_title }}</h2>
   </div>
 
 </div>
@@ -32,7 +32,34 @@
       "type": "text",
       "id": "video_oragenice_title",
       "label": "video-text"
-    }
+    },
+    {
+          "type": "color",
+          "id": "head_f1",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_f2",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_f3",
+          "label": "size"
+        }
 
   ],
   

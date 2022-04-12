@@ -1,14 +1,14 @@
 <div class="component-wrapper___2BkSO">
   <div class="summary___1Xtln_row">
     <div class="shine-wrapper">
-      <h2 class="video-popup-heading">{{section.settings.popup_heading}}</h2>
-      <p class="video-popup-text">{{section.settings.popup_text}}</p>
+      <h2 style="color:{{section.settings.head_g1}}; font-family:{{section.settings.head_g2}}; font-size:{{section.settings.head_g3}}px;" class="video-popup-heading">{{section.settings.popup_heading}}</h2>
+      <p style="color:{{section.settings.head_g4}}; font-family:{{section.settings.head_g5}}; font-size:{{section.settings.head_g6}}px;" class="video-popup-text">{{section.settings.popup_text}}</p>
       <div class="pupop-clear">
         <p class="popup-btn">{{section.settings.popup_btn}}</p>
       </div>
     </div>
     <div class="embedded-popup-video">
-  	   <iframe scrolling="none" id="sample-popup_video" src="https://www.youtube.com/embed/{{section.settings.youtube_video_three}}?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  	   <iframe class="terminal-video" scrolling="none" id="sample-popup_video" src="https://www.youtube.com/embed/{{section.settings.youtube_video_three}}?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
        <div id="versions" class="close_wrapper"><i class="fa fa-close"></i></div>
     </div>
   
@@ -52,9 +52,63 @@ jQuery(document).ready(function() {
       "label": "Heading"
     },
     {
+	   "type": "color",
+       "id": "head_g1",
+       "label": "Color"
+    },
+    {
+       "type": "select",
+       "id": "head_g2",
+       "label": "Font",
+       "default": "Neue Plak",
+       "options": [
+       {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+       },
+       {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+       }
+
+       ]
+     },
+    {
+          "type": "text",
+          "id": "head_g3",
+          "label": "size"
+    },
+    {
       "type": "text",
       "id": "popup_text",
       "label": "text"
+    },
+    {
+	   "type": "color",
+       "id": "head_g4",
+       "label": "Color"
+    },
+    {
+       "type": "select",
+       "id": "head_g5",
+       "label": "Font",
+       "default": "Neue Plak",
+       "options": [
+       {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+       },
+       {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+       }
+
+       ]
+     },
+    {
+          "type": "text",
+          "id": "head_g6",
+          "label": "size"
     },
     {
       "type": "text",

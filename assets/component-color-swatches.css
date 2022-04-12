@@ -39,18 +39,10 @@
     position: relative;
     width: 80px;
     height: 80px;
-    /* border: 3px solid #fff; */
     display: inline-block;
 }
 
-.color-swatch--small.color-swatch--light .color-swatch {
-    /* box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5); */
-}
-
-
 .color-swatch__wrapper.color-swatch--small {
-    /* width: 10px;
-    height: 10px; */
     border: none;
 }
 
@@ -78,10 +70,6 @@
     height: 100%;
 }
 
-.color-swatch__display--below {
-
-}
-
 .card-wrapper .color-swatches .card-information__wrapper {
     position: relative;
 }
@@ -90,7 +78,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    /* background: rgb(var(--color-background)); */
     justify-content: center;
     width: 100%;
     height: 100%;

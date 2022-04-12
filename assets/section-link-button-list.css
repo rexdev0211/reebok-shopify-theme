@@ -1,77 +1,77 @@
 .link-button-list__header {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .link-button-list--heading {
-    font-size: 1rem;
-    margin: 0;
+  font-size: 1rem;
+  margin: 0;
 }
 
 .link-button-list ul {
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    margin-bottom: 0;
-    padding-left: 0 !important;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  padding-left: 0 !important;
 }
 
 .link-button-list .button-list {
-    overflow-x: unset;
+  overflow-x: unset;
 }
 
 .link-button-list .button-list li {
-    margin-top: 5px;
-    margin-bottom: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .link-button-list .text-list li {
-    margin-left: 5px;
-    margin-right: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .link-button-list .text-list a {
-    text-decoration: none;
-    transition: opacity var(--duration-default) ease-in-out;
+  text-decoration: none;
+  transition: opacity var(--duration-default) ease-in-out;
 }
 
 .link-button-list.link-button-list--hover a {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 .link-button-list.link-button-list--hover a.link-button-list--hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 .link-button-list .button-list-outline li {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .link-button-list .button-list-outline li:not(:first-child) {
-    margin-left: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 .link-button-list .button-list-outline li:not(:last-child) {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .link-button-list .button-list-outline li a {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 @media screen and (min-width: 750px) {
-    .link-button-list .link-button-list__content {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  .link-button-list .link-button-list__content {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media screen and (max-width: 749px) {
-    .link-button-list .link-button-list__content {
-        width: 100%!important;
-    }
+  .link-button-list .link-button-list__content {
+    width: 100%!important;
+  }
 }

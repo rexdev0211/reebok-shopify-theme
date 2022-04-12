@@ -141,7 +141,7 @@
                                         </a>
                                       {%- else -%}
                                         <details id="Details-menu-drawer-submenu-{{ forloop.index }}">
-                                          <summary id="small_child_menu" class="icone_wrapper_new menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                          <summary id="small_child_menu" class="small_links_with_child icone_wrapper_new menu-drawer__menu-item link link--text list-menu__item focus-inset">
                                             {{ childlink.title | escape }}
                                             {% render 'icon-arrow' %}
                                             {% render 'icon-caret' %}
@@ -151,7 +151,7 @@
                                               {% render 'icon-arrow' %}
                                               {{ childlink.title | escape }}
                                             </button>
-                                            <ul id="grand_child_menus">
+                                            <ul class="grand_links_with_child" id="grand_child_menus">
                                               {%- for grandchildlink in childlink.links -%}
                                                 <li>
                                                   <a href="{{ grandchildlink.url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>

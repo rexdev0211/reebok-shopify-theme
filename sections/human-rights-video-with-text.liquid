@@ -1,8 +1,8 @@
 <div class="component-wrapper___2BSG0">
   <div class="page-width articals-wrapper">
     <div class="heading-olders">
-      <h2>{{section.settings.newest_title}}</h2>
-      <p>{{section.settings.newest_subtitle}}</p>
+      <h2 style="color:{{section.settings.head_p1}}; font-family:{{section.settings.head_p2}}; font-size:{{section.settings.head_p3}}px;">{{section.settings.newest_title}}</h2>
+      <p style="color:{{section.settings.head_p4}}; font-family:{{section.settings.head_p5}}; font-size:{{section.settings.head_p6}}px;">{{section.settings.newest_subtitle}}</p>
     </div>
     <div class="gl-carousel__content-new">
       {% for block in section.blocks %}
@@ -10,7 +10,7 @@
         <div class="box-a-{{forloop.index}} newest-imge-conten">
         	<img src="{{block.settings.newest_img | img_url: 'master'}}">
             <div class="play-wrapper-icone">
-              <p id="much-{{forloop.index}}" class="trigger_popup_fridd play_video_icone"><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 204 204"><defs><style>.cls-1,.cls-2{fill:none;stroke-miterlimit:10;}.cls-1{stroke:#000;stroke-width:22px;}.cls-2{stroke:#fff;stroke-width:19px;}</style></defs><polygon class="cls-1" points="164 105.34 47.44 38.05 47.44 172.64 164 105.34"/><polygon class="cls-2" points="156.56 98.66 40 31.36 40 165.95 156.56 98.66"/></svg></p>
+              <p id="much-{{forloop.index}}" class="trigger_popup_fridd play_video_icone"><svg class="youtube_arrow" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 204 204"><defs><style>.cls-1,.cls-2{fill:none;stroke-miterlimit:10;}.cls-1{stroke:#000;stroke-width:22px;}.cls-2{stroke:#fff;stroke-width:19px;}</style></defs><polygon class="cls-1" points="164 105.34 47.44 38.05 47.44 172.64 164 105.34"/><polygon class="cls-2" points="156.56 98.66 40 31.36 40 165.95 156.56 98.66"/></svg></p>
             </div>
         </div>
         <div class="box-b-{{forloop.index}} newest_video_container">
@@ -19,7 +19,7 @@
         </div>
         <div class="teaser-content___2qVy3">
           <div class="title___3i4il gl-body">
-            <h6 class="withhtml">{{block.settings.newest_text}}</h6>
+            <h6 style="color:{{block.settings.head_p7}}; font-family:{{block.settings.head_p8}}; font-size:{{block.settings.head_p9}}px;" class="withhtml">{{block.settings.newest_text}}</h6>
           </div>
           <p class="summary___3soIS gl-body">{{block.settings.newest_subtext}}</p>
           <p class="summary___3soIS gl-body-one">{{block.settings.newest_one_subtitle}}</p>
@@ -72,10 +72,64 @@ jQuery(document).ready(function() {
       "default": "Your title"
     },
     {
+          "type": "color",
+          "id": "head_p1",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_p2",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_p3",
+          "label": "size"
+        },
+    {
       "type": "text",
       "id": "newest_subtitle",
       "label": "Sub-Heading"
-    }
+    },
+    {
+          "type": "color",
+          "id": "head_p4",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_p5",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_p6",
+          "label": "size"
+        }
     
 
   ],
@@ -101,6 +155,33 @@ jQuery(document).ready(function() {
           "type": "text",
           "id": "newest_text",
           "label": "text"
+        },
+        {
+          "type": "color",
+          "id": "head_p7",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_p8",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_p9",
+          "label": "size"
         },
         {
           "type": "text",

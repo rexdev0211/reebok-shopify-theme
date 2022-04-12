@@ -4,7 +4,7 @@
         {{ section.settings.slider_title }}
     </h2>
     {%- endif -%}
-    <p class="content-section-peregraph">
+    <p style="color: {{ section.settings.pera_z1}}; font-size: {{ section.settings.pera_z2 }}px;" class="content-section-peregraph">
       {{ section.settings.new_peregrapfh }}
     </p>
     <div>
@@ -33,15 +33,15 @@
                     </div>
     				<div class="conten_slider_information">
                         {%- if bset.title != blank -%}
-                        <p class="content-slider-title">{{ bset.title }}</p>
+                        <p style="color:{{ bset.pera_z3 }};  font-size:{{ bset.pera_z5 }}px;" class="content-slider-title">{{ bset.title }}</p>
                         {%- endif -%}
 
 
-                        <p class="content_slider_text">{{ bset.text }}</p>
+                        <p style="color:{{ bset.pera_z6 }};  font-size:{{ bset.pera_z8 }}px;" class="content_slider_text">{{ bset.text }}</p>
 
 
                         {%- if bset.link_text != blank -%} 
-                        <p class="New_button">{{ bset.link_text }}</p>
+                        <p style="color:{{ bset.pera_z9 }};  font-size:{{ bset.pera_z11 }}px;" class="New_button">{{ bset.link_text }}</p>
                         {%- endif -%}
 
                    </div>
@@ -59,6 +59,8 @@
 
     #shopify-section-{{section.id}} .content-section-title {
         color: {{section.settings.text_color}};
+        font-size: {{section.settings.size_v1}}px;
+        font-family: {{section.settings.font_v2}};
     }
 
 
@@ -114,15 +116,49 @@
             "id": "slider_title",
             "label": "Title"
         },
+        
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "Title colour",
+            "default": "#000000"
+        },
+         {
+          "type": "select",
+          "id": "font_v2",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "size_v1",
+          "label": "size"
+        },
         {
             "type": "text",
             "id": "new_peregrapfh",
             "label": "Sub-Title"
         },
         {
+          "type": "text",
+          "id": "pera_z2",
+          "label": "size"
+        },
+        {
             "type": "color",
-            "id": "text_color",
-            "label": "Title colour",
+            "id": "pera_z1",
+            "label": "subTitle colour",
             "default": "#000000"
         },
         {
@@ -183,10 +219,32 @@
                     "label": "Title"
                 },
                 {
+                    "type": "color",
+                    "id": "pera_z3",
+                    "label": "colour"
+                },
+                
+        		{
+          			"type": "text",
+          			"id": "pera_z5",
+          			"label": "size"
+        		},
+                {
                     "type": "html",
                     "id": "text",
                     "label": "Text"
                 },
+                {
+                    "type": "color",
+                    "id": "pera_z6",
+                    "label": "colour"
+                },
+                
+        		{
+          			"type": "text",
+          			"id": "pera_z8",
+          			"label": "size"
+        		},
                 {
                     "type": "url",
                     "id": "link",
@@ -197,6 +255,17 @@
                     "id": "link_text",
                     "label": "Link text"
                 },
+                {
+                    "type": "color",
+                    "id": "pera_z9",
+                    "label": "colour"
+                },
+                
+        		{
+          			"type": "text",
+          			"id": "pera_z11",
+          			"label": "size"
+        		},
                 {
                     "type": "image_picker",
                     "id": "image",

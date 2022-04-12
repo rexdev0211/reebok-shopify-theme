@@ -12,7 +12,7 @@
 
 <div class="collection featured-collection">
   <div class="{% if section.settings.show_view_all %}title-wrapper-with-link{% endif %}{% if section.settings.title == blank %} title-wrapper-with-link--no-heading{% endif %}">
-    <h2 class="section-title h6 {% if section.settings.title == blank %} title--no-heading{% endif %}" style="font-family: {{ section.settings.font_family }}; font-weight: {{ section.settings.font_weight }}">{{ section.settings.title | escape }}</h2>
+    <h2 class="section-title h6 {% if section.settings.title == blank %} title--no-heading{% endif %}" style="font-size: {{ section.settings.font_h3 }}px; font-family: {{ section.settings.font_family }}; font-weight: {{ section.settings.font_weight }}">{{ section.settings.title | escape }}</h2>
 
     {%- if section.settings.show_view_all -%}
       <a href="{{ section.settings.collection.url }}" class="link-with-icon link-with-icon--large animate-arrow section-title link-with-icon--right">
@@ -129,6 +129,11 @@
       "id": "title",
       "default": "Featured collection",
       "label": "t:sections.featured-collection.settings.title.label"
+    },
+    {
+       "type": "text",
+       "id": "font_h3",
+       "label": "size"
     },
     {
         "type": "select",

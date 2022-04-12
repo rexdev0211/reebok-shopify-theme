@@ -12,8 +12,8 @@
             </div>
           </div>
           <div class="workout_text_overlay">
-              <h2 class="title___1RkKz withhtml___2qjxa gl-heading--s">{{block.settings.head_text}}</h2>
-            <p class="summary___15lGL withhtml___2qjxa">{{block.settings.sub_text}}</p>
+              <h2 style="color:{{block.settings.head_t1}}; font-family:{{block.settings.head_t2}}; font-size:{{block.settings.head_t3}}px;" class="title___1RkKz withhtml___2qjxa gl-heading--s">{{block.settings.head_text}}</h2>
+            <p style="color:{{block.settings.head_t4}}; font-family:{{block.settings.head_t5}}; font-size:{{block.settings.head_t6}}px;" class="summary___15lGL withhtml___2qjxa">{{block.settings.sub_text}}</p>
 
               <div class="content_item">
                 <div class="cta___1ls_5 fadeIn___U34LS">
@@ -61,10 +61,65 @@
           "id": "head_text",
           "label": "title"
         },
+        
+       {
+          "type": "color",
+          "id": "head_t1",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_t2",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_t3",
+          "label": "size"
+        },
         {
           "type": "text",
           "id": "sub_text",
           "label": "sub-title"
+        },
+        {
+          "type": "color",
+          "id": "head_t4",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_t5",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_t6",
+          "label": "size"
         },
         {
           "type": "text",

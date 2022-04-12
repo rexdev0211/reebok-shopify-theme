@@ -10,9 +10,9 @@
   <div class="energy-video-text-conten">
     <div class="poster_conten">
         <img src="{{section.settings.grow_img | img_url: 'master'}}">
-        <h2 class="video-title new_g5_terminal">{{ section.settings.video_ENERGY_title }}</h2>
-        <p class="enargy_sometext">{{ section.settings.video_ENERGY_text }}</p>
-        <a class="enargy-btn" href="{{ section.settings.video_ENERGY_btn_url }}">{{ section.settings.video_ENERGY_btn_text }}</a>
+        <h2 style="color:{{section.settings.head_I1}}; font-family:{{section.settings.head_I2}}; font-size:{{section.settings.head_I3}}px;" class="video-title new_g5_terminal">{{ section.settings.video_ENERGY_title }}</h2>
+        <p style="color:{{section.settings.head_I4}}; font-family:{{section.settings.head_I5}}; font-size:{{section.settings.head_I6}}px;" class="enargy_sometext">{{ section.settings.video_ENERGY_text }}</p>
+        <a style="color:{{section.settings.head_I7}}; font-family:{{section.settings.head_I8}}; font-size:{{section.settings.head_I9}}px;" class="enargy-btn" href="{{ section.settings.video_ENERGY_btn_url }}">{{ section.settings.video_ENERGY_btn_text }}</a>
     </div>
   </div>
 
@@ -44,15 +44,96 @@
       "label": "video-title"
     },
     {
+          "type": "color",
+          "id": "head_I1",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_I2",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_I3",
+          "label": "size"
+        },
+    {
       "type": "html",
       "id": "video_ENERGY_text",
       "label": "video-text"
     },
+    {
+          "type": "color",
+          "id": "head_I4",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_I5",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_I6",
+          "label": "size"
+        },
    {
       "type": "text",
       "id": "video_ENERGY_btn_text",
       "label": "btn_title"
     },
+    {
+          "type": "color",
+          "id": "head_I7",
+          "label": "Color"
+        },
+        {
+          "type": "select",
+          "id": "head_I8",
+          "label": "Font",
+          "default": "Neue Plak",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+
+          ]
+        },
+        {
+          "type": "text",
+          "id": "head_I9",
+          "label": "size"
+        },
     {
       "type": "url",
       "id": "video_ENERGY_btn_url",
