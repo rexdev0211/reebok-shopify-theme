@@ -1,0 +1,132 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="REEBOK_container">
+  <div class="side_insert_text">
+    <h2 style="font-size:{{section.settings.insert_a11}}px; color: {{section.settings.insert_a21}}; font-family: {{section.settings.insert_a3}};">{{section.settings.insert_titles}}</h2>
+    <p style="font-size:{{section.settings.insert_b11}}px; color: {{section.settings.insert_b21}}; font-family: {{section.settings.insert_b3}};">{{section.settings.insert_peregraps}}</p>
+  </div>
+  <div class="bullet_container___2a7AM beyond_customer">
+    <ul>
+    {% for block in section.blocks %}
+      <li><span><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 347.14 236.57" style="enable-background:new 0 0 347.14 236.57;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E7464C;}
+	.st1{fill:#D31729;}
+	.st2{fill:#E4727C;}
+	.st3{fill:#E4767F;}
+	.st4{fill:#EC1B24;}
+	.st5{fill:#FEFEFE;}
+	.st6{fill:none;stroke:#000000;stroke-width:19;stroke-miterlimit:10;}
+</style>
+<polyline class="st6" points="36.64,135.64 116.36,215.36 310.5,21.21 "/>
+</svg> {{block.settings.insert_clams}}</li>  
+    {% endfor %}
+    </ul>
+    
+    <div class="learn-condition_new"><a href="/">Learn More</a></div>
+  
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+"name": "ragister_sidebar",
+"class": "ragister_overlay_conten",
+  "settings": [
+    {
+      "type": "text",
+      "id": "insert_titles",
+      "label": "Heading",
+      "default": "Your title"
+    },
+    {
+      "type": "color",
+      "id": "insert_a21",
+      "label": "Color"
+    },
+    {
+      "type": "select",
+      "id": "insert_a31",
+      "label": "Font",
+      "default": "Neue Plak",
+      "options": [
+         {
+             "label": "Neue Plak",
+             "value": "Neue Plak"
+         },
+         {
+             "label": "Neue Plak Wide",
+             "value": "Neue Plak Wide"
+         }
+
+       ]
+    },
+    {
+      "type": "text",
+      "id": "insert_a11",
+      "label": "size"
+    },
+    {
+      "type": "html",
+      "id": "insert_peregraps",
+      "label": "text"
+    },
+    {
+      "type": "color",
+      "id": "insert_b21",
+      "label": "Color"
+    },
+    {
+      "type": "select",
+      "id": "insert_b31",
+      "label": "Font",
+      "default": "Neue Plak",
+      "options": [
+         {
+             "label": "Neue Plak",
+             "value": "Neue Plak"
+         },
+         {
+             "label": "Neue Plak Wide",
+             "value": "Neue Plak Wide"
+         }
+
+       ]
+    },
+    {
+      "type": "text",
+      "id": "insert_b11",
+      "label": "size"
+    }
+
+  ],
+
+"blocks": [
+     
+    {
+      "type": "text",
+      "name": "text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "insert_clams",
+          "label": "text"
+        }
+        
+      ]
+    }
+
+  ],
+  
+
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "ragister_sidebar"
+    }
+  ]
+}
+{% endschema %}

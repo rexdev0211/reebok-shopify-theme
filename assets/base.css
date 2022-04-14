@@ -3091,33 +3091,7 @@ section.conten_links {
 .box-colums .workout_text_overlay a:hover {
   background: #244496;
 }
-  
-div#Banner-bottom-banner .banner__text.f-body.banner__text-- {
-  text-align: left;
-  margin-top: 15px;
-}
-  
-div#Banner-bottom-banner .banner__buttons {
-  margin: 0;
-}
-  
-div#Banner-bottom-banner a.button.button--primary {
-  opacity: 1;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none !important;
-  font-weight: 600;
-}
-  
-div#Banner-bottom-banner a.button.button--primary:hover {
-  background: #244496;
-}
-  
-div#Banner-bottom-banner {
-  margin-top: 25px;
-}
-  
+    
 html {
   scroll-behavior: smooth;
 }
@@ -3695,7 +3669,7 @@ a.gl-cta.gl-cta--tertiary {
 }
   
 .dynamice_btn_one {
-  padding-bottom: 30px  
+  padding-bottom: 30px; 
 }
   
 .dynamice_btn_one a {
@@ -3732,7 +3706,7 @@ a.gl-cta.gl-cta--tertiary {
 }
   
 .privacy-policy.page-width .conditions_value {
-  display: block  
+  display: block;  
 }
   
 .privacy-policy.page-width .term_details_page {
@@ -3865,6 +3839,8 @@ a.your_link:hover {
 .template-search__search label.field__label {
   display: none;
 }
+  
+
   
 @media screen and (max-width: 749px) {
   .text_with_image_container {

@@ -102,6 +102,7 @@
 
 .section-collection-list .title-wrapper-with-link.title-wrapper--self-padded-mobile.title-wrapper--no-top-margin {
    justify-content: center;
+   margin-bottom: 25px;
 }
 
 .section-collection-list .card.card--standard.card--text {

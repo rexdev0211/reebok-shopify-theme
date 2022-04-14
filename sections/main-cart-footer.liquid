@@ -2,7 +2,7 @@
 {{ 'component-totals.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
-
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script> 
 <div class="page-width{% if cart == empty %} is-empty{% endif %}" id="main-cart-footer" data-id="{{ section.id }}">
   <div>
     <div class="cart__footer">
@@ -12,14 +12,15 @@
           <textarea class="text-area field__input" name="note" form="cart" id="Cart-note" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note }}</textarea>
         </cart-note>
       {%- endif -%}
-
-      <div class="cart__blocks">
+      
+      <div class="cart__blocks duplicate_overlay">
         {% for block in section.blocks %}
           {%- case block.type -%}
             {%- when '@app' -%}
               {% render block %}
             {%- when 'subtotal' -%}
               <div class="js-contents" {{ block.shopify_attributes }}>
+                <h2 class="summary_title">ORDER SUMMARY</h2>
                 <div class="totals">
                   <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
                   <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
@@ -51,6 +52,126 @@
                   {%- endif -%}
                 </small>
               </div>
+              
+        
+                   
+                  {%- else -%}
+                    <div class="cart__ctas" {{ block.shopify_attributes }}>
+                      <noscript>
+                        <button type="submit" class="cart__update-button button button--secondary" form="cart">
+                          {{ 'sections.cart.update' | t }}
+                        </button>
+                      </noscript>
+
+                      {%comment%}<button type="submit" id="checkout" class="cart__checkout-button button" name="checkout"{% if cart == empty %} disabled{% endif %} form="cart">
+                        {{ 'sections.cart.checkout' | t }}
+                      </button>{%endcomment%}
+                    </div>
+
+                    {%- if additional_checkout_buttons -%}
+                      <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
+                        {{ content_for_additional_checkout_buttons }}
+                      </div>
+                    {%- endif -%}
+                {%- endcase -%}
+              {% endfor %}
+
+
+            </div>
+      
+      
+      
+      <div class="car_payment_wrapper">
+        <div class="chack_by_item">
+            <button type="submit" id="checkout" class="cart__checkout-button button dsynamic_check" name="checkout"{% if cart == empty %} disabled{% endif %} form="cart">
+                  Checkout
+            </button>
+        </div>
+        <p class="or_terminal">OR</p>
+        <div id="paypal-button-container"></div> 
+      </div>
+      
+      <div class="special_product_conten_a1">
+        <div class="fecture_block_conten">
+          <h2 class="top_product_wender">TOP PICKS FOR YOU</h2>
+          <div class="cart_product_component">
+          	<ul id="" class="slicing_cart_new">
+            {% for product in collections[section.settings.product_condition_new].products %}
+                <li class="swiper-slide function_wrapper_new ">
+                {% render 'card-product',
+                  card_product: product,
+                  media_aspect_ratio: section.settings.image_ratio,
+                  show_secondary_image: section.settings.show_secondary_image,
+                  show_vendor: section.settings.show_vendor,
+                  show_rating: section.settings.show_rating
+                %}
+                </li>
+            {%- else -%}
+                {%- for i in (1..4) -%}
+                <li class="swiper-slide">
+                    {% render 'card-product-placeholder' %}
+                </li>
+                {%- endfor -%}
+            {%- endfor -%}
+            </ul>
+          </div>
+   
+        </div>
+      </div>
+
+      <div class="cart__blocks">
+        {% for block in section.blocks %}
+          {%- case block.type -%}
+            {%- when '@app' -%}
+              {% render block %}
+            {%- when 'subtotal' -%}
+              <div class="js-contents  accecesary_condition" {{ block.shopify_attributes }}>
+                <h2 class="summary_title">ORDER SUMMARY</h2>
+                <div class="totals">
+                  <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
+                  <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
+                </div>
+
+                <div>
+                  {%- if cart.cart_level_discount_applications.size > 0 -%}
+                    <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                      {%- for discount in cart.cart_level_discount_applications -%}
+                        <li class="discounts__discount discounts__discount--position">
+                          {%- render 'icon-discount' -%}
+                          {{ discount.title }}
+                          (-{{ discount.total_allocated_amount | money }})
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+
+                <small class="tax-note caption-large rte">
+                  {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+                    {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                  {%- elsif cart.taxes_included -%}
+                    {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
+                  {%- elsif shop.shipping_policy.body != blank -%}
+                    {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+                  {%- else -%}
+                    {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+                  {%- endif -%}
+                </small>
+              </div>
+              
+        
+             <div class="cart_summary_links">
+               <h6>Help & Contact Us</h6>
+               <ul class="help_container_links">
+                 {% for block in section.blocks %}
+                 <li class="trigger_popup_fridd gl-tab-{{forloop.index}}">{{block.settings.dridd_s1}}</li>
+                  {% endfor %}
+              
+               </ul>
+             </div>
+             <div class="gl-vspace-bpall-medium bottom-content___38506">
+               <h4 class="gl-label gl-label--l gl-label--bold">Accepted payment methods</h4>
+               <img src="https://cdn.shopify.com/s/files/1/0631/9810/1734/files/py.png?v=1649680858" alt=""></div>
             {%- else -%}
               <div class="cart__ctas" {{ block.shopify_attributes }}>
                 <noscript>
@@ -59,9 +180,9 @@
                   </button>
                 </noscript>
 
-                <button type="submit" id="checkout" class="cart__checkout-button button" name="checkout"{% if cart == empty %} disabled{% endif %} form="cart">
+                {%comment%}<button type="submit" id="checkout" class="cart__checkout-button button" name="checkout"{% if cart == empty %} disabled{% endif %} form="cart">
                   {{ 'sections.cart.checkout' | t }}
-                </button>
+                </button>{%endcomment%}
               </div>
 
               {%- if additional_checkout_buttons -%}
@@ -77,6 +198,80 @@
     </div>
   </div>
 </div>
+{% for block in section.blocks %}
+<div class="hover_bkgr_fridd sl-tab{{forloop.index}}">
+    <span class="helper"></span>
+    <div>
+        <div class="popupCloseterm">&times;</div>
+        <p style="margin: 0;">{{block.settings.text_puopup_conten}}</p>
+    </div>
+</div>
+{% endfor %}
+{% for block in section.blocks %}
+<script>
+$(window).load(function () {
+    $(".gl-tab-{{forloop.index}}").click(function(){
+       $('.sl-tab{{forloop.index}}').show();
+    });
+    $('.sl-tab{{forloop.index}}').click(function(){
+        $('.sl-tab{{forloop.index}}').hide();
+    });
+    $('.popupCloseterm').click(function(){
+        $('.sl-tab{{forloop.index}}').hide();
+    });
+});
+</script>
+
+
+{% endfor %}
+<script>
+$(document).ready(function(){
+  $(".trigger_popup_fridd").click(function(){
+    $("body").addClass("remaning");
+  });
+  $(".popupCloseterm").click(function(){
+    $("body").removeClass("remaning");
+  });
+});
+</script>
+<script>
+  	$('.slicing_cart_new').slick({
+  dots: true,
+  infinite: false,
+  speed: 300,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+  </script>
+
 
 {% javascript %}
   class CartNote extends HTMLElement {
@@ -113,6 +308,32 @@
     });
   });
 </script>
+<script>
+    // Render the PayPal button into #paypal-button-container
+    paypal.Buttons({
+
+        // Set up the transaction
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: {{ cart.total_price | divided_by: 100.0 }}
+                    }
+                }]
+            });
+        },
+
+        // Finalize the transaction
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                // Show a success message to the buyer
+                alert('Transaction completed by ' + details.payer.name.given_name + '!');
+            });
+        }
+
+
+    }).render('#paypal-button-container');
+</script> 
 
 {% schema %}
 {
@@ -124,7 +345,12 @@
       "id": "show_cart_note",
       "default": false,
       "label": "t:sections.main-cart-footer.settings.show_cart_note.label"
-    }
+    },
+    {
+          "type": "collection",
+          "id": "product_condition_new",
+          "label": "products"
+     }
   ],
   "blocks": [
     {
@@ -139,7 +365,26 @@
     },
     {
       "type": "@app"
+    },
+    {
+      "type": "text",
+      "name": "text",
+      "settings": [
+       {
+          "type": "text",
+          "id": "dridd_s1",
+          "label": "text"
+        },
+        {
+          "type": "html",
+          "id": "text_puopup_conten",
+          "label": "text"
+        }
+
+        
+      ]
     }
+   
   ]
 }
 {% endschema %}

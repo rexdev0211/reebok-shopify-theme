@@ -1,0 +1,137 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="REEBOK_container">
+  <div class="side_insert_text">
+    <h2 style="font-size:{{section.settings.insert_a1}}px; color: {{section.settings.insert_a2}}; font-family: {{section.settings.insert_a3}};">{{section.settings.insert_title}}</h2>
+    <p style="font-size:{{section.settings.insert_b1}}px; color: {{section.settings.insert_b2}}; font-family: {{section.settings.insert_b3}};">{{section.settings.insert_peregrap}}</p>
+  </div>
+  <div class="bullet_container___2a7AM">
+    <ul>
+    {% for block in section.blocks %}
+      <li><span><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 347.14 236.57" style="enable-background:new 0 0 347.14 236.57;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E7464C;}
+	.st1{fill:#D31729;}
+	.st2{fill:#E4727C;}
+	.st3{fill:#E4767F;}
+	.st4{fill:#EC1B24;}
+	.st5{fill:#FEFEFE;}
+	.st6{fill:none;stroke:#000000;stroke-width:19;stroke-miterlimit:10;}
+</style>
+<polyline class="st6" points="36.64,135.64 116.36,215.36 310.5,21.21 "/>
+</svg></span> {{block.settings.insert_clam}}</li>  
+    {% endfor %}
+    </ul>
+    
+    <div class="create_wrapper">
+    	<a href="{{ routes.account_register_url }}">
+            {{ 'customer.login_page.create_account' | t }}
+        </a>
+    </div>
+    <div class="learn-condition"><a href="/">Learn More</a></div>
+  
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+"name": "login_sidebar",
+"class": "login_overlay_conten",
+  "settings": [
+    {
+      "type": "text",
+      "id": "insert_title",
+      "label": "Heading",
+      "default": "Your title"
+    },
+    {
+      "type": "color",
+      "id": "insert_a2",
+      "label": "Color"
+    },
+    {
+      "type": "select",
+      "id": "insert_a3",
+      "label": "Font",
+      "default": "Neue Plak",
+      "options": [
+         {
+             "label": "Neue Plak",
+             "value": "Neue Plak"
+         },
+         {
+             "label": "Neue Plak Wide",
+             "value": "Neue Plak Wide"
+         }
+
+       ]
+    },
+    {
+      "type": "text",
+      "id": "insert_a1",
+      "label": "size"
+    },
+    {
+      "type": "html",
+      "id": "insert_peregrap",
+      "label": "text"
+    },
+    {
+      "type": "color",
+      "id": "insert_b2",
+      "label": "Color"
+    },
+    {
+      "type": "select",
+      "id": "insert_b3",
+      "label": "Font",
+      "default": "Neue Plak",
+      "options": [
+         {
+             "label": "Neue Plak",
+             "value": "Neue Plak"
+         },
+         {
+             "label": "Neue Plak Wide",
+             "value": "Neue Plak Wide"
+         }
+
+       ]
+    },
+    {
+      "type": "text",
+      "id": "insert_b1",
+      "label": "size"
+    }
+
+  ],
+
+"blocks": [
+     
+    {
+      "type": "text",
+      "name": "text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "insert_clam",
+          "label": "text"
+        }
+        
+      ]
+    }
+
+  ],
+  
+
+  
+  "presets": [
+    {
+      "category": "text",
+      "name": "login_sidebar"
+    }
+  ]
+}
+{% endschema %}

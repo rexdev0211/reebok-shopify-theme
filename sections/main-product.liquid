@@ -52,7 +52,7 @@
       <div class="mobile_product_price no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
            {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
        </div>
-      <div>
+      <div class="product_media_wrapper_terminal">
         <media-gallery id="MediaGallery-{{ section.id }}" role="region" {% if section.settings.enable_sticky_info %}class="product__media-gallery"{% endif %} aria-label="{{ 'products.product.media.gallery_viewer' | t }}" data-desktop-layout="{{ section.settings.gallery_layout }}">
           <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
           <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
@@ -725,6 +725,43 @@
     </modal-dialog>
   {%- endfor -%}
 </section>
+  <script>
+  $('.gallary_slider').slick({
+  dots: true,
+  infinite: false,
+  speed: 300,
+  slidesToShow: 7,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+  </script>
 
 {% javascript %}
   class ProductModal extends ModalDialog {

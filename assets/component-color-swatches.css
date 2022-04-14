@@ -21,7 +21,7 @@
 .color-swatch__wrapper:after {
     position: absolute;
     width: 100%;
-    height: 1px;
+    height: 2px;
     background-color: #000;
     left: 0;
     bottom: -2px;

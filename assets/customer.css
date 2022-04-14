@@ -1,18 +1,5 @@
-.customer:not(.account):not(.order) {
-  margin: 6rem auto 9rem;
-  max-width: 33.4rem;
-  padding: 0 1.5rem;
-  text-align: center;
-}
-
-@media screen and (min-width: 750px) {
-  .customer:not(.account):not(.order) {
-    max-width: 47.8rem;
-  }
-}
-
 .customer form {
-  margin-top: 4rem;
+  margin-top: 20px;
 }
 
 .customer button {
@@ -323,7 +310,6 @@
 
 /* Login */
 .login a {
-  display: block;
   margin: 0 auto;
   width: fit-content;
 }
@@ -743,4 +729,489 @@ li[data-address] > h2 {
 .addresses form > div:nth-of-type(7),
 .addresses form > div:nth-of-type(7) + div[id] {
   margin-top: 1.5rem;
+}
+
+/* ----------------------------------- */
+
+.page-width.reder_conditional_terminal {
+  display: flex;
+}
+
+.main_customize_term.customer.login {
+  width: 41%;
+  margin-left: 4.1666666667%;
+  float: left;
+  padding: 0 15px;
+}
+
+.login_overlay_conten {
+  width: 41%;
+  margin-left: 4.1666666667%;
+  float: left;
+  padding: 0 15px;
+}
+
+.login_title_wrapper {
+  font-size: 42px;
+  line-height: 38px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 15px 0;
+}
+
+.customer_component_wrapper {
+  padding-top: 25px;
+}
+
+.forgote_links a {
+  color: black;
+  font-size: 16px;
+  line-height: 22px;
+  text-transform: capitalize;
+  text-underline-offset: 1px;
+}
+
+.forgote_links a:hover {
+  background: black;
+  color: white;
+  text-decoration-thickness: auto;
+}
+
+.field.email_wrapper input {
+  border: 1px solid #767677;
+  height: 5.5rem;
+}
+
+.field.email_wrapper label {
+  color: #767677;
+  line-height: 2;
+}
+
+.field.password_wrapper input {
+  border: 1px solid #767677;
+  height: 5.5rem;
+}
+
+.field.password_wrapper label {
+  color: #767677;
+  line-height: 2;
+}
+
+button.submit-btn {
+  color: white;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none !important;
+  font-weight: bold;
+}
+
+
+.implicit-consent-terms {
+  color: black;
+  font-size: 14px;
+}
+
+.implicit-consent-terms a {
+  color: black;
+  font-size: 15px;
+}
+
+.implicit-consent-terms a:hover {
+  color: white;
+  background: black;
+}
+
+.facebook_btn {
+  margin-bottom: 15px;
+}
+
+.facebook_btn a {
+  border: 1px solid #e9ecef;
+  font-size: 14px;
+  color: #000;
+  text-decoration: none;
+  padding: 10px 0px;
+  font-weight: bolder;
+  width: 50%;
+  text-align: center;
+}
+
+.facebook_btn a:hover {
+  border-color: black;
+}
+
+.side_insert_text h2 {
+  line-height: 38px;
+  text-transform: uppercase;
+  margin: 0 0 15px 0;
+}
+
+.side_insert_text p {
+  line-height: 22px;
+  margin: 0 0 15px 0;
+}
+
+.bullet_container___2a7AM ul {
+  list-style: none;
+  padding: 0;
+}
+
+.bullet_container___2a7AM ul li {
+  margin-bottom: 5px;
+  color: black;
+  font-size: 14px;
+}
+
+.bullet_container___2a7AM ul li svg {
+  width: 19px;
+  height: 19px;
+  position: relative;
+  top: 3px;
+  margin-right: 7px;
+}
+
+.create_wrapper a {
+  color: #fff;
+  background: black;
+  text-decoration: none;
+  padding: 12px 23px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.create_wrapper a:hover {
+  background: #244496;
+}
+
+.learn-condition a {
+  color: black;
+  font-size: 15px;
+}
+
+.learn-condition {
+  margin-top: 20px;
+}
+
+.bullet_container___2a7AM.beyond_customer ul {
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+.learn-condition_new a {
+  color: black;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.main_customize_term.customer.register {
+  width: 37.5%;
+  margin-left: 8.3333333333%;
+  float: left;
+  padding: 0 15px;
+  margin-bottom: 30px;
+}
+
+.ragister_overlay_conten {
+  width: 37.5%;
+  margin-left: 8.3333333333%;
+  float: left;
+  padding: 0 15px;
+}
+
+h1.ragister_title_wrapper {
+  font-size: 52px;
+  line-height: 44px;
+  font-family: 'Neue Plak Wide';
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+
+.gl-vspace-bpall-small {
+  font-size: 14px;
+  color: black;
+}
+
+h5.gl-vspace-bpall-top {
+  font-size: 20px;
+  line-height: 18px;
+  margin: 15px 0;
+  text-transform: uppercase;
+}
+
+h5.gl-vspace-bpall-top {
+  font-size: 20px;
+  line-height: 18px;
+  margin: 15px 0;
+  text-transform: uppercase;
+}
+
+.field.customer_name input {
+  border: 1px solid #767677;
+  height: 5.5rem;
+}
+
+.field.customer_name label {
+  color: #767677;
+  line-height: 2;
+}
+
+h5.gl-vspace-bpall-center {
+  font-size: 20px;
+  line-height: 18px;
+  margin: 15px 0;
+  text-transform: uppercase;
+}
+
+.genter_overlay {
+  padding: 25px 0;
+}
+
+.gl-vspace-bpall-dgh {
+  font-size: 20px;
+  line-height: 18px;
+  margin: 15px 0;
+  text-transform: uppercase;
+}
+
+.field.customer_email input {
+  border: 1px solid #767677;
+  height: 5.5rem;
+}
+
+.field.customer_email label {
+  color: #767677;
+  line-height: 2;
+}
+
+.gl-form-hint {
+  color: #767677;
+  margin-top: 5px;
+  padding-left: 15pxpx;
+  text-align: left;
+  font-family: 'Neue Plak';
+  font-size: 14px;
+  line-height: 20px;
+}
+
+button.gl-cta__content {
+  color: white;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none !important;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+button.gl-cta__content:hover {
+  background: #244496;
+}
+
+.genter_overlay input[type='radio']:after {
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  top: -4px;
+  left: -1px;
+  position: relative;
+  background-color: white;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 1px solid #d1d3d1;
+}
+
+.genter_overlay input[type='radio']:checked:after {
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  top: -4px;
+  left: -1px;
+  position: relative;
+  background-color: white;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 8px solid black;
+}
+
+.genter_overlay label {
+  padding: 0 15px;
+  font-size: 14px;
+  color: black;
+}
+
+.recover_wrapper {
+  font-family: 'Neue Plak Wide';
+  text-transform: uppercase;
+  line-height: 38px;
+  margin-top: 0;
+}
+
+p.recover_subtext {
+  color: black;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.field.recover_email input {
+  border: 1px solid #767677;
+  height: 5.5rem;
+}
+
+.field.recover_email label {
+  color: #767677;
+  line-height: 2;
+}
+
+a.recover-cancel {
+  font-size: 16px;
+  color: black;
+}
+
+button.recover_btn {
+  color: white;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none !important;
+  font-weight: bold;
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.chacking-text-accept {
+  display: flex;
+  padding-top: 10px;
+}
+
+.chack_condition_terminal label {
+  color: black;
+  font-size: 14px;
+  position: relative;
+  bottom: 7px;
+  left: 5px;
+}
+
+.chack_condition_terminal input {
+  width: 24px;
+  height: 24px;
+}
+
+.chacking-text-accept  input {
+  width: 24px;
+  height: 24px;
+}
+
+.chack_condition_terminal {
+    padding-top: 10px;
+}
+
+.customer.account {
+  margin-top: 20px;
+}
+
+h1.custom_account_title {
+  margin-top: 10px;
+  font-size: 42px;
+  font-family: 'Neue Plak Wide';
+  text-transform: uppercase;
+}
+
+a.logout_terminal {
+  font-size: 16px;
+  color: black;
+}
+
+h2.order_subtitle {
+  font-size: 26px;
+  font-family: 'Neue Plak Wide';
+  text-transform: uppercase;
+}
+
+p.customer_richtext {
+  color: black;
+  font-size: 17px;
+}
+
+.deatils_wrapper p{
+  color: black;
+  font-size: 17px;
+}
+
+
+h2.customer-details {
+  font-size: 26px;
+  text-transform: uppercase;
+}
+
+.customer_address {
+  color: black !important;
+  font-size: 17px !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .page-width.reder_conditional_terminal {
+    display: block;
+  }
+  
+  .main_customize_term.customer.login {
+    width: 100%;
+    margin-left: 0;
+    float: unset;
+  }
+  
+  .login_overlay_conten {
+    width: 100%;
+    margin-left: 0;
+    float: unset;
+  }
+  
+  .login_title_wrapper {
+    font-size: 36px;
+    line-height: 32px;
+  }
+  
+  .facebook_btn a {
+    width: 100%;
+  }
+  
+  button.submit-btn {
+    width: 100%;
+  }
+  
+  .side_insert_text h2 {
+    line-height: 32px;
+    font-size: 36px !important;
+  }
+  
+  .create_wrapper a {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .learn-condition {
+    margin-bottom: 30px;
+  }
+  
+  .main_customize_term.customer.register {
+    width: 100%;
+    margin-left: 0;
+    float: unset;
+   }
+  
+  .ragister_overlay_conten {
+    width: 100%;
+    margin-left: 0;
+    float: unset;
+  }
+  
+  h1.ragister_title_wrapper {
+    font-size: 42px;
+    line-height: 38px;
+  }
+  
+  button.gl-cta__content {
+    width: 100%;
+  }
 }

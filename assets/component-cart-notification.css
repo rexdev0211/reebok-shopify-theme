@@ -109,3 +109,11 @@
   margin-bottom: 0.5rem;
   margin-top: 0;
 }
+
+.cart-notification__links button.button.button--primary.button--full-width {
+  color: white;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none !important;
+  font-weight: bold;
+}

@@ -1392,6 +1392,33 @@ h1.mobile_product_title.product__title {
   margin: 0;  
 }
   
+.product_media_wrapper_terminal {
+  position: relative;  
+}
+  
+.product--thumbnail_slider .thumbnail-slider {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 3%;
+  width: 34%;
+  z-index: 2;
+  left: 31%;  
+}
+  
+.color-swatches__swatch-wrapper {
+  text-align: end;  
+}
+ 
+.color-swatch__wrapper.color-swatch--large {
+  text-align: center;
+}
+
+.product__colors--swatches .slick-track {
+  display: flex;
+  margin-right: 0;  
+}
+  
  
 @media screen and (max-width: 769px) {
   #sidebar {
