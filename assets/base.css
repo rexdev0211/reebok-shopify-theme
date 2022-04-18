@@ -3839,6 +3839,32 @@ a.your_link:hover {
 .template-search__search label.field__label {
   display: none;
 }
+
+.button:after{
+  position: relative;
+}
+
+li.buttan_coll.collection-list__item.grid__item .card__inner.color-background-2 {
+  display: none;
+}
+
+p.announcement-bar__message {
+  font-size: 12px;
+  color: #fff;
+}
+
+.slick-prev {
+  z-index: 2;
+}
+
+product-recommendations.product-recommendations.page-width.section-template--15922313199846__product-recommendations-padding.isolate.product-recommendations--loaded {
+  width: 65%;
+  margin-left: 0;
+}
+
+div#shopify-product-reviews {
+  width: 65%;
+}
   
 
   
@@ -4046,5 +4072,13 @@ a.your_link:hover {
   
   .template-search__header.page-width.center h1 {
   	font-size: 35px;
+  }
+
+  product-recommendations.product-recommendations.page-width.section-template--15922313199846__product-recommendations-padding.isolate.product-recommendations--loaded {
+    width: 100%;
+  }
+
+  div#shopify-product-reviews {
+    width: 100%;
   }
 }
