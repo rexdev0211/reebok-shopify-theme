@@ -56,7 +56,7 @@
 
       html {
         box-sizing: border-box;
-        font-size: calc(var(--font-body-scale) * 62.5%);
+        font-size: var(--base-font-size);
         height: 100%;
       }
 
@@ -85,11 +85,6 @@
     {{ 'theme.css' | asset_url | stylesheet_tag }}
 
     <script src="{{ 'jquery-3.6.0.min.js' | asset_url }}"></script>
-
-    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-
-    
-    <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
     
     {%- unless settings.type_body_font.system? and settings.type_use_custom == true -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
@@ -109,6 +104,9 @@
     </script>
 
     {% section 'filter-menu-settings' %}
+
+    <script src="{{ 'vendor.js' | asset_url }}"></script>
+
   </head>
 
   <body class="gradient template-{{ request.page_type | handle }}">
@@ -128,6 +126,8 @@
       {{ content_for_layout }}
     </main>
 
+    {% section 'bottom-banner-action' %}
+
     {% section 'footer' %}
 
     {% section 'footer-bottom' %}
@@ -136,9 +136,13 @@
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
     </ul>
 
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    
+    <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
 
-    <script src="{{ 'products--get-variants.js' | asset_url }}"></script>
-    <script src="{{ 'collection--infinite-load.js' | asset_url }}"></script>
+
+    <script src="{{ 'products--get-variants.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'collection--infinite-load.js' | asset_url }}" defer="defer"></script>
 
     {%- if settings.enable_sticky_header -%}
       <script>
@@ -234,7 +238,7 @@
     </script>
     {%- endif -%}
 
-<!--     <script>
+    <script>
       window.addEventListener('DOMContentLoaded', () => {
         imageMapResize();
       });
@@ -242,7 +246,7 @@
       document.addEventListener("shopify:section:load", function(event) {
         imageMapResize();
       });
-    </script>  -->
+    </script> 
 
     <script>
       window.shopUrl = '{{ request.origin }}';

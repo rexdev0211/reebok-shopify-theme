@@ -3,7 +3,7 @@
 <div class="link-button-list link-button-list--{{ section.id }}" id="link-button-list--{{ section.id }}">
   {%- if section.settings.title != blank -%} 
   <div class="link-button-list__header {{ section.settings.title_alignment }}">
-    <h2 class="link-button-list--heading">{{ section.settings.title }}</h2>
+    <h2 class="link-button-list--heading h3">{{ section.settings.title }}</h2>
   </div>
   {%- endif -%}
     <div class="padding-left padding-right link-button-list__content">
@@ -15,9 +15,14 @@
                 </li>
             {%- endfor -%}
             {%- for block in section.blocks -%}
-                <li>
-                    <a href="{{ block.settings.link }}" {%- if section.settings.style == 'button-list-outline' -%}class="button button--secondary"{%- endif -%}>{{ block.settings.title | escape }}{% if section.settings.style == 'text-list' and section.settings.show_commas == true and forloop.last != true %}, {% endif %}</a>
-                </li>
+                {%- if block.settings.title != blank -%}
+                  <li>
+                      <a href="{{ block.settings.link }}" {%- if section.settings.style == 'button-list-outline' -%}class="button button--secondary"{%- endif -%}>{{ block.settings.title | escape }}{% if section.settings.style == 'text-list' and section.settings.show_commas == true and forloop.last != true %}, {% endif %}</a>
+                  </li>
+                  <li>
+                    <a href="{{ block.settings.link }}" {%- if section.settings.style == 'button-list-outline' -%}class="button"{%- endif -%}>{{ block.settings.title | escape }}{% if section.settings.style == 'text-list' and section.settings.show_commas == true and forloop.last != true %}, {% endif %}</a>
+                  </li>
+                {%- endif -%}
             {%- endfor -%}
         </ul>
         
@@ -31,7 +36,7 @@
   {%- endunless -%}
   {%- endif -%}
 
-  .link-button-list--{{ section.id }} .link-button-list__content {
+  .link-button-list--{{ section.id }} {
     width: {{ section.settings.width }}%;
     padding-top: {{ section.settings.vertical_spacing }}px;
     padding-bottom: {{ section.settings.vertical_spacing }}px;

@@ -271,3 +271,8 @@ slider-component {
 .slider-button--prev:not([disabled]):hover .icon {
   transform: rotate(90deg) scale(1.1);
 }
+
+.featured-collection .new-slider.slick-initialized .grid__item {
+  width: 100%!important;
+  max-width: 100%!important;
+}

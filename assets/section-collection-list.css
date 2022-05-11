@@ -61,24 +61,16 @@
   margin-top: 2rem;
 }
 
-.section-collection-list h3.card__heading {
-  color: black;
-}
 
 .section-collection-list .card__content {
-  background: white;
-  border: 1px solid #e9ecef;;
   padding: 0px;
 }
 
 .section-collection-list .card__content:hover {
-  border-color:  black;
+  /* border-color:  black; */
 }
 
-.section-collection-list a.full-unstyled-link {
-  font-size: 13px;
-  font-family: 'Neue Plak';
-  font-weight: 300;
+.section-collection-list .full-unstyled-link {
   letter-spacing: 1px;
   text-align: center;
 }
@@ -92,7 +84,6 @@
 }
 
 .section-collection-list {
-   width: 800px;
    margin: auto;
 }
 

@@ -1,3 +1,7 @@
+{%- comment -%} 
+DO NOT USE
+{%- endcomment -%}
+
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
@@ -446,19 +450,6 @@
           ],
           "default": "center",
           "label": "t:sections.slideshow.blocks.slide.settings.text_alignment_mobile.label"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "t:sections.slideshow.presets.name",
-      "blocks": [
-        {
-          "type": "slide"
-        },
-        {
-          "type": "slide"
         }
       ]
     }

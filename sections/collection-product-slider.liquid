@@ -1,10 +1,12 @@
-<div class="col-prod-slider {% if section.settings.content_boxed == true %}section-boxed{% endif %}">
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+
+<div class="col-prod-slider {{ section.settings.page_width }}">
     {%- if section.settings.slider_title != blank -%}
-    <h2 class="text-uppercase content-section-title">
+    <h2 class="h3 content-section-title">
         {{ section.settings.slider_title }}
     </h2>
     {%- endif -%}
-    <p style="color: {{ section.settings.pera_z1}}; font-size: {{ section.settings.pera_z2 }}px;" class="content-section-peregraph">
+    <p style="color: {{ section.settings.pera_z1}};" class="content-section-peregraph">
       {{ section.settings.new_peregrapfh }}
     </p>
     <div>
@@ -13,7 +15,7 @@
             {% assign bset = block.settings %}
            
         <div class="content-slide" {{ block.shopify_attributes }}>
-                <a class="content-slide-link" href="{{ bset.link }}">
+                <a class="content-slide-link text-decoration-none" href="{{ bset.link }}">
                     <div class="position-relative">
                         {%- assign img_url = bset.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
                         <div style="padding-top:{{ 1 | divided_by: bset.image.aspect_ratio | times: 100}}%;">
@@ -32,16 +34,20 @@
                         </noscript>
                     </div>
     				<div class="conten_slider_information">
+                       <div>
                         {%- if bset.title != blank -%}
-                        <p style="color:{{ bset.pera_z3 }};  font-size:{{ bset.pera_z5 }}px;" class="content-slider-title">{{ bset.title }}</p>
+                        <p style="color:{{ bset.pera_z3 }};" class="content-slider-title">{{ bset.title }}</p>
                         {%- endif -%}
 
-
-                        <p style="color:{{ bset.pera_z6 }};  font-size:{{ bset.pera_z8 }}px;" class="content_slider_text">{{ bset.text }}</p>
-
+                        {%- if bset.text != blank -%}
+                        <p style="color:{{ bset.pera_z6 }};" class="content_slider_text content-slider-text">{{ bset.text }}</p>
+                        {%- endif -%}
+                       </div>
 
                         {%- if bset.link_text != blank -%} 
-                        <p style="color:{{ bset.pera_z9 }};  font-size:{{ bset.pera_z11 }}px;" class="New_button">{{ bset.link_text }}</p>
+                        <div>
+                            <p class="link--background inline-block content-slider-button">{{ bset.link_text }}</p>
+                        </div>
                         {%- endif -%}
 
                    </div>
@@ -59,7 +65,6 @@
 
     #shopify-section-{{section.id}} .content-section-title {
         color: {{section.settings.text_color}};
-        font-size: {{section.settings.size_v1}}px;
         font-family: {{section.settings.font_v2}};
     }
 
@@ -68,21 +73,13 @@
         margin-top: {{ section.settings.top_spacing }}px;
         margin-bottom: {{ section.settings.bottom_spacing }}px;
     }
-
-    #shopify-section-{{ section.id }} .slick-dots button:before {
-        border-color: {{ section.settings.dot_color_border }};
-    }
-
-    #shopify-section-{{ section.id }} .slick-dots .slick-active button:before {
-        background: {{ section.settings.dot_color }};
-    }
 </style>
 
 {% if section.settings.slides_per_view < section.blocks.size %}
 <script>
     $(document).ready(function() {
         $("#shopify-section-{{section.id}} .content-slider").slick({
-            dots: false,
+            dots: true,
             arrows: true,
             infinite: false,
             slidesToShow: {{ section.settings.slides_per_view }},
@@ -92,7 +89,7 @@
                     breakpoint: 749,
                     settings: {
                         slidesToShow: 1,
-                        arrows: false
+                        arrows: true
                     }
                 }
             ]
@@ -106,10 +103,24 @@
     "name": "Collection/Product Slide",
     "settings": [
         {
-            "type": "checkbox",
-            "id": "content_boxed",
-            "label": "Use boxed appearance for section",
-            "default": true
+            "type": "select",
+            "id": "page_width",
+            "label": "Section width",
+            "default": "page-width",
+            "options": [
+            {
+                "value": "",
+                "label": "Full width"
+            },
+            {
+                "value": "page-width",
+                "label": "Contained"
+            },
+            {
+                "value": "page-width--narrow",
+                "label": "Contained (narrow)"
+            }
+            ]
         },
         {
             "type": "text",
@@ -141,19 +152,13 @@
           ]
         },
         {
-          "type": "text",
-          "id": "size_v1",
-          "label": "size"
-        },
-        {
-            "type": "text",
+            "type": "textarea",
             "id": "new_peregrapfh",
-            "label": "Sub-Title"
+            "label": "Subtitle"
         },
         {
-          "type": "text",
-          "id": "pera_z2",
-          "label": "size"
+            "type": "header",
+            "content": "Subtitle"
         },
         {
             "type": "color",
@@ -194,18 +199,6 @@
             "max": 5,
             "step": 1,
             "default": 4
-        },
-        {
-            "type": "color",
-            "id": "dot_color",
-            "label": "Dot colour",
-            "default": "#000000"
-        },
-        {
-            "type": "color",
-            "id": "dot_color_border",
-            "label": "Dot border colour",
-            "default": "#000000"
         }
     ],
     "blocks": [

@@ -59,18 +59,18 @@ li.cta___2bw7D {
 }
 
 li.cta___2bw7D a {
-  color: black;
+  /* color: black; */
 }
 
 li.cta___2bw7D a {
-  color: #000;
-  font-size: 14px;
+  /* color: #000; */
+  /* font-size: 14px; */
   font-weight: bold;
 }
 
 li.cta___2bw7D a:hover {
-  color: white;
-  background: black;
+  /* color: white; */
+  /* background: black; */
 }
 
 h2.faq_tabs_title {
@@ -95,7 +95,7 @@ section.tab_faq_container {
 
 .tabs_text_conten {
   width: 70%;
-  background: #f3f3f3;
+  /* background: #f3f3f3; */
 }
 
 section.tab_faq_container .tab {
@@ -110,7 +110,7 @@ section.tab_faq_container .tabs-container {
 }
 
 li.cta___2bx8t a {
-  color: black;
+  /* color: black; */
   font-size: 16px;
   line-height: 22px;
   font-family: 'Neue Plak';
@@ -131,8 +131,8 @@ section.tab_faq_container .tab button {
   text-align: left;
   cursor: pointer;
   transition: 0.3s;
-  background: white;
-  border-bottom: 1px solid #9a9a9a;
+  /* background: white; */
+  /* border-bottom: 1px solid #9a9a9a; */
 }
 
 section.tab_faq_container .tab button.active {
@@ -178,8 +178,8 @@ section.tab_faq_container .tab button.active .faq_arrow_now {
 }
 
 li.cta___2bx8t a:hover {
-  background: black;
-  color: white;
+  /* background: black; */
+  /* color: white; */
 }
 
 /* ----------------------------------- */
@@ -206,8 +206,8 @@ li.cta___2bx8t a:hover {
 }
 
 .detox_text a:hover {
-  background: black !important;
-  color: white !important;
+  /* background: black !important; */
+  /* color: white !important; */
 }
 
 .detox_text p {
@@ -238,12 +238,12 @@ section.mibile_tab_faq_container {
   outline: none;
   font-size: 15px;
   transition: 0.4s;
-  background: white;
+  /* background: white; */
   position: relative;
 }
 
 .accordian_difolt {
-  border: 1px solid #e9ecef;
+  /* border: 1px solid #e9ecef; */
 }
 
 .active, .accordion:hover {
@@ -252,11 +252,11 @@ section.mibile_tab_faq_container {
 
 .accordion:after {
   content: '\f0d7';
-  color: black;
+  /* color: black; */
   font-weight: bold;
   float: right;
   margin-left: 5px;
-  font-family: fontawesome;
+  /* font-family: fontawesome; */
   position: absolute;
   right: 15px;
   bottom: 18px;
@@ -268,7 +268,7 @@ section.mibile_tab_faq_container {
 
 .panel {
   padding: 0 18px;
-  background-color: white;
+  /* background-color: white; */
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;

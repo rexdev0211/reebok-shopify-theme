@@ -15,7 +15,7 @@
 }
 
 .newsletter {
-  border: 1px solid #f3f3f3;
+  /* border: 1px solid #f3f3f3; */
   margin-top: 20px;
   padding: 30px 45px;
   margin-bottom: 40px
@@ -72,8 +72,8 @@ form#contact_form {
 }
 
 input[type="checkbox"]:checked:before {
-  background: #000;
-  color: #fff;
+  /* background: #000; */
+  /* color: #fff; */
   content: "\2713";
   text-align: center;
 }

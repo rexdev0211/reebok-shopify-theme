@@ -1,4 +1,7 @@
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
+
+{% comment %}
+NOTE: already imported with footer.liquid - avoid importing twice
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-list-payment.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -11,10 +14,13 @@
 <noscript>{{ 'component-list-social.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'disclosure.css' | asset_url | stylesheet_tag }}</noscript>
+{% endcomment %}
 
 {%- style -%}
-  .footer {
+  .footer-{{ section.id }} {
     margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.color_bg_mobile }}; 
+    color: {{ section.settings.color_text_mobile }};
   }
 
   .section-{{ section.id }}-padding {
@@ -22,9 +28,11 @@
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
-  @media screen and (min-width: 750px) {
-    .footer {
+  @media screen and (min-width: 960px) {
+    .footer-{{ section.id }} {
       margin-top: {{ section.settings.margin_top }}px;
+      background-color: {{ section.settings.color_bg }}; 
+      color: {{ section.settings.color_text }};
     }
 
     .section-{{ section.id }}-padding {
@@ -34,9 +42,9 @@
   }
 {%- endstyle -%}
 
-<footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  {%- if section.blocks.size > 0 or section.settings.newsletter_enable or section.settings.show_social or section.settings.country_selector -%}
-    <div class="footer__content-top page-width footer_terminal">
+<footer class="footer footer-{{ section.id }} footer-bottom section-{{ section.id }}-padding">
+  {%- if section.blocks.size > 0  or section.settings.enable_country_selector -%}
+    <div class="footer__content-top footer_terminal page-width--narrow">
       {%- if section.blocks.size > 0 -%}
         {%- liquid
           if section.blocks.size == 9
@@ -47,13 +55,13 @@
             assign footer_grid_class = 'grid--3-col-tablet'
           endif
         -%}
-        <div class="footer__blocks-wrapper footer_divice ">
+        <div class="footer__blocks-wrapper footer__blocks-inline">
             <div class="country_black ">
-                {%- if section.settings.country_selector == true -%} 
+                {%- if section.settings.enable_country_selector == true -%} 
                     <div class="footer__country-popup">
                     <a class="footer__country-popup--link" href="{{ section.settings.country_list.url }}">
                         {%- if section.settings.canada_flag != blank -%} 
-                        <img class="footer__country-popup--flag margin-right-small" src="{{ section.settings.canada_flag | img_url: '50x' }}" alt="{{ section.settings.canada_flag.alt | escape }}" /> 
+                        <img loading="lazy" class="footer__country-popup--flag margin-right-small" src="{{ section.settings.canada_flag | img_url: '50x' }}" alt="{{ section.settings.canada_flag.alt | escape }}" /> 
                         {%- endif -%}
                         <span class="footer__country-popup--label">{{ section.settings.country_label }}</span>
                     </a>
@@ -73,10 +81,10 @@
                   </div>
                 {%- when 'link_list' -%}
                   {%- if block.settings.menu != blank and block.settings.heading != blank -%}
-                    <ul class="footer-block__details-content list-unstyled">
+                    <ul class="footer-block__details-content footer-bottom-block__links list-unstyled">
                       {%- for link in block.settings.menu.links -%}
-                        <li class="li.footer-legal-item___1t4Gx">
-                          <a style="font-family:{{block.settings.footer_bottom_a3}} ; color:{{block.settings.footer_bottom_a1}}; font-size: {{block.settings.footer_bottom_a2}};" href="{{ link.url }}" class="bottom_links_conten bottom_new_links link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                        <li class="footer-bottom-block__link-item">
+                          <a href="{{ link.url }}" class="footer-bottom-block__link link link--text">
                             {{ link.title }}
                           </a>
                         </li>
@@ -105,6 +113,8 @@
           {%- endfor -%}
         </div>
       {%- endif -%}
+
+      {% comment %}
       <div class="footer__column footer__localization isolate">
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
           <noscript>
@@ -150,51 +160,8 @@
           </localization-form>
         {%- endif -%}
 
-        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-          <noscript>
-            {%- form 'localization', id: 'FooterLanguageFormNoScript', class: 'localization-form' -%}
-              <div class="localization-form__select">
-                <h2 class="visually-hidden" id="FooterLanguageLabelNoScript">{{ 'localization.language_label' | t }}</h2>
-                <select class="localization-selector link" name="locale_code" aria-labelledby="FooterLanguageLabelNoScript">
-                  {%- for language in localization.available_languages -%}
-                    <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
-                      {{ language.endonym_name | capitalize }}
-                    </option>
-                  {%- endfor -%}
-                </select>
-                {% render 'icon-caret' %}
-              </div>
-              <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
-            {%- endform -%}
-          </noscript>
-
-          <localization-form>
-            {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
-              <div class="no-js-hidden">
-                <h2 class="caption-large text-body" id="FooterLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-                <div class="disclosure">
-                  <button type="button" class="disclosure__button localization-form__select localization-selector link link--text caption-large" aria-expanded="false" aria-controls="FooterLanguageList" aria-describedby="FooterLanguageLabel">
-                    {{ localization.language.endonym_name | capitalize }}
-                    {% render 'icon-caret' %}
-                  </button>
-                  <div class="disclosure__list-wrapper" hidden>
-                    <ul id="FooterLanguageList" role="list" class="disclosure__list list-unstyled">
-                      {%- for language in localization.available_languages -%}
-                        <li class="disclosure__item" tabindex="-1">
-                          <a class="link link--text disclosure__link caption-large{% if language.iso_code == localization.language.iso_code %} disclosure__link--active{% endif %} focus-inset" href="#" hreflang="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} aria-current="true"{% endif %} data-value="{{ language.iso_code }}">
-                            {{ language.endonym_name | capitalize }}
-                          </a>
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                  </div>
-                </div>
-                <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
       </div>
+      {% endcomment %}
     </div>
   {%- endif -%}
 </footer>
@@ -272,33 +239,6 @@
           "default": "footer",
           "label": "t:sections.footer.blocks.link_list.settings.menu.label",
           "info": "t:sections.footer.blocks.link_list.settings.menu.info"
-        },
-        {
-          "type": "color",
-          "id": "footer_bottom_a1",
-          "label": "Color"
-        },
-        {
-          "type": "select",
-          "id": "footer_bottom_a3",
-          "label": "Font",
-          "default": "Neue Plak",
-          "options": [
-            {
-                "label": "Neue Plak",
-                "value": "Neue Plak"
-            },
-            {
-                "label": "Neue Plak Wide",
-                "value": "Neue Plak Wide"
-            }
-
-          ]
-        },
-        {
-          "type": "text",
-          "id": "footer_bottom_a2",
-          "label": "size"
         }
       ]
     },
@@ -364,43 +304,40 @@
   ],
   "settings": [
     {
-      "type": "select",
-      "id": "color_scheme",
-      "options": [
-        {
-          "value": "accent-1",
-          "label": "t:sections.footer.settings.color_scheme.options__1.label"
-        },
-        {
-          "value": "accent-2",
-          "label": "t:sections.footer.settings.color_scheme.options__2.label"
-        },
-        {
-          "value": "background-1",
-          "label": "t:sections.footer.settings.color_scheme.options__3.label"
-        },
-        {
-          "value": "background-2",
-          "label": "t:sections.footer.settings.color_scheme.options__4.label"
-        },
-        {
-          "value": "inverse",
-          "label": "t:sections.footer.settings.color_scheme.options__5.label"
-        }
-      ],
-      "default": "background-1",
-      "label": "t:sections.footer.settings.color_scheme.label"
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background color (desktop)",
+      "default": "#244496"
     },
     {
-        "type": "header",
-        "content": "Country flag"
+      "type": "color",
+      "id": "color_text",
+      "label": "Text content color (desktop)",
+      "default": "#ffffff"
+    },
+
+    {
+      "type": "color",
+      "id": "color_bg_mobile",
+      "label": "Background color (mobile)",
+      "default": "#ffffff"
     },
     {
-        "type": "checkbox",
-        "id": "country_selector",
-        "label": "Show country selector pop-up",
-        "info": "This will appear in the mid-left section.",
-        "default": false
+      "type": "color",
+      "id": "color_text_mobile",
+      "label": "Text content color (mobile)",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__3.content",
+      "info": "t:sections.footer.settings.header__4.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_country_selector.label"
     },
     {
         "type": "text",
@@ -415,41 +352,8 @@
     {
         "type": "page",
         "id": "country_list",
-        "label": "Country list for popup",
+        "label": "Country list",
         "info": "Add and edit countries on the page."
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__2.content",
-      "info": "t:sections.footer.settings.header__2.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_social",
-      "default": false,
-      "label": "t:sections.footer.settings.show_social.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__3.content",
-      "info": "t:sections.footer.settings.header__4.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_country_selector",
-      "default": true,
-      "label": "t:sections.footer.settings.enable_country_selector.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__5.content",
-      "info": "t:sections.footer.settings.header__6.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_language_selector",
-      "default": true,
-      "label": "t:sections.footer.settings.enable_language_selector.label"
     },
     {
       "type": "header",
@@ -473,21 +377,21 @@
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 100,
-      "step": 4,
+      "max": 50,
+      "step": 2,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "default": 16
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 100,
-      "step": 4,
+      "max": 50,
+      "step": 2,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "default": 16
     }
   ],
   "default": {

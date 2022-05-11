@@ -19,7 +19,7 @@
     }
 </style>
 
-<div class="section-content-column ib-background {% if section.settings.content_boxed == true %}section-boxed{% endif %}">
+<div class="section-content-column ib-background {{ section.settings.page_width }}">
     <div class="ib-wrapper">
     {% for block in section.blocks limit: section.blocks.size %}
         {% assign bset = block.settings %}
@@ -360,11 +360,24 @@
         "content": "Content sizing"
     },
     {
-        "type": "checkbox",
-        "id": "content_boxed",
-        "label": "Use boxed appearance for section",
-        "info": "Set the maximum width in Theme Settings > Layout",
-        "default": false
+        "type": "select",
+        "id": "page_width",
+        "label": "Section width",
+        "default": "",
+        "options": [
+        {
+            "value": "",
+            "label": "Full width"
+        },
+        {
+            "value": "page-width",
+            "label": "Contained"
+        },
+        {
+            "value": "page-width--narrow",
+            "label": "Contained (narrow)"
+        }
+        ]
     },
     {
         "type": "range",

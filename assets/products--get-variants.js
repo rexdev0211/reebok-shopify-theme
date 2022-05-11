@@ -154,10 +154,10 @@ collectionGetVariations = function(settings = {}, filteredDataProducts) {
 		}
 
 		if(hex !== '') {
-			var colorUrl = window.location.pathname + "/products/" + p.handle;
+			var colorUrl = window.location.pathname + "products/" + p.handle;
 
 			if($(".template-product").length > 0 || $(".template-search".length > 0)) {
-				colorUrl = "/products/" + p.handle;
+				colorUrl = "products/" + p.handle;
 			} 
 
 			var collectionUrl = $(currentMainProduct).data("collection");
@@ -326,7 +326,7 @@ collectionGetVariations = function(settings = {}, filteredDataProducts) {
 		
 		var colorUrl = setMain || nameMatchWithMain ? parentProductName : swatchInfo.data("colorUrl");
 		var collectionUrl = parentProduct.data("collection");
-		var variantUrl = `${collectionUrl ? collectionUrl + '/' : ''}${colorUrl}`;
+		var variantUrl = `${collectionUrl ? collectionUrl + '/' : ''}${colorUrl.indexOf('products') > -1 ? '' : 'products/'}${colorUrl}`;
 		var swatchColor = swatchInfo.data("swatchProdName");
 
 

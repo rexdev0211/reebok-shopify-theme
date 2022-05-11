@@ -17,7 +17,7 @@ h1.second_collection-hero__title {
 }
 
 h1.collection-hero__title {
-  color: white;
+  /* color: white; */
 }
 
 .pt-sort-selector {
@@ -33,12 +33,12 @@ h1.collection-hero__title {
 }
 
 menu-drawer.mobile-facets__wrapper {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   padding: 4px 10px;
 }
 
 span.mobile-facets__open {
-  color: black;
+  /* color: black; */
   font-weight: 700;
 }
 
@@ -214,11 +214,11 @@ span.mobile-facets__open {
 }
 
 .collection_conten_discription a.strap_links:hover {
-	background: white;
+	/* background: white; */
 }
 
 .collection_conten_discription a.strap_links:focus {
-	background: white;
+	/* background: white; */
 }
 
 .collection_conten_discription a.strap_links p {
@@ -228,7 +228,7 @@ span.mobile-facets__open {
     margin: 0;
     font-size: 14px;
     line-height: 22px;
-    color: black;
+    /* color: black; */
 }
 
 .diss_links_conten {

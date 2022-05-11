@@ -147,7 +147,7 @@
 
   .image-list__mobile--horizontal .image-list__content {
     display: grid;
-    grid-template-areas: 'image''content';
+    grid-template-areas: 'image' 'content';
     grid-template-columns: 35% 65%;
     align-items: flex-start;
   }
@@ -175,6 +175,6 @@
   }
   
   .image-list .card__text-heading {
-    font-size: 1.6rem;
+    font-size: inherit;
   }
 }

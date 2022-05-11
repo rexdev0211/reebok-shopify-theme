@@ -1,0 +1,15 @@
+<div class="mailchimp-form">
+    {%- if settings.mailchimp_heading != blank -%} 
+        <div class="mailchimp-form--heading">
+            <h2>{{ settings.mailchimp_heading }}</h2>
+        </div>
+    {%- endif -%}
+    <div class="mailchimp-form--form">
+        {{ settings.mailchimp_form }}
+    </div>
+    {%- if settings.mailchimp_additional_text != blank -%}
+        <div class="mailchimp-form--text">
+            {{ settings.mailchimp_additional_text }}
+        </div>
+    {%- endif -%}
+</div>

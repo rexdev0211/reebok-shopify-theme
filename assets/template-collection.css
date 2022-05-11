@@ -64,12 +64,16 @@
 }
 
 .featured-collection .card-wrapper {
-  padding-bottom: 3rem;
+  padding-bottom: 1rem;
+}
+
+.featured-collection .new-slider.slick-initialized .grid__item {
+  max-width: 100%!important;
 }
 
 @media screen and (min-width: 750px) {
   .featured-collection .card-wrapper {
-    padding-bottom: 3rem;
+    padding-bottom: 1rem;
   }
 }
 

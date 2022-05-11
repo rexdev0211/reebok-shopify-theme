@@ -25,7 +25,7 @@
 -%}
 
 <div class="multicolumn color-{{ section.settings.color_scheme }} gradient{% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}{% if section.settings.title == blank %} no-heading{% endif %}">
-  <div class="page-width section-{{ section.id }}-padding isolate">
+  <div class="{{ section.settings.page_width }} section-{{ section.id }}-padding isolate">
     {%- unless section.settings.title == blank -%}
       <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin">
         <h2 class="title {{ section.settings.heading_size }}">
@@ -82,13 +82,13 @@
               {%- endif -%}
               <div class="multicolumn-card__info multi_dynamic-{{ block.id }}">
                 {%- if block.settings.title != blank -%}
-                  <h3 style="color:{{ block.settings.info_color }}; font-family:{{ block.settings.info_font_family }}; font-size:{{ block.settings.info_font_size }}px; " class="info_text">{{ block.settings.title | escape }}</h3>
+                  <h3 style="color:{{ block.settings.info_color }}; font-family:{{ block.settings.info_font_family }};" class="info_text multicolumn-card__info--title {{ block.settings.title_size }}">{{ block.settings.title | escape }}</h3>
                 {%- endif -%}
                 {%- if block.settings.text != blank -%}
-                  <div style="color:{{ block.settings.rte_color }}; font-family:{{ block.settings.rte_font_family }};" class="rte">{{ block.settings.text }}</div>
+                  <div style="color:{{ block.settings.rte_color }}; font-family:{{ block.settings.rte_font_family }};" class="rte multicolumn-card__info--text">{{ block.settings.text }}</div>
                 {%- endif -%}
                 {%- if block.settings.link_label != blank -%}
-                  <a class="link animate-arrow" {% if block.settings.link == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.link }}"{% endif %}>{{ block.settings.link_label | escape }}<span class="icon-wrap">&nbsp;{% render 'icon-arrow' %}</span></a>
+                  <a class="link link--background" {% if block.settings.link == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.link }}"{% endif %}>{{ block.settings.link_label | escape }}</a>
                 {%- endif -%}
               </div>
             </div>
@@ -131,6 +131,26 @@
       "id": "title",
       "default": "Multicolumn",
       "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "page_width",
+      "label": "Section width",
+      "default": "page-width--narrow",
+      "options": [
+        {
+          "value": "",
+          "label": "Full width"
+        },
+        {
+          "value": "page-width",
+          "label": "Contained"
+        },
+        {
+          "value": "page-width--narrow",
+          "label": "Contained (narrow)"
+        }
+      ]
     },
     {
       "type": "select",
@@ -338,10 +358,30 @@
           "label": "t:sections.multicolumn.blocks.column.settings.image.label"
         },
         {
+          "type": "header",
+          "content": "Title"
+        },
+        {
           "type": "text",
           "id": "title",
           "default": "Column",
           "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+        },
+        {
+          "type": "select",
+          "id": "title_size",
+          "label": "Title size",
+          "default": "multicolumn-card__info--title-small",
+          "options": [
+            {
+              "value": "",
+              "label": "Default (large)"
+            },
+            {
+              "value": "multicolumn-card__info--title-small",
+              "label": "Small"
+            }
+          ]
         },
         {
           "type": "color",
@@ -366,9 +406,8 @@
           ]
         },
         {
-          "type": "text",
-          "id": "info_font_size",
-          "label": "size"
+          "type": "header",
+          "content": "Content"
         },
         {
           "type": "richtext",
@@ -397,6 +436,10 @@
             }
 
           ]
+        },
+        {
+          "type": "header",
+          "content": "Link"
         },
         {
           "type": "text",

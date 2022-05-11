@@ -1,5 +1,5 @@
 .search__input.field__input {
-  padding-right: 5rem;
+  padding-right: 1rem;
 }
 
 .search__button {
@@ -29,18 +29,18 @@
 }
 
 .search__input.field__input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #767677;
+  /* color: #767677; */
   opacity: 1; /* Firefox */
   padding-left:8px;
 }
 
 .search__input.field__input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: #767677;
+  /* color: #767677; */
   padding-left:8px;
 }
 
 .search__input.field__input::-ms-input-placeholder { /* Microsoft Edge */
-  color: ##767677;
+  /* color: #767677; */
   padding-left:8px;
 }
 /* Remove extra spacing for search inputs in Safari */
@@ -56,21 +56,22 @@ label.field__label {
 .search__input.field__input {
   padding: 0px !important;
   margin: 0px;
-  border-bottom: 1px solid black;
+  border: none;
+  border-bottom: 1px solid rgb(var(--color-foreground));
   height: 37px;
   width: 140px;
-  font-size: 13px;
+  font-size: 0.8rem;
 }
 
 .field:after, .select:after, .customer .field:after, .customer select:after, .localization-form__select:after {
   content: none;
 }
 
-button.search__button.field__button img {
+/* button.search__button.field__button img {
   width: 20px;
-}
+} */
 
-a.header__icon.header__icon--account.link.focus-inset .login_defolt {
+/* a.header__icon.header__icon--account.link.focus-inset .login_defolt {
   width: 21px;
   margin-left:23px
 }
@@ -78,7 +79,7 @@ a.header__icon.header__icon--account.link.focus-inset .login_defolt {
 a.header__icon.header__icon--cart.link.focus-inset .cart_defolt {
   width: 21px;
   margin-left:23px
-}
+} */
 
 .header__icon, .header__icon--cart .icon {
   float: left;
@@ -92,15 +93,20 @@ details-modal.header__search {
   box-shadow: none;
 }
 
-a.header__icon.header__icon--cart.link.focus-inset{
+.header__icon.header__icon--cart {
   margin-right: 0px;
-  margin-left: 8px;
+  margin-left: 0.5rem;
   padding-bottom: 5px;
 }
 
-a.header__icon.header__icon--account.link.focus-inset {
-  margin-left: 8px;
+.header__icon.header__icon--account {
+  /* margin-left: 8px; */
   padding-bottom: 5px;
+}
+
+.header .search__button {
+  height: auto;
+  width: 1.25rem;
 }
 
 @media only screen and (max-width: 767px) {
@@ -115,7 +121,7 @@ a.header__icon.header__icon--account.link.focus-inset {
   
     .header__icon:not(.header__icon--summary), .header__icon span {
       justify-content: flex-end;
-      margin-left: 7px;
+      /* margin-left: 7px; */
     }
   
     a.header__icon.header__icon--cart.link.focus-inset {

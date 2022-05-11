@@ -102,7 +102,7 @@ cart-items.is-empty .title-wrapper-with-link,
   font-size: 16px;
   line-height: 22px;
   display: inline-block;
-  color: black;
+  /* color: black; */
   text-decoration: underline;
 }
 
@@ -117,7 +117,7 @@ li.trigger_popup_fridd.gl-tab-2 {
 p.text_conten_ppc {
   margin: 0;
   text-align: start;
-  color: black;
+  /* color: black; */
   font-size: 15px;
   line-height: 22px;
   font-weight: bold;
@@ -130,14 +130,14 @@ p.text_conten_ppc {
 p.text-conten_hcl {
   margin: 7px 0 7px 0;
   text-align: start;
-  color: black;
+  /* color: black; */
 }
 
 ul.plus_contener {
   margin: 0;
   padding: 0;
   text-align: start;
-  color: black;
+  /* color: black; */
 }
 
 ul.plus_contener li {
@@ -154,7 +154,7 @@ h4.hp_title_worrier {
 }
 
 p.link_texter {
-  color: black;
+  /* color: black; */
   text-align: start;
   font-size: 16px;
   line-height: 22px;
@@ -162,12 +162,12 @@ p.link_texter {
 }
 
 p.link_texter a {
-  color: black;
+  /* color: black; */
 }
 
 ul.one_daimention {
   text-align: start;
-  color: black;
+  /* color: black; */
   padding: 0;
   margin: 15px 0;
 }
@@ -181,7 +181,7 @@ ul.one_daimention li {
 
 p.gift_conten {
   text-align: start;
-  color: black;
+  /* color: black; */
   font-weight: bold;
   font-size: 15px;
   line-height: 22px;
@@ -189,7 +189,7 @@ p.gift_conten {
 
 ul.two_daimention {
   text-align: start;
-  color: black;
+  /* color: black; */
   padding: 0;
   margin: 15px 0;
 }
@@ -203,7 +203,7 @@ ul.two_daimention li {
 
 p.above_text {
   text-align: start;
-  color: black;
+  /* color: black; */
   font-size: 16px;
   line-height: 22px;
   margin-bottom: 16px;
@@ -375,15 +375,15 @@ p.above_text {
 }
 
 .cart__warnings a:hover {
-  background: #244496;
+  /* background: #244496; */
 }
 
 .cart__login-paragraph a {
-  color: black;
+  /* color: black; */
   text-decoration: underline !important;
 }
 .cart__login-paragraph a:hover {
-  background: white;
+  /* background: white; */
 }
 
 @media screen and (min-width: 750px) {

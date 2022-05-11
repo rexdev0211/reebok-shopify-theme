@@ -1,0 +1,27 @@
+.product-grid {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  .product-grid .grid__item {
+    /* padding-bottom: 3rem; */
+  }
+  
+  .product-grid.negative-margin {
+    /* margin-bottom: -2rem; */
+  }
+  
+  @media screen and (min-width: 768px) {
+    .product-grid .grid__item {
+      /* padding-bottom: 6.5rem; */
+    }
+  
+    .product-grid.negative-margin {
+      /* margin-bottom: -5rem; */
+    }
+  
+    .product-grid.negative-margin--small {
+      /* margin-bottom: -1rem; */
+    }
+  }
+  

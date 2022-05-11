@@ -1,0 +1,233 @@
+{%- style -%}
+.section-{{ section.id }} {
+    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.color_bg }};
+  }
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  .section-{{ section.id }} .trigger_popup_fricc {
+    {%- if section.settings.btn_color != blank and section.settings.btn_color != 'rgba(0,0,0,0,)' -%} 
+    --color-button-text: {{ section.settings.btn_color }}; 
+    --color-button-text-hover: {{ section.settings.btn_color }}; 
+    --color-button-border: {{ section.settings.btn_color }}; 
+    --color-button-border-hover: {{ section.settings.btn_color }}; 
+    {%- endif -%}
+    {%- if section.settings.btn_bgcolor != blank and section.settings.btn_bgcolor != 'rgba(0,0,0,0,)' -%}
+     --color-button: {{ section.settings.btn_bgcolor }};
+     --color-button-hover: {{ section.settings.btn_bgcolor }};
+     {%- endif -%}
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+    }
+
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="bottom-banner-action" class="bottom-banner-action section-{{ section.id }} section-{{ section.id }}-padding">
+  <div class="footer-interactive page-width--narrow">
+    <div class="footer_newsletter___33hsw">
+      <div class="container wrapper___hyNX4 grid align-items-center grid--1-col {% if section.settings.button_action != 'hide' -%}grid--2-col-tablet{%- endif -%}">
+        <div class="grid__item">
+          <h4 style="color:{{ section.settings.news_color }}; font-family:{{ section.settings.news_font_family }}; " class="h3 text-uppercase intractive_title">{{ section.settings.intractive_title }}</h4>
+        </div>
+        {%- if section.settings.button_action != 'hide' -%}
+          <div class="grid__item">
+            {%- if section.settings.intractive_btn != blank -%}
+            <a href="bottom-banner--modal" rel="modal:open" class="button trigger_popup_fricc gl-cta gl-cta--secondary gl-cta--secondary-light" aria-label="Primary" id="bottom-banner-action--button">
+              {{ section.settings.intractive_btn }}
+            </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- if section.settings.button_action != 'hide' -%}
+<div id="bottom-banner--modal" class="jq-modal">
+  <div>
+    {%- liquid 
+        case section.settings.button_action
+        when 'register'
+          render 'section--customer-register', is_banner: true
+        when 'subscription'
+          render 'mailchimp-form', is_banner: true
+        endcase 
+      
+      -%}
+  </div>
+</div>
+<script>
+
+</script>
+{%- endif -%}
+
+{%- comment -%}
+{%- if section.settings.button_action != 'hide' -%}
+<div class="hover_bkgr_fricc" id="bottom-banner-action--popup">
+    <span class="helper"></span>
+    <div>
+        <button id="popupCloseButton">&times;<span class="sr-only">Close</span></button>
+        {%- liquid 
+            case section.settings.button_action
+            when 'register'
+              render 'section--customer-register', is_banner: true
+            when 'subscription'
+              render 'mailchimp-form', is_banner: true
+            endcase 
+          
+          -%}
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#bottom-banner-action--button").click(function(e){
+    e.preventDefault()
+    $("body").addClass("remaning");
+    $('#bottom-banner-action--popup').show();
+  });
+  
+  $('#popupCloseButton').click(function(){
+      $('#bottom-banner-action--popup').hide();
+      $("body").removeClass("remaning");
+  });
+});
+</script>
+{%- endif -%}
+{%- endcomment -%}
+    
+{% schema %}
+{
+  "name": "Bottom banner",
+  "settings": [
+    {
+      "type": "select",
+      "id": "button_action",
+      "label": "Popup content",
+      "default": "register",
+      "options": [
+          {
+            "value": "register",
+            "label": "Account register"
+          },
+          {
+            "value": "subscription",
+            "label": "Subscription form"
+          },
+          {
+            "value": "hide",
+            "label": "Don't show button or popup"
+          }
+        ]
+      },
+        {
+            "type": "color",
+            "id": "color_bg",
+            "label": "Banner background color",
+            "default": "#e41d1b"
+        },
+        {
+            "type" :"header",
+            "content": "Title settings"
+        },
+        {
+          "type": "text",
+          "id": "intractive_title",
+          "label": "Title"
+       },
+       {
+          "type": "color",
+          "id": "news_color",
+          "label": "Text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "select",
+          "id": "news_font_family",
+          "label": "Font family",
+          "default": "Neue Plak Wide",
+          "options": [
+            {
+                "label": "Neue Plak",
+                "value": "Neue Plak"
+            },
+            {
+                "label": "Neue Plak Wide",
+                "value": "Neue Plak Wide"
+            }
+          ]
+        },
+        {
+            "type": "header",
+            "content": "Sign up button"
+        },
+        {
+            "type": "text",
+            "id": "intractive_btn",
+            "label": "Button text"
+        },
+       
+        {
+          "type": "color",
+          "id": "btn_bgcolor",
+          "label": "Background color"
+        },
+        {
+            "type": "color",
+            "id": "btn_color",
+            "label": "Text color"
+        },
+        {
+            "type": "header",
+            "content": "Spacing"
+        },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.footer.settings.margin_top.label",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 50
+    }
+  ]
+}
+{% endschema %}

@@ -259,16 +259,16 @@ fieldset.product-form__input .form__label {
 
 .product-form__submit {
   margin-bottom: 1rem;
-  background: black;
+  /* background: black; */
   justify-content: center;
   align-items: center;
-  color: white;
+  /* color: white; */
   text-decoration: none !important;
   font-weight: bold;
   
 }
 .product-form__submit:hover {
-	background: #244496;
+	/* background: #244496; */
   border: none;
   outline: none;
 } 
@@ -1029,16 +1029,12 @@ section#shopify-section-template--15773388669158__16487227664b757d9c {
   padding-right: 1.3rem;
   padding-left: 0;
   height: 4.4rem;
-  text-underline-offset: 0.3rem;
-  text-decoration-thickness: 0.1rem;
-  transition: text-decoration-thickness var(--duration-short) ease;
   text-align: left;
   display: flex;
   align-items: center;
 }
 
 .product-popup-modal__button:hover {
-  text-decoration-thickness: 0.2rem;
 }
 
 .product-popup-modal__content-info {
@@ -1301,25 +1297,25 @@ p.product__text.caption-with-letter-spacing {
   font-weight: 100;
 }
   
-h1.product__title {
+/* h1.product__title {
   font-weight: 600;
   font-size: 28px;
   line-height: 34px;
   text-transform: capitalize;
   margin-bottom: 0;
   font-family: "Neue Plak",Helvetica, Arial, sans-serif;
-}
+} */
   
-span.badge.price__badge-sale.color-accent-2 {
+/* span.badge.price__badge-sale.color-accent-2 {
   display: none;
 }
   
 span.price-item.price-item--sale.price-item--last {
   font-size: 16px;
   font-weight: 900;
-}
+} */
   
-p.product__text {
+/* p.product__text {
   font-size: 14px;
   text-transform: none;
   letter-spacing: 0;
@@ -1327,16 +1323,16 @@ p.product__text {
   line-height: 15px;
   font-weight: 900;
   margin: 20px 0;
-}
+} */
   
-fieldset.js.product-form__input legend.form__label {
+/* fieldset.js.product-form__input legend.form__label {
   font-size: 14px;
   text-transform: none;
   letter-spacing: 0;
   margin-bottom: 0;
   color: black;
   font-weight: 700;
-}
+} */
   
 variant-radios.no-js-hidden {
   padding-top: 10px;

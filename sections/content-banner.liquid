@@ -35,6 +35,7 @@
 
 <div id="Banner-{{ section.id }}" 
 class="banner
+{{ section.settings.page_width }}
   {% if section.settings.stack_images_on_mobile and section.settings.image != blank and section.settings.image_2 != blank%} banner--stacked{% endif %}
   {% if section.settings.adapt_height != 'none' and section.settings.image != blank or section.settings.image_2 != blank %} banner--adapt{% endif %} 
   {% if section.settings.video_file != blank or section.settings.video_link.id != blank %} banner--video{% endif %} 
@@ -61,10 +62,7 @@ class="banner
       >
       
     </div>
-  <div class="second_banner_new">
-  
-  <img src="{{section.settings.clint_banner | img_url: 'master'}}">
-  </div>
+
     {%- elsif section.settings.image == blank and section.settings.left_bg != blank -%}
       <div class="banner__col-left banner__col-empty"></div>
    
@@ -123,7 +121,8 @@ class="banner
       </div>
   {%- endif -%}
   {%- endif -%}
-  <div class="home_second banner__content page-width {{ section.settings.content_alignment_mobile }}">
+
+  <div class="banner__content {{ section.settings.content_alignment_mobile }}">
     <div class="banner__box banner__blocks--{{ section.blocks.size }} {{ section.settings.content_mobile }}">
       {%- assign block_count = section.blocks.size -%}
 
@@ -281,12 +280,27 @@ class="banner
 {
   "name": "Content banner",
   "tag": "section",
-  "settings": [
+    "settings": [
     {
-         "id": "clint_banner",
-         "type": "image_picker",
-          "label": "mobile-Image"
-     },
+      "type": "select",
+      "id": "page_width",
+      "label": "Section width",
+      "default": "",
+      "options": [
+      {
+          "value": "",
+          "label": "Full width"
+      },
+      {
+          "value": "page-width",
+          "label": "Contained"
+      },
+      {
+          "value": "page-width--narrow",
+          "label": "Contained (narrow)"
+      }
+      ]
+  },
 	{
       "type": "range",
       "id": "min_height",
@@ -581,6 +595,26 @@ class="banner
           "id": "heading",
           "default": "Content banner",
           "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Text alignment",
+          "default": "text-left",
+          "options": [
+              {
+                  "value": "text-left",
+                  "label": "Left"
+              },
+              {
+                  "value": "text-center",
+                  "label": "Centre"
+              },
+              {
+                  "value": "text-right",
+                  "label": "Right"
+              }
+          ]
         },
         {
           "type": "select",
@@ -893,9 +927,8 @@ class="banner
       "limit": 1,
       "settings": [
         {
-          "type": "text",
+          "type": "textarea",
           "id": "text",
-          "default": "Give customers details about the banner image(s) or content on the template.",
           "label": "t:sections.image-banner.blocks.text.settings.text.label"
         },
         {
@@ -1072,6 +1105,46 @@ class="banner
         },
         {
           "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "default": "button",
+          "options": [
+            {
+              "value": "button",
+              "label": "Button (filled)"
+            },
+            {
+              "value": "button-outline",
+              "label": "Button (outline)"
+            },
+            {
+              "value": "text",
+              "label": "Text (with background hover color)"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Button alignment",
+          "default": "text-center",
+          "options": [
+              {
+                  "value": "text-left",
+                  "label": "Left"
+              },
+              {
+                  "value": "text-center",
+                  "label": "Centre"
+              },
+              {
+                  "value": "text-right",
+                  "label": "Right"
+              }
+          ]
+        },
+        {
+          "type": "select",
           "id": "position",
           "label": "Position",
           "default": "bottom",
@@ -1159,9 +1232,23 @@ class="banner
           "unit": "%"
         },
         {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "paragraph",
+          "content": "Not all button styles may use all below colors."
+        },
+        {
           "type": "color",
           "id": "button_color_background",
           "label": "Button background color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_color_border",
+          "label": "Button border color",
           "default": "#000000"
         },
         {
@@ -1170,10 +1257,37 @@ class="banner
           "label": "Button text color",
           "default": "#FFFFFF"
         },
+        
+        {
+          "type": "color",
+          "id": "button_color_background_hover",
+          "label": "Button background color (hover)",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_color_border_hover",
+          "label": "Button border color (hover)",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_color_text_hover",
+          "label": "Button text color (hover)",
+          "default": "#FFFFFF"
+        },
+
+
         {
           "type": "color",
           "id": "button_color_background_mobile",
           "label": "Button background color (mobile)",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_color_border_mobile",
+          "label": "Button border color (mobile)",
           "default": "#000000"
         },
         {
@@ -1199,12 +1313,6 @@ class="banner
           "label": "t:sections.image-banner.blocks.buttons.settings.button_link_1.label"
         },
         {
-          "type": "checkbox",
-          "id": "button_style_secondary_1",
-          "default": false,
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_1.label"
-        },
-        {
           "type": "header",
           "content": "Button 2"
         },
@@ -1219,12 +1327,6 @@ class="banner
           "type": "url",
           "id": "button_link_2",
           "label": "t:sections.image-banner.blocks.buttons.settings.button_link_2.label"
-        },
-        {
-          "type": "checkbox",
-          "id": "button_style_secondary_2",
-          "default": false,
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
         },
         {
           "type": "header",
@@ -1243,12 +1345,6 @@ class="banner
           "label": "Third button link"
         },
         {
-          "type": "checkbox",
-          "id": "button_style_secondary_3",
-          "default": false,
-          "label": "Use outline button style"
-        },
-        {
           "type": "header",
           "content": "Button 4"
         },
@@ -1263,12 +1359,6 @@ class="banner
           "type": "url",
           "id": "button_link_4",
           "label": "Fourth button link"
-        },
-        {
-          "type": "checkbox",
-          "id": "button_style_secondary_4",
-          "default": false,
-          "label": "Use outline button style"
         }
       ]
     },

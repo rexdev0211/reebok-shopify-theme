@@ -1,33 +1,7 @@
 .loading-overlay {
   position: absolute;
   z-index: 1;
-  width: 1.8rem;{
-          "type": "color",
-          "id": "info_color",
-          "label": "Color"
-        },
-        {
-          "type": "select",
-          "id": "info_font_family",
-          "label": "Font",
-          "default": "Neue Plak",
-          "options": [
-            {
-                "label": "Neue Plak",
-                "value": "Neue Plak"
-            },
-            {
-                "label": "Neue Plak Wide",
-                "value": "Neue Plak Wide"
-            }
-
-          ]
-        },
-        {
-          "type": "text",
-          "id": "info_font_size",
-          "label": "size"
-        },
+  width: 1.8rem;
 }
 
 @media screen and (max-width: 749px) {

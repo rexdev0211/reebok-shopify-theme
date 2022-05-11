@@ -1,6 +1,6 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
-{%comment%}{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}{%endcomment%}
+{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
 
 <link type="text/css" rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
 <link type="text/css"  href="{{ 'component-badge.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -10,37 +10,39 @@
 <noscript>{{ 'component-badge.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'template-collection.css' | asset_url | stylesheet_tag }}</noscript>
 
-<div class="collection featured-collection">
+<div class="collection featured-collection {{ section.settings.page_width }}">
   <div class="{% if section.settings.show_view_all %}title-wrapper-with-link{% endif %}{% if section.settings.title == blank %} title-wrapper-with-link--no-heading{% endif %}">
-    <h2 class="section-title h6 {% if section.settings.title == blank %} title--no-heading{% endif %}" style="font-size: {{ section.settings.font_h3 }}px; font-family: {{ section.settings.font_family }}; font-weight: {{ section.settings.font_weight }}">{{ section.settings.title | escape }}</h2>
+    <h2 class="section-title h6 {% if section.settings.title == blank %} title--no-heading{% endif %}" style="font-family: {{ section.settings.font_family }}; font-weight: {{ section.settings.font_weight }}">{{ section.settings.title | escape }}</h2>
 
     {%- if section.settings.show_view_all -%}
-      <a href="{{ section.settings.collection.url }}" class="link-with-icon link-with-icon--large animate-arrow section-title link-with-icon--right">
+      <a href="{{ section.settings.collection.url }}" class="link--background">
         {%- if section.settings.view_all_text != blank -%}
          {{ section.settings.view_all_text | escape }}
         {%- else -%}
           {{ 'sections.featured_collection.view_all' | t }}
         {%- endif -%}
-     {%comment%}   {%- render 'icon-arrow' -%}{%endcomment%}
       </a>
     {%- endif -%}
   </div>
 
   <div id="slider-{{ section.id }}">
-      <ul class="new-slider">
+      <ul class="new-slider grid grid--{{ section.settings.slides_mobile }}-col grid--{{ section.settings.slides_tablet }}-col-tablet grid--{{ section.settings.slides_desktop }}-col-desktop">
         {%- for product in section.settings.collection.products -%}
-            <li class="swiper-slide ">
+          {%- if product.available -%}
+            <li class="grid__item">
             {% render 'card-product',
               card_product: product,
               media_aspect_ratio: section.settings.image_ratio,
               show_secondary_image: section.settings.show_secondary_image,
               show_vendor: section.settings.show_vendor,
-              show_rating: section.settings.show_rating
+              show_rating: section.settings.show_rating,
+              tag_value: section.settings.tag_value
             %}
             </li>
+          {%- endif -%}
         {%- else -%}
             {%- for i in (1..4) -%}
-            <li class="swiper-slide">
+            <li class="swiper-slide grid__item">
                 {% render 'card-product-placeholder' %}
             </li>
             {%- endfor -%}
@@ -50,10 +52,11 @@
 </div>
 <script>
     $(document).ready(function() {
-        initCollectionSlider()
+      initCollectionSlider($("#slider-{{ section.id }} .new-slider"))
     })
-  function initCollectionSlider() {
-    $(".new-slider").not('.slick-initialized').slick({
+
+  function initCollectionSlider(slider) {
+    slider.not('.slick-initialized').slick({
       loop: false,
       infinite: false,
       dots: true,
@@ -65,38 +68,58 @@
                 breakpoint: 1024,
                 settings: {
                   slidesToShow: {{ section.settings.slides_desktop }},
-                  slidesToScroll: 1,
+                  slidesToScroll: {{ section.settings.slides_desktop }},
                   infinite: false,
-                  dots: true
                 }
               },
               {
                 breakpoint: 600,
                 settings: {
                   slidesToShow: {{ section.settings.slides_tablet }},
-                  slidesToScroll: 2,
+                  slidesToScroll: {{ section.settings.slides_tablet }},
                   arrows: false,
-      			 infinite: false
+                  infinite: false,
                 }
               },
               {
                 breakpoint: 480,
                 settings: {
                   slidesToShow: {{ section.settings.slides_mobile }},
-                  slidesToScroll: 2,
+                  slidesToScroll: {{ section.settings.slides_mobile }},
                   infinite: false,
-                  arrows: false
+                  arrows: false,
                 }
               }
         ]
     })
   }
+
 </script>
 {% schema %}
 {
   "name": "Collection slider",
   "tag": "section",
   "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "label": "Section width",
+      "default": "page-width",
+      "options": [
+      {
+          "value": "",
+          "label": "Full width"
+      },
+      {
+          "value": "page-width",
+          "label": "Contained"
+      },
+      {
+          "value": "page-width--narrow",
+          "label": "Contained (narrow)"
+      }
+      ]
+    },
     {
         "type": "range",
         "id": "slides_desktop",
@@ -129,11 +152,6 @@
       "id": "title",
       "default": "Featured collection",
       "label": "t:sections.featured-collection.settings.title.label"
-    },
-    {
-       "type": "text",
-       "id": "font_h3",
-       "label": "size"
     },
     {
         "type": "select",
@@ -176,15 +194,6 @@
       "type": "collection",
       "id": "collection",
       "label": "t:sections.featured-collection.settings.collection.label"
-    },
-    {
-      "type": "range",
-      "id": "products_to_show",
-      "min": 2,
-      "max": 12,
-      "step": 2,
-      "default": 4,
-      "label": "t:sections.featured-collection.settings.products_to_show.label"
     },
     {
       "type": "checkbox",
@@ -239,6 +248,12 @@
       "id": "show_vendor",
       "default": false,
       "label": "t:sections.featured-collection.settings.show_vendor.label"
+    },
+    {
+      "type": "text",
+      "id": "tag_value",
+      "label": "Show value from tag",
+      "info": "Case sensitive. Include the prefix of the tag without the colon. Will only show the first it find."
     }
   ],
   "presets": [

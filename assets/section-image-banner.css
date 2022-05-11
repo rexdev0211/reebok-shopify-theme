@@ -7,7 +7,7 @@
 .banner__box {
   text-align: center;
 }
-
+/* 
 .slideshow__text.banner__box.content-container.content-container--full-width-mobile.slideshow__text--left.slideshow__text-mobile--center {
   width: 200px;
   min-width: 47rem;
@@ -18,16 +18,16 @@
 }
 
 .slideshow__text.banner__box.content-container.content-container--full-width-mobile.slideshow__text--left.slideshow__text-mobile--center a.button.button--primary:hover {
-  color: #000000 !importan;
-  background-color: #ffffff !importan;
-}
+  color: #000000 !important;
+  background-color: #ffffff !important;
+} */
 
-.slideshow__text-wrapper.banner__content.banner__content--middle-right.page-width {
+/* .slideshow__text-wrapper.banner__content.banner__content--middle-right.page-width {
   position: absolute;
   left: 53%;
   top: 50%;
   transform: translate(-50%,-50%);
-}
+} */
 
 .slideshow__media.banner__media.media.placeholder {
    position: inherit;
@@ -41,20 +41,20 @@ slideshow-component .slideshow.banner {
    height: auto;
 }
 
-slideshow-component .slideshow.banner h2.banner__heading.h1 {
+/* slideshow-component .slideshow.banner h2.banner__heading.h1 {
   line-height: 36px;
   font-size: 43px;
-}
+} */
 
-.banner__text {
+/* .banner__text {
   line-height: 22px;
-}
+} */
 
 .banner {
   min-height: auto !important;
 }
 
-.banner__text {
+/* .banner__text {
   font-size: 18px;
   margin-top: 1rem;
 }
@@ -62,7 +62,7 @@ slideshow-component .slideshow.banner h2.banner__heading.h1 {
 .slideshow.banner a.button.button--primary{
   font-weight: 600;
   font-size: 14px;
-}
+} */
 
 
 @media only screen and (max-width: 749px) {
@@ -512,7 +512,7 @@ slideshow-component .slideshow.banner h2.banner__heading.h1 {
   	display: block;
     position: inherit;
   }
-  .slideshow__text-wrapper.banner__content.banner__content--middle-right.page-width {
+  /* .slideshow__text-wrapper.banner__content.banner__content--middle-right.page-width {
   	left: 50%;
     top: 76%;
     justify-content: start;
@@ -521,10 +521,10 @@ slideshow-component .slideshow.banner h2.banner__heading.h1 {
   	width: 0;
     min-width: 38rem;
     
-  }
+  } */
   .slideshow.banner h2.banner__heading.h1 {
-    line-height: 28px;
-    font-size: 30px;
+    line-height: 1.75;
+    font-size: 1.875rem;
     text-align: start;
    }
    .slideshow.banner .banner__text {
