@@ -42,9 +42,9 @@
   }
 }
 
-.collection.loading .loading-overlay {
+/* .collection .loading-overlay {
   display: block;
-}
+} */
 
 .collection--empty .title-wrapper {
   margin-top: 10rem;
@@ -67,7 +67,7 @@
   padding-bottom: 1rem;
 }
 
-.featured-collection .new-slider.slick-initialized .grid__item {
+ .new-slider .grid__item {
   max-width: 100%!important;
 }
 
@@ -85,6 +85,6 @@
   width: 100%;
 }
 
-li.grid__item.product-item:hover {
+.grid__item.product-item:hover {
   border: 1px solid black;
 }

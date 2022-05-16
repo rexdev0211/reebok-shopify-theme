@@ -522,12 +522,12 @@ slideshow-component .slideshow.banner {
     min-width: 38rem;
     
   } */
-  .slideshow.banner h2.banner__heading.h1 {
+  .slideshow banner__heading {
     line-height: 1.75;
     font-size: 1.875rem;
     text-align: start;
    }
-   .slideshow.banner .banner__text {
+   .slideshow .banner__text {
     text-align: start;
    }
 }

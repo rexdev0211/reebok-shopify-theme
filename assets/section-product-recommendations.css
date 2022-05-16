@@ -25,7 +25,7 @@
   z-index: 3;
 }
 
-h1.ragister_title_wrapper {
+.ragister_title_wrapper {
   margin: 0;
   padding: 25px 0;
 }
@@ -34,7 +34,7 @@ h1.ragister_title_wrapper {
   background: var(--gradient-background);
 }
 
-ul.tab-terminal-left {
+.tab-terminal-left {
   margin: 15px 0px;
   padding: 0;
   list-style: none;
@@ -44,21 +44,21 @@ ul.tab-terminal-left {
   justify-content: center;
 }
 
-ul.tab-terminal-left li {
+.tab-terminal-left li {
   padding: 20px;
 }
 
-li.core_1.active {
+.core_1.active {
   border-bottom: 2px solid;
 }
 
-ul.tab-terminal-left li a {
+.tab-terminal-left li a {
   color: rgb(var(--color-foreground));
   font-size: 15px;
   text-decoration: none;
 }
 
-li.core_1.active a{
+.core_1.active a{
   font-weight: var(--font-heading-weight);
 }
 

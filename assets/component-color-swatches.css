@@ -103,9 +103,9 @@
     vertical-align: middle;
     margin-left: 5px;
 }
-.template-collection .color-swatches.product__color-swatches.color-swatches--left {
+.template-collection .color-swatches--left {
     display: none;
 }
-li.grid__item.product-item:hover .color-swatches.product__color-swatches.color-swatches--left {
+.grid__item.product-item:hover .color-swatches--left {
 	display: block;
 }

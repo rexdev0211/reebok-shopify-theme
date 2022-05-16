@@ -56,7 +56,7 @@
         padding-top: 30px;
     }
 
-    .section-content-column .ib-block-left .ib-item {
+    .section-content-column  .ib-item {
         position: relative;
         top: unset;
         left: unset;

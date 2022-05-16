@@ -495,15 +495,15 @@
   .banner__box--mobile > * {
     margin-top: 0;
   }
-  .banner--video.banner-mobile--stack .banner__media--video {
+  .banner--video .banner__media--video {
     padding-top: 0;
   }
   
-  .banner--video.banner-mobile--stack .banner__media--video .banner__media--video-video {
+  .banner--video  .banner__media--video-video {
     position: relative;
   }
   
-  .banner--video.banner-mobile--stack .banner__media--video-embed iframe {
+  .banner--video. .banner__media--video-embed iframe {
     height: 56.25vw;
   }
 }

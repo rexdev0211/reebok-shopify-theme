@@ -49,7 +49,7 @@ input::-webkit-search-decoration {
 }
 
 label.field__label {
-  font-size: 14px;
+  font-size: 0.9rem;
   left: 9px;
 }
 
@@ -124,7 +124,7 @@ details-modal.header__search {
       /* margin-left: 7px; */
     }
   
-    a.header__icon.header__icon--cart.link.focus-inset {
+    a.header__icon.focus-inset {
       margin-right: 0px;
     }
 
@@ -139,11 +139,11 @@ details-modal.header__search {
      display: block !important;
    }
   
-   form.search.search-modal__form {
+   .search.search-modal__form {
     display: none;
    }
   
-   summary.header__icon.header__icon--search.header__icon--summary.link.focus-inset.modal__toggle svg#Layer_1 {
+   .header__icon. svg#Layer_1 {
     width: 20px;
   }
 }

@@ -12,7 +12,7 @@
 
 .image-list__item .card__text p {
   margin-top: 0;
-  font-weight: 400;
+  font-weight: var(--font-body-weight);
 }
 
 .image-list--text-overlap .card--stretch {

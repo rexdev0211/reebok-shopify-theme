@@ -286,6 +286,6 @@ ul.menu-drawer__menu.list-menu li:first-child {
 }
 
 .submenu_dark {
-  font-weight: bold;
+  font-weight: var(--font-heading-weight);
   color: inherit;
 }

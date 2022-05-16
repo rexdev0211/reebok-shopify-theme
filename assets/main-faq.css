@@ -42,39 +42,39 @@ section.necessary_conten {
   padding-top: 40px;
 }
 
-h2.Faq_head_title {
-  font-size: 30px;
+.Faq_head_title {
+  font-size: 1.9rem;
   line-height: 28px;
   margin: 10px 0;
 }
 
-ul.ctas___1HCiK {
+.ctas___1HCiK {
   margin: 0;
   list-style: none;
   padding: 0;
 }
 
-li.cta___2bw7D {
+.cta___2bw7D {
   margin: 15px 0;
 }
 
-li.cta___2bw7D a {
+.cta___2bw7D a {
   /* color: black; */
 }
 
-li.cta___2bw7D a {
+.cta___2bw7D a {
   /* color: #000; */
   /* font-size: 14px; */
-  font-weight: bold;
+  font-weight: var(--font-heading-weight);
 }
 
-li.cta___2bw7D a:hover {
+.cta___2bw7D a:hover {
   /* color: white; */
   /* background: black; */
 }
 
-h2.faq_tabs_title {
-  font-weight: 700;
+.faq_tabs_title {
+  font-weight: var(--font-heading-weight)
   line-height: 38px;
   margin: 0 0 30px 0;
 }
@@ -109,15 +109,15 @@ section.tab_faq_container .tabs-container {
   padding: 0 15px;
 }
 
-li.cta___2bx8t a {
+.cta___2bx8t a {
   /* color: black; */
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 22px;
-  font-family: 'Neue Plak';
-  font-weight: 100;
+  font-family: var(--font-body-family);
+  font-weight: var(--font-body-weight);
 }
 
-ul.ctas___1Htmc {
+.ctas___1Htmc {
   padding: 0 15px;
   list-style: none;
 }
@@ -136,7 +136,7 @@ section.tab_faq_container .tab button {
 }
 
 section.tab_faq_container .tab button.active {
-	font-weight: bold;
+	font-weight: var(--font-heading-weight);
 }
 
 section.tab_faq_container .tabcontent {
@@ -165,7 +165,7 @@ section.tab_faq_container .tabcontent {
   display: none;
 }
 
-section.tab_faq_container .tab button.active .faq_arrow_now {
+.tab_faq_container .tab button.active .faq_arrow_now {
 	display: block;
 }
 
@@ -202,7 +202,7 @@ li.cta___2bx8t a:hover {
 }
 
 .detox_text a {
-  font-weight: 600;
+  font-weight: var(--font-heading-weight);
 }
 
 .detox_text a:hover {
@@ -236,7 +236,7 @@ section.mibile_tab_faq_container {
   border: none;
   text-align: left;
   outline: none;
-  font-size: 15px;
+  font-size: 0.95rem;
   transition: 0.4s;
   /* background: white; */
   position: relative;
@@ -253,7 +253,7 @@ section.mibile_tab_faq_container {
 .accordion:after {
   content: '\f0d7';
   /* color: black; */
-  font-weight: bold;
+  font-weight: var(--font-heading-weight);
   float: right;
   margin-left: 5px;
   /* font-family: fontawesome; */
@@ -275,7 +275,7 @@ section.mibile_tab_faq_container {
 }
 
 .mobile_faq-title_label {
-  font-weight: 600;
+  font-weight: var(--font-heading-weight);
 }
 
 /* ------------end-------------------------- */
@@ -289,8 +289,8 @@ section.mibile_tab_faq_container {
     width: 100%;
   }
   
-  h2.Faq_head_title {
-    font-size: 26px;
+  .Faq_head_title {
+    font-size: 1.63rem;
     line-height: 26px;
   }
   
@@ -309,8 +309,8 @@ section.mibile_tab_faq_container {
   	margin-bottom: 12px;
   }
   
-  h2.faq_tabs_title {
-  	font-size: 30px !important;
+  .faq_tabs_title {
+  	font-size: 1.9rem !important;
     line-height: 28px;
   }
   
