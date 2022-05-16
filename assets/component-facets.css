@@ -1,3 +1,13 @@
+span.mobile-facets__open-label.button-label {
+  border-bottom: 1px solid;
+  margin: 0 10px 0 0;
+  font-size: 1.1rem;
+}
+
+span.mobile-facets__open {
+  flex-direction: row-reverse;
+}
+
 .facets-container {
   display: grid;
   grid-template-columns: repeat(2, auto);
@@ -507,7 +517,7 @@ a.active-facets__button.focused .active-facets__button-inner,
 .mobile-facets__clear-wrapper {
   align-items: center;
   display: flex;
-  justify-content: center;
+ 
 }
 
 .mobile-facets {
@@ -537,13 +547,13 @@ a.active-facets__button.focused .active-facets__button-inner,
 
 .mobile-facets__inner {
   background-color: rgb(var(--color-background));
-  width: calc(100% - 5rem);
+  width: 30%;
   margin-left: auto;
   height: 100%;
   overflow-y: auto;
   pointer-events: all;
   transition: transform var(--duration-short) ease;
-  max-width: 37.5rem;
+
   display: flex;
   flex-direction: column;
   border-color: rgba(var(--color-foreground), var(--drawer-border-opacity));
@@ -588,12 +598,13 @@ a.active-facets__button.focused .active-facets__button-inner,
 .mobile-facets__heading {
   font-size: calc(var(--font-heading-scale) * 1.4rem);
   margin: 0;
+  font-family: var(--font-body-family);
 }
 
 .mobile-facets__count {
   color: rgba(var(--color-foreground), 0.7);
-  font-size: 1.3rem;
-  margin: 0;
+  font-size: 1.0rem;
+  margin: 5px 0 0;
   flex-grow: 1;
 }
 
@@ -625,7 +636,7 @@ a.active-facets__button.focused .active-facets__button-inner,
 }
 
 .mobile-facets__open:hover .mobile-facets__open-label {
-  text-decoration: underline;
+
   text-underline-offset: 0.3rem;
 }
 
@@ -657,7 +668,7 @@ a.active-facets__button.focused .active-facets__button-inner,
 }
 
 .mobile-facets__close svg {
-  width: 2.2rem;
+  width: 1.2rem;
 }
 
 details.menu-opening .mobile-facets__close {
@@ -692,7 +703,7 @@ details.menu-opening .mobile-facets__close svg {
 }
 
 .mobile-facets__main {
-  padding: 2.7rem 0 0;
+  padding: 20px;
   position: relative;
   z-index: 1;
   flex-grow: 1;
@@ -825,7 +836,7 @@ input.mobile-facets__checkbox {
 .mobile-facets__footer {
   background-color: rgb(var(--color-background));
   border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
-  padding: 2rem;
+  padding: 2rem 0;
   bottom: 0;
   position: sticky;
   display: flex;
@@ -905,4 +916,11 @@ input.mobile-facets__checkbox {
 
 .product-count__text.loading + .loading-overlay__spinner {
   display: block;
+}
+
+/* All Mobile Sizes */
+@media only screen and (max-width: 767px) {
+  .mobile-facets__inner {
+    width: 100%;
+  }
 }

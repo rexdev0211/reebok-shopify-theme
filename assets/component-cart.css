@@ -3,6 +3,27 @@
   display: block;
 }
 
+.cart-count-bubble {
+  display: none;
+}
+
+ul.slicing_cart h3.card__heading {
+  font-size: 1rem;
+ 
+  font-family: var(--font-body-family)
+}
+
+h4.gl-label.gl-label--l.gl-label--bold {
+  font-size: 0.6rem;
+  line-height: 17px;
+}
+
+.cart_summary_links h6 {
+  font-size: 0.6rem;
+    line-height: 17px;
+    margin-bottom: 13px;
+}
+
 .cart__empty-text,
 .is-empty .cart__contents,
 cart-items.is-empty .title-wrapper-with-link,
@@ -84,7 +105,7 @@ cart-items.is-empty .title-wrapper-with-link,
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 35px;
+  font-size: 2.2rem;
   line-height: 30px;
   width: 50px;
   height: 50px;
@@ -99,7 +120,7 @@ cart-items.is-empty .title-wrapper-with-link,
 
 .trigger_popup_fridd {
   cursor: pointer;
-  font-size: 16px;
+  font-size:1rem;
   line-height: 22px;
   display: inline-block;
   /* color: black; */
@@ -118,7 +139,7 @@ p.text_conten_ppc {
   margin: 0;
   text-align: start;
   /* color: black; */
-  font-size: 15px;
+  font-size: 0.9rem;
   line-height: 22px;
   font-weight: bold;
 }
@@ -142,13 +163,13 @@ ul.plus_contener {
 
 ul.plus_contener li {
   margin-bottom: 13px;
-  font-size: 14px;
+  font-size:0.8rem;
   padding-left: 7px;
 }
 
 h4.hp_title_worrier {
   text-align: start;
-  font-size: 18px;
+  font-size: 1.2rem;
   line-height: 24px;
   letter-spacing: 1px;
 }
@@ -156,7 +177,7 @@ h4.hp_title_worrier {
 p.link_texter {
   /* color: black; */
   text-align: start;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 22px;
   margin-bottom: 16px;
 }
@@ -174,7 +195,7 @@ ul.one_daimention {
 
 ul.one_daimention li {
   margin-bottom: 13px;
-  font-size: 14px;
+  font-size: 0.8rem;
   padding-left: 7px;
   line-height: 20px;
 }
@@ -183,7 +204,7 @@ p.gift_conten {
   text-align: start;
   /* color: black; */
   font-weight: bold;
-  font-size: 15px;
+  font-size: 0.9rem;
   line-height: 22px;
 }
 
@@ -196,7 +217,7 @@ ul.two_daimention {
 
 ul.two_daimention li {
   margin-bottom: 13px;
-  font-size: 14px;
+  font-size: 0.8rem;
   padding-left: 7px;
   line-height: 20px;
 }
@@ -204,7 +225,7 @@ ul.two_daimention li {
 p.above_text {
   text-align: start;
   /* color: black; */
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 22px;
   margin-bottom: 16px;
 }
@@ -312,7 +333,7 @@ p.above_text {
   }
 
   .cart__footer > * {
-    width: 35rem;
+   
   }
 
   .cart__footer > * + * {
@@ -367,7 +388,7 @@ p.above_text {
 }
 
 .cart__warnings a {
-  color: #fff;
+   
   align-items: center;
   padding: 0 14px;
   font-weight: bold;

@@ -92,7 +92,7 @@
     
             <ul id="product-grid" 
                 data-id="{{ section.id }}" 
-                class="grid  css-grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+                class="collectio-terminal-wrapper grid  css-grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
               {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
                 grid--{{ section.settings.columns_desktop }}-col-desktop
               {% endif %}"
@@ -121,7 +121,7 @@
                 {%- endif -%} 
 
 
-                <li class="grid__item product-item" data-prod-name="{{ currentProductName | strip }}">
+                <li class=" collection-terminal-item grid__item product-item" data-prod-name="{{ currentProductName | strip }}">
                   {% render 'card-product',
                     card_product: product,
                     media_aspect_ratio: section.settings.image_ratio,

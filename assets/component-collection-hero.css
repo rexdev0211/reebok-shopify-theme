@@ -6,10 +6,12 @@
 
 .collection-hero__text-wrapper {
   position: absolute;
-  top: 71px;
+  top: 0px;
   z-index: 1;
   width: 100%;
-  text-align: center;
+  display: flex;
+  height: 100%;
+  align-items: center;
 }
 
 h1.second_collection-hero__title {
@@ -119,16 +121,16 @@ span.mobile-facets__open {
   }
   
   .diss_title_new {
-    font-size: 24px;
+    font-size: 1.5rem;
     line-height: 30px;
   }
   .diss_subtitle_new {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 19px;
     margin: 12px 0 10px;
   }
   .diss_subtitle_new_one {
-    font-size: 14px;
+    font-size: 0.8rem;
   }
   .collection_conten_discription ul.colam_two {
   	width: 100% !important;
@@ -146,35 +148,35 @@ span.mobile-facets__open {
 }
 
 .diss_title_new {
-	font-size: 30px;
+	font-size: 1.8rem;
     line-height: 30px;
     margin: 0 0 10px 0;
     font-style: normal;
-    font-weight: 400;
+    font-family: var(--font-body-family);
     text-transform: uppercase;
 }
 
 .diss_subtitle_new {
-	font-size: 20px;
+	font-size: 1.3rem;
     line-height: 20px;
     margin: 20px 0 10px 0;
     font-style: normal;
-    font-weight: 400;
+    font-family: var(--font-body-family);
     text-transform: uppercase;
 }
 
 .diss_text_new {
-	font-size: 16px;
+	font-size:1rem;
     line-height: 22px;
     margin: 0 0 16px 0;
     padding: 0;
 }
 
 .diss_subtitle_new_one {
-	font-size: 20px;
+	font-size: 1.3rem;
     line-height: 18px;
     font-style: normal;
-    font-weight: 700;
+    font-family: var(--font-body-family);
     text-transform: uppercase;
     margin: 0 0 10px 0;
 }
@@ -201,11 +203,11 @@ span.mobile-facets__open {
 }
 
 .collection_conten_discription a.strap_links {
-	font-size: 14px;
+	font-size:0.8rem;
     line-height: 0;
     margin-bottom:0;
     font-style: normal;
-    font-weight: 400;
+    font-family: var(--font-body-family);
     color: inherit;
     cursor: pointer;
     text-decoration: none;
@@ -226,7 +228,7 @@ span.mobile-facets__open {
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 0;
-    font-size: 14px;
+    font-size: 0.8rem;
     line-height: 22px;
     /* color: black; */
 }

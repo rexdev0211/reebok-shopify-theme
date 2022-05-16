@@ -216,12 +216,20 @@
         </div>
       {%- endunless -%}
     
-            {%- if product.description != blank -%}
-              <div class="desktop_description product__description rte">
+           
+
+             <div class="tabs-continer-wrapper">
+    <ul id="navMenus" class="tab-terminal-left">
+      <li class="core_1"><a href="#Slider-Gallery-template--16013449986278__main">GALLERY</a></li>
+      <li class="core_1 active"><a href="#discription-wrapper">DESCRIPTION</a></li>
+      <li class="core_1"><a href="#shopify-product-reviews">REVIEWS</a></li>
+    </ul>
+  </div>
+     {%- if product.description != blank -%}
+              <div id="discription-wrapper" class="desktop_description product__description rte">
                 {{ product.description }}
               </div>
             {%- endif -%}
-    
     </div>
     <div id="sidebar" class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
       <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
@@ -401,7 +409,7 @@
 
 
                       <fieldset class="js product-form__input" data-option-name="{{ option.name }}">
-                        <legend class="form__label">{{ option_name_replacement }}</legend>
+                        <legend class="variant-wrapper-label form__label">{{ option_name_replacement }}</legend>
                         {%- for value in sortedOptions -%}
                           <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
                                 name="{{ option.name }}"
@@ -533,7 +541,7 @@
                       class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
                     {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                     >
-                        <span>
+                        <span class="add_btn">
                           {%- if product.selected_or_first_available_variant.available -%}
                             {{ 'products.product.add_to_cart' | t }}
                           {%- else -%}
@@ -762,6 +770,35 @@
   ]
 });
   </script>
+
+  <script>
+	$("#navMenus").on('click', 'li', function () {
+    $("#navMenus li.active").removeClass("active");
+    $(this).addClass("active");
+});
+</script>
+<script>
+$(document).ready(function() {
+var stickyNavTop = $('#navMenus').offset().top;
+ 
+var stickyNav = function(){
+var scrollTop = $(window).scrollTop();
+      
+if (scrollTop > stickyNavTop) { 
+    $('#navMenus').addClass('sticky');
+} else {
+    $('#navMenus').removeClass('sticky'); 
+}
+};
+ 
+stickyNav();
+ 
+$(window).scroll(function() {
+    stickyNav();
+});
+});
+</script>
+
 
 {% javascript %}
   class ProductModal extends ModalDialog {

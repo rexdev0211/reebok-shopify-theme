@@ -28,7 +28,7 @@
   background-color: {{ settings.color_pt_bg | default: 'transparent' }};
   border-radius: {{ settings.pt_bg_radius | default: 0 }}px;
   padding: {{ settings.pt_bg_padding | default: 0 }}px;
-  border: 1px solid {{ settings.color_pt_bg_border | default: 'transparent' }};
+ 
 }
 
 .filter-menu .has_group_selected {
@@ -79,13 +79,11 @@
       padding-bottom: 5px;
       padding-right: 45px;
       color: {{ settings.color_pt_header_text | default: '#222' }};
-      border-bottom: 1px solid {{ settings.color_pt_header_border | default: '#888' }};
+      
       font-size: {{ settings.pt_header_size | default: '18' }}px;
-      {% if settings.pt_header_font_override %}
-      font-family: {{ settings.pt_header_font.family }}, {{ settings.pt_header_font.fallback_families }};
-      {% endif %}
+    
       font-weight: {{ settings.pt_header_weight | default: 600 }};
-
+      font-family: var(--font-body-family);
       margin-top: 0;
       padding-top: 0;
       border-top: none;
@@ -722,7 +720,7 @@ a:hover i.check-icon:before {
   line-height: 40px;
   text-decoration: none;
   white-space: nowrap;
-
+      display: none;
     span, span:before, span:after {
       cursor: pointer;
       border-radius: 1px;
@@ -909,8 +907,8 @@ a:hover i.check-icon:before {
       cursor: pointer;
       padding: 0 {{ settings.pt_links_size  | default: '13' | times: 2 }}px 0 15px;
       z-index: 5;
-      line-height: {{ settings.pt_links_size  | default: '13' | times: 2 | minus: 2 }}px;
-      height: {{ settings.pt_links_size  | default: '13' | times: 2 }}px;
+      line-height: 30px;
+      height:35px;
       position: relative;
       overflow: hidden;
     }
@@ -952,7 +950,7 @@ a:hover i.check-icon:before {
       background: #F9F9F9;
       min-width: 198px;
       width: 198px;
-      width: calc(100% - 20px);
+      width: calc(100% - 0px);
       margin: 0;
       padding: 5px 10px;
       border: solid 1px #CCC;
@@ -1026,14 +1024,12 @@ a:hover i.check-icon:before {
 }
 
 .pt-apply {
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
+ padding: 9px 0;
   color: #ffffff;
   font-size: 18px;
   background-color: {{ settings.pt_apply_button_color | default: '#0084FF' }};
   text-decoration: none;
-  margin-top: 20px;
+  margin-top: 30px;
   margin-left: 0;
   width: 100%;
   font-weight: bold;

@@ -357,7 +357,7 @@ cart-remove-button .icon-remove {
 .product-component-defolt p {
   margin: 0;
   color: black;
-  font-size: 16px;
+  font-size:1rem;
   font-weight: 400;
 }
 
@@ -371,7 +371,15 @@ cart-remove-button .icon-remove {
 }
 
 .cart-items {
-  /* border: 1px solid #767677; */
+  border: 1px solid #767677;
+}
+
+.cart-item__media {
+  border: 1px solid #e9ecef;
+}
+
+.cart-item__image-container.gradient.global-media-settings {
+  border: none;
 }
 
 .cart-item__image-container {
@@ -428,7 +436,7 @@ a.cart-item__name.h4.break {
 
 a.button.button--tertiary {
   display: block;
-  font-size: 30px;
+  font-size: 1.9rem;
   font-weight: 100;
   /* color: black; */
   position: absolute;
@@ -545,12 +553,17 @@ ul.slicing_cart button.slick-next.slick-arrow:hover {
 }
 
 .cart__blocks .js-contents {
-  /* border: 1px solid #767677; */
+  border: 1px solid #e9ecef;
   padding: 20px 15px;
 }
 
+h3.totals__subtotal {
+  font-size: 1.2rem;
+  font-family: var(--font-body-family);
+}
+
 .summary_title {
-  font-size: 20px;
+  font-size: 1.2rem;
   line-height: 18px;
   /* color: #000; */
   margin-top: 0;
@@ -636,7 +649,7 @@ h4.gl-label.gl-label--l.gl-label--bold {
 }
 
 h2.top_product_wender {
-  font-size: 30px;
+  font-size: 1.8rem;
   line-height: 28px;
   /* font-family: 'Neue Plak Wide'; */
   margin-bottom: 0;
@@ -698,14 +711,59 @@ button.cart__checkout-button.button.dsynamic_check:hover {
   margin-top: 30px;
   padding-top: 25px;
 }
+
+.mobile-item-top .js-contents {
+  border: 1px solid #e9ecef;
+  padding: 25px;
+}
+
+.mobile-item-top .totals {
+  justify-content: space-between;
+}
+
+.mobile-item-top {
+  display: none;
+}
 @media only screen and (max-width: 767px) {
+  .mobile-item-top {
+    display: block;
+}
+
+.car_payment_wrapper.payment-terminal-term {
+  display: none;
+}
+
+.cart-item__media {
+  border: none;
+}
+
+.tax-note{
+  text-align: left !important;
+}
+
+.quantity__input {
+  padding: 0;
+}
+
+.special_product_conten_a1 {
+  margin-top: 0 !important;
+}
+
+.fecture_block_conten {
+  padding-top: 0;
+}
+
+h2.top_product_wender {
+  margin-top: 0;
+}
+
   .dynamic-cart-overlay {
     width: 100%;
     float: unset;
   }
   
   .cart_component.page-width h1.title.title--primary {
-  	font-size: 26px !important;
+  	font-size: 1.5rem !important;
     line-height: 24px;
   }
   
@@ -744,7 +802,7 @@ button.cart__checkout-button.button.dsynamic_check:hover {
   }
   
   .cart__blocks.duplicate_overlay {
-    display: block;
+    display: none;
   }
   
   .js-contents.accecesary_condition {

@@ -11,3 +11,94 @@
   margin: 0;
   margin-bottom: 3rem;
 }
+
+.recommend-wrapper-term {
+  max-width: 66%;
+  margin: 0;
+}
+
+.spr-container {
+  width: 66%;
+}
+
+.shopify-section {
+  z-index: 3;
+}
+
+h1.ragister_title_wrapper {
+  margin: 0;
+  padding: 25px 0;
+}
+
+.jq-modal {
+  background: var(--gradient-background);
+}
+
+ul.tab-terminal-left {
+  margin: 15px 0px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #F3F3F3;
+  border-bottom: 1px solid #F3F3F3;
+  display: flex;
+  justify-content: center;
+}
+
+ul.tab-terminal-left li {
+  padding: 20px;
+}
+
+li.core_1.active {
+  border-bottom: 2px solid;
+}
+
+ul.tab-terminal-left li a {
+  color: rgb(var(--color-foreground));
+  font-size: 15px;
+  text-decoration: none;
+}
+
+li.core_1.active a{
+  font-weight: var(--font-heading-weight);
+}
+
+.tabs-continer-wrapper {
+  margin-bottom: 50px;
+}
+
+.tabs-continer-wrapper {
+  position: sticky;
+  top: 20px;
+  background: var(--gradient-background);
+    z-index: 2;
+}
+
+
+
+/* Tablet Portrait size to Base 996px */
+@media only screen and (min-width: 768px) and (max-width: 995px) {
+  .recommend-wrapper-term {
+    max-width: 50%;
+    margin: 0;
+}
+.spr-container {
+  width: 47%;
+}
+.grid__item.product__media-wrapper {
+  padding: 0 15px;
+}
+.product__info-container{
+  padding: 0 15px;
+}
+
+}
+
+@media only screen and (max-width: 768px){
+  .recommend-wrapper-term {
+    max-width: 100%;
+    margin: 0;
+}
+.spr-container {
+  width: 95%;
+}
+}

@@ -171,7 +171,7 @@ function deferFilterjQuery() {
           $(document).on('click', '.filter-menu .pt-mobile-header a', function(e){
             if(e.handled !== true) {
               if ($('.pt-nav-toggle').hasClass('active')) {
-                $('.filter-menu').removeClass('pt-expand');
+               
                 $('.pt-display-dropdown .scroll-content').hide();
                 $('.pt-nav-toggle').attr('aria-expanded', 'false');
                 $('.pt-nav-toggle').attr('aria-label', 'Show Filters');

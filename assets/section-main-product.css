@@ -190,8 +190,8 @@ fieldset.product-form__input .form__label {
   color: rgb(var(--color-foreground));
   display: inline-block;
   margin: 0.7rem 0.5rem 0.2rem 0;
-  padding: 1rem 23px;
-  font-size: 1.4rem;
+  padding: 0.6rem 14px;
+  font-size: 1.0rem;
   line-height: 1;
   text-align: center;
   transition: border var(--duration-short) ease;
@@ -216,9 +216,9 @@ fieldset.product-form__input .form__label {
 }
 
 .product-form__input input[type='radio']:checked + label {
-  background-color: white;
-  color: black;
-  border: 1px solid;
+  background: var(--gradient-background);
+  color: rgb(var(--color-foreground));
+  border: 1px solid var(--color-input-border);
 }
 
 @media screen and (forced-colors: active) {
@@ -257,6 +257,16 @@ fieldset.product-form__input .form__label {
   max-width: 25rem;
 }
 
+.sticky{
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	z-index:9999;
+  width: 66%;
+  background: var(--gradient-background);
+}
+
 .product-form__submit {
   margin-bottom: 1rem;
   /* background: black; */
@@ -264,7 +274,7 @@ fieldset.product-form__input .form__label {
   align-items: center;
   /* color: white; */
   text-decoration: none !important;
-  font-weight: bold;
+  font-weight: var(--font-heading-weight)
   
 }
 .product-form__submit:hover {
@@ -327,6 +337,7 @@ a.product__text {
 .product__title {
   word-break: break-word;
   margin-bottom: 1.5rem;
+  font-family: var(--font-body-family);
 }
 
 .product__title + .product__text.caption-with-letter-spacing {
@@ -438,6 +449,10 @@ a.product__text {
   margin-bottom: 1.2rem;
 }
 
+.variant-wrapper-label {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
 
 .product--no-media fieldset.product-form__input {
   flex-wrap: wrap;
@@ -1505,4 +1520,7 @@ h1.mobile_product_title.product__title {
     display: block;
   }
    
+}
+.add_btn {
+  color: #fff;
 }

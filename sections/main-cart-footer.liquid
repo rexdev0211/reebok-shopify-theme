@@ -81,7 +81,7 @@
       
       
       
-      <div class="car_payment_wrapper">
+      <div class="car_payment_wrapper payment-terminal-term">
         <div class="chack_by_item">
             <button type="submit" id="checkout" class="cart__checkout-button button dsynamic_check" name="checkout"{% if cart == empty %} disabled{% endif %} form="cart">
                   Checkout
@@ -164,7 +164,7 @@
                <h6>Help & Contact Us</h6>
                <ul class="help_container_links">
                  {% for block in section.blocks %}
-                 <li class="trigger_popup_fridd gl-tab-{{forloop.index}}">{{block.settings.dridd_s1}}</li>
+                 <li class="trigger_popup_fridd gl-tab-{{forloop.index}} link--background">{{block.settings.dridd_s1}}</li>
                   {% endfor %}
               
                </ul>

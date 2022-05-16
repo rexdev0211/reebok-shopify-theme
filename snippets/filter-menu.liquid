@@ -35,7 +35,7 @@
     </div>
 {%- endif -%}
 {%- endcapture -%}
-<div class="filter-menu {% if collection.handle != blank and collection.handle == 'all' and current_tags == blank%}filter-menu-none-selected{% endif %} filter-selected-{{ collection.handle }}{% for tag in current_tags %} filter-selected-{{ tag | handleize }}{% endfor %}" data-total-tag-count="{{ collection.tags | size }}">
+<div class="filter-menu {% if collection.handle != blank and collection.handle == 'all' and current_tags == blank%}filter-menu-none-selected{% endif %} filter-selected-{{ collection.handle }}{% for tag in current_tags %} filter-selected-{{ tag | handleize }}{% endfor %} pt-expand" data-total-tag-count="{{ collection.tags | size }}">
     <div class="pt-mobile-header">
         <a id="pt-nav-toggle" class="pt-nav-toggle" href="#" aria-label="Show Filters" aria-expanded="false"><span></span> <p>{{ settings.pt_mobile_text | default: 'Filter' }}</p></a>
     </div>

@@ -49,7 +49,7 @@
 }
 
 .footer-block__heading {
-  font-weight: 600;
+  font-weight: var(--font-body-weight);
   letter-spacing: 2px;
   font-family: var(--font-body-family);
 }
@@ -59,7 +59,7 @@
 }
 
 .second-footer-menu-heading {
-  font-weight: 600;
+  font-weight: var(--font-body-weight);
   letter-spacing: 2px;
   margin-bottom: 17px;
   margin-top: 17px;
@@ -107,7 +107,7 @@
 
   .menu-drawer__menu-item.list-menu__item {
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: var(--font-body-weight);
   }
 
   .menu-drawer__menu-item.list-menu__item {
