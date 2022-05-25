@@ -60,7 +60,7 @@ label.field__label {
   border-bottom: 1px solid rgb(var(--color-foreground));
   height: 37px;
   width: 140px;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
 }
 
 .field:after, .select:after, .customer .field:after, .customer select:after, .localization-form__select:after {

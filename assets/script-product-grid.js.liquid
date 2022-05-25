@@ -1,0 +1,54 @@
+productGridSetUp = function({ isSearch = false, variantSettings = {}, ajaxSettings = {}}) {  
+  const productClass = '.product-item';
+  const colorCounterClass = '.card-product__color-counter' 
+
+    function clearProductItemHeight() {
+      $(productClass).each(function() {
+        $(this).removeAttr("style");
+      })
+    }
+  
+    function setProductItemHeight() {
+      $(productClass).each(function() {
+        let colorLabelHeight = $(this).find(colorCounterClass).height()
+        let summedHeight = colorLabelHeight + $(this).height()
+        $(this).css("height", summedHeight + 'px');
+      })
+    }
+  
+    function productHeightListener() {
+      setProductItemHeight();
+  
+      $(window).resize(function() {
+          clearTimeout(window.resizedFinished);
+          window.resizedFinished = setTimeout(function(){
+            clearProductItemHeight();
+            setProductItemHeight();
+          }, 250);
+      });
+    }
+  
+  
+    var pgjQuery = setInterval(function () {
+      if(typeof $ != 'undefined') {
+          clearInterval(pgjQuery);
+          collectionGetVariations(variantSettings);
+  
+
+            setTimeout(function() {
+              setProductItemHeight();
+            }, 1000);
+  
+  
+  
+          setTimeout(function(){
+            if($(productClass).length > 0) {
+              ajaxifyCollection(ajaxSettings);
+  
+              productHeightListener();
+            }
+          }, 200);
+          
+        }
+    }, 100);
+  }

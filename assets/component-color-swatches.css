@@ -103,9 +103,16 @@
     vertical-align: middle;
     margin-left: 5px;
 }
-.template-collection .color-swatches--left {
+
+.product-grid .color-swatches--left {
     display: none;
 }
-.grid__item.product-item:hover .color-swatches--left {
+
+.product-grid .product-item:hover .color-swatches--left {
 	display: block;
+}
+
+.card-product__color-counter * {
+    font-size: 0.875rem;
+    color: rgb(var(--color-secondary-text));
 }

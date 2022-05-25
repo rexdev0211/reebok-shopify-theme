@@ -186,7 +186,7 @@
             <div data-badge-main>
               <span class="sr-only">{{ 'products.product.on_sale' | t }}</span>
               <span class="badge badge--bottom-left badge--sale">
-                {{- card_product.compare_at_price_max | minus: card_product.price | times: 100.0 | divided_by: card_product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0' | append: '%' | prepend: '-' -}}
+                {{- card_product.compare_at_price_max | minus: card_product.price | times: 100.0 | divided_by: card_product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0' | append: '%' | prepend: '−' -}}
               </span>
             </div>
             <div data-badge-variant></div>
@@ -194,7 +194,11 @@
           </div>
 
 
-          <div class="card__price">
+          <div class="card__price card__badge-price">
+            {% render 'price', product: card_product, price_class: '' %}
+          </div>
+
+          <div class="card__price--variant card__price hide">
             {% render 'price', product: card_product, price_class: '' %}
           </div>
 
@@ -269,7 +273,7 @@
                  -%}
 
                  {%- if tag_value and tag_value != blank -%}
-                  <div class="card-information--item light">{{ tag_value }}</div>
+                  <div class="card-information--item text-secondary">{{ tag_value }}</div>
                  {%- endif -%}
 
                  {%- comment -%}
@@ -301,10 +305,8 @@
                {%comment%} <div class="card__price">
                   {% render 'price', product: card_product, price_class: '' %}
                 </div>{%endcomment%}
-                <div class="card__price--variant hide">
-                  {% render 'price', product: card_product, price_class: '' %}
-                </div>
-              <div class="card-product__color-counter hide">
+               
+              <div class="card-product__color-counter sr-only">
                 <p> <span data-color-counter-number>1</span>
                 <span data-color-counter-label>colour</span></p>
               </div>

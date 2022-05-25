@@ -65,6 +65,7 @@ summary.menu-drawer__menu-item.list-menu__item.link.link--text.focus-inset {
   transform: translateX(-100%);
   visibility: hidden;
   z-index: 3;
+  width: 100%;
   left: 0;
   top: 100%;
   padding: 0;

@@ -46,12 +46,85 @@
 <section class="section-{{ section.id }}-padding">
   <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
-      <h1 class="mobile_product_title product__title" {{ block.shopify_attributes }}>
+      <div class="product__top-content--mobile padding-left padding-right">
+        <h2 class="h4 product__title medium-up--hide" {{ block.shopify_attributes }}>
           {%- render 'snippet--product-name', product: product -%}
-       </h1>
-      <div class="mobile_product_price no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-           {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
-       </div>
+        </h2>
+        <div class="medium-up--hide product__price no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+            {%- render 'price', product: product, use_variant: false, show_badges: false, price_class: 'price--large' -%}
+        </div>
+      </div>
+
+      <div id="gallery">
+        <a class="skip-to-content-link button visually-hidden" href="#ProductInfo-{{ section.id }}">
+          {{ "accessibility.skip_to_product_info" | t }}
+        </a>
+
+        <div class="product__gallery">
+          <ul id="Slider-Gallery-{{ section.id }}" class="product__media-list list-unstyled" role="list">
+            {%- for media in product.media -%} 
+            <li>
+              <div class="product__media--media">
+                {%- if media.media_type == 'model' -%}
+                  <span class="thumbnail__badge" aria-hidden="true">
+                    {%- render 'icon-3d-model' -%}
+                  </span>
+                {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}
+                <span class="thumbnail__badge" aria-hidden="true">
+                  {%- render 'icon-play' -%}
+                </span>
+                {%- elsif media.media_type == 'image' -%}
+                    <img id="{{ media.id }}"
+                        class="lazypreload lazypreload"
+                        src="{{ media | img_url: '400x400' }}"
+                        data-src="{{ media.url }}"
+                        data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                        data-aspectratio="{{ media.aspect_ratio }}"
+                        data-sizes="auto"
+                        tabindex="-1"
+                        alt="{{ media.alt | escape }}"
+                        loading="lazy"
+                      >
+                  {%- endif -%}
+                </div>
+              </li>
+            {%- endfor -%}
+            
+          </ul>
+
+          <div class="product__gallery-thumbnails">
+            <ul id="Slider-Thumbnails-{{ section.id }}"  class="list-unstyled">
+              {%- for media in product.media -%} 
+              <li>
+                {%- if media.media_type == 'model' -%}
+                  <span class="thumbnail__badge" aria-hidden="true">
+                    {%- render 'icon-3d-model' -%}
+                  </span>
+                {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}
+                <span class="thumbnail__badge" aria-hidden="true">
+                  {%- render 'icon-play' -%}
+                </span>
+                {%- elsif media.media_type == 'image' -%}
+                    <button class="product__gallery-thumbnails--button">
+                      <img id="{{ media.id }}"
+                        class="lazypreload lazypreload"
+                        src="{{ media | img_url: '40x40' }}"
+                        data-src="{{ media.url }}"
+                        data-aspectratio="{{ media.aspect_ratio }}"
+                        tabindex="-1"
+                        alt="{{ media.alt | escape }}"
+                        loading="lazy"
+                      >
+                    </button>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+  
+          </div>
+        </div>
+      </div>
+      {%- comment -%}
       <div class="product_media_wrapper_terminal">
         <media-gallery id="MediaGallery-{{ section.id }}" role="region" {% if section.settings.enable_sticky_info %}class="product__media-gallery"{% endif %} aria-label="{{ 'products.product.media.gallery_viewer' | t }}" data-desktop-layout="{{ section.settings.gallery_layout }}">
           <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
@@ -202,11 +275,12 @@
           {%- endif -%}
         </media-gallery>
       </div>
+      {%- endcomment -%}
 
       {%- unless is_gift_card == true -%}
-        <div>
+        <div class="product__colors-wrapper">
           <div>
-          {%comment%}  <p>{%- render 'snippet--product-current-color', product: product -%}</p>{%endcomment%}
+          <p class="text-capitalize">{%- render 'snippet--product-current-color', product: product -%}</p>
           </div>
           <div class="product__colors"> 
             <div class="product__colors--swatches">
@@ -220,13 +294,13 @@
 
              <div class="tabs-continer-wrapper">
     <ul id="navMenus" class="tab-terminal-left">
-      <li class="core_1"><a href="#Slider-Gallery-template--16013449986278__main">GALLERY</a></li>
-      <li class="core_1 active"><a href="#discription-wrapper">DESCRIPTION</a></li>
+      <li class="core_1 active"><a href="#gallery">GALLERY</a></li>
+      <li class="core_1"><a href="#description">DESCRIPTION</a></li>
       <li class="core_1"><a href="#shopify-product-reviews">REVIEWS</a></li>
     </ul>
   </div>
      {%- if product.description != blank -%}
-              <div id="discription-wrapper" class="desktop_description product__description rte">
+              <div id="description" class="medium-down--hide product__description rte">
                 {{ product.description }}
               </div>
             {%- endif -%}
@@ -240,19 +314,19 @@
           {%- when '@app' -%}
             {% render block %}
           {%- when 'text' -%}
-            <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
+            <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %} {{ block.settings.display }}" {{ block.shopify_attributes }}>
               {{- block.settings.text -}}
             </p>
           {%- when 'title' -%}
-            <h1 class="desktop_product_title product__title" {{ block.shopify_attributes }}>
+            <h1 class="medium-down--hide product__title h4" {{ block.shopify_attributes }}>
               {%- render 'snippet--product-name', product: product -%}
             </h1>
           {%- when 'price' -%}
-            <div class="desktop_product_price no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+            <div class="medium-down--hide product__price no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+              {%- render 'price', product: product, use_variant: false, show_badges: false, price_class: '' -%}
             </div>
             {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
-              <div class="product__tax caption rte">
+              <div class="product__tax rte">
                 {%- if shop.taxes_included -%}
                   {{ 'products.product.include_taxes' | t }}
                 {%- endif -%}
@@ -267,14 +341,16 @@
                 {{ form | payment_terms }}
               {%- endform -%}
             </div>
-          	{%comment%}{%- when 'description' -%}
+          	{%- when 'description' -%}
             {%- if product.description != blank -%}
-              <div class="product__description rte">
+              <div class="product__description rte" {{ block.shopify_attributes }}>
                 {{ product.description }}
               </div>
-            {%- endif -%}{%endcomment%}
+            {%- endif -%}
           {%- when 'custom_liquid' -%}
-            {{ block.settings.custom_liquid }}
+            <div {{ block.shopify_attributes }}>
+              {{ block.settings.custom_liquid }}
+            </div>
           {%- when 'collapsible_tab' -%}
             <div class="product__accordion accordion" {{ block.shopify_attributes }}>
               <details id="Details-{{ block.id }}-{{ section.id }}">
@@ -320,9 +396,9 @@
             </div>
           {%- when 'popup' -%}
               <modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#PopupModal-{{ block.id }}" {{ block.shopify_attributes }}>
-                <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog"><span class="classify_icones">{{ block.settings.claasi_icon }}</span><span class="classify_text">{{ block.settings.text | default: block.settings.page.title }}</span></button>
+                <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link " type="button" aria-haspopup="dialog"><span class="classify_icones">{{ block.settings.claasi_icon }}</span><span class="classify_text link--background">{{ block.settings.text | default: block.settings.page.title }}</span></button>
               </modal-opener>
-              <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.text }}</a>
+              <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link link--background no-js">{{ block.settings.text }}</a>
           {%- when 'share' -%}
             <share-button id="Share-{{ section.id }}" class="share-button" {{ block.shopify_attributes }}>
               <button class="share-button__button hidden">
@@ -538,10 +614,10 @@
                     <button
                       type="submit"
                       name="add"
-                      class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
+                      class="product-form__submit button button--full-width"
                     {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                     >
-                        <span class="add_btn">
+                        <span>
                           {%- if product.selected_or_first_available_variant.available -%}
                             {{ 'products.product.add_to_cart' | t }}
                           {%- else -%}
@@ -684,7 +760,7 @@
       </div>
         
         {%- if product.description != blank -%}
-              <div class="mobile_description product__description rte">
+              <div class="medium-up--hide product__description rte">
                 {{ product.description }}
               </div>
        {%- endif -%}
@@ -734,72 +810,87 @@
   {%- endfor -%}
 </section>
   <script>
-  $('.gallary_slider').slick({
-  dots: true,
-  infinite: false,
-  speed: 300,
-  slidesToShow: 7,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: true,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
-  ]
-});
-  </script>
-
-  <script>
-	$("#navMenus").on('click', 'li', function () {
-    $("#navMenus li.active").removeClass("active");
-    $(this).addClass("active");
-});
+	
 </script>
 <script>
 $(document).ready(function() {
-var stickyNavTop = $('#navMenus').offset().top;
- 
-var stickyNav = function(){
-var scrollTop = $(window).scrollTop();
+  var stickyNavTop = $('#navMenus').offset().top;
+  
+  var stickyNav = function(){
+  var scrollTop = $(window).scrollTop();
+        
+  if (scrollTop > stickyNavTop) { 
+      $('#navMenus').addClass('sticky');
+  } else {
+      $('#navMenus').removeClass('sticky'); 
+  }
+  };
+  
+  stickyNav();
+  
+  $(window).scroll(function() {
+      stickyNav();
+  });
+});
+
+
+let waitForJQuery = setInterval(function () { 
+
+      if(typeof $ != 'undefined') {
+        clearInterval(waitForJQuery);
+      //   $("[data-size-chart]").click(function(e) {
+      //   e.preventDefault();
+      //   this.blur(); 
+      //   $.get(this.href, function(html) {
+      //     var filteredHtml = $(html).find(".page-content");
+
+      //     filteredHtml.appendTo('body').modal({
+      //         closeText: "close",
+      //         fadeDuration: 300
+      //     });
+      //   });
+      // });
+
+      $("#navMenus").on('click', 'li', function () {
+          $("#navMenus li.active").removeClass("active");
+          $(this).addClass("active");
+      });
       
-if (scrollTop > stickyNavTop) { 
-    $('#navMenus').addClass('sticky');
-} else {
-    $('#navMenus').removeClass('sticky'); 
-}
-};
- 
-stickyNav();
- 
-$(window).scroll(function() {
-    stickyNav();
-});
-});
+      $('#Slider-Gallery-{{ section.id }}').slick({
+          dots: false,
+          infinite: false,
+          speed: 400,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          asNavFor: '#Slider-Thumbnails-{{ section.id }}'
+      });
+
+      $('#Slider-Thumbnails-{{ section.id }}').slick({
+        slidesToShow: {{ product.media | size }},
+        slidesToScroll: 1,
+        asNavFor: '#Slider-Gallery-{{ section.id }}',
+        dots: false,
+        focusOnSelect: true,
+        variableWidth: true,
+        centerMode: true,
+      })
+
+      // $(document).on($.modal.OPEN, function(event, modal) {
+      //   let closeButton = document.querySelector('.jquery-modal .close-modal');
+      //   if(closeButton) {
+      //     let closeButtonPosition = closeButton.getBoundingClientRect();
+      //     closeButton.style.position = 'fixed';
+      //     closeButton.style.top = closeButtonPosition.top + 'px';
+      //     closeButton.style.left = closeButtonPosition.left + 'px';
+      //   }
+      // });
+      }
+
+      
+    }, 100);
 </script>
 
-
+{%- comment -%}
 {% javascript %}
   class ProductModal extends ModalDialog {
     constructor() {
@@ -841,6 +932,9 @@ $(window).scroll(function() {
   <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
 {% endif %}
 
+{%- endcomment -%}
+
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     function isIE() {
@@ -874,7 +968,6 @@ $(window).scroll(function() {
   const sizeCheck = document.querySelector("[data-hide-sizes]").getAttribute("data-hide-sizes");
   const variantRadios = document.querySelectorAll("variant-radios input[type='radio']");
   const initialSelection = document.querySelector("variant-radios fieldset[data-option-name='"+variantOptions[1]+"'] input:checked");
-  console.log(product);
   let swiperGallery = null;
 
   initAvailability();
@@ -974,40 +1067,8 @@ $(window).scroll(function() {
     
   }
 
-  function initSwiper() {
-    console.log("click");
-    swiperGallery = new Swiper('#gallery-images', {
-      slidesPerView: 1,
-      direction: "vertical",
-      mousewheel: true,
-      freeMode: true
-    });
-    
-    // swiperThumbs = new Swiper('#gallery-thumbnails', {
-    //   slidesPerView: 4,
-    //   direction: "vertical",
-    //   navigation: {
-    //       nextEl: '.swiper-button-next',
-    //       prevEl: '.swiper-button-prev',
-    //   },
-    //   thumbs: {
-    //     swiper: swiperGallery
-    //   }
-    // });
-  }
-
-  function destroySwiper() {
-    swiperGallery.destroy();
-    swiperGallery = null;
-    
-    // swiperThumbs.destroy();
-    // swiperThumbs = null;
-  }
-
 
   window.addEventListener("DOMContentLoaded", () => {
-    
-
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -1017,36 +1078,6 @@ $(window).scroll(function() {
             });
         });
     });
-
-    let waitForJQuery = setInterval(function () { 
-      if(typeof $ != 'undefined') {
-        clearInterval(waitForJQuery);
-      }
-
-      $("[data-size-chart]").click(function(e) {
-        e.preventDefault();
-        this.blur(); 
-        $.get(this.href, function(html) {
-          var filteredHtml = $(html).find(".page-content");
-
-          filteredHtml.appendTo('body').modal({
-              closeText: "close",
-              fadeDuration: 300
-          });
-        });
-      });
-
-      $(document).on($.modal.OPEN, function(event, modal) {
-        let closeButton = document.querySelector('.jquery-modal .close-modal');
-        if(closeButton) {
-          let closeButtonPosition = closeButton.getBoundingClientRect();
-          // console.log(closeButtonPosition.top, closeButtonPosition.left);
-          closeButton.style.position = 'fixed';
-          closeButton.style.top = closeButtonPosition.top + 'px';
-          closeButton.style.left = closeButtonPosition.left + 'px';
-        }
-      });
-    }, 100);
   });
 </script>
 
@@ -1178,6 +1209,26 @@ $(window).scroll(function() {
           ],
           "default": "body",
           "label": "t:sections.main-product.blocks.text.settings.text_style.label"
+        },
+        {
+          "type": "select",
+          "id": "display",
+          "label": "Display on",
+          "default": "",
+          "options": [
+            {
+              "value": "",
+              "label": "All sizes"
+            },
+            {
+              "value": "medium-down--hide",
+              "label": "Desktop only"
+            },
+            {
+              "value": "medium-up--hide",
+              "label": "Mobile only"
+            }
+          ]
         }
       ]
     },

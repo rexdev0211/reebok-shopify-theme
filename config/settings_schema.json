@@ -43,6 +43,22 @@
             },
             {
                 "type": "header",
+                "content": "Cart bubble"
+            },
+            {
+                "type": "color",
+                "id": "color_cart_bubble_background",
+                "label": "Cart bubble background color",
+                "default": "#244496"
+            },
+            {
+                "type": "color",
+                "id": "color_cart_bubble_text",
+                "label": "Cart bubble text color",
+                "default": "#ffffff"
+            },
+            {
+                "type": "header",
                 "content": "Buttons & links"
             },
             {
@@ -186,13 +202,19 @@
             }, {
                 "type": "color",
                 "id": "colors_text",
-                "default": "#121212",
+                "default": "#000000",
+                "label": "t:settings_schema.colors.settings.colors_text.label",
+                "info": "t:settings_schema.colors.settings.colors_text.info"
+            }, {
+                "type": "color",
+                "id": "colors_text_secondary",
+                "default": "#767677",
                 "label": "t:settings_schema.colors.settings.colors_text.label",
                 "info": "t:settings_schema.colors.settings.colors_text.info"
             }, {
                 "type": "color",
                 "id": "colors_outline_button_labels",
-                "default": "#121212",
+                "default": "#000000",
                 "label": "t:settings_schema.colors.settings.colors_outline_button_labels.label",
                 "info": "t:settings_schema.colors.settings.colors_outline_button_labels.info"
             },
@@ -628,6 +650,12 @@
                 "id": "color_input_border",
                 "label": "Border color",
                 "default": "#000000"
+            },
+            {
+                "type": "color",
+                "id": "color_input_border_light",
+                "label": "Border color (light)",
+                "default": "#e9ecef"
             },
             {
                 "type": "color",

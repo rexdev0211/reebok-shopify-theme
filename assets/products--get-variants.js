@@ -401,7 +401,7 @@ collectionGetVariations = function(settings = {}, filteredDataProducts) {
 
 					if(!swatchContainer.hasClass("slick-initialized")) {
 						var numOfSwatches = swatchContainer.find(".color-swatch__wrapper").length;
-						var count = swatchContainer.closest(productSelector).find(".card-product__color-counter").removeClass('hide');
+						var count = swatchContainer.closest(productSelector).find(".card-product__color-counter").removeClass('sr-only');
 						count.find("[data-color-counter-number]").text(numOfSwatches);
 						count.find("[data-color-counter-label]").text('colours');
 	
@@ -411,7 +411,7 @@ collectionGetVariations = function(settings = {}, filteredDataProducts) {
 						if(numOfSwatches > 1) {
 							setTimeout(function() {
 								// swatchContainer.slick({
-								// 	slidesToShow: 3,
+								// 	slidesToShow: 6,
 								// 	arrows: true,
 								// 	speed: 300
 								// })

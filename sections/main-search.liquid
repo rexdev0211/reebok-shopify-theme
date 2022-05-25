@@ -1,6 +1,7 @@
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-color-swatches.css' | asset_url | stylesheet_tag }}
 
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 
@@ -62,12 +63,28 @@
 {%- endstyle -%}
 
 <div class="template-search{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
-  <div class="template-search__header page-width center">
+  <div class="template-search__header page-width">
     {%- if search.performed -%}
-      <h1 class="h2">{{ 'templates.search.title' | t }}</h1>
+      <h1 class="h2">
+        <span class="padding-bottom block">{{ 'templates.search.title' | t }}</span>
+        <span class="h1 block">
+          “{{ search.terms | escape }}”
+          {%- if search.performed -%}
+          {%- unless section.settings.enable_filtering or section.settings.enable_sorting -%}
+            {%- if search.results_count > 0 -%}
+              <span role="status" class="light text-small">[{{ search.results_count }}]</span>
+            {%- endif -%}
+          {%- endunless -%}
+        {%- endif -%}
+        </span>
+      </h1>
     {%- else -%}
       <h1 class="h2">{{ 'general.search.search' | t }}</h1>
     {%- endif -%}
+
+    
+    
+    {%- comment -%}
     <div class="template-search__search">
       {%- if settings.predictive_search_enabled -%}
         <predictive-search data-loading-text="{{ 'accessibility.loading' | t }}">
@@ -123,12 +140,8 @@
       {%- endif -%}
 
     </div>
+    {%- endcomment -%}
     {%- if search.performed -%}
-      {%- unless section.settings.enable_filtering or section.settings.enable_sorting -%}
-        {%- if search.results_count > 0 -%}
-          <p role="status">{{ 'templates.search.results_with_count_and_term' | t: terms: search.terms, count: search.results_count }}</p>
-        {%- endif -%}
-      {%- endunless -%}
       {%- if search.results_count == 0 and search.filters == empty -%}
         <p role="status">{{ 'templates.search.no_results' | t: terms: search.terms }}</p>
       {%- endif -%}
@@ -157,7 +170,7 @@
         {% paginate search.results by section.settings.products_per_page %}
           <div class="template-search__results collection page-width" id="product-grid" data-id="{{ section.id }}">
             <div class="loading-overlay gradient"></div>
-            <ul class="grid product-grid css-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down{% if section.settings.columns_desktop == 1 %} grid--full-width{% else %} grid--{{ section.settings.columns_desktop }}-col-desktop{% endif %}" role="list"
+            <ul class="grid product-grid css-grid grid--{{ section.settings.columns_mobile }}-col grid--{{ section.settings.columns_tablet }}-col-tablet{% if section.settings.columns_desktop == 1 %} grid--full-width{% else %} grid--{{ section.settings.columns_desktop }}-col-desktop{% endif %}" role="list"
             data-infinite="{{ section.settings.enable_infinite_load }}"
             data-hide-duplicates="{{ section.settings.hide_duplicate_products }}">
               {%- for item in search.results -%}
@@ -262,26 +275,25 @@
         clearInterval(collectionWaitForJQuery);
 
         if(productCount > 0) {
+          let settings = {}
 
           if(showColorSwatches) {
-            let settings = {
+            settings = {
               hideDuplicates: hideDuplicateProducts,
               showSwatches: showColorSwatches,
             }
-            collectionGetVariations(settings, null);
           }
           
-
+          let ajaxSettings = {}
           if(enableInfiniteLoad) {
-
-            let ajaxSettings = {
+            ajaxSettings = {
               isSearch: false,
               hideDuplicates: {{ section.settings.hide_duplicate_products }},
               showSwatches: {{ section.settings.show_color_swatches }},
             }
-            
-            ajaxifyCollection(ajaxSettings);
           }
+
+          productGridSetUp({isSearch: true, variantSettings: settings, ajaxSettings });
         }
       }
     }, 100);
@@ -311,6 +323,24 @@
       "step": 1,
       "default": 4,
       "label": "t:sections.main-search.settings.columns_desktop.label"
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 3,
+      "label": "Number of columns on tablet"
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 2,
+      "label": "Number of columns on mobile"
     },
     {
       "type": "checkbox",
@@ -396,14 +426,14 @@
     {
       "type": "checkbox",
       "id": "enable_filtering",
-      "default": true,
+      "default": false,
       "label": "t:sections.main-collection-product-grid.settings.enable_filtering.label",
       "info": "t:sections.main-collection-product-grid.settings.enable_filtering.info"
     },
     {
       "type": "checkbox",
       "id": "enable_sorting",
-      "default": true,
+      "default": false,
       "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
     },
     {
@@ -431,22 +461,6 @@
     {
       "type": "header",
       "content": "t:sections.main-search.settings.header_mobile.content"
-    },
-    {
-      "type": "select",
-      "id": "columns_mobile",
-      "default": "2",
-      "label": "t:sections.main-search.settings.columns_mobile.label",
-      "options": [
-        {
-          "value": "1",
-          "label": "t:sections.main-search.settings.columns_mobile.options__1.label"
-        },
-        {
-          "value": "2",
-          "label": "t:sections.main-search.settings.columns_mobile.options__2.label"
-        }
-      ]
     },
     {
       "type": "header",

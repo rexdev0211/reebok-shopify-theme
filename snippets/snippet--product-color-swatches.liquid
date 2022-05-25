@@ -118,6 +118,7 @@ Usage
             <div class="color-swatch__wrapper color-swatch--selected color-swatch--main color-swatch--{{- size }} {{ contrast_class }}">
                 <a class=" color-swatch color-swatch-{{- product.handle }} color-swatch--selected color-swatch--main" data-swatch-color-name="{{- c -}}" style="background-color: {{- colorProdHex -}};" href="{{ url | first | append: '/products/' | append: product.handle }}">
                     <span class="sr-only">{{ product.title }}</span>
+                    <img src="{{ product.featured_media | img_url: 'x80' }}" loading="lazy" />
                 </a>
             </div>
         {%- endif -%}

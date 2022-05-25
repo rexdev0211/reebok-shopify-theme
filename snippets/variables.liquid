@@ -56,6 +56,8 @@
     --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
 
     --color-base-text: {{ settings.colors_text.red }}, {{ settings.colors_text.green }}, {{ settings.colors_text.blue }};
+    --color-secondary-text: {{ settings.colors_text_secondary.red }}, {{ settings.colors_text_secondary.green }}, {{ settings.colors_text_secondary.blue }};
+    
     --color-shadow: {{ settings.colors_text.red }}, {{ settings.colors_text.green }}, {{ settings.colors_text.blue }};
     --color-base-background-1: {{ settings.colors_background_1.red }}, {{ settings.colors_background_1.green }}, {{ settings.colors_background_1.blue }};
     --color-base-background-2: {{ settings.colors_background_2.red }}, {{ settings.colors_background_2.green }}, {{ settings.colors_background_2.blue }};
@@ -152,6 +154,9 @@
     --color-button-secondary-background-hover: {{ settings.color_button_2_bg_hover }};
     --color-button-secondary-border-hover: {{ settings.color_button_2_border_hover }};
 
+    --color-cart-bubble-background:{{ settings.color_cart_bubble_background }};
+    --color-cart-bubble-text:{{ settings.color_cart_bubble_text }};
+
     --color-link-text: {{ settings.color_links_text }};
     --color-link-background-hover: {{ settings.color_links_bg_hover }};
     --color-link-text-hover: {{ settings.color_links_text_hover }};
@@ -184,6 +189,7 @@
     --color-input-background: {{ settings.color_input_background }};
     --color-input-text: {{ settings.color_input_text }};
     --color-input-border: {{ settings.color_input_border }};
+    --color-input-border-light: {{ settings.color_input_border_light }};
 
     --color-input-background-focus: {{ settings.color_input_background_focus }};
     --color-input-text-focus: {{ settings.color_input_text_focus }};

@@ -182,21 +182,23 @@
 
     let collectionWaitForJQuery = setInterval(function () {
       if(typeof $ != 'undefined') {
-        console.log('test')
         clearInterval(collectionWaitForJQuery);
 
+        let settings = {}
+        let ajaxSettings = {}
+
         if(productCount > 0) {
-          let settings = {
+          settings = {
             hideDuplicates: {{ section.settings.hide_duplicate_products }},
             showSwatches: {{ section.settings.show_color_swatches }},
             {%- if settings.swatch_enable_limit == true %}
             limitSwatches: {{ settings.swatch_limit_amount }}
             {% endif %}
           }
-          collectionGetVariations(settings, null);
+          // collectionGetVariations(settings, null);
 
           if(enableInfiniteLoad) {
-            let ajaxSettings = {
+            ajaxSettings = {
               isSearch: false,
               hideDuplicates: {{ section.settings.hide_duplicate_products }},
               showSwatches: {{ section.settings.show_color_swatches }},
@@ -204,8 +206,10 @@
               limitSwatches: {{ settings.swatch_limit_amount }}
               {% endif %}
             }
-            ajaxifyCollection(ajaxSettings);
+            // ajaxifyCollection(ajaxSettings);
           }
+
+          productGridSetUp({ variantSettings: settings, ajaxSettings });
         }
       }
     }, 100);
