@@ -17,13 +17,14 @@
 {%- endstyle -%}
 
 <div class="blog_categories">
-  <ul class="blog_wrapper">
+  <ul id="navMenus" class="blog_wrapper">
        
 
        {%- for tag in blog.all_tags -%}
         
-           <li>
-              <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+           <li class="blog-terminal {% if forloop.first == true %}update-blog {% else %}test{%endif%}">
+          
+              <a class="{{ link.child_active }}" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
            </li>
           
        {%- endfor -%}
@@ -36,10 +37,11 @@
 </div>
 {%- paginate blog.articles by 6 -%}
   <div class="main-blog page-width section-{{ section.id }}-padding">
-    <h1 class="title--primary">{{ blog.title | escape }}</h1>
-
+   {%comment%} <h1 class="title--primary">{{ blog.title | escape }}</h1>{%endcomment%}
+    <h1 class="custom-blog-head"></h1>
     <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
-      {%- for article in blog.articles -%}
+     {%- for article in blog.articles -%} 
+  
         <div class="blog-articles__article article custom-blog-{{forloop.index}}">
           {%- render 'article-card',
             article: article,
@@ -53,6 +55,25 @@
         </div>
       {%- endfor -%}
     </div>
+    <style>
+     {%- if paginate.current_page == 1 -%}
+     .blog-articles__article.custom-blog-1 .card__inner.color-background-2.ratio {
+       width: 60%;
+     }
+
+     .blog-articles__article.custom-blog-1 .card.article-card.card--standard.article-card__image--medium.card--media {
+       align-items: center;
+     }
+     .blog-articles__article.article.custom-blog-1 .card__content {
+       width: 40%;
+       position: relative;
+       left: -100px;
+       background: white;
+     }
+
+    
+    {%- endif -%}
+    </style>
 
     {%- if paginate.pages > 1 -%}
       {%- render 'pagination', paginate: paginate -%}
@@ -60,6 +81,39 @@
   </div>
 {%- endpaginate -%}
 
+
+<script>
+
+
+$(document).ready(function () {
+        var url = window.location;
+    // Will only work if string in href matches with location
+        $('#navMenus a[href="' + url + '"]').parent().addClass('active');
+
+    // Will also work for relative and absolute hrefs
+        $('#navMenus a').filter(function () {
+            return this.href == url;
+        }).parent().addClass('active').parent().parent().addClass('active');
+        
+    });
+</script>
+
+<script>
+    
+        console.log(window.location.href) ;
+        var geturl = window.location.href;
+
+       setInterval(function () {
+         var getslug = geturl.split("/");
+        var finalslug = getslug[6];
+        console.log (finalslug);
+        $(".custom-blog-head").text(finalslug);
+        
+    },1000);  
+
+  
+      
+    </script>
 {% schema %}
 {
   "name": "t:sections.main-blog.name",

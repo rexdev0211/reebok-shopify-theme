@@ -34,10 +34,56 @@
 
         {%- when 'title'-%}
           <header class="page-width page-width--narrow" {{ block.shopify_attributes }}>
+          <div class="top_small_text">
+          <div class="date-terminal">
+             / <span class="circle-divider caption-with-letter-spacing" itemprop="dateCreated pubdate datePublished">{{ article.published_at | time_tag: format: 'date' }}</span>
+           
+            
+            /  <span class="caption-with-letter-spacing" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span itemprop="name">{{ article.author }}</span>
+              </span>
+              </div>
+              <div class="social-wrapper-links">
+              <ul class="social-sharing">
+
+  
+    <li>
+      <a target="_blank" href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}" class="terminal_social_links btn btn--small btn--share share-facebook">
+        {% include 'icon-facebook' %}
+        
+      </a>
+    </li>
+  
+
+
+    <li>
+      <a target="_blank" href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}" class="terminal_social_links btn btn--small btn--share share-twitter">
+        {% include 'icon-twitter' %}
+        
+      </a>
+    </li>
+
+
+
+    <li>
+      <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}" class="terminal_social_links btn btn--small btn--share share-pinterest">
+        {% include 'icon-pinterest' %}
+        
+      </a>
+    </li>
+    
+    <li>
+      <a target="_blank" href="mailto:andriikozhush@gmail.com " class="terminal_social_links btn btn--small btn--share share-pinterest">
+        {% include 'icon-tumblr' %}
+        
+      </a>
+    </li>
+
+</ul>           
+              </div>
+          </div>
             <h1 class="article-template__title" itemprop="headline">{{ article.title | escape }}</h1>
-            {%- if block.settings.blog_show_date -%}
-              <span class="circle-divider caption-with-letter-spacing" itemprop="dateCreated pubdate datePublished">{{ article.published_at | time_tag: format: 'date' }}</span>
-            {%- endif -%}
+            
             {%- if block.settings.blog_show_author -%}
               <span class="caption-with-letter-spacing" itemprop="author" itemscope itemtype="http://schema.org/Person">
                 <span itemprop="name">{{ article.author }}</span>
@@ -46,11 +92,65 @@
           </header>
 
         {%- when 'content'-%}
+
           <div class="article-template__content page-width page-width--narrow rte" itemprop="articleBody" {{ block.shopify_attributes }}>
               {{ article.content }}
           </div>
 
-        {%- when 'share' -%}
+          <div class="last-conten-date page-width page-width--narrow">
+             <div class="top_small_text">
+          <div class="date-terminal">
+             / <span class="circle-divider caption-with-letter-spacing" itemprop="dateCreated pubdate datePublished">{{ article.published_at | time_tag: format: 'date' }}</span>
+           
+            
+            /  <span class="caption-with-letter-spacing" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span itemprop="name">{{ article.author }}</span>
+              </span>
+              </div>
+              <div class="social-wrapper-links">
+               <!-- /snippets/social-sharing.liquid -->
+<ul class="social-sharing">
+
+  
+    <li>
+      <a target="_blank" href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}" class="terminal_social_links btn btn--small btn--share share-facebook">
+        {% include 'icon-facebook' %}
+        
+      </a>
+    </li>
+  
+
+
+    <li>
+      <a target="_blank" href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}" class="terminal_social_links btn btn--small btn--share share-twitter">
+        {% include 'icon-twitter' %}
+        
+      </a>
+    </li>
+
+
+
+    <li>
+      <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}" class="terminal_social_links btn btn--small btn--share share-pinterest">
+        {% include 'icon-pinterest' %}
+        
+      </a>
+    </li>
+
+    <li>
+      <a target="_blank" href="mailto:andriikozhush@gmail.com " class="terminal_social_links btn btn--small btn--share share-pinterest">
+        {% include 'icon-tumblr' %}
+        
+      </a>
+    </li>
+
+
+</ul>              
+              </div>
+          </div>
+          </div>
+
+       {%comment%} {%- when 'share' -%}
           <div class="article-template__social-sharing page-width page-width--narrow" {{ block.shopify_attributes }}>
             <share-button class="share-button" {{ block.shopify_attributes }}>
               <button class="share-button__button hidden">
@@ -89,6 +189,7 @@
             </share-button>
             <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
           </div>
+         {%endcomment%}
     {%- endcase -%}
   {%- endfor -%}
 
@@ -357,8 +458,27 @@
     {
       "type": "share",
       "name": "t:sections.main-article.blocks.share.name",
-      "limit": 2,
       "settings": [
+        {
+          "type": "url",
+          "id": "social_c1",
+          "label": "twitter-link"
+        },
+        {
+          "type": "url",
+          "id": "social_c2",
+          "label": "facebook-link"
+        },
+        {
+          "type": "url",
+          "id": "social_c3",
+          "label": "instagram-link"
+        },
+        {
+          "type": "url",
+          "id": "social_c4",
+          "label": "pinterest-link"
+        },
         {
           "type": "text",
           "id": "share_label",

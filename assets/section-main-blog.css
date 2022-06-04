@@ -2,6 +2,12 @@
   width: 100%;
 }
 
+
+
+.card__inner.color-background-2.ratio .card__content {
+  display: none;
+}
+
 @media screen and (min-width: 990px) {
   .blog-articles--collage > *:nth-child(3n + 1) .article-card__image--small .ratio .ratio::before,
   .blog-articles--collage > *:nth-child(3n + 2):last-child .article-card__image--small .ratio .ratio::before {
@@ -55,7 +61,7 @@ h1.title--primary {
 }
 
 .blog-articles__article .card__information {
-  background: var(--gradient-background)
+  background: var(--gradient-background);
   margin: 0 0 0 -110px;
   z-index: 1;
   padding: 22px 28px;
@@ -78,7 +84,7 @@ h1.title--primary {
 
 .blog-articles__article .full-unstyled-link {
   font-size: 0.9rem;
-  font-weight: var(--font-heading-weight)
+  font-weight: var(--font-heading-weight);
   font-family: var(--font-body-family);
 }
 
@@ -115,22 +121,68 @@ h1.title--primary {
 
 .blog_wrapper li {
   padding: 14px 17px;
+  border-bottom: 2px solid transparent;
+}
+
+li.blog-terminal.update-blog {
+  border-bottom: 2px solid black;
+}
+
+li.blog-terminal.active {
+  border-bottom: 2px solid black !important;
 }
 
 .blog_wrapper li:hover {
   border-bottom: 2px solid black;
 }
+li.blog-terminal.active a {
+  font-weight: var(--font-heading-weight);
+  color: #000;
+}
 
+li.blog-terminal.update-blog a {
+  font-weight: var(--font-heading-weight);
+  color: #000;
+}
+
+h1.custom-blog-head {
+  font-size: 2.62rem;
+  line-height: 38px;
+  font-family: var(--font-body-family);
+  font-style: normal;
+  font-weight: var(--font-heading-weight);
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+.blog_categories.active li.blog-terminal.update-blog{
+  border-bottom: 2px solid transparent;
+}
+
+.blog_categories.active li.blog-terminal.update-blog a{
+  font-weight: 100;
+  color: #767677;
+}
 .blog_wrapper li a {
   color: #767677;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: var(--font-body-weight);
+  font-family: var(--font-body-family);
 }
 
 .blog_categories {
   border-bottom: 1px solid #e9ecef;
 }
+
+.main-blog .title--primary {
+    margin-top: 10px;
+}
+
+.article-template__back.element-margin-top.center {
+  display: none;
+}
+
 
 @media screen and (max-width: 767px) {
   .blog-articles__article .card__inner {

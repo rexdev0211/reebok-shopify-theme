@@ -2,6 +2,66 @@
   margin-top: 5rem;
 }
 
+a.article-template__link.link.animate-arrow {
+  display: none;
+}
+
+header.page-width.page-width--narrow {
+  display: flex;
+  flex-direction: column;
+}
+
+h1.article-template__title {
+  margin-top: 10px;
+}
+
+.terminal_social_links svg {
+  width: 25px;
+  height: 25px;
+}
+a.link.list-social__link {
+  padding: 0;
+}
+ul.social-sharing {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: end;
+}
+ul.social-sharing li {
+  padding: 0 10px;
+}
+.top_small_text {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
+}
+.date-terminal {
+  width: 50%;
+ 
+}
+.social-wrapper-links {
+  width: 50%;
+}
+svg.icon.icon-twitter {
+  color: #1da1f2;
+}
+svg.icon.icon-facebook {
+  color: #1877f2;
+}
+li.instagram a svg {
+  color: #e95950;
+}
+svg.icon.icon-pinterest {
+  color: 	#E60023;
+}
+.circle-divider {
+  padding: 0 5px;
+}
+span.caption-with-letter-spacing{
+  padding: 0 5px;
+}
 @media screen and (min-width: 750px) {
   .article-template > *:first-child:not(.article-template__hero-container) {
     margin-top: calc(5rem + var(--page-width-margin));
