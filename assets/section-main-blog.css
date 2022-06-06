@@ -90,7 +90,7 @@ h1.title--primary {
 
 .blog-articles__article .article-card__excerpt {
   margin-bottom: 0;
-  font-size: 1.2rem;
+  font-size: 0.9375rem;
   line-height: 1.5;
   color: rgb(var(--color-foreground));
 }
